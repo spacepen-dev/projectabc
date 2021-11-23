@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalContainer from "./ModalContainer";
 
-const ViewEmployeeModal = () => {
-  return <>{/* <ModalContainer /> */}</>;
+const ViewEmployeeModal = ({ modal }) => {
+  return (
+    <>
+      <ModalContainer closeModal={modal} buttonText='Save' />
+    </>
+  );
 };
 
 export default ViewEmployeeModal;

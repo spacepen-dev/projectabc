@@ -192,6 +192,8 @@ input::placeholder {
 }
 
 .sub-text {
+  width: 100% !important;
+  max-width: 100rem !important;
   color: var(--accent) !important;
   background-color: transparent !important;
   font-size: 1.25rem;
@@ -595,6 +597,29 @@ textarea {
 
 .add-roles Form div:nth-child(2) {
   height: 10.62rem;
+}
+
+.Modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 100%;
+  max-width: 75.06rem;
+  height: fit-content;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 3.13rem;
+  transform: translate(-50%, -50%);
+  outline: transparent;
+}
+.Overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 @media screen and (min-width: 576px) {

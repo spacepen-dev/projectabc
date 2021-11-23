@@ -1,55 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import EmployeeRegistration from "./EmployeeRegistration";
-import ModalContainer from "./ModalContainer";
-import { Modal, Button } from "react-bootstrap";
 
-const AddEmployee = (props) => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+const AddEmployee = () => {
   return (
     <div>
-      {/* <Modal.Dialog
-        {...props}
-        size='lg'
-        aria-labelledby='contained-modal-title-vcenter'
-        centered>
-        <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-vcenter'>
-            Modal heading
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
-      </Modal.Dialog> */}
-      {/* <EmployeeRegistration removeBtn='none' /> */}
-      {/* <ModalContainer /> */}
-
-      <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant='primary' onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <EmployeeRegistration removeBtn='none' buttonText='Add' />
     </div>
   );
 };

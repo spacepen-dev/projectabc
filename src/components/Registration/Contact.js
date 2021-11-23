@@ -37,6 +37,7 @@ const Contact = ({
               name='email'
               inputname='Email Address'
               type='email'
+              label='Enter the email address of company'
             />
           </div>
           <div className='field-container'>

@@ -1,23 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Modal, Button } from "react-bootstrap";
+import EmployeeRegistration from "./EmployeeRegistration";
+import { Container } from "react-bootstrap";
 
-const ModalContainer = (props) => {
+const ModalContainer = ({ closeModal, buttonText }) => {
+  const close = () => {
+    closeModal();
+  };
+
   return ReactDOM.createPortal(
-    <Modal centered>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal title</Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>
-        <p>Modal body text goes here.</p>
-      </Modal.Body>
-
-      <Modal.Footer>
-        <Button variant='secondary'>Close</Button>
-        <Button variant='primary'>Save changes</Button>
-      </Modal.Footer>
-    </Modal>,
+    <div className='Overlay'>
+      <Container className='Modal' onClick={(e) => e.stopPropagation()}>
+        <EmployeeRegistration buttonText={buttonText} close={close} />
+      </Container>
+    </div>,
     document.querySelector("#modal")
   );
 };

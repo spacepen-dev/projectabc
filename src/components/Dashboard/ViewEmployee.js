@@ -141,12 +141,15 @@ const ViewEmployee = () => {
     },
   ];
 
+  const employeeData = (data) => {
+    console.log(data);
+  };
   return (
     <div className=' mt-5'>
       <DashboardTable
         heading={heading}
         tableData={data}
-        // rowFunction={tableRowId}
+        employeeData={employeeData}
       />
     </div>
   );

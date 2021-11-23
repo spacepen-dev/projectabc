@@ -1,10 +1,13 @@
 import React from "react";
 import SubHeader from "./SubHeader";
-import { Form, Input, Col, Button } from "react-bootstrap";
+import { Form, Spinner, Col, Button } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
+import { companyRegistration } from "../../Actions";
+
 import InputField from "./InputField";
 import LabelText from "./LabelText";
 import FormValidation from "./FormValidation";
+import { connect } from "react-redux";
 
 const Settings = ({
   currentForm,
@@ -15,7 +18,7 @@ const Settings = ({
   submitting,
 }) => {
   const onSubmit = (values) => {
-    console.log(values);
+    companyRegistration(values);
   };
   // console.log(this.props);
   if (currentForm !== 3) {
@@ -90,6 +93,7 @@ const Settings = ({
               type='submit'
               className='button ms-4'
               disabled={pristine || submitting}>
+              <Spinner as='span' animation='border' size='lg' />
               FINISH
             </Button>
           </div>
@@ -99,9 +103,11 @@ const Settings = ({
   );
 };
 
-export default reduxForm({
-  form: "COMPANY-REGISTRATION",
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
-  validate: FormValidation,
-})(Settings);
+export default connect(null, { companyRegistration })(
+  reduxForm({
+    form: "COMPANY-REGISTRATION",
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
+    validate: FormValidation,
+  })(Settings)
+);

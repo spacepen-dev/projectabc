@@ -85,6 +85,16 @@ const SalariesHistory = () => {
       tax: "100,000",
       amount: "200,000",
     },
+    {
+      paymentDate: "05-09-2022",
+      paymentRef: "1023498FA",
+      taxRef: "1023498FA",
+      employee: "50",
+      years: "2022",
+      month: "December",
+      tax: "100,000",
+      amount: "200,000",
+    },
   ];
   return (
     <>

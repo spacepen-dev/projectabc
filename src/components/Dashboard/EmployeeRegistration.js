@@ -1,9 +1,14 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Row, Col, Form, Button } from "react-bootstrap";
-import LabelText from "../Registration/LabelText";
+import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
+import DashBoardText from "./DashBoardText";
 
-const EmployeeRegistration = ({ handleSubmit, removeBtn }) => {
+const EmployeeRegistration = ({
+  handleSubmit,
+  removeBtn,
+  buttonText,
+  close,
+}) => {
   const renderInput = ({ input }) => {
     return (
       <div className='py-1.5'>
@@ -20,22 +25,25 @@ const EmployeeRegistration = ({ handleSubmit, removeBtn }) => {
   };
   return (
     <Form
-      className='d-flex flex-column pt-5 mt-5 justify-content-center w-100 mx-auto employee-form'
+      className='d-flex flex-column pt-5  mt-5 justify-content-center w-100 mx-auto employee-form'
       onSubmit={handleSubmit(onSubmit)}>
       <Row className='mb-3 wrap'>
         <Form.Group as={Col} controlId='formGridFirstName'>
-          <LabelText name='First Name' label='Enter the name of your company' />
+          <DashBoardText
+            name='First Name'
+            label='Enter the name of your company'
+          />
           <Field component={renderInput} name='First name' type='text' />
         </Form.Group>
 
         <Form.Group as={Col} controlId='formGrid'>
-          <LabelText name='Last Name' label='Enter Last name of employee' />
+          <DashBoardText name='Last Name' label='Enter Last name of employee' />
           <Field component={renderInput} name='last name' type='text' />
         </Form.Group>
       </Row>
       <Row className='mb-3'>
         <Form.Group as={Col} controlId='formGrid'>
-          <LabelText
+          <DashBoardText
             name='National Identity Number'
             label='Enter National Indentity Number'
           />
@@ -43,7 +51,7 @@ const EmployeeRegistration = ({ handleSubmit, removeBtn }) => {
         </Form.Group>
 
         <Form.Group as={Col} controlId='formGrid'>
-          <LabelText
+          <DashBoardText
             name='TIN'
             label='Enter the 
                     TIN of the company'
@@ -53,24 +61,24 @@ const EmployeeRegistration = ({ handleSubmit, removeBtn }) => {
       </Row>
       <Row className='mb-3'>
         <Form.Group as={Col} controlId='formGrid'>
-          <LabelText name='Role' label='Enter Role ' />
+          <DashBoardText name='Role' label='Enter Role ' />
           <Field component={renderInput} name='role' type='text' />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>
-          <LabelText name='Department' label='Enter employee department' />
+          <DashBoardText name='Department' label='Enter employee department' />
           <Field name='department' type='text' component={renderInput} />
         </Form.Group>
       </Row>
       <Row>
         <Form.Group as={Col} controlId='formGrid'>
-          <LabelText
+          <DashBoardText
             name='Annual Gross Salary'
             label='Enter annual gross salary'
           />
           <Field name='annual salary' type='text' component={renderInput} />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>
-          <LabelText
+          <DashBoardText
             name='Monthly Gross Salary'
             label='Enter employee monthly salary'
           />
@@ -78,19 +86,23 @@ const EmployeeRegistration = ({ handleSubmit, removeBtn }) => {
         </Form.Group>
       </Row>
       <Form.Group className='mt-3' controlId='formGrid'>
-        <LabelText name='Relives' label='Input the TIN of the company ' />
+        <DashBoardText name='Relives' label='Input the TIN of the company ' />
         <Field component={renderInput} name='relives' type='text' />
       </Form.Group>
       <div className='ms-auto mt-5 double-btns'>
-        <Button type='button' className={`button ms-auto d-${removeBtn} `}>
-          BACK
+        <Button
+          type='button'
+          className={`button ms-auto d-${removeBtn} `}
+          onClick={close}>
+          Close
         </Button>
         <Button
           type='submit'
           className='button ms-4'
           // disabled={pristine || submitting}
         >
-          Add
+          <Spinner as='span' animation='border' size='lg' />
+          {buttonText}
         </Button>
       </div>
     </Form>

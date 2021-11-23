@@ -8,7 +8,6 @@ import OTP from "./Registration/OTP";
 import OnBoarding from "./Registration/OnBoarding";
 import AddRoles from "./Registration/AddRoles";
 import Dashboard from "./Dashboard/Dashboard";
-import ViewEmployeeModal from "./Dashboard/ViewEmployeeModal";
 
 const App = (props) => {
   useEffect(() => {
@@ -28,7 +27,6 @@ const App = (props) => {
           <Route path='/on-Boarding' exact component={OnBoarding}></Route>
           <Route path='/add-roles' exact component={AddRoles}></Route>
           <Route path='/Dashboard' exact component={Dashboard}></Route>
-          <Route path='/view' exact component={ViewEmployeeModal}></Route>
         </div>
       </BrowserRouter>
     </Container>

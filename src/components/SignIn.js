@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { signIn } from "../Actions";
+
 import Header from "./Header";
 import SingleBtn from "./SingleBtn";
-import { Link } from "react-router-dom";
 
-const SignIn = () => {
+const SignIn = ({ signIn }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
@@ -21,7 +24,8 @@ const SignIn = () => {
     if (regexp.test(String(email).toLowerCase())) {
       // MAKE AN API REQUEST TO CHECK IF THE EMAIL IS REGISTERED
       // OBTAIN THE COMPANY DETAILS
-      console.log(email);
+      // console.log(email);
+      signIn(email);
       setError("");
     } else {
       setError("Correct email address must be provided.");
@@ -65,4 +69,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default connect(null, { signIn })(SignIn);
