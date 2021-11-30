@@ -41,7 +41,6 @@ const DashboardTable = ({ heading, tableData, employeeData }) => {
         style={{ height: "200px" }}>
         <thead className=''>
           {data.head.map((cur, index) => {
-            console.log(cur);
             let objValues = Object.values(cur);
             return (
               <tr key={index}>

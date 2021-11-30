@@ -72,7 +72,7 @@ const Profile = ({ currentForm, handleSubmit, nextPage }) => {
               component={InputField}
               name='registration'
               inputname='Registration number'
-              type='text'
+              type='number'
               label='Input the registration number of your company'
             />
           </div>
@@ -85,7 +85,7 @@ const Profile = ({ currentForm, handleSubmit, nextPage }) => {
               inputname='TIN'
               id='tin'
               label='Input the TIN of your company'
-              type='text'
+              type='number'
             />
           </div>
           {/* Third input */}
@@ -160,7 +160,7 @@ const Profile = ({ currentForm, handleSubmit, nextPage }) => {
 };
 
 export default reduxForm({
-  form: "COMPANY-REGISTRATION",
+  form: "companyRegistration",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate: FormValidation,

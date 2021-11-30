@@ -1,31 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SubHeader from "./SubHeader";
 import { Form, Spinner, Col, Button } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
 import { companyRegistration } from "../../Actions";
+import { useNavigate } from "react-router";
 
 import InputField from "./InputField";
 import LabelText from "./LabelText";
 import FormValidation from "./FormValidation";
-import { connect } from "react-redux";
+import WarningModal from "../Dashboard/WarningModal";
 
 const Settings = ({
   currentForm,
   prevPage,
   handleSubmit,
-  meta,
-  pristine,
-  submitting,
+  companyRegistration,
+  checkStatus,
+  values,
 }) => {
-  const onSubmit = (values) => {
-    companyRegistration(values);
+  const [request, setRequest] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [errorMessage, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const sendOtp = (checkStatus) => {
+    // console.log(values);
+    if (checkStatus === null) {
+      return null;
+    } else {
+      setRequest(false);
+      const { error, success } = checkStatus.data;
+      if (error) setMessage(error);
+      else if (success) navigate(`otp`);
+    }
   };
-  // console.log(this.props);
+
+  useEffect(() => {
+    sendOtp(checkStatus);
+  }, [checkStatus]);
+
+  const onSubmit = (values) => {
+    setRequest(true);
+    companyRegistration(values);
+    // navigate(`/otp`);
+  };
+
+  const close_reload = () => {
+    setMessage("");
+    // window.location.reload(false);
+  };
+
   if (currentForm !== 3) {
     return null;
   }
   return (
     <>
+      {errorMessage ? (
+        <WarningModal closeWarning={close_reload} errorMessage={errorMessage} />
+      ) : null}
       <div>
         <SubHeader>Fill in your company bank account details</SubHeader>
       </div>
@@ -54,7 +87,7 @@ const Settings = ({
               component={InputField}
               name='accountNumber'
               inputname='Account Number'
-              type='text'
+              type='number'
               label='Input the official account number of your company'
             />
           </div>
@@ -92,9 +125,17 @@ const Settings = ({
             <Button
               type='submit'
               className='button ms-4'
-              disabled={pristine || submitting}>
-              <Spinner as='span' animation='border' size='lg' />
-              FINISH
+              disabled={request ? true : false}>
+              {!request ? (
+                "FINISH"
+              ) : (
+                <Spinner
+                  as='span'
+                  className='bg-transparent'
+                  animation='border'
+                  size='lg'
+                />
+              )}
             </Button>
           </div>
         </Form>
@@ -103,9 +144,15 @@ const Settings = ({
   );
 };
 
-export default connect(null, { companyRegistration })(
+const mapStateToProps = (state, ownProps) => {
+  const registrationData = state.RegistrationReducer.companyRegistration;
+  const { values } = state.form.companyRegistration;
+  return { checkStatus: registrationData, values };
+};
+
+export default connect(mapStateToProps, { companyRegistration })(
   reduxForm({
-    form: "COMPANY-REGISTRATION",
+    form: "companyRegistration",
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
     validate: FormValidation,

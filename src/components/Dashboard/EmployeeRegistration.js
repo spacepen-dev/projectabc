@@ -90,11 +90,8 @@ const EmployeeRegistration = ({
         <Field component={renderInput} name='relives' type='text' />
       </Form.Group>
       <div className='ms-auto mt-5 double-btns'>
-        <Button
-          type='button'
-          className={`button ms-auto d-${removeBtn} `}
-          onClick={close}>
-          Close
+        <Button type='button' className={`button ms-auto d-${removeBtn} `}>
+          Delete
         </Button>
         <Button
           type='submit'

@@ -599,27 +599,46 @@ textarea {
   height: 10.62rem;
 }
 
+.Overlay,
+.Overlay-alert {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.Overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.Overlay-alert {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.Overlay-alert .alert {
+  max-width: 50rem;
+  margin-left: auto;
+}
+.alert .alert-heading {
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .Modal {
   position: absolute;
   top: 50%;
   left: 50%;
   display: block;
   width: 100%;
-  max-width: 75.06rem;
+  /* max-width: 75.06rem; */
   height: fit-content;
   padding: 2rem;
   background-color: #fff;
   border-radius: 3.13rem;
   transform: translate(-50%, -50%);
   outline: transparent;
-}
-.Overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 @media screen and (min-width: 576px) {

@@ -4,7 +4,7 @@ import ModalContainer from "./ModalContainer";
 const ViewEmployeeModal = ({ modal }) => {
   return (
     <>
-      <ModalContainer closeModal={modal} buttonText='Save' />
+      <ModalContainer closeModal={modal} buttonText='Save' display='true' />
     </>
   );
 };

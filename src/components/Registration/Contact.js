@@ -72,7 +72,7 @@ const Contact = ({
 };
 
 export default reduxForm({
-  form: "COMPANY-REGISTRATION",
+  form: "companyRegistration",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate: FormValidation,
