@@ -17,33 +17,41 @@ const Settings = ({
   handleSubmit,
   companyRegistration,
   checkStatus,
-  values,
+  getValues,
 }) => {
   const [request, setRequest] = useState(false);
-  const [status, setStatus] = useState(null);
   const [errorMessage, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const sendOtp = (checkStatus) => {
-    // console.log(values);
-    if (checkStatus === null) {
+  const networkError = ({ errMessage }) => {
+    if (!errMessage) {
       return null;
     } else {
       setRequest(false);
-      const { error, success } = checkStatus.data;
-      if (error) setMessage(error);
-      else if (success) navigate(`otp`);
+      setMessage(errMessage.message);
+    }
+  };
+
+  const sendOtp = ({ companyRegistration }) => {
+    if (!companyRegistration) {
+      return null;
+    } else {
+      setRequest(false);
+      const { error, success } = companyRegistration.data;
+      if (error) {
+        setMessage(error);
+      } else if (success) navigate(`otp`);
     }
   };
 
   useEffect(() => {
     sendOtp(checkStatus);
+    networkError(checkStatus);
   }, [checkStatus]);
 
   const onSubmit = (values) => {
     setRequest(true);
     companyRegistration(values);
-    // navigate(`/otp`);
   };
 
   const close_reload = () => {
@@ -145,9 +153,14 @@ const Settings = ({
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const registrationData = state.RegistrationReducer.companyRegistration;
-  const { values } = state.form.companyRegistration;
-  return { checkStatus: registrationData, values };
+  const registrationData = state.RegistrationReducer;
+  const formValues = state.form.companyRegistration.values;
+
+  return {
+    checkStatus: registrationData,
+    getValues: formValues,
+    // registrationError: state.RegistrationReducer.errMessage,
+  };
 };
 
 export default connect(mapStateToProps, { companyRegistration })(

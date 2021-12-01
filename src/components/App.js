@@ -15,6 +15,7 @@ const App = (props) => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SignIn />}></Route>
+          {/* <Route path='/sign' element={<SignIn />}></Route> */}
           <Route
             path='registration/company'
             exact

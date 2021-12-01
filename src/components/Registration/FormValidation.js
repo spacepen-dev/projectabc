@@ -10,9 +10,9 @@ const FormValidation = (values) => {
   if (!values.tin) {
     error.tin = "TIN is required!";
   }
-  // if (!values.about) {
-  // }
-  // error.about = "Tell us about your company";
+
+  // error.about = "Tell us about your company";// if (!values.about) {
+  //
 
   if (!values.address) {
     error.address = "Company address is required!";

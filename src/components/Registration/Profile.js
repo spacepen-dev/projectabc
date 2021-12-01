@@ -109,7 +109,7 @@ const Profile = ({ currentForm, handleSubmit, nextPage }) => {
                 type='text'
                 name='about'
                 inputname='About'
-                className='w-100 border-1 rounded-2 text-area px-1 mt-2 fs-7 text-capitalize'
+                className='w-100 border-1 rounded-2 text-area px-1 mt-2 fs-7'
               />
             </Col>
           </div>

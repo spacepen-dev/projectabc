@@ -42,6 +42,19 @@ export const companyRegistration = (values) => async (dispatch) => {
     );
     dispatch({ type: "REGISTER_COMPANY", payLoad: data });
   } catch (error) {
-    dispatch({ type: "Error_MESSAGE", payLoad: error });
+    dispatch({ type: "ERROR_MESSAGE", payLoad: error });
+  }
+};
+
+export const Otp = (code) => async (dispatch) => {
+  try {
+    const data = await axios.post(
+      "https://haypex.com.ng/dev/ABC/webService/verifyAccountOtp.php",
+
+      { otp: code }
+    );
+    dispatch({ type: "OTP", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "ERROR_MESSAGE", payLoad: error });
   }
 };

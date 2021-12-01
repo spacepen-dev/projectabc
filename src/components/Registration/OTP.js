@@ -1,15 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import { Container } from "react-bootstrap";
+import { connect } from "react-redux";
+import { Otp } from "../../Actions";
+import WarningModal from "../Dashboard/WarningModal";
+import { useNavigate } from "react-router";
 
-const OTP = () => {
+const OTP = ({ Otp, resOtp }) => {
+  const navigate = useNavigate();
+
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [otpdata, setData] = useState(null);
+  const [error, setError] = useState("");
+
+  const sendOTP = (otp) => {
+    const otpNumber = parseInt(otp.join(""));
+    if (otp.join("").length < 6) {
+      return null;
+    }
+    setTimeout(() => {
+      console.log(otpNumber);
+
+      Otp(otpNumber);
+    }, 3000);
+  };
+
+  const networkError = ({ errMessage }) => {
+    if (!errMessage) {
+      return null;
+    } else {
+      setError(errMessage.message);
+    }
+  };
+
+  const OtpResponse = ({ otp }) => {
+    if (!otp) {
+      return null;
+    } else {
+      const { error, success } = otp.data;
+      if (error) {
+        setError(error);
+      } else if (success) {
+        navigate("/");
+      }
+    }
+  };
+
+  useEffect(() => {
+    sendOTP(otp);
+  }, [otp]);
+
+  useEffect(() => {
+    OtpResponse(resOtp);
+    networkError(resOtp);
+  }, [resOtp]);
 
   const handleOtp = (elem, index) => {
     // check if the value is a number or text
+    // console.log(elem.target.value);
     if (isNaN(elem.target.value)) return false;
-    setData(elem.target.value);
     setOtp([
       ...otp.map((input, inputIndex) =>
         index === inputIndex ? elem.target.value : input
@@ -20,8 +68,16 @@ const OTP = () => {
     }
   };
 
+  const close_reload = () => {
+    setError("");
+    // window.location.reload(false);
+  };
+
   return (
     <Container className='otp px-1'>
+      {!error ? null : (
+        <WarningModal closeWarning={close_reload} errorMessage={error} />
+      )}
       <div>
         <Header />
       </div>
@@ -44,15 +100,15 @@ const OTP = () => {
             color: " #23549e",
             lineHeight: "2.7rem",
           }}>
-          Enter the 6-digit pin that was sent to mail@mail.com
+          Enter the 6-digit pin that was sent to
         </p>
       </div>
       <div className='d-flex justify-content-between align-items-center py-2 otp-input-container'>
         {otp.map((inputData, index) => {
-          // console.log(inputData);
           return (
             <input
               key={index}
+              // id={index}
               type='text'
               className='text-center'
               maxLength='1'
@@ -66,10 +122,12 @@ const OTP = () => {
       <div className='py-4 mt-3 w-75 fs-3 text-center'>
         Didn't get it in your email? <span>Resend the code</span>
       </div>
-      {/* </Col> */}
-      {/* </Row> */}
     </Container>
   );
 };
 
-export default OTP;
+const mapStateToProps = (state) => {
+  return { resOtp: state.RegistrationReducer };
+};
+
+export default connect(mapStateToProps, { Otp })(OTP);
