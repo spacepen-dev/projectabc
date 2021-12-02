@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Alert } from "react-bootstrap";
 
 const WarningModal = ({ closeWarning, errorMessage }) => {
-  return ReactDOM.createPortal(
+  return (
     <div className='Overlay-alert' onClick={closeWarning}>
       <Alert
         onClick={(e) => e.stopPropagation()}
@@ -17,8 +17,7 @@ const WarningModal = ({ closeWarning, errorMessage }) => {
           {errorMessage}
         </Alert.Heading>
       </Alert>
-    </div>,
-    document.querySelector("#modal")
+    </div>
   );
 };
 

@@ -17,7 +17,6 @@ const Settings = ({
   handleSubmit,
   companyRegistration,
   checkStatus,
-  getValues,
 }) => {
   const [request, setRequest] = useState(false);
   const [errorMessage, setMessage] = useState("");
@@ -40,7 +39,9 @@ const Settings = ({
       const { error, success } = companyRegistration.data;
       if (error) {
         setMessage(error);
-      } else if (success) navigate(`otp`);
+      } else if (success) {
+        navigate("otp/email-confirmation");
+      }
     }
   };
 
@@ -56,7 +57,6 @@ const Settings = ({
 
   const close_reload = () => {
     setMessage("");
-    // window.location.reload(false);
   };
 
   if (currentForm !== 3) {
@@ -113,7 +113,6 @@ const Settings = ({
               <label className='switch'>
                 {/* <div className='field-container'> */}
                 <Field
-                  // onChange={onChecked}
                   name='tax'
                   id='tax'
                   component='input'
@@ -154,12 +153,11 @@ const Settings = ({
 
 const mapStateToProps = (state, ownProps) => {
   const registrationData = state.RegistrationReducer;
-  const formValues = state.form.companyRegistration.values;
+  const formValues = state.form.companyRegistration;
 
   return {
     checkStatus: registrationData,
     getValues: formValues,
-    // registrationError: state.RegistrationReducer.errMessage,
   };
 };
 

@@ -6,12 +6,13 @@ import { Otp } from "../../Actions";
 import WarningModal from "../Dashboard/WarningModal";
 import { useNavigate } from "react-router";
 
-const OTP = ({ Otp, resOtp }) => {
+const OTP = ({ Otp, resOtp, getValues }) => {
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [error, setError] = useState("");
-
+  const [email, setEmail] = useState(null);
+  const [saveEmail, setSave] = useState(email);
   const sendOTP = (otp) => {
     const otpNumber = parseInt(otp.join(""));
     if (otp.join("").length < 6) {
@@ -19,7 +20,6 @@ const OTP = ({ Otp, resOtp }) => {
     }
     setTimeout(() => {
       console.log(otpNumber);
-
       Otp(otpNumber);
     }, 3000);
   };
@@ -46,6 +46,15 @@ const OTP = ({ Otp, resOtp }) => {
   };
 
   useEffect(() => {
+    if (!getValues) {
+      console.log("empty");
+      // navigate(-1);
+    } else {
+      setEmail(localStorage.setItem("email", getValues.values.email));
+    }
+  }, [getValues]);
+
+  useEffect(() => {
     sendOTP(otp);
   }, [otp]);
 
@@ -56,7 +65,7 @@ const OTP = ({ Otp, resOtp }) => {
 
   const handleOtp = (elem, index) => {
     // check if the value is a number or text
-    // console.log(elem.target.value);
+    console.log(elem);
     if (isNaN(elem.target.value)) return false;
     setOtp([
       ...otp.map((input, inputIndex) =>
@@ -70,7 +79,6 @@ const OTP = ({ Otp, resOtp }) => {
 
   const close_reload = () => {
     setError("");
-    // window.location.reload(false);
   };
 
   return (
@@ -100,7 +108,8 @@ const OTP = ({ Otp, resOtp }) => {
             color: " #23549e",
             lineHeight: "2.7rem",
           }}>
-          Enter the 6-digit pin that was sent to
+          Enter the 6-digit pin that was sent to{" "}
+          {localStorage.getItem("email", email)}
         </p>
       </div>
       <div className='d-flex justify-content-between align-items-center py-2 otp-input-container'>
@@ -108,7 +117,6 @@ const OTP = ({ Otp, resOtp }) => {
           return (
             <input
               key={index}
-              // id={index}
               type='text'
               className='text-center'
               maxLength='1'
@@ -127,7 +135,10 @@ const OTP = ({ Otp, resOtp }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { resOtp: state.RegistrationReducer };
+  return {
+    resOtp: state.RegistrationReducer,
+    getValues: state.form.companyRegistration,
+  };
 };
 
 export default connect(mapStateToProps, { Otp })(OTP);

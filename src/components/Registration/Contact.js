@@ -5,13 +5,7 @@ import InputField from "./InputField";
 import { reduxForm, Field } from "redux-form";
 import FormValidation from "./FormValidation";
 
-const Contact = ({
-  currentForm,
-  handleSubmit,
-  prevPage,
-  pristine,
-  submitting,
-}) => {
+const Contact = ({ currentForm, handleSubmit, prevPage }) => {
   if (currentForm !== 2) {
     return null;
   }
