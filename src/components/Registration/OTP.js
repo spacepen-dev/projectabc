@@ -4,20 +4,25 @@ import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Otp } from "../../Actions";
 import WarningModal from "../Dashboard/WarningModal";
+import VerificationModal from "../Dashboard/VerificationModal";
 import { useNavigate } from "react-router";
+import LoaderModal from "../Dashboard/LoaderModal";
 
 const OTP = ({ Otp, resOtp, getValues }) => {
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [email, setEmail] = useState(null);
-  const [saveEmail, setSave] = useState(email);
+  const [active, setActive] = useState(false);
+
   const sendOTP = (otp) => {
     const otpNumber = parseInt(otp.join(""));
     if (otp.join("").length < 6) {
       return null;
     }
+    setActive(true);
     setTimeout(() => {
       console.log(otpNumber);
       Otp(otpNumber);
@@ -28,7 +33,10 @@ const OTP = ({ Otp, resOtp, getValues }) => {
     if (!errMessage) {
       return null;
     } else {
-      setError(errMessage.message);
+      setActive(false);
+      setError(
+        `${errMessage.message}. Check your network connection and try again.`
+      );
     }
   };
 
@@ -36,11 +44,13 @@ const OTP = ({ Otp, resOtp, getValues }) => {
     if (!otp) {
       return null;
     } else {
+      setActive(false);
       const { error, success } = otp.data;
       if (error) {
         setError(error);
       } else if (success) {
-        navigate("/");
+        setSuccess(success);
+        // navigate("/");
       }
     }
   };
@@ -65,14 +75,16 @@ const OTP = ({ Otp, resOtp, getValues }) => {
 
   const handleOtp = (elem, index) => {
     // check if the value is a number or text
-    console.log(elem);
     if (isNaN(elem.target.value)) return false;
     setOtp([
       ...otp.map((input, inputIndex) =>
         index === inputIndex ? elem.target.value : input
       ),
     ]);
-    if (elem.target.nextSibling) {
+    if (
+      elem.target.nextSibling &&
+      elem.nativeEvent.inputType === "insertText"
+    ) {
       elem.target.nextSibling.focus();
     }
   };
@@ -80,9 +92,19 @@ const OTP = ({ Otp, resOtp, getValues }) => {
   const close_reload = () => {
     setError("");
   };
+  const closeModal = () => {
+    setSuccess("");
+    navigate("/");
+  };
 
   return (
     <Container className='otp px-1'>
+      {!active ? null : <LoaderModal />}
+
+      {!success ? null : (
+        <VerificationModal message={success} close={closeModal} />
+      )}
+
       {!error ? null : (
         <WarningModal closeWarning={close_reload} errorMessage={error} />
       )}
@@ -123,6 +145,11 @@ const OTP = ({ Otp, resOtp, getValues }) => {
               value={inputData}
               onChange={(e) => handleOtp(e, index)}
               onFocus={(e) => e.target.select()}
+              onKeyUp={(e) => {
+                if (e.target.previousSibling && e.key === "Backspace") {
+                  e.target.previousSibling.focus();
+                }
+              }}
             />
           );
         })}

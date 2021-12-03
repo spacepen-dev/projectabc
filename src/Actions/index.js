@@ -1,9 +1,10 @@
 import axios from "axios";
 
-export const signIn = (details) => async (dispatch) => {
-  const data = await axios.post("", {
-    params: { details },
-  });
+export const signIn = (email) => async (dispatch) => {
+  const data = await axios.post(
+    "https://haypex.com.ng/dev/ABC/webService/accountLogin.php",
+    { email }
+  );
   dispatch({ type: "SIGN_IN", payLoad: data });
 };
 

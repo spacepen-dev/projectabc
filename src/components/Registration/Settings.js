@@ -27,7 +27,9 @@ const Settings = ({
       return null;
     } else {
       setRequest(false);
-      setMessage(errMessage.message);
+      setMessage(
+        `${errMessage.message}. Check your network connection and try again.`
+      );
     }
   };
 

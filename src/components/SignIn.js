@@ -57,12 +57,13 @@ const SignIn = ({ signIn }) => {
         </div>
         <div className='button-container d-flex justify-content-center align-items-end'>
           <SingleBtn>SUBMIT</SingleBtn>
-          <div className='py-3 mx-3'>
-            or{" "}
-            <Link to='/registration/company' className='fs-4'>
-              Register Here
-            </Link>
-          </div>
+          {/* <div className='py-3 mx-3'> */}
+        </div>
+        <div className='py-4 mt-3 w-75 ms-5 fs-3 text-center'>
+          Don't have an account?{" "}
+          <Link to='/registration/company' className='fs-4'>
+            <h3>Register Here</h3>
+          </Link>
         </div>
       </form>
     </Container>

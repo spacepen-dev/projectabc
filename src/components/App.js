@@ -20,7 +20,9 @@ const App = (props) => {
             path='registration/company'
             exact
             element={<Registration />}></Route>
-          <Route path='otp/email-confirmation' element={<OTP />}></Route>
+          <Route
+            path='registration/company/otp/email-confirmation'
+            element={<OTP />}></Route>
           <Route path='on-Boarding' element={<OnBoarding />}></Route>
           <Route path='add-roles' element={AddRoles}></Route>
           <Route path='Dashboard' element={<Dashboard />}></Route>

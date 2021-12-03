@@ -647,6 +647,26 @@ textarea {
   transform: translate(-50%, -50%);
   outline: transparent;
 }
+.verify-modal {
+  width: 80%;
+  width: 50rem;
+  border-radius: 1rem;
+}
+.loader-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  background-color: var(--page);
+  box-shadow: 2px 2px 2px #ccc;
+}
+
+.loader-modal .spinner {
+  padding: 2rem;
+  color: var(--baseColor) !important;
+}
 
 @media screen and (min-width: 576px) {
   .toggle-input {
