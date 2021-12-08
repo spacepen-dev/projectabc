@@ -1,19 +1,47 @@
-import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Spinner, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { signIn } from "../Actions";
 
 import Header from "./Header";
-import SingleBtn from "./SingleBtn";
+import VerificationModal from "./Dashboard/VerificationModal";
 
-const SignIn = ({ signIn }) => {
+const SignIn = ({ signIn, accountEmail, logIN }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [request, setRequest] = useState(false);
+  const [success, setSuccess] = useState("");
 
   const onInputChange = (e) => {
     setEmail(e.target.value);
   };
+
+  useEffect(() => {
+    if (!accountEmail) {
+      return null;
+    }
+    setEmail(accountEmail.data.accountEmail);
+  }, [accountEmail]);
+
+  const OtpResponse = ({ data }) => {
+    setRequest(false);
+
+    const { error, success } = data;
+    if (error) {
+      setError(error);
+    } else if (success) {
+      setSuccess(success);
+      navigate("/login/otp");
+    }
+  };
+
+  useEffect(() => {
+    if (!logIN) {
+      return null;
+    }
+    OtpResponse(logIN);
+  }, [logIN]);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
@@ -27,10 +55,17 @@ const SignIn = ({ signIn }) => {
       // console.log(email);
       signIn(email);
       setError("");
+      setRequest(true);
     } else {
       setError("Correct email address must be provided.");
     }
   };
+
+  const closeModal = () => {
+    setSuccess("");
+    // navigate("/");
+  };
+
   return (
     <Container id='signin'>
       <Header />
@@ -42,6 +77,7 @@ const SignIn = ({ signIn }) => {
         <div>
           <label>Email Address</label>
           <p>Enter the official email-address of your company</p>
+
           <div>
             <input
               type='text'
@@ -56,8 +92,16 @@ const SignIn = ({ signIn }) => {
           </div>
         </div>
         <div className='button-container d-flex justify-content-center align-items-end'>
-          <SingleBtn>SUBMIT</SingleBtn>
-          {/* <div className='py-3 mx-3'> */}
+          <Button
+            type='submit'
+            className='button'
+            disabled={request ? true : false}>
+            {request ? (
+              <Spinner as='span' animation='border' size='lg' />
+            ) : (
+              "SUBMIT"
+            )}
+          </Button>
         </div>
         <div className='py-4 mt-3 w-75 ms-5 fs-3 text-center'>
           Don't have an account?{" "}
@@ -66,8 +110,22 @@ const SignIn = ({ signIn }) => {
           </Link>
         </div>
       </form>
+      {!success ? null : (
+        <VerificationModal message={`${success}`} close={closeModal} />
+      )}
+
+      {/* {!error ? null : (
+        <WarningModal closeWarning={close_reload} errorMessage={error} />
+      )} */}
     </Container>
   );
 };
 
-export default connect(null, { signIn })(SignIn);
+const mapStateToProps = (state) => {
+  return {
+    accountEmail: state.RegistrationReducer.otp,
+    logIN: state.RegistrationReducer.signIN,
+  };
+};
+
+export default connect(mapStateToProps, { signIn })(SignIn);

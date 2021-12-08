@@ -3,13 +3,13 @@ import Header from "../Header";
 import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
 
-import { Otp } from "../../Actions";
+import { LoginOtp } from "../../Actions";
 import WarningModal from "../Dashboard/WarningModal";
 import VerificationModal from "../Dashboard/VerificationModal";
 import { useNavigate } from "react-router";
 import LoaderModal from "../Dashboard/LoaderModal";
 
-const OTP = ({ Otp, resOtp, getValues }) => {
+const LoginOtp = ({ Otp, resOtp, getValues }) => {
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -25,9 +25,8 @@ const OTP = ({ Otp, resOtp, getValues }) => {
     }
     setActive(true);
     setTimeout(() => {
-      console.log(otpNumber);
-      Otp(otpNumber);
-    }, 2000);
+      LoginOtp(otpNumber);
+    }, 1000);
   };
 
   const networkError = ({ errMessage }) => {
@@ -125,7 +124,7 @@ const OTP = ({ Otp, resOtp, getValues }) => {
             lineHeight: "3.6rem",
             fontWeight: "700",
           }}>
-          OTP confirmation
+          Enter Login OTP
         </h2>
       </div>
       <div>
@@ -135,8 +134,8 @@ const OTP = ({ Otp, resOtp, getValues }) => {
             color: " #23549e",
             lineHeight: "2.7rem",
           }}>
-          Enter the 6-digit pin that was sent to{" "}
-          {localStorage.getItem("email", email)}
+          Enter the 6-digit login pin.
+          {/* {localStorage.getItem("email", email)} */}
         </p>
       </div>
       <div className='d-flex justify-content-between align-items-center py-2 otp-input-container'>
@@ -176,4 +175,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { Otp })(OTP);
+export default connect(mapStateToProps, { Otp })(LoginOtp);

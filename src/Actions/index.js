@@ -59,3 +59,14 @@ export const Otp = (code) => async (dispatch) => {
     dispatch({ type: "ERROR_MESSAGE", payLoad: error });
   }
 };
+
+export const LoginOtp = (code) => async (dispatch) => {
+  try {
+    const data = await axios.post(
+      "https://haypex.com.ng/dev/ABC/webService/verifyLogin.php",
+      {
+        code,
+      }
+    );
+  } catch (error) {}
+};

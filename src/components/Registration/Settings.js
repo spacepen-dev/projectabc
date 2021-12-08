@@ -10,6 +10,7 @@ import InputField from "./InputField";
 import LabelText from "./LabelText";
 import FormValidation from "./FormValidation";
 import WarningModal from "../Dashboard/WarningModal";
+import VerificationModal from "../Dashboard/VerificationModal";
 
 const Settings = ({
   currentForm,
@@ -20,6 +21,9 @@ const Settings = ({
 }) => {
   const [request, setRequest] = useState(false);
   const [errorMessage, setMessage] = useState("");
+  const [success, setSuccess] = useState("");
+  const [showModal, setShow] = useState(false);
+
   const navigate = useNavigate();
 
   const networkError = ({ errMessage }) => {
@@ -27,6 +31,7 @@ const Settings = ({
       return null;
     } else {
       setRequest(false);
+      setShow(true);
       setMessage(
         `${errMessage.message}. Check your network connection and try again.`
       );
@@ -41,8 +46,9 @@ const Settings = ({
       const { error, success } = companyRegistration.data;
       if (error) {
         setMessage(error);
+        setShow(true);
       } else if (success) {
-        navigate("otp/email-confirmation");
+        setSuccess(success);
       }
     }
   };
@@ -58,7 +64,13 @@ const Settings = ({
   };
 
   const close_reload = () => {
-    setMessage("");
+    // window.location.reload(false);
+    setMessage(null);
+    setShow(false);
+  };
+  const closeModal = () => {
+    setSuccess("");
+    navigate("otp/email-confirmation");
   };
 
   if (currentForm !== 3) {
@@ -66,9 +78,15 @@ const Settings = ({
   }
   return (
     <>
-      {errorMessage ? (
+      {showModal ? (
         <WarningModal closeWarning={close_reload} errorMessage={errorMessage} />
       ) : null}
+      {!success ? null : (
+        <VerificationModal
+          message={`${success}. Verify your email address to continue.`}
+          close={closeModal}
+        />
+      )}
       <div>
         <SubHeader>Fill in your company bank account details</SubHeader>
       </div>

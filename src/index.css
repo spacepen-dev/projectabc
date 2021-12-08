@@ -618,7 +618,7 @@ textarea {
   background-color: rgba(0, 0, 0, 0.4);
 }
 .Overlay-alert {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .Overlay-alert .alert {
   max-width: 50rem;
@@ -648,9 +648,13 @@ textarea {
   outline: transparent;
 }
 .verify-modal {
+  height: 20rem;
   width: 80%;
-  width: 50rem;
+  max-width: fit-content;
   border-radius: 1rem;
+}
+.verify-modal h3 {
+  font-weight: 400;
 }
 .loader-modal {
   display: flex;

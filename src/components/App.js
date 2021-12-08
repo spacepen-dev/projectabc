@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -8,6 +8,7 @@ import OTP from "./Registration/OTP";
 import OnBoarding from "./Registration/OnBoarding";
 import AddRoles from "./Registration/AddRoles";
 import Dashboard from "./Dashboard/Dashboard";
+import LoginOtp from "./Registration/LoginOtp";
 
 const App = (props) => {
   return (
@@ -15,7 +16,7 @@ const App = (props) => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SignIn />}></Route>
-          {/* <Route path='/sign' element={<SignIn />}></Route> */}
+          <Route path='login/otp' element={<LoginOtp />}></Route>
           <Route
             path='registration/company'
             exact
