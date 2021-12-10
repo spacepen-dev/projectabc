@@ -3,13 +3,13 @@ import Header from "../Header";
 import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
 
-import { LoginOtp } from "../../Actions";
+import { LoginOTP } from "../../Actions";
 import WarningModal from "../Dashboard/WarningModal";
 import VerificationModal from "../Dashboard/VerificationModal";
 import { useNavigate } from "react-router";
 import LoaderModal from "../Dashboard/LoaderModal";
 
-const LoginOtp = ({ Otp, resOtp, getValues }) => {
+const LoginOtp = ({ Otp, resOtp, getValues, LoginOTP }) => {
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -25,7 +25,8 @@ const LoginOtp = ({ Otp, resOtp, getValues }) => {
     }
     setActive(true);
     setTimeout(() => {
-      LoginOtp(otpNumber);
+      console.log(otpNumber);
+      LoginOTP(otpNumber);
     }, 1000);
   };
 
@@ -55,14 +56,14 @@ const LoginOtp = ({ Otp, resOtp, getValues }) => {
     }
   };
 
-  useEffect(() => {
-    if (!getValues) {
-      console.log("empty");
-      // navigate(-1);
-    } else {
-      setEmail(localStorage.setItem("email", getValues.values.email));
-    }
-  }, [getValues]);
+  // useEffect(() => {
+  //   if (!getValues) {
+  //     console.log("empty");
+  //     // navigate(-1);
+  //   } else {
+  //     setEmail(localStorage.setItem("email", getValues.values.email));
+  //   }
+  // }, [getValues]);
 
   useEffect(() => {
     sendOTP(otp);
@@ -175,4 +176,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { Otp })(LoginOtp);
+export default connect(mapStateToProps, { LoginOTP })(LoginOtp);

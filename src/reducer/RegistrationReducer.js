@@ -3,6 +3,7 @@ const Initial_State = {
   companyRegistration: null,
   otp: null,
   errMessage: null,
+  loginOtp: null,
 };
 
 const RegistrationReducer = (state = Initial_State, action) => {
@@ -13,6 +14,8 @@ const RegistrationReducer = (state = Initial_State, action) => {
       return { ...state, signIN: action.payLoad };
     case "OTP":
       return { ...state, otp: action.payLoad };
+    case "LOGIN":
+      return { ...state, loginOtp: action.payLoad };
     case "ERROR_MESSAGE":
       return { ...state, errMessage: action.payLoad };
     default:

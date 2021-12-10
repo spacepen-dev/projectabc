@@ -60,13 +60,15 @@ export const Otp = (code) => async (dispatch) => {
   }
 };
 
-export const LoginOtp = (code) => async (dispatch) => {
+export const LoginOTP = (code) => async (dispatch) => {
+  console.log(code);
   try {
     const data = await axios.post(
       "https://haypex.com.ng/dev/ABC/webService/verifyLogin.php",
-      {
-        code,
-      }
+      { login: code }
     );
-  } catch (error) {}
+    dispatch({ typ: "LOGIN", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "ERROR_MESSAGE", payLoad: error });
+  }
 };

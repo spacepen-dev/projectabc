@@ -6,9 +6,9 @@ import SignIn from "./SignIn";
 import Registration from "./Registration/Registration";
 import OTP from "./Registration/OTP";
 import OnBoarding from "./Registration/OnBoarding";
-import AddRoles from "./Registration/AddRoles";
 import Dashboard from "./Dashboard/Dashboard";
 import LoginOtp from "./Registration/LoginOtp";
+import TagInput from "./Registration/TagInput";
 
 const App = (props) => {
   return (
@@ -25,7 +25,7 @@ const App = (props) => {
             path='registration/company/otp/email-confirmation'
             element={<OTP />}></Route>
           <Route path='on-Boarding' element={<OnBoarding />}></Route>
-          <Route path='add-roles' element={AddRoles}></Route>
+          <Route path='add-roles' element={<TagInput />}></Route>
           <Route path='Dashboard' element={<Dashboard />}></Route>
         </Routes>
       </BrowserRouter>

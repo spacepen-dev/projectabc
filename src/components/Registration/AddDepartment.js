@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const AddRoles = ({ data }) => {
+const AddDepartment = ({ data }) => {
   const [tags, setTags] = useState([]);
 
   const keyPress = (e) => {
@@ -57,4 +57,4 @@ const AddRoles = ({ data }) => {
   );
 };
 
-export default AddRoles;
+export default AddDepartment;

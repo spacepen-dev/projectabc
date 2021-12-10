@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Container, Spinner, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../Actions";
+// import { UseNavigate } from "react-router-dom";s
 
 import Header from "./Header";
 import VerificationModal from "./Dashboard/VerificationModal";
 
 const SignIn = ({ signIn, accountEmail, logIN }) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [request, setRequest] = useState(false);
