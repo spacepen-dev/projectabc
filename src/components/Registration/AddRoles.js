@@ -5,7 +5,7 @@ const AddRoles = ({ data }) => {
 
   const keyPress = (e) => {
     let tag = e.target.value.replace(/\s+/g, " ");
-    if (e.code === "Enter") {
+    if (e.code === "Enter" && tag !== "") {
       e.preventDefault();
       setTags([...tags, tag]);
       e.target.value = "";

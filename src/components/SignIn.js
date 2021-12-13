@@ -7,6 +7,7 @@ import { signIn } from "../Actions";
 
 import Header from "./Header";
 import VerificationModal from "./Dashboard/VerificationModal";
+import Loaderbutton from "./LoaderButton";
 
 const SignIn = ({ signIn, accountEmail, logIN }) => {
   const navigate = useNavigate();
@@ -14,7 +15,6 @@ const SignIn = ({ signIn, accountEmail, logIN }) => {
   const [error, setError] = useState("");
   const [request, setRequest] = useState(false);
   const [success, setSuccess] = useState("");
-
   const onInputChange = (e) => {
     setEmail(e.target.value);
   };
@@ -94,16 +94,7 @@ const SignIn = ({ signIn, accountEmail, logIN }) => {
           </div>
         </div>
         <div className='button-container d-flex justify-content-center align-items-end'>
-          <Button
-            type='submit'
-            className='button'
-            disabled={request ? true : false}>
-            {request ? (
-              <Spinner as='span' animation='border' size='lg' />
-            ) : (
-              "SUBMIT"
-            )}
-          </Button>
+          <Loaderbutton btnName='SUBMIT' request={request} />
         </div>
         <div className='py-4 mt-3 w-75 ms-5 fs-3 text-center'>
           Don't have an account?{" "}

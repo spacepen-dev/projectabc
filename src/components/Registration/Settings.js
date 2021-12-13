@@ -11,6 +11,7 @@ import LabelText from "./LabelText";
 import FormValidation from "./FormValidation";
 import WarningModal from "../Dashboard/WarningModal";
 import VerificationModal from "../Dashboard/VerificationModal";
+import LoaderButton from "../LoaderButton";
 
 const Settings = ({
   currentForm,
@@ -31,10 +32,10 @@ const Settings = ({
       return null;
     } else {
       setRequest(false);
-      setShow(true);
       setMessage(
         `${errMessage.message}. Check your network connection and try again.`
       );
+      setShow(true);
     }
   };
 
@@ -55,6 +56,9 @@ const Settings = ({
 
   useEffect(() => {
     sendOtp(checkStatus);
+  }, [checkStatus]);
+
+  useEffect(() => {
     networkError(checkStatus);
   }, [checkStatus]);
 
@@ -149,7 +153,13 @@ const Settings = ({
             <Button type='button' className='button ms-auto' onClick={prevPage}>
               BACK
             </Button>
-            <Button
+            <LoaderButton
+              btnName='FINISH'
+              style='ms-4'
+              request={request}
+              spinnerStyle='bg-transparent'
+            />
+            {/* <Button
               type='submit'
               className='button ms-4'
               disabled={request ? true : false}>
@@ -163,7 +173,7 @@ const Settings = ({
                   size='lg'
                 />
               )}
-            </Button>
+            </Button> */}
           </div>
         </Form>
       </div>

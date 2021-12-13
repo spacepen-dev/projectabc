@@ -25,7 +25,6 @@ const LoginOtp = ({ Otp, resOtp, getValues, LoginOTP }) => {
     }
     setActive(true);
     setTimeout(() => {
-      console.log(otpNumber);
       LoginOTP(otpNumber);
     }, 1000);
   };
@@ -41,13 +40,14 @@ const LoginOtp = ({ Otp, resOtp, getValues, LoginOTP }) => {
     }
   };
 
-  const OtpResponse = ({ otp }) => {
-    if (!otp) {
+  const OtpResponse = ({ loginOtp }) => {
+    if (!loginOtp) {
       return null;
     } else {
       setActive(false);
-      const { error, success } = otp.data;
+      const { error, success } = loginOtp.data;
       if (error) {
+        console.log(error);
         setError(error);
       } else if (success) {
         setSuccess(success);
@@ -70,6 +70,9 @@ const LoginOtp = ({ Otp, resOtp, getValues, LoginOTP }) => {
   }, [otp]);
 
   useEffect(() => {
+    if (!resOtp) {
+      return null;
+    }
     OtpResponse(resOtp);
     networkError(resOtp);
   }, [resOtp]);
@@ -172,7 +175,6 @@ const LoginOtp = ({ Otp, resOtp, getValues, LoginOTP }) => {
 const mapStateToProps = (state) => {
   return {
     resOtp: state.RegistrationReducer,
-    getValues: state.form.companyRegistration,
   };
 };
 
