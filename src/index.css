@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
+:root {
+  --transition: all 0.3s linear;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -458,6 +464,67 @@ otp div:last-child {
 .col-2 {
   width: calc(100% - 27.12rem);
 }
+
+/*
+=============== 
+WarningPage
+===============
+*/
+
+main{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: -1;
+}
+
+main .content {
+  background-color: var(--transparent);
+  display: flex;
+  border-style: none !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70vw !important;
+  height: 80vh;
+  box-shadow: var(--light-shadow);
+}
+.s-svg {
+  margin-left: 10rem !important;
+}
+.content h2 {
+  color: var(--baseColor);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.content h5 {
+  color: var(--accent);
+  font-weight: bold;
+  line-height: 1.5;
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+.btn {
+  text-transform: uppercase;
+  background: var(--baseColor);
+  color: var(--page);
+  padding: 1.5rem 2rem;
+  letter-spacing: 1px;
+  display: inline-block;
+  transition: var(--transition);
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+.btn:hover {
+  background: transparent;
+}
+
+
+
 
 .details-container {
   padding-top: 4.69rem;
