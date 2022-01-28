@@ -4,6 +4,7 @@
   --transition: all 0.3s linear;
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --primary-Red: rgba(200, 16, 16, 0.9)
 }
 
 * {
@@ -491,18 +492,20 @@ main .content {
   height: 80vh;
   box-shadow: var(--light-shadow);
 }
-.s-svg {
-  margin-left: 10rem !important;
+.s{
+  margin-bottom: 2rem;
+mix-blend-mode: color-burn;  
 }
+
 .content h2 {
   color: var(--baseColor);
   font-weight: 500;
   margin-bottom: 1rem;
 }
-.content h5 {
-  color: var(--accent);
+.content p {
+  color: var(--primary-Red);
   font-weight: bold;
-  line-height: 1.5;
+  line-height: 1;
   text-transform: capitalize;
   margin-bottom: 1rem;
 }
@@ -510,12 +513,13 @@ main .content {
   text-transform: uppercase;
   background: var(--baseColor);
   color: var(--page);
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.5rem;
   letter-spacing: 1px;
   display: inline-block;
   transition: var(--transition);
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
+  margin-top: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }

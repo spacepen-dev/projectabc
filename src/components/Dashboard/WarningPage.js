@@ -1,17 +1,16 @@
-import { queryByDisplayValue } from "@testing-library/react";
 import React from "react";
-import { Successful } from "./svg/Successful";
+
 
 const WarningPage = () => {
   
   return (
     <main>
       <div className="content">
-        <div className="s-svg">
-        <Successful />
+        <div className="s">
+          <img src="./images/download.jpg" alt="" />
         </div>
         <h2>SORRY!</h2>
-        <h5>you've never pay any employees</h5>
+        <p>you've never pay any employees</p>
         <button className="btn">pay employees</button>
       </div>
     </main>

@@ -10,12 +10,14 @@ import Dashboard from "./Dashboard/Dashboard";
 import LoginOtp from "./Registration/LoginOtp";
 import TagInput from "./Registration/TagInput";
 import WarningPage from "./Dashboard/WarningPage";
+import ViewEmployee from "./Dashboard/ViewEmployee";
 
 
 const App = (props) => {
   return (
     <Container fluid className="pb-4">
       {/* <WarningPage /> */}
+      {/* <ViewEmployee/> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SignIn />}></Route>
