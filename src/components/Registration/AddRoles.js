@@ -5,7 +5,7 @@ const AddRoles = ({ data }) => {
 
   const keyPress = (e) => {
     let tag = e.target.value.replace(/\s+/g, " ");
-    if (e.code === "Enter") {
+    if (e.code === "Enter" && tag !== "") {
       e.preventDefault();
       setTags([...tags, tag]);
       e.target.value = "";
@@ -33,8 +33,8 @@ const AddRoles = ({ data }) => {
               }}>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
+                width='12.5'
+                height='12.5'
                 fill='currentColor'
                 className='bi bi-x'
                 viewBox='0 0 16 16'>

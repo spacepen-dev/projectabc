@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
+import { Routes, Route } from "react-router-dom";
+
 import SideBar from "./SideBar";
 import Overview from "./Overview";
 import AddEmployee from "./AddEmployee";
 import ViewEmployee from "./ViewEmployee";
-import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
+import ViewSalaryHisory from "./ViewSalaryHistory";
+import { CompanyDetails } from "../../Actions";
 
 const Dashboard = () => {
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    // CompanyDetails();
+  }, []);
   return (
     <Container fluid>
       <Row className='row'>
@@ -25,16 +34,20 @@ const Dashboard = () => {
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
-        <Col className='d-none d-lg-block col-1'>
+        <Col className='d-none d-lg-block col-1 '>
           <SideBar pageId={(id) => setPage(id)} page={page} />
         </Col>
         <Col className='col-2'>
-          {page === 1 ? <Overview page={page} /> : ""}
-          {page === 2 ? <AddEmployee page={page} /> : ""}
-          {page === 3 ? <ViewEmployee page={page} /> : ""}
+          <Routes>
+            <Route index element={<Overview />} />
+            <Route path='/overview' element={<Overview />} />
+            <Route path='/add/employee' element={<AddEmployee />} />
+            <Route path='/view/employees' element={<ViewEmployee />} />
+            <Route path='/view/salary/history' element={<ViewSalaryHisory />} />
+          </Routes>
         </Col>
       </Row>
     </Container>
   );
 };
-export default Dashboard;
+export default connect(null, { CompanyDetails })(Dashboard);

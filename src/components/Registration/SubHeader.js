@@ -6,9 +6,9 @@ const SubHeader = ({ children }) => {
       <h5
         className=' lh-3 text-center text-left-sm'
         style={{
-          fontSize: "1.87rem",
-          padding: "2.25rem",
-          lineHeight: "2.25rem",
+          fontSize: "1.2rem",
+          padding: "0.5rem",
+          lineHeight: "1.13rem",
         }}>
         {children}
       </h5>

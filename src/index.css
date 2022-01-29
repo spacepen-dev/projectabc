@@ -11,6 +11,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Lato", sans-serif;
 }
 html {
   --background: #c4c4c4c4;
@@ -35,20 +36,18 @@ h5 {
 }
 header {
   max-width: 48.2rem;
-  height: 15.18rem;
-  margin-bottom: 4.1rem;
+  height: 3.8rem;
+  margin-bottom: 2.5rem;
+  padding-top: 1rem;
 }
 .logo {
   max-width: 8.88rem;
-  height: 3.75rem;
+  height: 1.88rem;
   font-family: var(--mainFont);
-  font-size: 3.1rem;
+  font-size: 1.55rem;
   font-weight: 700;
   text-transform: uppercase;
   color: #000000;
-}
-.heading-container {
-  padding-bottom: 2.7rem;
 }
 
 .heading-container h2,
@@ -60,48 +59,45 @@ label {
 }
 
 .heading-container h2 {
-  font-size: 3rem;
-  /* padding-bottom: 0.35rem; */
-  padding-bottom: 1.7rem;
-  /* line-height: 2.4rem; */
+  font-size: 1.5rem;
+  padding-bottom: 0.85rem;
 }
 .heading-container h3 {
   font-weight: 400;
-  font-size: 2.25rem;
-  line-height: 2.69rem;
-  margin-bottom: 4.69rem;
+  font-size: 1.13rem;
+  line-height: 1.39rem;
+  margin-bottom: 2.35rem;
 }
 
 #signin label {
   color: var(--baseColor);
   font-family: var(--mainFont);
   font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1.8rem;
+  font-size: 0.75rem;
+  line-height: 0.9rem;
   margin-bottom: 0.5rem;
   /* color: red; */
 }
 #signin p {
   color: var(--accent);
-  font-size: 1.25rem;
+  font-size: 0.63rem;
   font-weight: 400;
   font-family: var(--mainFont);
-  line-height: 1.5rem;
+  line-height: 0.75rem;
   margin-bottom: 1.38rem;
 }
 #signin input {
   color: var(--baseColor);
   font-family: var(--mainFont);
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   width: 100%;
-  max-width: 62.5rem;
-  /* max-width: 31.25rem; */
-  height: 5rem;
+  max-width: 42.25rem;
+  height: 3rem;
   outline: none;
   border: none;
   border: 2px solid var(--baseColor);
   border-radius: 0.63rem;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 }
 input::placeholder {
   color: var(--accent);
@@ -114,10 +110,10 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 .button-container {
-  height: 7rem;
-  width: 83%;
-  max-width: 62.5rem;
-  margin-top: 6.69rem;
+  height: 3.75rem;
+  width: 100%;
+  max-width: 42.25rem;
+  margin-top: 2.35rem;
 }
 .double-btns button:first-child {
   background-color: transparent;
@@ -130,15 +126,15 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .button {
   background-color: var(--baseColor);
-  font-size: 1.75rem;
+  font-size: 0.88rem;
   font-family: var(--mainFont);
   font-weight: 700;
   text-decoration: none !important;
-  line-height: 2.1rem;
-  width: 13.8rem;
-  height: 6.125rem;
+  line-height: 1.05rem;
+  width: 6.9rem;
+  height: 3.06rem;
   border: none;
-  border-radius: 0.625rem;
+  border-radius: 0.3125rem;
   transition: background-color 0.5s ease;
 }
 .button:hover,
@@ -147,7 +143,7 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: var(--button);
 }
 .lines {
-  height: 15.18rem;
+  height: 7.59rem;
   max-width: 23rem;
   overflow-x: hidden;
 }
@@ -157,11 +153,11 @@ input[type="number"]::-webkit-outer-spin-button {
 .lines span:first-child {
   width: 27rem;
   /* margin-bottom: 0.95rem; */
-  margin-bottom: 30.5px;
+  margin-bottom: 0.96rem;
 }
 .lines span:nth-child(2) {
   /* margin-bottom: 1.1rem; */
-  margin-bottom: 35.5px;
+  margin-bottom: 1.11rem;
   width: 18.3rem;
 }
 .lines span:last-child {
@@ -169,27 +165,26 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .formHeading h3 {
-  font-size: 3.125rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  line-height: 3.75rem;
-  margin-bottom: 3.06rem;
+  line-height: 0.9rem;
+  margin-bottom: 0.77rem;
 }
 .range-container {
   width: 80%;
-  max-width: 40rem;
-  /* width: 10rem; */
+  max-width: 25rem;
 }
 .range-container span {
-  padding: 1.37rem !important;
-  margin-top: 1.18rem !important ;
+  padding: 0.69rem !important;
+  margin-top: 0.59rem !important ;
 }
 .range-container small {
-  height: 0;
-  width: 7.4rem !important;
-  margin-top: 3.18rem;
+  height: 0.1rem;
+  width: 3.7rem !important;
+  margin-top: 2rem;
 }
 .section label {
-  font-size: 0.75rem;
+  font-size: 0.375rem;
   color: var(--baseColor);
 }
 .section span {
@@ -199,7 +194,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border: 0.1px solid var(--accent);
   background-color: var(--accent);
   width: 80%;
-  max-width: 7.4rem;
+  max-width: 3.7rem;
 }
 .active {
   background-color: var(--accent) !important;
@@ -210,27 +205,31 @@ input[type="number"]::-webkit-outer-spin-button {
   max-width: 100rem !important;
   color: var(--accent) !important;
   background-color: transparent !important;
-  font-size: 1.25rem;
+  font-size: 0.83rem;
 }
 Label {
   color: var(--baseColor) !important;
-  font-size: 1.5rem !important;
+  font-size: 1rem !important;
   /* text-align: center; */
+}
+.form-label {
+  font-size: 0.75rem;
+  line-height: 0.9rem;
+  font-family: var(--mainFont);
 }
 .registration-input {
   border-color: var(--accent);
-  border-radius: 0.625rem !important;
+  border-radius: 0.313rem !important;
   border-top: 1px solid var(--accent);
   color: var(--baseColor) !important;
   outline: none;
-  transition: border 0.01s ease;
-  max-width: 62.5rem !important;
-  height: 5rem;
+  transition: border 0.01 ease;
+  max-width: 42.25rem !important;
+  height: 3rem;
 }
 
 .field-container {
-  /* background-color: red; */
-  margin-bottom: 2.8rem !important;
+  margin-bottom: 1.4rem !important;
 }
 
 .registration-input:active,
@@ -257,13 +256,13 @@ select:focus {
 select {
   color: var(--accent);
   border-color: var(--accent);
-  border-radius: 0.625rem;
-  height: 5rem;
+  border-radius: 0.313rem;
+  height: 3rem;
   width: 100%;
-  max-width: 62.5rem !important;
-  margin-top: 22px;
-  padding: 0 2rem;
-  font-size: 1.25rem;
+  max-width: 42.25rem !important;
+  margin-top: 0.69;
+  padding: 0 1rem;
+  font-size: 0.63rem;
 }
 .errorBorder {
   border-color: red;
@@ -272,17 +271,17 @@ select {
 .switch {
   position: relative;
   display: inline-block;
-  width: 7.97rem;
-  height: 4.43rem;
-  border: 2px solid --baseColor;
+  width: 3.99rem;
+  height: 2.22rem;
+  border: 1px solid --baseColor;
 }
 
 .toggle-container {
-  width: 15.2rem;
+  width: 7.5rem;
   color: var(--accent);
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   font-weight: bold;
-  line-height: 1.8rem;
+  line-height: 0.9rem;
   /* margin-left: 9rem !important; */
 }
 
@@ -304,7 +303,7 @@ select {
   bottom: 0;
   background-color: var(--page) !important;
   border: 1px solid var(--accent);
-  border-radius: 2.5rem;
+  border-radius: 1.25rem;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   /* background-color: red !important; */
@@ -313,8 +312,8 @@ select {
 .slider:before {
   position: absolute;
   content: "";
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 1.25rem;
+  width: 1.25rem;
   left: 17.46%;
   right: 50.79%;
   bottom: 23.94%;
@@ -333,14 +332,14 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(1.63rem);
+  -ms-transform: translateX(1.63rem);
+  transform: translateX(1.63rem);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+  border-radius: 2.13rem;
 }
 
 .slider.round:before {
@@ -348,19 +347,30 @@ input:checked + .slider:before {
 }
 
 .otp-input-container {
-  max-width: 68.75rem;
-  margin-top: 4.69rem;
+  max-width: 34.38rem;
+  margin-top: 2.35rem;
 }
 
+.otp-header {
+  font-size: 1.5rem;
+  color: var(--baseColor);
+  font-weight: 700;
+  line-height: 1.8rem;
+}
+.otp-sub-header {
+  font-size: 1.13rem;
+  color: var(--baseColor);
+  line-height: 1.35rem;
+}
 .otp input {
-  width: 3rem;
-  height: 3rem;
-  font-size: 3rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.5rem;
   color: var(--baseColor);
   border: 2px solid var(--baseColor);
   outline-color: var(--baseColor);
   background-color: var(--page);
-  border-radius: 0.6rem;
+  border-radius: 0.3rem;
 }
 otp div:last-child {
   color: #000000;
@@ -369,7 +379,7 @@ otp div:last-child {
   color: var(--baseColor);
 }
 .onboarding-container div:first-child {
-  height: 9.375rem;
+  height: 4.38rem;
   width: 100%;
   /* background-color: red; */
   display: flex;
@@ -378,38 +388,39 @@ otp div:last-child {
 }
 .onboarding-container div:first-child h3 {
   align-self: flex-end;
-  height: 2.1rem;
+  height: 1.05rem;
   text-align: center;
-  line-height: 2.1rem;
+  line-height: 1.05rem;
+  font-size: 1.2rem;
 }
 
 .onboarding-container div:nth-child(2) {
-  max-width: 62.8rem;
-  margin-top: 7.4rem;
+  max-width: 31.4rem;
+  margin-top: 3.7rem;
 }
 .onboarding-container div:nth-child(3) h3 {
-  margin-top: 4.2rem;
+  margin-top: 2.1rem;
   color: var(--accent) !important;
   font-weight: 400;
   text-align: center;
-  line-height: 1.87rem;
+  font-size: 1rem;
+  line-height: 0.94rem;
 }
 .onboarding-container div:nth-child(4) {
-  margin-top: 2.12rem !important;
+  margin-top: 1.06rem !important;
 }
 .col-1 {
-  width: 27.12rem !important;
-  /* background-color: red; */
+  width: 18.54rem !important;
 }
 .sidebar-container {
   height: 100vh;
   height: fit-content;
-  width: 22.12rem;
-  padding-bottom: 5rem;
+  width: 16.54rem;
+  padding-bottom: 2.5rem;
   padding-top: 1rem;
-  border-radius: 3.125rem;
-  margin-bottom: 3rem;
+  border-radius: 1rem;
   background-color: var(--transparent);
+  margin-left: 0;
 }
 .side-bar {
   border-radius: 3.125rem;
@@ -424,27 +435,29 @@ otp div:last-child {
 }
 
 .sidebar-logo {
-  height: 10.125rem;
+  height: 5.05rem;
 }
 .sidebar-heading {
-  padding: 1.25rem 0;
-  margin-left: 3.5rem;
+  padding: 0.625rem 0;
+  margin-left: 1.75rem;
 }
 
 .side-bar div h3,
 .links {
-  font-size: 1.25rem;
-  line-height: 1.5rem;
+  font-size: 0.8rem;
+  line-height: 0.75rem;
   font-weight: 400;
+  color: yellow;
 }
 .side-bar div h3 {
   color: var(--accent);
 }
 .dashboard-link {
-  height: 5rem;
-  width: 100%;
+  height: 3rem;
+  max-width: 22.12rem;
   display: flex;
   align-items: center;
+  text-decoration: none;
   /* background-color: red; */
 }
 .dashboard-link-active {
@@ -457,13 +470,13 @@ otp div:last-child {
   align-items: center;
   text-decoration: none;
   color: var(--baseColor);
-  margin-left: 3.38rem;
+  margin-left: 1.69rem;
   cursor: pointer;
   /* margin-top: 2.875rem; */
 }
 
 .col-2 {
-  width: calc(100% - 27.12rem);
+  width: calc(100% - 19.5rem);
 }
 
 /*
@@ -531,31 +544,32 @@ mix-blend-mode: color-burn;
 
 
 .details-container {
-  padding-top: 4.69rem;
-  padding-bottom: 4rem;
-  max-width: 1654.06px;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  max-width: 264.64rem;
 }
 .details-card {
-  width: 27.45rem !important;
-  height: 13.02rem;
+  width: 20.8rem !important;
+  height: 8rem;
   margin-left: 1rem;
   background-color: var(--transparent);
-  border-radius: 2.23rem;
+  border-radius: 1.12rem;
 }
 .details-card h3 {
-  font-size: 1.27rem;
-  line-height: 1.56rem;
-  margin-bottom: 2.34rem;
+  font-size: 0.97rem;
+  line-height: 0.58rem;
+  margin-top: 2.13rem;
   color: var(--accent);
 }
 .details-card h2 {
-  font-size: 3.06rem;
+  font-size: 1.53rem;
   font-weight: 700;
   line-height: 3.69rem;
   color: var(--baseColor);
 }
 .overview .top-tab {
-  height: 10rem;
+  margin-bottom: 1.5rem;
+  height: 3rem;
   margin-left: 1rem;
 }
 /* .top-tab > div {
@@ -576,8 +590,8 @@ add an active class with the color and a line below the tab
 article span {
   cursor: pointer;
   font-weight: 700;
-  font-size: 1.53rem;
-  line-height: 1.81rem;
+  font-size: 1rem;
+  line-height: 0.11rem;
   color: rgba(35, 84, 158, 0.2);
 }
 .overview-tab {
@@ -588,18 +602,15 @@ article small {
   width: 0;
   height: 0;
   border-radius: 1rem;
-  margin-top: 1.6rem;
+  margin-top: 0.8rem;
   transition: width 0.5s ease;
 }
 .add-small {
-  border: solid 2px var(--baseColor);
-  /* width: 20.94rem; */
+  border: solid 1px var(--baseColor);
   width: 100%;
-  /* background-color: var(--baseColor); */
 }
 
 .table {
-  background-color: red;
   border-top-left-radius: 1.91rem !important;
   background-color: var(--page) !important;
   border-top-right-radius: 1.91rem !important;
@@ -608,34 +619,35 @@ article small {
 }
 
 thead tr:first-child {
-  height: 5.19rem;
+  height: 2.6rem;
   vertical-align: middle;
   vertical-align: center;
   justify-content: space-around;
   align-items: center;
 }
 tr {
-  height: 6.25rem;
+  height: 3.125rem;
 }
 tr:nth-child(2n) {
   background-color: var(--transparent);
 }
 
 th:first-child {
-  border-top-left-radius: 1.91rem !important;
+  border-top-left-radius: 0.96rem !important;
 }
 th:last-child {
-  border-top-right-radius: 1.91rem !important;
+  border-top-right-radius: 0.96rem !important;
 }
 th {
   background-color: var(--baseColor) !important;
-  font-size: 1.15rem;
+  font-size: 0.8rem;
   line-height: 1.38rem;
   text-align: center;
+  font-family: var(--mainFont);
   color: var(--page);
 }
 td {
-  font-size: 1.28rem;
+  font-size: 0.8rem;
   line-height: 1.51rem;
   color: var(--accent);
   vertical-align: middle;
@@ -644,10 +656,11 @@ td {
 }
 
 .employee-form {
-  flex-wrap: wrap;
-  max-width: 65.94rem;
-  /* height: 67.38rem; */
+  max-width: 39.29rem;
   height: fit-content;
+}
+.employee-form .employer-input {
+  font-size: 0.8rem !important;
 }
 .content {
   /* height: 14.28rem; */
@@ -655,7 +668,8 @@ td {
   width: 100%;
   border-radius: 0.625rem !important;
   border: 2px solid var(--baseColor) !important;
-  padding-bottom: 3rem;
+  padding-bottom: 5rem;
+  /* max-width: 31.25rem !important; */
 }
 .content ul {
   display: flex;
@@ -675,29 +689,32 @@ td {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 3.19rem;
+  height: 1.6rem;
   width: fit-content;
   padding: 0 1rem;
-  border-radius: 10px;
+  border-radius: 0.313rem;
   border: 1px solid var(--accent);
-  font-size: 20px;
+  font-size: 0.63rem;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 0.75;
   text-transform: capitalize;
   color: var(--baseColor);
   margin-left: 1rem;
   margin-top: 0.39rem;
 }
 .add-roles > div:nth-child(1) {
-  height: 10.33rem;
+  height: 5.17rem;
 }
 .add-roles div {
-  max-width: 62.5rem;
+  max-width: 43.75rem;
   /* background-color: red; */
+}
+.add-roles h3 {
+  font-size: 0.8rem;
 }
 
 .add-roles Form div:nth-child(2) {
-  height: 10.62rem;
+  height: 5.31rem;
 }
 
 .Overlay,
@@ -707,13 +724,13 @@ td {
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .Overlay {
   background-color: rgba(0, 0, 0, 0.4);
 }
-.Overlay-alert {
-  background-color: rgba(0, 0, 0, 0.4);
-}
+
 .Overlay-alert .alert {
   max-width: 50rem;
   margin-left: auto;
@@ -740,36 +757,72 @@ td {
   border-radius: 3.13rem;
   transform: translate(-50%, -50%);
   outline: transparent;
+  /* z-index: 0 !important; */
 }
+
 .verify-modal {
-  height: 20rem;
+  height: 15rem;
   width: 80%;
   max-width: fit-content;
   border-radius: 1rem;
 }
 .verify-modal h3 {
+  font-size: 1rem;
   font-weight: 400;
 }
 .loader-modal {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 15rem;
-  height: 10rem;
+  width: 7.5rem;
+  height: 5rem;
   border-radius: 0.5rem;
   background-color: var(--page);
-  box-shadow: 2px 2px 2px #ccc;
 }
 
 .loader-modal .spinner {
-  padding: 2rem;
+  padding: 1rem;
   color: var(--baseColor) !important;
 }
 
+.pagination li {
+  margin: 0 0.3rem;
+}
+.page-link {
+  padding: 0.5rem 2rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.5rem;
+  z-index: 200 !important;
+  color: var(--baseColor);
+}
+.page-link .active {
+  border-radius: 0.5rem !important;
+}
+.table-form input {
+  width: 50%;
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.5rem;
+  border: 1px solid var(--accent);
+  font-size: 1rem;
+  line-height: 1.51rem;
+}
+.table-form input::placeholder {
+  font-size: 1.28rem;
+}
+.table-form button {
+  background-color: var(--baseColor);
+  border: none;
+}
+.toggle-input {
+  max-width: 42.25rem;
+}
+
 @media screen and (min-width: 576px) {
-  .toggle-input {
-    width: 85% !important;
-  }
+  /* .toggle-input {
+    width: 100%;
+    max-width: 32rem;
+    /* width: 6% !important; */
+  /* }  */
 }
 
 @media screen and (min-width: 500px) {
@@ -780,8 +833,8 @@ td {
 }
 @media screen and (min-width: 780px) {
   .otp input {
-    width: 6.25rem;
-    height: 6.25rem;
+    width: 3.125rem;
+    height: 3.125rem;
   }
 }
 /* @media screen and (min-width: 780px) {
@@ -852,7 +905,7 @@ td {
   .sub-text {
     color: var(--accent) !important;
     background-color: transparent !important;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .button {

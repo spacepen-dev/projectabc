@@ -1,8 +1,8 @@
 const Salary = () => {
   return (
     <svg
-      width='25'
-      height='25'
+      width='20'
+      height='20'
       viewBox='0 0 25 25'
       fill='none'
       style={{ marginRight: "1.875rem" }}

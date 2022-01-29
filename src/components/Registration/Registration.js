@@ -1,89 +1,96 @@
-import React, { useState } from "react";
-import { Container, FormGroup, Button } from "react-bootstrap";
+import React from "react";
+import { Container } from "react-bootstrap";
+
 import Profile from "./Profile";
 import Contact from "./Contact";
 import Settings from "./Settings";
 import Header from "../Header";
 import FormHeader from "./FormHeader";
 
-const Registration = () => {
-  const [currentForm, setcurrentForm] = useState(1);
+class Registration extends React.Component {
+  state = {
+    currentForm: 1,
+    name: "",
+    registration: "",
+    tin: "",
+    about: "",
+    location: "Ondo state",
+    address: "",
+    email: "",
+    website: "",
+    accountName: "",
+    bank: "",
+    account: "",
+    tax: "YES",
+    checked: false,
+  };
+
+  onChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+    this.setState({ location: e.target.value });
+    if (name === "tax") {
+      this.setState({ checked: true });
+      this.setState({ [name]: "NO" });
+    }
+  };
 
   // current form = 1 0r 2 should have the next button
   //  current form is greater than 2 add previous and finish
-  const nextForm = () => {
-    let currentStep = currentForm;
+  nextForm = () => {
+    let currentStep = this.state.currentForm;
     currentStep = currentStep >= 2 ? 3 : currentStep + 1;
-    setcurrentForm(currentStep);
+
+    this.setState({ currentForm: currentStep });
   };
 
-  const prevForm = () => {
-    let currentStep = currentForm;
+  prevForm = () => {
+    let currentStep = this.state.currentForm;
     currentStep = currentStep <= 1 ? 1 : currentStep - 1;
-    setcurrentForm(currentStep);
+    this.setState({ currentForm: currentStep });
   };
 
-  // prevButton = () => {
-  //   if (this.state.currentForm !== 1) {
-  //     // add previous
-  //     return (
-  //       <Button
-  //         type='button'
-  //         className='button ms-auto'
-  //         onClick={this.prevForm}>
-  //         BACK
-  //       </Button>
-  //     );
-  //   }
-  //   return null;
-  // };
-
-  // nextButton = () => {
-  //   if (this.state.currentForm < 3) {
-  //     // add the next button
-  //     return (
-  //       <Button
-  //         type='button'
-  //         className='button ms-4 next'
-  //         onClick={this.nextForm}>
-  //         NEXT
-  //       </Button>
-  //     );
-  //   }
-  //   return null;
-  // };
-  // const finishButton = () => {
-  //   if (this.state.currentForm === 3) {
-  //     // add the next button
-  //     return (
-  //       <Button type='button' className='button ms-4'>
-  //         FINISH
-  //       </Button>
-  //     );
-  //   }
-  //   return null;
-  // };
-
-  return (
-    <Container className='section pb-4'>
-      <FormGroup>
-        <div>
-          <Header />
-        </div>
-        <div>
-          <FormHeader currentForm={currentForm} />
-        </div>
-        <Profile currentForm={currentForm} onSubmit={nextForm} />
-        <Contact
-          currentForm={currentForm}
-          onSubmit={nextForm}
-          prevPage={prevForm}
-        />
-        <Settings currentForm={currentForm} prevPage={prevForm} />
-        <div className='button-container double-btns d-flex justify-content-end align-items-end'></div>
-      </FormGroup>
-    </Container>
-  );
-};
+  render() {
+    return (
+      <Header>
+        <Container className='section mx-auto'>
+          <div>
+            <FormHeader currentForm={this.state.currentForm} />
+          </div>
+          <Profile
+            currentForm={this.state.currentForm}
+            nextPage={this.nextForm}
+            handleChange={this.onChange}
+            name={this.state.name}
+            registration={this.state.registration}
+            tin={this.state.tin}
+            about={this.state.about}
+            state={this.state.location}
+          />
+          <Contact
+            currentForm={this.state.currentForm}
+            nextPage={this.nextForm}
+            prevPage={this.prevForm}
+            handleChange={this.onChange}
+            address={this.state.address}
+            email={this.state.email}
+            website={this.state.website}
+          />
+          <Settings
+            currentForm={this.state.currentForm}
+            prevPage={this.prevForm}
+            handleChange={this.onChange}
+            accountName={this.state.accountName}
+            bank={this.state.bank}
+            account={this.state.account}
+            tax={this.state.tax}
+            formData={this.state}
+            check={this.state.checked}
+          />
+        </Container>
+      </Header>
+    );
+  }
+}
 
 export default Registration;

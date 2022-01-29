@@ -1,7 +1,7 @@
 import React from "react";
-
 import DashboardTable from "./DashboardTable";
-const SalariesHistory = () => {
+
+const ViewSalaryHisory = () => {
   const heading = [
     {
       paymentDate: "Payment date",
@@ -166,22 +166,11 @@ const SalariesHistory = () => {
       amount: "200,000",
     },
   ];
-  const limitDataTable = (tableData) => {
-    let tdata = [];
-    for (let i = 0; i < 10; i++) {
-      tdata = [...tdata, tableData[i]];
-    }
-    return tdata;
-  };
   return (
-    <>
-      <DashboardTable
-        heading={heading}
-        tableData={limitDataTable(tableData)}
-        display='none'
-      />
-    </>
+    <div className=' mt-5'>
+      <DashboardTable heading={heading} tableData={tableData} display='flex' />
+    </div>
   );
 };
 
-export default SalariesHistory;
+export default ViewSalaryHisory;

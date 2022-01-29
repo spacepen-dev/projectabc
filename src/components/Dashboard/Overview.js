@@ -1,23 +1,26 @@
 import React, { useState } from "react";
+import { Button, Container } from "react-bootstrap";
+
+import EmptyData from "./EmptyData";
 import DetailsCard from "./DetailsCard";
 import EyeSVG from "./svg/Eyes";
 import WhiteWallet from "./svg/WhiteWallet";
 import ProfileWhite from "./svg/ProfileWhite";
 import SalariesHistory from "./SalariesHistory";
-import { Button, Container } from "react-bootstrap";
 import Slider from "./Slider";
 
-const Overview = () => {
+const Overview = ({ page, viewPage }) => {
   const [pageId, setId] = useState(1);
   const [small, setSmall] = useState("first");
 
   const getId = (e) => {
-    setId(parseFloat(e.target.id));
+    setId(Number(e.target.id));
     setSmall(e.target.nextSibling.id);
   };
 
   return (
     <Container fluid className='overview h-100'>
+      {/* <EmptyData /> */}
       <div className='d-flex justify-content-between align-items-center details-container'>
         <DetailsCard
           heading=' TOTAL BALANCE'
@@ -63,7 +66,16 @@ const Overview = () => {
             smallId='third'
           />
           <div className=' overview-btn'>
-            <Button className='button'>View All</Button>
+            <Button
+              className='button'
+              onClick={() => {
+                viewPage(pageId);
+                if (pageId === 1) {
+                  viewPage(4);
+                }
+              }}>
+              View All
+            </Button>
           </div>
         </div>
       </article>

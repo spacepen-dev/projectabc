@@ -1,8 +1,8 @@
 const Profile = () => {
   return (
     <svg
-      width='25'
-      height='30'
+      width='20'
+      height='20'
       viewBox='0 0 25 30'
       style={{ marginRight: "1.875rem" }}
       fill='none'

@@ -1,127 +1,156 @@
 import React, { useEffect, useState } from "react";
 import SubHeader from "./SubHeader";
-import { Form, Spinner, Col, Button } from "react-bootstrap";
-import { Field, reduxForm } from "redux-form";
-import { connect } from "react-redux";
-import { companyRegistration } from "../../Actions";
+import { Form, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { connect } from "react-redux";
 
-import InputField from "./InputField";
+import { companyReg } from "../../Actions";
 import LabelText from "./LabelText";
-import FormValidation from "./FormValidation";
-import WarningModal from "../Dashboard/WarningModal";
 import VerificationModal from "../Dashboard/VerificationModal";
+import LoaderButton from "../LoaderButton";
+import Input from "./Input";
+import NetWorkErrors from "../NetWorkErrors";
 
 const Settings = ({
   currentForm,
-  prevPage,
-  handleSubmit,
-  companyRegistration,
+  handleChange,
+  companyReg,
   checkStatus,
+  accountName,
+  bank,
+  account,
+  tax,
+  prevPage,
+  formData,
+  check,
+  errMessage,
 }) => {
   const [request, setRequest] = useState(false);
   const [errorMessage, setMessage] = useState("");
+  const [serverErr, setServerErr] = useState("");
   const [success, setSuccess] = useState("");
   const [showModal, setShow] = useState(false);
+  const [accountNameErr, setAccountNameErr] = useState("");
+  const [accountNumberErr, setAccountNumberErr] = useState("");
+  const [bankNameErr, setBankNameErr] = useState("");
 
   const navigate = useNavigate();
 
-  const networkError = ({ errMessage }) => {
-    if (!errMessage) {
+  useEffect(() => {
+    if (!checkStatus) {
       return null;
     } else {
       setRequest(false);
-      setShow(true);
-      setMessage(
-        `${errMessage.message}. Check your network connection and try again.`
-      );
-    }
-  };
-
-  const sendOtp = ({ companyRegistration }) => {
-    if (!companyRegistration) {
-      return null;
-    } else {
-      setRequest(false);
-      const { error, success } = companyRegistration.data;
+      const { error, success } = checkStatus.data;
       if (error) {
-        setMessage(error);
         setShow(true);
+        setServerErr(error);
+        const removeTimeOut = setTimeout(() => {
+          setShow(false);
+        }, 4000);
+        return () => {
+          clearTimeout(removeTimeOut);
+        };
       } else if (success) {
         setSuccess(success);
+        setMessage("");
+        setServerErr("");
       }
+    }
+  }, [checkStatus]);
+
+  useEffect(() => {
+    if (!errMessage) {
+      return null;
+    }
+    setRequest(false);
+    setShow(true);
+    setMessage(errMessage.message);
+    const removeTimeOut = setTimeout(() => {
+      setShow(false);
+    }, 4000);
+    return () => {
+      clearTimeout(removeTimeOut);
+    };
+  }, [errMessage]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (!accountName) {
+      setAccountNameErr("Account name is required!");
+    } else if (!bank) {
+      setBankNameErr("Bank name is required");
+    } else if (!account || account.length < 10 || account.length > 10) {
+      setAccountNumberErr("Invalid account number");
+    } else {
+      setRequest(true);
+      companyReg(formData);
     }
   };
 
-  useEffect(() => {
-    sendOtp(checkStatus);
-    networkError(checkStatus);
-  }, [checkStatus]);
-
-  const onSubmit = (values) => {
-    setRequest(true);
-    companyRegistration(values);
-  };
-
-  const close_reload = () => {
-    // window.location.reload(false);
-    setMessage(null);
-    setShow(false);
-  };
   const closeModal = () => {
     setSuccess("");
     navigate("otp/email-confirmation");
   };
-
   if (currentForm !== 3) {
     return null;
   }
+
   return (
-    <>
-      {showModal ? (
-        <WarningModal closeWarning={close_reload} errorMessage={errorMessage} />
-      ) : null}
-      {!success ? null : (
-        <VerificationModal
-          message={`${success}. Verify your email address to continue.`}
-          close={closeModal}
-        />
-      )}
+    <div className='mx-auto w-75'>
+      {success && <VerificationModal message={success} close={closeModal} />}
+
       <div>
         <SubHeader>Fill in your company bank account details</SubHeader>
       </div>
       <div>
-        <Form className='ms-2' onSubmit={handleSubmit(onSubmit)}>
+        <Form className='ms-2' onSubmit={onSubmit}>
           <div className='field-container'>
-            <Field
-              component={InputField}
-              name='account'
-              inputname='Account Name'
-              type='text'
+            <LabelText
               label='Enter the full account name of your company'
+              name='Account Name'
             />
-          </div>
-          <div className='field-container'>
-            <Field
-              component={InputField}
-              name='bank'
-              inputname='Bank Name'
+
+            <Input
+              inputName='accountName'
               type='text'
-              label='Enter the bank official account of your company'
+              handleChange={handleChange}
+              err={accountNameErr}
+              onPress={() => setAccountNameErr("")}
+              value={accountName}
             />
           </div>
           <div className='field-container'>
-            <Field
-              component={InputField}
-              name='accountNumber'
-              inputname='Account Number'
-              type='number'
-              label='Input the official account number of your company'
+            <LabelText
+              label='Enter the bank official account of your company'
+              name='Bank Name'
+            />
+            <Input
+              inputName='bank'
+              type='text'
+              err={bankNameErr}
+              handleChange={handleChange}
+              onPress={() => setBankNameErr("")}
+              value={bank}
             />
           </div>
-          <Col
-            className='d-flex toggle-input justify-content-between align-items-center'
-            style={{ width: "100%", maxWidth: "60.5rem" }}>
+          <div className='field-container'>
+            <LabelText
+              label='Enter the full account name of your company'
+              name='Account Number'
+            />
+
+            <Input
+              inputName='account'
+              type='number'
+              handleChange={handleChange}
+              err={accountNumberErr}
+              onPress={() => setAccountNumberErr("")}
+              value={account}
+            />
+          </div>
+          <Col className='d-flex toggle-input justify-content-between align-items-center'>
             <LabelText
               name='PAYE'
               inputname='PAYE Taxes'
@@ -131,61 +160,48 @@ const Settings = ({
             <div className='toggle-container d-flex justify-content-evenly align-items-center'>
               Yes
               <label className='switch'>
-                {/* <div className='field-container'> */}
-                <Field
+                <input
                   name='tax'
                   id='tax'
-                  component='input'
                   inputname='tax'
                   type='checkbox'
+                  value={tax}
+                  checked={check}
+                  onChange={handleChange}
                 />
-                {/* </div> */}
                 <span className='slider'></span>
               </label>
               No
             </div>
           </Col>
-          <div className='button-container double-btns d-flex align-items-end'>
+          <div className='button-container double-btns d-flex justify-content-end align-items-end'>
             <Button type='button' className='button ms-auto' onClick={prevPage}>
-              BACK
+              Back
             </Button>
-            <Button
-              type='submit'
-              className='button ms-4'
-              disabled={request ? true : false}>
-              {!request ? (
-                "FINISH"
-              ) : (
-                <Spinner
-                  as='span'
-                  className='bg-transparent'
-                  animation='border'
-                  size='lg'
-                />
-              )}
-            </Button>
+            <LoaderButton
+              btnName='FINISH'
+              btnStyle='ms-4'
+              request={request}
+              spinnerStyle='bg-transparent'
+            />
           </div>
         </Form>
+        {showModal && (
+          <NetWorkErrors
+            errMessage={errorMessage}
+            serverErr={serverErr}
+            removeLoader={() => setRequest(false)}
+          />
+        )}
       </div>
-    </>
+    </div>
   );
 };
-
 const mapStateToProps = (state, ownProps) => {
-  const registrationData = state.RegistrationReducer;
-  const formValues = state.form.companyRegistration;
-
   return {
-    checkStatus: registrationData,
-    getValues: formValues,
+    checkStatus: state.RegistrationReducer.companyRegistration,
+    errMessage: state.RegistrationReducer.registrationErr,
   };
 };
 
-export default connect(mapStateToProps, { companyRegistration })(
-  reduxForm({
-    form: "companyRegistration",
-    destroyOnUnmount: false,
-    forceUnregisterOnUnmount: true,
-    validate: FormValidation,
-  })(Settings)
-);
+export default connect(mapStateToProps, { companyReg })(Settings);
