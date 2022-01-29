@@ -1,19 +1,32 @@
 import React from "react";
-import Links from "./Links";
 import SideBarHeading from "./SideBarHeading";
+import { Link } from "react-router-dom";
 
-const DashBoardLinks = ({ heading, name, icon, id, data, none, page }) => {
+const DashBoardLinks = ({
+  heading,
+  name,
+  icon,
+  id,
+  data,
+  none,
+  page,
+  pathLink,
+}) => {
   return (
     <>
       <SideBarHeading heading={heading} none={none} />
-      <div
+      <Link
+        to={pathLink}
         className={`dashboard-link ${
           id === page ? "dashboard-link-active" : ""
         }`}
         id={id}
         onClick={() => data(id)}>
-        <Links name={name} icon={icon} />
-      </div>
+        <small to={`$name`} className='links'>
+          {icon}
+          {name}
+        </small>
+      </Link>
     </>
   );
 };

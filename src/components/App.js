@@ -4,15 +4,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import SignIn from "./SignIn";
 import Registration from "./Registration/Registration";
-import OTP from "./Registration/OTP";
+import OTP from "./Registration/RegistrationOTP";
 import OnBoarding from "./Registration/OnBoarding";
 import Dashboard from "./Dashboard/Dashboard";
 import LoginOtp from "./Registration/LoginOtp";
 import TagInput from "./Registration/TagInput";
 
-const App = (props) => {
+const App = () => {
   return (
-    <Container fluid className='pb-4'>
+    <Container fluid className='' style={{ minHeight: "100vh" }}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SignIn />}></Route>
@@ -26,7 +26,7 @@ const App = (props) => {
             element={<OTP />}></Route>
           <Route path='on-Boarding' element={<OnBoarding />}></Route>
           <Route path='add-roles' element={<TagInput />}></Route>
-          <Route path='Dashboard' element={<Dashboard />}></Route>
+          <Route path='Dashboard/*' element={<Dashboard />}></Route>
         </Routes>
       </BrowserRouter>
     </Container>

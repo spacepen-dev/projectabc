@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import { Container } from "react-bootstrap";
-import { connect } from "react-redux";
-
-import { Otp } from "../../Actions";
-import WarningModal from "../Dashboard/WarningModal";
-import VerificationModal from "../Dashboard/VerificationModal";
 import { useNavigate } from "react-router";
+
+import Verification from "../Dashboard/svg/Verification";
+import Warning from "../Dashboard/svg/Warning";
+import VerificationModal from "../Dashboard/VerificationModal";
 import LoaderModal from "../Dashboard/LoaderModal";
+import NetWorkErrors from "../NetWorkErrors";
 
-const OTP = ({ Otp, resOtp, getValues }) => {
+const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
   const navigate = useNavigate();
-
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [error, setError] = useState("");
+  const [errorMessage, setMessage] = useState("");
+  const [serverErr, setServerErr] = useState("");
+  const [showModal, setShow] = useState(false);
   const [success, setSuccess] = useState("");
-  const [email, setEmail] = useState(null);
   const [active, setActive] = useState(false);
+  const [comEmail, setComEmail] = useState("");
 
   const sendOTP = (otp) => {
     const otpNumber = parseInt(otp.join(""));
@@ -25,54 +26,67 @@ const OTP = ({ Otp, resOtp, getValues }) => {
     }
     setActive(true);
     setTimeout(() => {
-      console.log(otpNumber);
-      Otp(otpNumber);
-    }, 2000);
+      otpAction(otpNumber);
+    }, 1000);
   };
-
-  const networkError = ({ errMessage }) => {
-    if (!errMessage) {
-      return null;
+  useEffect(() => {
+    if (!companyEmail) {
+      setComEmail(null);
     } else {
-      setActive(false);
-      setError(
-        `${errMessage.message}. Check your network connection and try again.`
-      );
+      const email = companyEmail.data.success.split(" ")[6];
+      setComEmail(email);
+    }
+  }, [companyEmail]);
+
+  useEffect(() => {
+    if (!err) {
+      return null;
+    }
+    setShow(true);
+    setMessage(err.message);
+    const removeTimeOut = setTimeout(() => {
+      setShow(false);
+    }, 4000);
+    return () => {
+      clearTimeout(removeTimeOut);
+    };
+  }, [err]);
+
+  const resFunt = (data) => {
+    const { error, success } = data.data;
+    setActive(false);
+    if (error) {
+      setShow(true);
+      setServerErr(error);
+      setTimeout(() => {
+        setShow(false);
+      }, 4000);
+    } else if (success) {
+      setSuccess(success);
+      setMessage("");
+      setServerErr("");
+      // navigate("/");
     }
   };
-
-  const OtpResponse = ({ otp }) => {
-    if (!otp) {
-      return null;
-    } else {
-      setActive(false);
-      const { error, success } = otp.data;
-      if (error) {
-        setError(error);
-      } else if (success) {
-        setSuccess(success);
-        // navigate("/");
-      }
+  const OtpResponse = (getValues) => {
+    if (getValues.loginOtp) {
+      resFunt(getValues.loginOtp);
+    } else if (getValues.otp) {
+      resFunt(getValues.otp);
     }
   };
 
   useEffect(() => {
-    if (!getValues) {
-      console.log("empty");
-      // navigate(-1);
-    } else {
-      setEmail(localStorage.setItem("email", getValues.values.email));
-    }
-  }, [getValues]);
+    sessionStorage.setItem("email", comEmail);
+  }, [comEmail]);
 
   useEffect(() => {
     sendOTP(otp);
   }, [otp]);
 
   useEffect(() => {
-    OtpResponse(resOtp);
-    networkError(resOtp);
-  }, [resOtp]);
+    OtpResponse(getValues);
+  }, [getValues]);
 
   const handleOtp = (elem, index) => {
     // check if the value is a number or text
@@ -90,90 +104,79 @@ const OTP = ({ Otp, resOtp, getValues }) => {
     }
   };
 
-  const close_reload = () => {
-    window.location.reload(false);
-    setError("");
-  };
   const closeModal = () => {
     setSuccess("");
-    navigate("/on-Boarding");
+    close();
+  };
+  const HomePage = () => {
+    navigate("/");
   };
 
   return (
-    <Container className='otp px-1'>
-      {!active ? null : <LoaderModal />}
+    <Container className='otp px-1 mx-auto w-75'>
+      {active && <LoaderModal />}
 
-      {!success ? null : (
+      {success && (
         <VerificationModal
-          message={`${success}. Register`}
+          message={`${success}`}
           close={closeModal}
+          svg={Verification()}
+        />
+      )}
+      {!comEmail && (
+        <VerificationModal
+          message={"Session timeout. Please sign in again!"}
+          close={HomePage}
+          svg={Warning()}
+        />
+      )}
+      {showModal && (
+        <NetWorkErrors
+          errMessage={errorMessage}
+          serverErr={serverErr}
+          removeLoader={() => setActive(false)}
         />
       )}
 
-      {!error ? null : (
-        <WarningModal closeWarning={close_reload} errorMessage={error} />
-      )}
-      <div>
-        <Header />
-      </div>
-      <div className='w-100'>
-        <h2
-          className='mb-3 py-2'
-          style={{
-            fontSize: "3rem",
-            color: "#23549e",
-            lineHeight: "3.6rem",
-            fontWeight: "700",
-          }}>
-          OTP confirmation
-        </h2>
-      </div>
-      <div>
-        <p
-          style={{
-            fontSize: "2.25rem",
-            color: " #23549e",
-            lineHeight: "2.7rem",
-          }}>
-          Enter the 6-digit pin that was sent to{" "}
-          {localStorage.getItem("email", email)}
-        </p>
-      </div>
-      <div className='d-flex justify-content-between align-items-center py-2 otp-input-container'>
-        {otp.map((inputData, index) => {
-          return (
-            <input
-              key={index}
-              type='text'
-              className='text-center'
-              maxLength='1'
-              value={inputData}
-              onChange={(e) => handleOtp(e, index)}
-              onFocus={(e) => e.target.select()}
-              onKeyUp={(e) => {
-                if (e.target.previousSibling && e.key === "Backspace") {
-                  e.target.previousSibling.focus();
-                }
-              }}
-            />
-          );
-        })}
-      </div>
-      <div className='py-4 mt-3 w-75 fs-3 text-center'>
-        Didn't get it in your email?{" "}
-        <span style={{ cursor: "pointer" }} onClick={() => {}}>
-          Resend the code
-        </span>
-      </div>
+      <Header>
+        <div className='w-100 otp-header'>
+          <h2 className='mb-3 py-2'>OTP confirmation</h2>
+        </div>
+        <div className='otp-sub-header'>
+          <p>
+            Enter the 6-digit pin that was sent to{" "}
+            {sessionStorage.getItem("email", comEmail.email)}
+          </p>
+        </div>
+        <div className='d-flex justify-content-between align-items-center otp-input-container'>
+          {otp.map((inputData, index) => {
+            return (
+              <input
+                key={index}
+                type='text'
+                className='text-center otp-input'
+                maxLength='1'
+                value={inputData}
+                onChange={(e) => handleOtp(e, index)}
+                onFocus={(e) => e.target.select()}
+                onKeyUp={(e) => {
+                  if (e.target.previousSibling && e.key === "Backspace") {
+                    e.target.previousSibling.focus();
+                  }
+                }}
+              />
+            );
+          })}
+        </div>
+        <div className='py-4 mt-3 w-75 fs-6 text-center'>
+          Didn't get it in your email?{" "}
+          <span style={{ cursor: "pointer" }} onClick={() => {}}>
+            Resend the code
+          </span>
+        </div>
+      </Header>
     </Container>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    resOtp: state.RegistrationReducer,
-    getValues: state.form.companyRegistration,
-  };
-};
-
-export default connect(mapStateToProps, { Otp })(OTP);
+export default OTP;

@@ -1,14 +1,18 @@
 import axios from "axios";
 
 export const signIn = (email) => async (dispatch) => {
-  const data = await axios.post(
-    "https://haypex.com.ng/dev/ABC/webService/accountLogin.php",
-    { email }
-  );
-  dispatch({ type: "SIGN_IN", payLoad: data });
+  try {
+    const data = await axios.post(
+      "https://haypex.com.ng/dev/ABC/webService/accountLogin.php",
+      { email }
+    );
+    dispatch({ type: "SIGN_IN", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "SIGN_ERR_MESSAGE", payLoad: error });
+  }
 };
 
-export const companyRegistration = (values) => async (dispatch) => {
+export const companyReg = (values) => async (dispatch) => {
   const {
     name,
     registration,
@@ -16,7 +20,7 @@ export const companyRegistration = (values) => async (dispatch) => {
     tin,
     state,
     website,
-    accountNumber,
+    accountName,
     address,
     bank,
     email,
@@ -33,17 +37,17 @@ export const companyRegistration = (values) => async (dispatch) => {
         tin: tin,
         state: state,
         website: website,
-        accountNo: accountNumber,
+        accountNo: account,
         address: address,
         bankName: bank,
         email: email,
         tax: tax,
-        accountName: account,
+        accountName: accountName,
       }
     );
     dispatch({ type: "REGISTER_COMPANY", payLoad: data });
   } catch (error) {
-    dispatch({ type: "ERROR_MESSAGE", payLoad: error });
+    dispatch({ type: "REGISTRATION_ERR_MESSAGE", payLoad: error });
   }
 };
 
@@ -56,7 +60,7 @@ export const Otp = (code) => async (dispatch) => {
     );
     dispatch({ type: "OTP", payLoad: data });
   } catch (error) {
-    dispatch({ type: "ERROR_MESSAGE", payLoad: error });
+    dispatch({ type: "OTP_ERR_MESSAGE", payLoad: error });
   }
 };
 
@@ -68,6 +72,91 @@ export const LoginOTP = (code) => async (dispatch) => {
     );
     dispatch({ type: "LOGIN", payLoad: data });
   } catch (error) {
-    dispatch({ type: "ERROR_MESSAGE", payLoad: error });
+    dispatch({ type: "LOGIN_ERR_MESSAGE", payLoad: error });
+  }
+};
+
+export const SubmitDepartment = (departments, tokenKey) => async (dispatch) => {
+  try {
+    const data = await axios.post(
+      "https://haypex.com.ng/dev/ABC/webService/role_department.php",
+      { tokenKey, departments }
+    );
+    dispatch({ type: "DEPARTMENT", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "DEPARTMENT_ERR_MESSAGE", payLoad: error });
+  }
+};
+
+export const CompanyDetails = (email) => async (dispatch) => {
+  try {
+    const data = await axios.get(
+      "https://haypex.com.ng/dev/ABC/webService/fetchAccount_details.php",
+      { emailAddress: email }
+    );
+    dispatch({ type: "COMPANY-DETAILS", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "DETAILS_ERR_MESSAGE", payLoad: error });
+  }
+};
+export const RegisterEmployee = (values, token) => async (dispatch) => {
+  const {
+    firstName,
+    LastName,
+    email,
+    annual,
+    role,
+    department,
+    relieves,
+    nin,
+  } = values;
+  try {
+    const data = await axios.post(
+      "https://haypex.com.ng/dev/ABC/webService/registerEmployee.php",
+      {
+        employeeFirstname: firstName,
+        employeeLastname: LastName,
+        employee_email: email,
+        employeeAnnualSalary: annual,
+        employeeRole: role,
+        employeeDepartment: department,
+        employeeRelieves: relieves,
+        employeeNin: nin,
+        tokenKey: token,
+      }
+    );
+    dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "REGISTER_EMPLOYEE_ERR_MESSAGE", payLoad: error });
+  }
+};
+export const UpdateEmployee = (values) => async (dispatch) => {
+  const {
+    firstName,
+    LastName,
+    email,
+    annual,
+    role,
+    department,
+    relieves,
+    nin,
+  } = values;
+  try {
+    const data = await axios.post(
+      "https://haypex.com.ng/dev/ABC/webService/updateEmployee.php",
+      {
+        employeeFirstname: firstName,
+        employeeLastname: LastName,
+        employee_email: email,
+        employeeAnnualSalary: annual,
+        employeeRole: role,
+        employeeDepartment: department,
+        employeeRelieves: relieves,
+        employeeNin: nin,
+      }
+    );
+    dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "UPDATE_EMPLOYEE_ERR_MESSAGE", payLoad: error });
   }
 };

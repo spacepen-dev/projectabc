@@ -10,7 +10,7 @@ const LoaderModal = () => {
           as='span'
           className='bg-transparent spinner'
           animation='border'
-          size='lg'
+          size='sm'
         />
       </div>
     </div>,
