@@ -16,7 +16,6 @@ const FormHeader = ({ currentForm }) => {
         <div className='d-flex justify-content-evenly align-items-center w-100'>
           <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
             <Form.Label>Profile</Form.Label>
-
             <span
               className={`d-inline-block rounded-circle mt-2 ${
                 currentForm === 1 ? active : active

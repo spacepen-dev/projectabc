@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Container, Spinner, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../Actions";
-// import { UseNavigate } from "react-router-dom";s
+import { CompanyDetails } from "../Actions";
 
 import Header from "./Header";
 import VerificationModal from "./Dashboard/VerificationModal";
+import Loaderbutton from "./LoaderButton";
+import NetWorkErrors from "./NetWorkErrors";
 
-const SignIn = ({ signIn, accountEmail, logIN }) => {
+const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState({ dataErr: "", inputErr: "" });
   const [request, setRequest] = useState(false);
   const [success, setSuccess] = useState("");
+  const [errStore, setStore] = useState(false);
+  const [errorMessage, setMessage] = useState("");
 
   const onInputChange = (e) => {
     setEmail(e.target.value);
@@ -28,15 +32,37 @@ const SignIn = ({ signIn, accountEmail, logIN }) => {
 
   const OtpResponse = ({ data }) => {
     setRequest(false);
-
     const { error, success } = data;
+
     if (error) {
-      setError(error);
+      setError({ dataErr: error });
+      const removeTimeOut = setTimeout(() => {
+        setStore(false);
+      }, 4000);
+      return () => {
+        clearTimeout(removeTimeOut);
+      };
     } else if (success) {
-      setSuccess(success);
+      const successMessage = success.split(":")[1];
+      setSuccess(successMessage);
       navigate("/login/otp");
     }
   };
+
+  useEffect(() => {
+    if (!errMessage) {
+      return null;
+    }
+    setStore(true);
+    setMessage(errMessage.message);
+    const removeTimeOut = setTimeout(() => {
+      setRequest(false);
+      setStore(false);
+    }, 4000);
+    return () => {
+      clearTimeout(removeTimeOut);
+    };
+  }, [errorMessage]);
 
   useEffect(() => {
     if (!logIN) {
@@ -44,6 +70,14 @@ const SignIn = ({ signIn, accountEmail, logIN }) => {
     }
     OtpResponse(logIN);
   }, [logIN]);
+
+  useEffect(() => {
+    if (error.dataErr) {
+      setStore(true);
+    } else {
+      return null;
+    }
+  }, [error.dataErr]);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
@@ -54,71 +88,68 @@ const SignIn = ({ signIn, accountEmail, logIN }) => {
     if (regexp.test(String(email).toLowerCase())) {
       // MAKE AN API REQUEST TO CHECK IF THE EMAIL IS REGISTERED
       // OBTAIN THE COMPANY DETAILS
-      // console.log(email);
       signIn(email);
-      setError("");
+      setError({ inputErr: "" });
       setRequest(true);
     } else {
-      setError("Correct email address must be provided.");
+      setError({ inputErr: "Correct email address must be provided." });
     }
   };
 
   const closeModal = () => {
     setSuccess("");
-    // navigate("/");
   };
 
   return (
-    <Container id='signin'>
-      <Header />
-      <div className='heading-container'>
-        <h2>Welcome Back.</h2>
-        <h3>Login to your account</h3>
-      </div>
-      <form onSubmit={onFormSubmit}>
-        <div>
-          <label>Email Address</label>
-          <p>Enter the official email-address of your company</p>
-
+    <Container id='signin' className='mx-auto w-75'>
+      <Header>
+        <div className='heading-container'>
+          <h2>Welcome Back.</h2>
+          <h3>Login to your account</h3>
+        </div>
+        <form onSubmit={onFormSubmit}>
           <div>
-            <input
-              type='text'
-              placeholder='mail@company.com'
-              autoComplete='true'
-              value={email}
-              onChange={onInputChange}
-            />
-            <div className=' text-danger fs-4 mt-3 pb-0'>
-              {error === "" ? "" : `${error}`}
+            <label>Email Address</label>
+            <p>Enter the official email-address of your company</p>
+
+            <div>
+              <input
+                type='text'
+                placeholder='mail@company.com'
+                autoComplete='true'
+                value={email}
+                onChange={onInputChange}
+                onInput={() => setError({ inputErr: "" })}
+              />
+              <div className=' text-danger fs-6 mt-3 pb-0'>
+                {error.inputErr && `${error.inputErr}`}
+              </div>
             </div>
           </div>
-        </div>
-        <div className='button-container d-flex justify-content-center align-items-end'>
-          <Button
-            type='submit'
-            className='button'
-            disabled={request ? true : false}>
-            {request ? (
-              <Spinner as='span' animation='border' size='lg' />
-            ) : (
-              "SUBMIT"
-            )}
-          </Button>
-        </div>
-        <div className='py-4 mt-3 w-75 ms-5 fs-3 text-center'>
-          Don't have an account?{" "}
-          <Link to='/registration/company' className='fs-4'>
-            <h3>Register Here</h3>
-          </Link>
-        </div>
-      </form>
-      {!success ? null : (
-        <VerificationModal message={`${success}`} close={closeModal} />
-      )}
-
-      {/* {!error ? null : (
-        <WarningModal closeWarning={close_reload} errorMessage={error} />
-      )} */}
+          <div className='button-container d-flex justify-content-center align-items-end'>
+            <Loaderbutton btnName='SUBMIT' request={request} />
+          </div>
+          <div className='py-4 mt-3 w-75 mb-3 fs-6 text-center'>
+            Don't have an account?{" "}
+            <Link to='/registration/company' className='d-block mt-2 fs-6 '>
+              <p className='fs-3'>Register Here</p>
+            </Link>
+          </div>
+        </form>
+        {success && (
+          <VerificationModal message={`${success}`} close={closeModal} />
+        )}
+        {errStore && (
+          <NetWorkErrors
+            errMessage={errorMessage}
+            serverErr={error.dataErr}
+            close={() => {
+              setStore(null);
+            }}
+            removeLoader={() => setRequest(false)}
+          />
+        )}
+      </Header>
     </Container>
   );
 };
@@ -127,7 +158,8 @@ const mapStateToProps = (state) => {
   return {
     accountEmail: state.RegistrationReducer.otp,
     logIN: state.RegistrationReducer.signIN,
+    errMessage: state.RegistrationReducer.signErr,
   };
 };
 
-export default connect(mapStateToProps, { signIn })(SignIn);
+export default connect(mapStateToProps, { signIn, CompanyDetails })(SignIn);
