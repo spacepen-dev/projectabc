@@ -17,8 +17,8 @@ const App = (props) => {
   return (
     <Container fluid className="pb-4">
       {/* <WarningPage /> */}
-      {/* <ViewEmployee/> */}
-      <BrowserRouter>
+      <ViewEmployee/>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/" element={<SignIn />}></Route>
           <Route path="login/otp" element={<LoginOtp />}></Route>
@@ -35,7 +35,7 @@ const App = (props) => {
           <Route path="add-roles" element={<TagInput />}></Route>
           <Route path="Dashboard" element={<Dashboard />}></Route>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </Container>
   );
 };
