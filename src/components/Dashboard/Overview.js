@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 
 import EmptyData from "./EmptyData";
+import WarningPage from "./WarningPage";
 import DetailsCard from "./DetailsCard";
 import EyeSVG from "./svg/Eyes";
 import WhiteWallet from "./svg/WhiteWallet";
@@ -20,8 +21,9 @@ const Overview = ({ page, viewPage }) => {
 
   return (
     <Container fluid className='overview h-100'>
+      <WarningPage />
       {/* <EmptyData /> */}
-      <div className='d-flex justify-content-between align-items-center details-container'>
+      {/* <div className='d-flex justify-content-between align-items-center details-container'>
         <DetailsCard
           heading=' TOTAL BALANCE'
           number='$50,000'
@@ -81,7 +83,7 @@ const Overview = ({ page, viewPage }) => {
       </article>
       <article className='bottom-tab'>
         {pageId === 1 ? <SalariesHistory /> : ""}
-      </article>
+      </article> */}
     </Container>
   );
 };
