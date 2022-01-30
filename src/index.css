@@ -502,12 +502,7 @@ main .content {
   align-items: center;
   justify-content: center;
   width: 70vw !important;
-  height: 80vh;
-  box-shadow: var(--light-shadow);
-}
-.s{
-  margin-bottom: 2rem;
-mix-blend-mode: color-burn;  
+  height: 40rem;
 }
 
 .content h2 {
@@ -516,7 +511,7 @@ mix-blend-mode: color-burn;
   margin-bottom: 1rem;
 }
 .content p {
-  color: var(--primary-Red);
+  color: var(--accent);
   font-weight: bold;
   line-height: 1;
   text-transform: capitalize;

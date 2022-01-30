@@ -15,10 +15,8 @@ import ViewEmployee from "./Dashboard/ViewEmployee";
 
 const App = () => {
   return (
-    <Container fluid className="pb-4
-    
-    <Container fluid className='' style={{ minHeight: "100vh" }}>
-
+    <Container fluid className="" style={{ minHeight: "100vh" }}>
+      {/* <WarningPage/> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SignIn />}></Route>
@@ -29,19 +27,19 @@ const App = () => {
             element={<Registration />}
           ></Route>
           <Route
-
             path="registration/company/otp/email-confirmation"
             element={<OTP />}
           ></Route>
           <Route path="on-Boarding" element={<OnBoarding />}></Route>
           <Route path="add-roles" element={<TagInput />}></Route>
           <Route path="Dashboard" element={<Dashboard />}></Route>
-=======
-            path='registration/company/otp/email-confirmation'
-            element={<OTP />}></Route>
-          <Route path='on-Boarding' element={<OnBoarding />}></Route>
-          <Route path='add-roles' element={<TagInput />}></Route>
-          <Route path='Dashboard/*' element={<Dashboard />}></Route>
+          <Route
+            path="registration/company/otp/email-confirmation"
+            element={<OTP />}
+          ></Route>
+          <Route path="on-Boarding" element={<OnBoarding />}></Route>
+          <Route path="add-roles" element={<TagInput />}></Route>
+          <Route path="Dashboard/*" element={<Dashboard />}></Route>
         </Routes>
       </BrowserRouter>
     </Container>
