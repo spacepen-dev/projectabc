@@ -9,14 +9,12 @@ import OnBoarding from "./Registration/OnBoarding";
 import Dashboard from "./Dashboard/Dashboard";
 import LoginOtp from "./Registration/LoginOtp";
 import TagInput from "./Registration/TagInput";
-import WarningPage from "./Dashboard/WarningPage";
-import ViewEmployee from "./Dashboard/ViewEmployee";
-
+import SalariesPage from "./Dashboard/EmployeeSalariesPage";
 
 const App = () => {
   return (
     <Container fluid className="" style={{ minHeight: "100vh" }}>
-      {/* <WarningPage/> */}
+      {/* <SalariesPage /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SignIn />}></Route>
