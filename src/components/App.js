@@ -17,27 +17,18 @@ const App = () => {
       {/* <SalariesPage /> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SignIn />}></Route>
-          <Route path="login/otp" element={<LoginOtp />}></Route>
+          <Route path='/' element={<SignIn />}></Route>
+          <Route path='login/otp' element={<LoginOtp />}></Route>
           <Route
-            path="registration/company"
+            path='registration/company'
             exact
-            element={<Registration />}
-          ></Route>
+            element={<Registration />}></Route>
           <Route
-            path="registration/company/otp/email-confirmation"
-            element={<OTP />}
-          ></Route>
-          <Route path="on-Boarding" element={<OnBoarding />}></Route>
-          <Route path="add-roles" element={<TagInput />}></Route>
-          <Route path="Dashboard" element={<Dashboard />}></Route>
-          <Route
-            path="registration/company/otp/email-confirmation"
-            element={<OTP />}
-          ></Route>
-          <Route path="on-Boarding" element={<OnBoarding />}></Route>
-          <Route path="add-roles" element={<TagInput />}></Route>
-          <Route path="Dashboard/*" element={<Dashboard />}></Route>
+            path='registration/company/otp/email-confirmation'
+            element={<OTP />}></Route>
+          <Route path='on-Boarding' element={<OnBoarding />}></Route>
+          <Route path='add-roles' element={<TagInput />}></Route>
+          <Route path='Dashboard/*' element={<Dashboard />}></Route>
         </Routes>
       </BrowserRouter>
     </Container>
