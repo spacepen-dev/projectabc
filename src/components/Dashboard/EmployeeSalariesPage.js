@@ -1,11 +1,10 @@
 import React from "react";
-import DashboardTable from "./DashboardTable";
 import { heading, Data } from "./utils/data";
 import { Container, Form, Button } from "react-bootstrap";
+import EsalariesTable from "./EsalariesTable";
 const EmployeeSalariesPage = () => {
-  // const employeeData = (data) => {
-  //   // console.log(data);
-  // };
+  const [state, setState] = React.useState([]);
+
   return (
     <div>
       <div className="paySelect">
@@ -43,7 +42,20 @@ const EmployeeSalariesPage = () => {
             </Form.Select>
           </Form.Group>
           <Form.Group className="mt-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Select all" />
+            <Form.Check
+              type="checkbox"
+              label="Select all"
+              checked={Data.filter((value) => value.select !== true).length < 1}
+              onChange={(e) => {
+                let checked = e.target.checked;
+                setState(
+                  Data.map((value) => {
+                    value.select = checked;
+                    return value;
+                  })
+                );
+              }}
+            />
           </Form.Group>
         </Form>
         <div className="pBtn">
@@ -53,12 +65,7 @@ const EmployeeSalariesPage = () => {
         </div>
       </div>
       <div className=" mt-5">
-        <DashboardTable
-          heading={heading}
-          tableData={Data}
-          // employeeData={employeeData}
-          display="none"
-        />
+        <EsalariesTable items={Data} setItems={setState} tableHead={heading} />
       </div>
     </div>
   );
