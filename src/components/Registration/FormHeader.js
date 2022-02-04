@@ -33,7 +33,7 @@ const FormHeader = ({ currentForm }) => {
           </div>
           <small className='d-inline-block'></small>
           <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
-            <Form.Label>Settings</Form.Label>
+            <Form.Label>Finish</Form.Label>
             <span
               className={`d-inline-block rounded-circle mt-2  ${
                 currentForm === 3 ? active : ""

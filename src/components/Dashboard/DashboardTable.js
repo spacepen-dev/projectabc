@@ -33,6 +33,7 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
     let filterData = data.filter((list) => {
       let values = Object.values(list);
       const searchString = String(values).includes(val.toUpperCase());
+
       if (val) {
         if (!searchString) {
           // return "data";
@@ -53,15 +54,15 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
         return items;
       } else {
         items.push(
-          <Pagination.Item
-            className='fs-3'
-            key={page}
+          <Button
+            className='rounded-0 py-1 px-3 border-0'
+            // key={page}
             active={page === currentPage}
             onClick={(e) => {
               setCurrentPage(Number(e.target.textContent));
             }}>
             {page}
-          </Pagination.Item>
+          </Button>
         );
       }
     }
@@ -97,31 +98,18 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
     }
   };
 
-  // if (!data.head || !data.tableData) {
-  //   return (
-  //     <div>
-  //       hellokndkdl;kldslsdkhflsdkhfaldskfha;lsdkflskdhfl;asdf;adlkalksdhflaksdhflaksdhflksdhflkdshflakdhflksdhlksdhf
-  //     </div>
-  //   );
-  // }
   return (
     <>
       <Form
-        className={`d-${display} mb-4 pb-2 table-form`}
-        onClick={(e) => {
-          e.preventDefault();
-          setValue(input.current.value);
-        }}>
+        className={`d-${display} py-2 table-form`}
+        onSubmit={(e) => e.preventDefault()}>
         <FormControl
           type='search'
-          placeholder='Search'
-          className='me-2'
-          aria-label='Search'
+          placeholder='Type search here....'
+          className='ms-auto py-1.5 w-40'
           ref={input}
+          onChange={() => setValue(input.current.value)}
         />
-        <Button type='submit' className='px-4 fs-6'>
-          Search
-        </Button>
       </Form>
       <Table
         className='hover table table-borderless'
@@ -154,8 +142,10 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
         {paginationElem(searchTable(value))}
       </Table>
       <div
-        className={` py-2 d-${display} justify-content-center align-items-center`}>
-        <Pagination>{items}</Pagination>
+        className={` py-1 d-${display} justify-content-end align-items-centerqqqq5`}>
+        <Pagination className='me-2' size='sm'>
+          {items}
+        </Pagination>
       </div>
 
       {!active ? (
