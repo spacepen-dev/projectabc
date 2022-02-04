@@ -4,23 +4,26 @@ const ViewEmployee = () => {
   const displaySVG = () => {
     return (
       <div
-        className='h-100 w-100 d-flex align-items-center justify-content-center '
-        id='circle-svg-container'
-        style={{ cursor: "pointer" }}>
+        className="h-100 w-100 d-flex align-items-center justify-content-center "
+        id="circle-svg-container"
+        style={{ cursor: "pointer" }}
+      >
         <svg
-          id='circle-svg'
-          width='15'
-          height='15'
-          viewBox='0 0 23 5'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'>
-          <circle cx='2.5' cy='2.5' r='2.5' fill='#659CF0' />
-          <circle cx='11.5' cy='2.5' r='2.5' fill='#659CF0' />
-          <circle cx='20.5' cy='2.5' r='2.5' fill='#659CF0' />
+          id="circle-svg"
+          width="15"
+          height="15"
+          viewBox="0 0 23 5"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="2.5" cy="2.5" r="2.5" fill="#659CF0" />
+          <circle cx="11.5" cy="2.5" r="2.5" fill="#659CF0" />
+          <circle cx="20.5" cy="2.5" r="2.5" fill="#659CF0" />
         </svg>
       </div>
     );
   };
+
   const heading = [
     {
       serialNumber: "S/N",
@@ -192,12 +195,12 @@ const ViewEmployee = () => {
     // console.log(data);
   };
   return (
-    <div className=' mt-5'>
+    <div className=" mt-5">
       <DashboardTable
         heading={heading}
         tableData={data}
         employeeData={employeeData}
-        display='flex'
+        display="flex"
       />
     </div>
   );

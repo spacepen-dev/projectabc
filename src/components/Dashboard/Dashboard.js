@@ -9,6 +9,7 @@ import AddEmployee from "./AddEmployee";
 import ViewEmployee from "./ViewEmployee";
 import ViewSalaryHisory from "./ViewSalaryHistory";
 import { CompanyDetails } from "../../Actions";
+import EmployeeSalariesPage from "./EmployeeSalariesPage";
 
 const Dashboard = () => {
   const [page, setPage] = useState(1);
@@ -44,6 +45,7 @@ const Dashboard = () => {
             <Route path='/add/employee' element={<AddEmployee />} />
             <Route path='/view/employees' element={<ViewEmployee />} />
             <Route path='/view/salary/history' element={<ViewSalaryHisory />} />
+            <Route path='/pay/employee/salaries' element={<EmployeeSalariesPage />} />
           </Routes>
         </Col>
       </Row>

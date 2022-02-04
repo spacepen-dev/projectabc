@@ -9,10 +9,12 @@ import OnBoarding from "./Registration/OnBoarding";
 import Dashboard from "./Dashboard/Dashboard";
 import LoginOtp from "./Registration/LoginOtp";
 import TagInput from "./Registration/TagInput";
+import SalariesPage from "./Dashboard/EmployeeSalariesPage";
 
 const App = () => {
   return (
-    <Container fluid className='' style={{ minHeight: "100vh" }}>
+    <Container fluid className="" style={{ minHeight: "100vh" }}>
+      {/* <SalariesPage /> */}
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SignIn />}></Route>

@@ -54,12 +54,13 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
       } else {
         items.push(
           <Pagination.Item
-            className='fs-3'
+            className="fs-3"
             key={page}
             active={page === currentPage}
             onClick={(e) => {
               setCurrentPage(Number(e.target.textContent));
-            }}>
+            }}
+          >
             {page}
           </Pagination.Item>
         );
@@ -111,23 +112,25 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
         onClick={(e) => {
           e.preventDefault();
           setValue(input.current.value);
-        }}>
+        }}
+      >
         <FormControl
-          type='search'
-          placeholder='Search'
-          className='me-2'
-          aria-label='Search'
+          type="search"
+          placeholder="Search"
+          className="me-2"
+          aria-label="Search"
           ref={input}
         />
-        <Button type='submit' className='px-4 fs-6'>
+        <Button type="submit" className="px-4 fs-6">
           Search
         </Button>
       </Form>
       <Table
-        className='hover table table-borderless'
-        responsive='sm'
-        style={{ height: "200px" }}>
-        <thead className=''>
+        className="hover table table-borderless"
+        responsive="sm"
+        style={{ height: "200px" }}
+      >
+        <thead className="">
           {tableHead.map((cur, index) => {
             let objValues = Object.values(cur);
             return (
@@ -143,7 +146,7 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
           {tablePagination(searchTable(value)).map((data, index) => {
             let values = Object.values(data);
             return (
-              <tr key={data.id} id={index} onClick={(e) => getRowData(e, data)}>
+              <tr key={data.id} id= {index} onClick={(e) => getRowData(e, data)}>
                 {values.map((cur, index) => {
                   return <td key={index}>{cur}</td>;
                 })}
@@ -154,7 +157,8 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
         {paginationElem(searchTable(value))}
       </Table>
       <div
-        className={` py-2 d-${display} justify-content-center align-items-center`}>
+        className={` py-2 d-${display} justify-content-center align-items-center`}
+      >
         <Pagination>{items}</Pagination>
       </div>
 
