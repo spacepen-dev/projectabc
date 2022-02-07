@@ -54,15 +54,17 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
         return items;
       } else {
         items.push(
-          <Button
-            className='rounded-0 py-1 px-3 border-0'
-            // key={page}
+             <Pagination.Item
+            className="fs-3"
+            key={page}
+
             active={page === currentPage}
             onClick={(e) => {
               setCurrentPage(Number(e.target.textContent));
-            }}>
+            }}
+          >
             {page}
-          </Button>
+          </Pagination.Item>
         );
       }
     }
@@ -101,21 +103,24 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
   return (
     <>
       <Form
-        className={`d-${display} py-2 table-form`}
-        onSubmit={(e) => e.preventDefault()}>
+        className={`d-${display} py-2 table-form`}>
         <FormControl
-          type='search'
-          placeholder='Type search here....'
-          className='ms-auto py-1.5 w-40'
+          type="search"
+          placeholder="Search"
+          className="me-2"
+          aria-label="Search"
+
           ref={input}
           onChange={() => setValue(input.current.value)}
         />
+
       </Form>
       <Table
-        className='hover table table-borderless'
-        responsive='sm'
-        style={{ height: "200px" }}>
-        <thead className=''>
+        className="hover table table-borderless"
+        responsive="sm"
+        style={{ height: "200px" }}
+      >
+        <thead className="">
           {tableHead.map((cur, index) => {
             let objValues = Object.values(cur);
             return (
@@ -131,7 +136,7 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
           {tablePagination(searchTable(value)).map((data, index) => {
             let values = Object.values(data);
             return (
-              <tr key={data.id} id={index} onClick={(e) => getRowData(e, data)}>
+              <tr key={data.id} id= {index} onClick={(e) => getRowData(e, data)}>
                 {values.map((cur, index) => {
                   return <td key={index}>{cur}</td>;
                 })}
@@ -146,6 +151,10 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
         <Pagination className='me-2' size='sm'>
           {items}
         </Pagination>
+        className={` py-2 d-${display} justify-content-center align-items-center`}
+      >
+        <Pagination>{items}</Pagination>
+
       </div>
 
       {!active ? (
