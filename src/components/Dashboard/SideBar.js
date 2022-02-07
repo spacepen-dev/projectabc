@@ -69,7 +69,7 @@ const SideBar = ({ pageId, page }) => {
           none='none'
           id={5}
           name='Pay employees salaries'
-          pathLink='/pay/employee/salaries'
+          pathLink='pay/employee/salaries'
           icon={Salary()}
           data={(data) => {
             pageId(data);
