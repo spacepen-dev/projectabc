@@ -10,6 +10,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import LoginOtp from "./Registration/LoginOtp";
 import TagInput from "./Registration/TagInput";
 import SalariesPage from "./Dashboard/EmployeeSalariesPage";
+import NoPage from "./NoPage";
 
 const App = () => {
   return (
@@ -17,18 +18,21 @@ const App = () => {
       {/* <SalariesPage /> */}
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<SignIn />}></Route>
-          <Route path='login/otp' element={<LoginOtp />}></Route>
-          <Route path='registration/company' element={<Registration />}></Route>
+          <Route path="/" element={<SignIn />}></Route>
+          <Route path="login/otp" element={<LoginOtp />}></Route>
+          <Route path="registration/company" element={<Registration />}></Route>
           <Route
-            path='registration/company/otp/email-confirmation'
-            element={<OTP />}></Route>
-          <Route path='on-Boarding' element={<OnBoarding />}></Route>
+            path="registration/company/otp/email-confirmation"
+            element={<OTP />}
+          ></Route>
+          <Route path="on-Boarding" element={<OnBoarding />}></Route>
           <Route
-            path='ad
-          d-roles'
-            element={<TagInput />}></Route>
-          <Route path='Dashboard/*' element={<Dashboard />}></Route>
+            path="ad
+          d-roles"
+            element={<TagInput />}
+          ></Route>
+          <Route path="Dashboard/*" element={<Dashboard />}></Route>
+          <Route path="*" element={<NoPage />}></Route>
         </Routes>
       </BrowserRouter>
     </Container>
