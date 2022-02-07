@@ -10,11 +10,11 @@ import Dashboard from "./Dashboard/Dashboard";
 import LoginOtp from "./Registration/LoginOtp";
 import TagInput from "./Registration/TagInput";
 import SalariesPage from "./Dashboard/EmployeeSalariesPage";
+import NoPage from "./NoPage";
 
 const App = () => {
   return (
     <Container fluid className='' style={{ minHeight: "100vh" }}>
-      {/* <SalariesPage /> */}
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SignIn />}></Route>
@@ -26,6 +26,16 @@ const App = () => {
           <Route path='on-Boarding' element={<OnBoarding />}></Route>
           <Route path='add-roles' element={<TagInput />}></Route>
           <Route path='Dashboard/*' element={<Dashboard />}></Route>
+          <Route
+            path='registration/company/otp/email-confirmation'
+            element={<OTP />}></Route>
+          <Route path='on-Boarding' element={<OnBoarding />}></Route>
+          <Route path='add-roles' element={<TagInput />}></Route>
+          <Route path='Dashboard/*' element={<Dashboard />}></Route>
+          <Route path='*' element={<NoPage />}></Route>
+          <Route
+            path='/pay/employee/salaries'
+            element={<SalariesPage />}></Route>
         </Routes>
       </BrowserRouter>
     </Container>
