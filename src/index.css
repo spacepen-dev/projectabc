@@ -517,6 +517,27 @@ main .content p {
   line-height: 1;
   text-transform: capitalize;
 }
+/*
+=============== 
+EmployeeSalaryPage
+===============
+*/
+div .paySelect{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* margin-top: 86.729px !important; */
+  height: 2rem;
+  padding: 4rem 0rem 0rem 0rem;
+}
+
+div .form{
+/* background-color: rgb(206, 245, 167); */
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 323.69px;
+}
 
 .details-container {
   padding-top: 1.5rem;

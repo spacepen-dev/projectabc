@@ -24,7 +24,6 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
   function tablePagination(data) {
     const start = (currentPage - 1) * dataPerPage;
     const stop = start + dataPerPage;
-
     let pagination = data.slice(start, stop);
     return pagination;
   }
@@ -54,15 +53,15 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
         return items;
       } else {
         items.push(
-          <Button
-            className='rounded-0 py-1 px-3 border-0'
-            // key={page}
+          <Pagination.Item
+            className=''
+            key={page}
             active={page === currentPage}
             onClick={(e) => {
               setCurrentPage(Number(e.target.textContent));
             }}>
             {page}
-          </Button>
+          </Pagination.Item>
         );
       }
     }
@@ -142,7 +141,7 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
         {paginationElem(searchTable(value))}
       </Table>
       <div
-        className={` py-1 d-${display} justify-content-end align-items-centerqqqq5`}>
+        className={` py-1 d-${display} justify-content-end align-items-center`}>
         <Pagination className='me-2' size='sm'>
           {items}
         </Pagination>
