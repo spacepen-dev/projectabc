@@ -13,7 +13,7 @@ import SalariesPage from "./Dashboard/EmployeeSalariesPage";
 
 const App = () => {
   return (
-    <Container fluid className="" style={{ minHeight: "100vh" }}>
+    <Container fluid className='' style={{ minHeight: "100vh" }}>
       {/* <SalariesPage /> */}
       <BrowserRouter>
         <Routes>
@@ -24,10 +24,7 @@ const App = () => {
             path='registration/company/otp/email-confirmation'
             element={<OTP />}></Route>
           <Route path='on-Boarding' element={<OnBoarding />}></Route>
-          <Route
-            path='ad
-          d-roles'
-            element={<TagInput />}></Route>
+          <Route path='add-roles' element={<TagInput />}></Route>
           <Route path='Dashboard/*' element={<Dashboard />}></Route>
         </Routes>
       </BrowserRouter>

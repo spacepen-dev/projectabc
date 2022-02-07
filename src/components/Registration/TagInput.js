@@ -26,18 +26,18 @@ const TagInput = ({
   const [errStore, setStore] = useState(false);
   const [noToken, setNoToken] = useState("");
 
-  useEffect(() => {
-    let token = null;
-    if (registrationToken) {
-      token = registrationToken.data.token;
-      setToken(token);
-    } else {
-      console.log("no token");
-      setNoToken("Account does not exits. Please sign in!");
-      // IF TOKEN NOT AVAILABLE RETURN TO HOME PAGE TO REGISTER.
-      return null;
-    }
-  }, [registrationToken]);
+  // useEffect(() => {
+  //   let token = null;
+  //   if (registrationToken) {
+  //     token = registrationToken.data.token;
+  //     setToken(token);
+  //   } else {
+  //     console.log("no token");
+  //     setNoToken("Account does not exits. Please sign in!");
+  //     // IF TOKEN NOT AVAILABLE RETURN TO HOME PAGE TO REGISTER.
+  //     return null;
+  //   }
+  // }, [registrationToken]);
 
   const OtpResponse = ({ data }) => {
     setRequest(false);
@@ -88,9 +88,10 @@ const TagInput = ({
   const HomePage = () => {
     navigate("/");
   };
+
   return (
     <>
-      <Container className='add-roles'>
+      <Container className='add-roles' style={{ maxWidth: "50rem" }}>
         <div className='d-flex align-items-center justify-content-center'>
           <h3 className='text-center'>DEPARTMENTS IN YOUR ORGANIZATION</h3>
         </div>
@@ -103,9 +104,9 @@ const TagInput = ({
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            SubmitDepartment(department, token);
-            setRequest(true);
-          }}>
+            console.log(department);
+          }}
+          class='d-flex flex-column justify-content-between align-items-start'>
           <AddRoles data={(val) => setDepartment(val)} />
           <div className='button-container w-100 d-flex justify-content-end'>
             <LoaderButton
@@ -137,7 +138,7 @@ const TagInput = ({
 
 const mapStateToProps = (state) => {
   return {
-    registrationToken: state.RegistrationReducer.otp,
+    // registrationToken: state.RegistrationReducer.otp,
     departmentMessage: state.RegistrationReducer.department,
     departmentErr: state.RegistrationReducer.departmentErr,
   };

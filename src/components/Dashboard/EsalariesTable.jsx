@@ -66,8 +66,7 @@ const EsalariesTable = ({items,tableHead,setItems}) => {
              </tr>
            );
          })}
-       </tbody>
-       
+       </tbody>       
      </Table>
    </div>
  );

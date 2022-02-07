@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
 import { Routes, Route } from "react-router-dom";
-import TableController from "./TableController";
 
 import SideBar from "./SideBar";
 import Overview from "./Overview";
