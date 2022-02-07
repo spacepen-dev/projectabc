@@ -18,14 +18,16 @@ const Profile = ({
   name,
   registration,
   about,
-  location,
+  state,
   nextPage,
 }) => {
   const [nameErr, setNameErr] = useState("");
   const [registrationErr, setRegistrationErr] = useState("");
   const [aboutErr, setAboutErr] = useState("");
+  const [locationErr, setLocationErr] = useState("");
 
   const states = [
+    "No State",
     "Abia State",
     "Adamawa State",
     "Anambra State",
@@ -76,6 +78,9 @@ const Profile = ({
       setRegistrationErr("Invalid registration number");
     } else if (!about) {
       setAboutErr("About Company is Required!");
+    } else if (state === "No State") {
+      console.log();
+      setLocationErr("Invalid location");
     } else {
       nextPage();
     }
@@ -162,7 +167,7 @@ const Profile = ({
               onChange={handleChange}>
               {states.map((state) => {
                 return (
-                  <option key={state} value={location}>
+                  <option key={state} value={state}>
                     {state}
                   </option>
                 );

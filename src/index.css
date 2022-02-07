@@ -80,7 +80,7 @@ label {
 }
 #signin p {
   color: var(--accent);
-  font-size: 0.63rem;
+  font-size: 0.73rem;
   font-weight: 400;
   font-family: var(--mainFont);
   line-height: 0.75rem;
@@ -89,7 +89,7 @@ label {
 #signin input {
   color: var(--baseColor);
   font-family: var(--mainFont);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   width: 100%;
   max-width: 42.25rem;
   height: 3rem;
@@ -97,7 +97,7 @@ label {
   border: none;
   border: 2px solid var(--baseColor);
   border-radius: 0.63rem;
-  padding: 0 0.5rem;
+  padding: 0.5rem 0.5rem;
 }
 input::placeholder {
   color: var(--accent);
@@ -262,7 +262,7 @@ select {
   max-width: 42.25rem !important;
   margin-top: 0.69;
   padding: 0 1rem;
-  font-size: 0.63rem;
+  font-size: 0.85rem;
 }
 .errorBorder {
   border-color: red;
@@ -411,6 +411,8 @@ otp div:last-child {
 }
 .col-1 {
   width: 18.54rem !important;
+  height: 100vh;
+  overflow-y: scroll;
 }
 .sidebar-container {
   height: 100vh;
@@ -476,7 +478,9 @@ otp div:last-child {
 }
 
 .col-2 {
-  width: calc(100% - 19.5rem);
+  width: calc(100% - 19rem);
+  height: 100vh;
+  overflow-y: auto;
 }
 
 /*
@@ -791,16 +795,10 @@ td {
   border-radius: 0.5rem !important;
 }
 .table-form input {
-  width: 50%;
-  border-radius: 0.5rem;
-  padding: 0.6rem 0.5rem;
-  border: 1px solid var(--accent);
-  font-size: 1rem;
-  line-height: 1.51rem;
+  width: 20rem;
+  border-radius: 0.2rem;
 }
-.table-form input::placeholder {
-  font-size: 1.28rem;
-}
+
 .table-form button {
   background-color: var(--baseColor);
   border: none;

@@ -295,7 +295,7 @@ const EmployeeRegistration = ({
           />
         </Form.Group>
       </Row>
-      {/* <Row>
+      <Row>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
             name='Annual Relieves'
@@ -346,7 +346,7 @@ const EmployeeRegistration = ({
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />
         </Form.Group>
-      </Row> */}
+      </Row>
       <div className='ms-auto mt-4 double-btns'>
         <Button type='button' className={`button ms-auto d-${removeBtn} `}>
           Delete

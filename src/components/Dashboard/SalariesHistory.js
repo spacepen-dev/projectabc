@@ -1,6 +1,7 @@
 import React from "react";
 
 import DashboardTable from "./DashboardTable";
+
 const SalariesHistory = () => {
   const heading = [
     {
@@ -180,6 +181,7 @@ const SalariesHistory = () => {
         tableData={limitDataTable(tableData)}
         display='none'
       />
+      {/* <TableController heading={heading} data={tableData} /> */}
     </>
   );
 };

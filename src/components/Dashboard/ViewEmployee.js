@@ -189,13 +189,38 @@ const ViewEmployee = () => {
       relieves: 40000,
       funt: displaySVG(),
     },
+    {
+      id: 13,
+      LastName: "DANIYAN",
+      firstName: "EMMANUEL",
+      role: "CEO",
+      nin: 1234567,
+      email: "spacepen@gmail.com",
+      annual: 20000,
+      month: 10000,
+      relieves: 40000,
+      funt: displaySVG(),
+    },
+    {
+      id: 14,
+      LastName: "DANIYAN",
+      firstName: "EMMANUEL",
+      role: "CEO",
+      nin: 1234567,
+      email: "spacepen@gmail.com",
+      annual: 20000,
+      month: 10000,
+      relieves: 40000,
+      funt: displaySVG(),
+    },
   ];
 
   const employeeData = (data) => {
     // console.log(data);
   };
   return (
-    <div className=" mt-5">
+    <div className=' mt-1'>
+
       <DashboardTable
         heading={heading}
         tableData={data}

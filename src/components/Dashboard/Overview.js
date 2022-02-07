@@ -10,20 +10,19 @@ import ProfileWhite from "./svg/ProfileWhite";
 import SalariesHistory from "./SalariesHistory";
 import Slider from "./Slider";
 
-const Overview = ({ page, viewPage }) => {
+const Overview = ({ trial }) => {
   const [pageId, setId] = useState(1);
   const [small, setSmall] = useState("first");
 
   const getId = (e) => {
+    console.log(e.target.id);
     setId(Number(e.target.id));
     setSmall(e.target.nextSibling.id);
   };
 
   return (
     <Container fluid className='overview h-100'>
-      <WarningPage />
-      {/* <EmptyData /> */}
-      {/* <div className='d-flex justify-content-between align-items-center details-container'>
+      <div className='d-flex justify-content-between align-items-center details-container'>
         <DetailsCard
           heading=' TOTAL BALANCE'
           number='$50,000'
@@ -68,22 +67,13 @@ const Overview = ({ page, viewPage }) => {
             smallId='third'
           />
           <div className=' overview-btn'>
-            <Button
-              className='button'
-              onClick={() => {
-                viewPage(pageId);
-                if (pageId === 1) {
-                  viewPage(4);
-                }
-              }}>
-              View All
-            </Button>
+            <Button className='button'>View All</Button>
           </div>
         </div>
       </article>
       <article className='bottom-tab'>
         {pageId === 1 ? <SalariesHistory /> : ""}
-      </article> */}
+      </article>
     </Container>
   );
 };

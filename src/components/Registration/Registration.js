@@ -14,7 +14,7 @@ class Registration extends React.Component {
     registration: "",
     tin: "",
     about: "",
-    location: "Ondo state",
+    location: "No state",
     address: "",
     email: "",
     website: "",
@@ -53,7 +53,7 @@ class Registration extends React.Component {
   render() {
     return (
       <Header>
-        <Container className='section mx-auto'>
+        <Container className='section mx-auto' style={{ maxWidth: "50.13rem" }}>
           <div>
             <FormHeader currentForm={this.state.currentForm} />
           </div>

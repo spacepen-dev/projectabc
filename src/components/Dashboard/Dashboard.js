@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
 import { Routes, Route } from "react-router-dom";
+import TableController from "./TableController";
 
 import SideBar from "./SideBar";
 import Overview from "./Overview";
@@ -35,7 +36,7 @@ const Dashboard = () => {
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
-        <Col className='d-none d-lg-block col-1 '>
+        <Col className='d-none d-lg-block col-1'>
           <SideBar pageId={(id) => setPage(id)} page={page} />
         </Col>
         <Col className='col-2'>
@@ -45,7 +46,7 @@ const Dashboard = () => {
             <Route path='/add/employee' element={<AddEmployee />} />
             <Route path='/view/employees' element={<ViewEmployee />} />
             <Route path='/view/salary/history' element={<ViewSalaryHisory />} />
-            <Route path='/pay/employee/salaries' element={<EmployeeSalariesPage />} />
+            <Route path='/pay/employee/salaries' element={<EmployeeSalariesPage />} /
           </Routes>
         </Col>
       </Row>

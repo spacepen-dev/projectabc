@@ -26,7 +26,6 @@ const AddEmployee = ({
 
   return (
     <div>
-      {console.log(loginToken)}
       <EmployeeRegistration
         removeBtn='none'
         buttonText='Add'

@@ -115,7 +115,7 @@ const SideBar = ({ pageId, page }) => {
         />
         <DashBoardLinks
           none='none'
-          pathLink='/form'
+          pathLink='/table'
           name='
           Form H1'
           icon={Tax()}
