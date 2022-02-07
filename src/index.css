@@ -522,7 +522,7 @@ main .content p {
 EmployeeSalaryPage
 ===============
 */
-div .paySelect{
+div .paySelect {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -531,12 +531,12 @@ div .paySelect{
   padding: 4rem 0rem 0rem 0rem;
 }
 
-div .form{
-/* background-color: rgb(206, 245, 167); */
-display: flex;
-align-items: center;
-justify-content: space-between;
-width: 323.69px;
+div .form {
+  /* background-color: rgb(206, 245, 167); */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 323.69px;
 }
 
 .details-container {
@@ -805,6 +805,42 @@ td {
 }
 .toggle-input {
   max-width: 42.25rem;
+}
+
+.error-cont {
+  height: 100%;
+  text-align: center;
+  font-family: var(--mainFont);
+  padding: 8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.error-oops {
+  color: #23549e;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 3.6rem;
+  margin: 3rem 0 2rem;
+}
+
+.error-msg {
+  width: 30.05rem;
+  height: 3.5rem;
+  font-size: 1.3rem;
+  line-height: 1.75rem;
+  text-align: center;
+  color: #659cf0;
+  margin: 0 auto 2rem;
+}
+
+.error-btn {
+  background-color: #23549e;
+  font-size: 0.9rem;
+  padding: 0.81rem 2.18rem;
+  border: none;
+  border-radius: 0.458rem;
 }
 
 @media screen and (min-width: 576px) {
