@@ -410,14 +410,14 @@ otp div:last-child {
   margin-top: 1.06rem !important;
 }
 .col-1 {
-  width: 18.54rem !important;
+  width: 16.54rem !important;
   height: 100vh;
   overflow-y: scroll;
 }
 .sidebar-container {
   height: 100vh;
   height: fit-content;
-  width: 16.54rem;
+  width: 14rem;
   padding-bottom: 2.5rem;
   padding-top: 1rem;
   border-radius: 1rem;
@@ -446,8 +446,8 @@ otp div:last-child {
 
 .side-bar div h3,
 .links {
-  font-size: 0.8rem;
-  line-height: 0.75rem;
+  font-size: 0.7rem;
+  line-height: 0.7rem;
   font-weight: 400;
   color: yellow;
 }
@@ -455,7 +455,7 @@ otp div:last-child {
   color: var(--accent);
 }
 .dashboard-link {
-  height: 3rem;
+  height: 2.5rem;
   max-width: 22.12rem;
   display: flex;
   align-items: center;
@@ -478,9 +478,8 @@ otp div:last-child {
 }
 
 .col-2 {
-  width: calc(100% - 19rem);
+  width: calc(100vw - 19.5rem);
   height: 100vh;
-  overflow-y: auto;
 }
 
 /*
@@ -542,45 +541,47 @@ div .form {
   font-weight: lighter;
 }
 .form select {
-  height: 2rem;
+  height: 1.9rem;
   width: 7rem;
-  font-size: 0.859rem;
+  font-size: 0.7rem;
 }
 .check-box {
   padding: 2rem;
   border: 1px solid var(--baseColor);
   border-color: var(--baseColor);
 }
+.check-label {
+  font-size: 0.1rem;
+}
 .payBtn {
   background-color: var(--baseColor);
-  font-size: 0.859rem;
+  font-size: 0.759rem;
   /* background-color: rgb(206, 245, 167); */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 323.69px;
 }
 
 .details-container {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  max-width: 264.64rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  max-width: 234.64rem;
 }
 .details-card {
-  width: 20.8rem !important;
-  height: 8rem;
+  width: 15.8rem !important;
+  height: 6.4rem;
   margin-left: 1rem;
   background-color: var(--transparent);
   border-radius: 1.12rem;
 }
 .details-card h3 {
-  font-size: 0.97rem;
-  line-height: 0.58rem;
-  margin-top: 2.13rem;
+  font-size: 0.77rem;
+  line-height: 0.38rem;
+  margin-top: 1.13rem;
   color: var(--accent);
 }
 .details-card h2 {
-  font-size: 1.53rem;
+  font-size: 1.13rem;
   font-weight: 700;
   line-height: 3.69rem;
   color: var(--baseColor);
@@ -608,8 +609,8 @@ add an active class with the color and a line below the tab
 article span {
   cursor: pointer;
   font-weight: 700;
-  font-size: 1rem;
-  line-height: 0.11rem;
+  font-size: 0.8rem;
+  line-height: 0.09rem;
   color: rgba(35, 84, 158, 0.2);
 }
 .overview-tab {
@@ -620,7 +621,7 @@ article small {
   width: 0;
   height: 0;
   border-radius: 1rem;
-  margin-top: 0.8rem;
+  margin-top: 0.5rem;
   transition: width 0.5s ease;
 }
 .add-small {
@@ -632,19 +633,19 @@ article small {
   border-top-left-radius: 1.91rem !important;
   background-color: var(--page) !important;
   border-top-right-radius: 1.91rem !important;
-  padding: 2rem 0 !important;
+  padding: 1rem 0 !important;
   border: none;
 }
 
 thead tr:first-child {
-  height: 2.6rem;
+  height: 2.3rem;
   vertical-align: middle;
   vertical-align: center;
   justify-content: space-around;
   align-items: center;
 }
 tr {
-  height: 3.125rem;
+  height: 3.025rem;
 }
 tr:nth-child(2n) {
   background-color: var(--transparent);
@@ -658,14 +659,14 @@ th:last-child {
 }
 th {
   background-color: var(--baseColor) !important;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 1.38rem;
   text-align: center;
   font-family: var(--mainFont);
   color: var(--page);
 }
 td {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 1.51rem;
   color: var(--accent);
   vertical-align: middle;
@@ -772,7 +773,7 @@ td {
   left: 50%;
   display: block;
   width: 100%;
-  /* max-width: 75.06rem; */
+  max-width: 50.06rem;
   height: fit-content;
   padding: 2rem;
   background-color: #fff;
@@ -867,6 +868,7 @@ td {
   padding: 0.81rem 2.18rem;
   border: none;
   border-radius: 0.458rem;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 576px) {

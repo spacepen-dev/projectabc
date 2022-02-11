@@ -41,7 +41,9 @@ const EmployeeSalariesPage = () => {
               <option value='30'>2030</option>
             </select>
           </Form.Group>
-          <Form.Group className='mt-3' controlId='formBasicCheckbox'>
+          <Form.Group
+            className='mt-3 check-label'
+            controlId='formBasicCheckbox'>
             <Form.Check
               type='checkbox'
               label='Select all'
@@ -59,7 +61,7 @@ const EmployeeSalariesPage = () => {
           </Form.Group>
         </Form>
         <div className='pBtn'>
-          <Button type='submit' className='payBtn'>
+          <Button type='submit' className='payBtn py-2 px-3'>
             Pay employees
           </Button>
         </div>

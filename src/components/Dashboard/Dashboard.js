@@ -40,8 +40,14 @@ const Dashboard = () => {
         </Col>
         <Col className='col-2'>
           <Routes>
-            <Route index element={<Overview />} />
-            <Route path='/overview' element={<Overview />} />
+            <Route
+              index
+              element={<Overview getPageId={(id) => setPage(id)} />}
+            />
+            <Route
+              path='/overview'
+              element={<Overview getPageId={(id) => setPage(id)} />}
+            />
             <Route path='/add/employee' element={<AddEmployee />} />
             <Route path='/view/employees' element={<ViewEmployee />} />
             <Route path='/view/salary/history' element={<ViewSalaryHisory />} />
