@@ -2,9 +2,13 @@ import React from "react";
 import { heading, Data } from "./utils/data";
 import { Container, Form, Button } from "react-bootstrap";
 import EsalariesTable from "./EsalariesTable";
+import ModalPayEmployee from "./ModalPayEmployee";
 const EmployeeSalariesPage = () => {
   const [state, setState] = React.useState([]);
-
+  const [modalState, setmodalState] = React.useState(false);
+  function closeModal() {
+    setmodalState(false);
+  }
   return (
     <div>
       <div className="paySelect">
@@ -59,7 +63,14 @@ const EmployeeSalariesPage = () => {
           </Form.Group>
         </Form>
         <div className="pBtn">
-          <Button variant="primary" type="submit" className="payBtn">
+          <Button
+            variant="primary"
+            type="submit"
+            className="payBtn"
+            onClick={function (e) {
+              setmodalState(true);
+            }}
+          >
             Pay employees
           </Button>
         </div>
@@ -67,6 +78,7 @@ const EmployeeSalariesPage = () => {
       <div className=" mt-5">
         <EsalariesTable items={Data} setItems={setState} tableHead={heading} />
       </div>
+      {modalState && <ModalPayEmployee close={closeModal} />}
     </div>
   );
 };
