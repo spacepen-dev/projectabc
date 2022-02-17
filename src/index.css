@@ -200,6 +200,51 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: var(--accent) !important;
 }
 
+/* DROP DOWN STYLING */
+.bankDropdown {
+  margin: 3rem auto;
+  width: 65%;
+  position: relative;
+}
+
+.dropdown-input {
+  width: 100%;
+  border-radius: 0.313rem;
+  border: 1px solid #659cf0;
+  color: #659cf0;
+  height: 3rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.dropdown-input:focus {
+  outline: 1px solid #23549e;
+}
+
+.dropdown-content {
+  display: block;
+  width: 100%;
+  border: 1px solid #659cf0;
+  z-index: 1;
+  font-size: 0.85rem;
+}
+
+.dropdown-content .bankLinks {
+  color: #659cf0;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown .bankLinks:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
 .sub-text {
   width: 100% !important;
   max-width: 100rem !important;

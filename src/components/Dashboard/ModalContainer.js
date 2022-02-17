@@ -3,9 +3,7 @@ import ReactDOM from "react-dom";
 import { Container } from "react-bootstrap";
 import EditEmployee from "./EditEmployee";
 
-import EmployeeRegistration from "./EmployeeRegistration";
-
-const ModalContainer = ({ closeModal, buttonText, display, initialValue }) => {
+const ModalContainer = ({ closeModal, buttonText, initialValue }) => {
   const close = () => {
     closeModal();
   };
