@@ -807,6 +807,7 @@ td {
   max-width: 42.25rem;
 }
 
+/* NoPage.js styles */
 .error-cont {
   height: 100%;
   text-align: center;
@@ -843,7 +844,9 @@ td {
   border-radius: 0.458rem;
 }
 
+/* ModalPayEmployee.js styles */
 .modal-1 {
+  font-family: var(--mainFont);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -919,6 +922,36 @@ td {
 /* .hidden {
   display: none;
 } */
+
+/* PaidSuccess.js styles */
+svg.hand-phone {
+  position: relative;
+  left: 35.93rem;
+  top: 3.75rem;
+}
+
+.hand-phone-div {
+  margin-top: 5rem;
+  text-align: center;
+}
+
+h5.congrats {
+  color: #23549e;
+  font-weight: bold;
+}
+
+p.paid-success {
+  margin-bottom: 1.6rem;
+  color: #659cf0;
+}
+
+.refresh-btn {
+  background-color: #23549e;
+  border-radius: 7.38577px;
+  outline: none;
+  font-size: 1.29rem;
+  padding: 0.8rem 2rem;
+}
 
 @media screen and (min-width: 576px) {
   /* .toggle-input {
