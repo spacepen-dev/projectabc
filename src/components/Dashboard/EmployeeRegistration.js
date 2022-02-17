@@ -24,6 +24,7 @@ const EmployeeRegistration = ({
   const [showModal, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
+  const [index, setIndex] = useState(0)
   console.log(token);
   // USE EFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL
   useEffect(() => {
@@ -153,12 +154,26 @@ const EmployeeRegistration = ({
     InputValidation();
   };
 
+  const nextQuestion = () => {
+    setIndex((oldIndex) => {
+      return oldIndex + 1
+    })
+  };
+
+  const prevQuestion = () => {
+    setIndex((oldIndex) => {
+      return oldIndex - 1
+    })
+  };
+
   const companyDepartment = ["Marketing", "Sales", "Engineering"];
 
-  return (
-    <Form
+
+  if (index === 0) {
+    return <Form
       className='d-flex flex-column pt-5 justify-content-center w-100 mx-auto employee-form'
       onSubmit={onSubmit}>
+        
       <Row>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
@@ -262,6 +277,17 @@ const EmployeeRegistration = ({
           />
         </Form.Group>{" "}
       </Row>
+      <Button type='button' className='button ms-auto'
+      onClick={nextQuestion}>
+          Continue
+        </Button>
+    </Form>
+  }
+
+  return (
+    <Form
+      className='d-flex flex-column pt-5 justify-content-center w-100 mx-auto employee-form'
+      onSubmit={onSubmit}>
       <Row>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
@@ -350,6 +376,10 @@ const EmployeeRegistration = ({
       <div className='ms-auto mt-4 double-btns'>
         <Button type='button' className={`button ms-auto d-${removeBtn} `}>
           Delete
+        </Button>
+        <Button type='button' className='button ms-auto'
+      onClick={prevQuestion}>
+          Back
         </Button>
         <LoaderButton btnName='SAVE' btnStyle='ms-4' request={request} />
       </div>

@@ -169,7 +169,7 @@ const SalariesHistory = () => {
   ];
   const limitDataTable = (tableData) => {
     let tdata = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 8; i++) {
       tdata = [...tdata, tableData[i]];
     }
     return tdata;

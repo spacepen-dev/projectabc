@@ -12,7 +12,7 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
   const [value, setValue] = useState("");
   let input = useRef();
 
-  let dataPerPage = 12;
+  let dataPerPage = 10;
   let numOfPages = 0;
   let items = [];
 

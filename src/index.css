@@ -55,7 +55,7 @@ h3,
 label {
   font-family: var(--mainFont);
   color: var(--baseColor);
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .heading-container h2 {
@@ -128,7 +128,7 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: var(--baseColor);
   font-size: 0.88rem;
   font-family: var(--mainFont);
-  font-weight: 700;
+  font-weight: 400;
   text-decoration: none !important;
   line-height: 1.05rem;
   width: 6.9rem;
@@ -410,14 +410,14 @@ otp div:last-child {
   margin-top: 1.06rem !important;
 }
 .col-1 {
-  width: 18.54rem !important;
+  width: 16.54rem !important;
   height: 100vh;
   overflow-y: scroll;
 }
 .sidebar-container {
   height: 100vh;
   height: fit-content;
-  width: 16.54rem;
+  width: 14rem;
   padding-bottom: 2.5rem;
   padding-top: 1rem;
   border-radius: 1rem;
@@ -446,8 +446,8 @@ otp div:last-child {
 
 .side-bar div h3,
 .links {
-  font-size: 0.8rem;
-  line-height: 0.75rem;
+  font-size: 0.7rem;
+  line-height: 0.7rem;
   font-weight: 400;
   color: yellow;
 }
@@ -455,7 +455,7 @@ otp div:last-child {
   color: var(--accent);
 }
 .dashboard-link {
-  height: 3rem;
+  height: 2.5rem;
   max-width: 22.12rem;
   display: flex;
   align-items: center;
@@ -478,9 +478,8 @@ otp div:last-child {
 }
 
 .col-2 {
-  width: calc(100% - 19rem);
+  width: calc(100vw - 19.5rem);
   height: 100vh;
-  overflow-y: auto;
 }
 
 /*
@@ -517,48 +516,72 @@ main .content p {
   line-height: 1;
   text-transform: capitalize;
 }
-/*
-=============== 
-EmployeeSalaryPage
-===============
-*/
+
 div .paySelect {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* margin-top: 86.729px !important; */
   height: 2rem;
   padding: 4rem 0rem 0rem 0rem;
 }
 
 div .form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 21rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+.form label {
+  font-weight: lighter;
+}
+.form select {
+  height: 1.9rem;
+  width: 7rem;
+  font-size: 0.7rem;
+}
+.check-box {
+  padding: 2rem;
+  border: 1px solid var(--baseColor);
+  border-color: var(--baseColor);
+}
+.check-label {
+  font-size: 0.1rem;
+}
+.payBtn {
+  background-color: var(--baseColor);
+  font-size: 0.759rem;
   /* background-color: rgb(206, 245, 167); */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 323.69px;
 }
 
 .details-container {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  max-width: 264.64rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  max-width: 234.64rem;
 }
 .details-card {
-  width: 20.8rem !important;
-  height: 8rem;
+  width: 15.8rem !important;
+  height: 6.4rem;
   margin-left: 1rem;
   background-color: var(--transparent);
   border-radius: 1.12rem;
 }
 .details-card h3 {
-  font-size: 0.97rem;
-  line-height: 0.58rem;
-  margin-top: 2.13rem;
+  font-size: 0.77rem;
+  line-height: 0.38rem;
+  margin-top: 1.13rem;
   color: var(--accent);
 }
 .details-card h2 {
-  font-size: 1.53rem;
+  font-size: 1.13rem;
   font-weight: 700;
   line-height: 3.69rem;
   color: var(--baseColor);
@@ -570,7 +593,7 @@ div .form {
 }
 /* .top-tab > div {
   /* max-width: 60rem; */
-*/ .top-tab Button {
+.top-tab Button {
   width: 10.21rem;
   height: 4.47rem;
   font-size: 0.96rem;
@@ -586,8 +609,8 @@ add an active class with the color and a line below the tab
 article span {
   cursor: pointer;
   font-weight: 700;
-  font-size: 1rem;
-  line-height: 0.11rem;
+  font-size: 0.8rem;
+  line-height: 0.09rem;
   color: rgba(35, 84, 158, 0.2);
 }
 .overview-tab {
@@ -598,7 +621,7 @@ article small {
   width: 0;
   height: 0;
   border-radius: 1rem;
-  margin-top: 0.8rem;
+  margin-top: 0.5rem;
   transition: width 0.5s ease;
 }
 .add-small {
@@ -610,19 +633,19 @@ article small {
   border-top-left-radius: 1.91rem !important;
   background-color: var(--page) !important;
   border-top-right-radius: 1.91rem !important;
-  padding: 2rem 0 !important;
+  padding: 1rem 0 !important;
   border: none;
 }
 
 thead tr:first-child {
-  height: 2.6rem;
+  height: 2.3rem;
   vertical-align: middle;
   vertical-align: center;
   justify-content: space-around;
   align-items: center;
 }
 tr {
-  height: 3.125rem;
+  height: 3.025rem;
 }
 tr:nth-child(2n) {
   background-color: var(--transparent);
@@ -636,14 +659,14 @@ th:last-child {
 }
 th {
   background-color: var(--baseColor) !important;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 1.38rem;
   text-align: center;
   font-family: var(--mainFont);
   color: var(--page);
 }
 td {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 1.51rem;
   color: var(--accent);
   vertical-align: middle;
@@ -663,22 +686,21 @@ td {
   max-height: fit-content;
   width: 100%;
   border-radius: 0.625rem !important;
-  border: 2px solid var(--baseColor) !important;
+  border: 2px solid var(--accent) !important;
   padding-bottom: 5rem;
   /* max-width: 31.25rem !important; */
 }
 .content ul {
   display: flex;
   flex-wrap: wrap;
-  padding: 7px;
-  margin: 12px 0;
+  padding: 0.434rem 0;
+  margin: 0.75px 0;
 }
 .content ul input {
-  flex: 1;
-  padding: 5px;
+  padding: 0.31rem;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .btn-add {
@@ -687,16 +709,20 @@ td {
   justify-content: space-between;
   height: 1.6rem;
   width: fit-content;
-  padding: 0 1rem;
-  border-radius: 0.313rem;
-  border: 1px solid var(--accent);
-  font-size: 0.63rem;
+  padding: 1rem 2rem;
+  border-radius: 0.3rem;
+  border: 2px solid var(--accent);
+  font-size: 0.93rem;
   font-weight: 400;
   line-height: 0.75;
   text-transform: capitalize;
   color: var(--baseColor);
   margin-left: 1rem;
   margin-top: 0.39rem;
+}
+.sug-tag {
+  margin-left: 0;
+  margin-right: 1rem;
 }
 .add-roles > div:nth-child(1) {
   height: 5.17rem;
@@ -706,11 +732,12 @@ td {
   /* background-color: red; */
 }
 .add-roles h3 {
-  font-size: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 400;
 }
 
 .add-roles Form div:nth-child(2) {
-  height: 5.31rem;
+  height: 4.31rem;
 }
 
 .Overlay,
@@ -746,7 +773,7 @@ td {
   left: 50%;
   display: block;
   width: 100%;
-  /* max-width: 75.06rem; */
+  max-width: 50.06rem;
   height: fit-content;
   padding: 2rem;
   background-color: #fff;
@@ -842,6 +869,7 @@ td {
   padding: 0.81rem 2.18rem;
   border: none;
   border-radius: 0.458rem;
+  text-decoration: none;
 }
 
 /* ModalPayEmployee.js styles */
