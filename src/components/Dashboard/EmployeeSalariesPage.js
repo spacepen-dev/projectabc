@@ -45,9 +45,7 @@ const EmployeeSalariesPage = () => {
               <option value='30'>2030</option>
             </select>
           </Form.Group>
-          <Form.Group
-            className='mt-3 check-label'
-            controlId='formBasicCheckbox'>
+          <Form.Group className='mt-3' controlId='formBasicCheckbox'>
             <Form.Check
               type='checkbox'
               label='Select all'
@@ -65,23 +63,20 @@ const EmployeeSalariesPage = () => {
           </Form.Group>
         </Form>
 
-        <div className="pBtn">
-          <Button
-            variant="primary"
-            type="submit"
-            className="payBtn"
-            onClick={function (e) {
-              setmodalState(true);
-            }}
-          >
-
         <div className='pBtn'>
-          <Button type='submit' className='payBtn py-2 px-3'>
-
-            Pay employees
-          </Button>
+          <div className='pBtn'>
+            <Button
+              type='submit'
+              className='payBtn py-2 px-3'
+              onClick={function (e) {
+                setmodalState(true);
+              }}>
+              Pay employees
+            </Button>
+          </div>
         </div>
       </div>
+
       <div className=' mt-5'>
         <EsalariesTable items={Data} setItems={setState} tableHead={heading} />
       </div>
