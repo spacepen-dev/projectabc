@@ -1,4 +1,3 @@
-import { checkBox } from "./utilsBtn";
 
 
 export const heading = [

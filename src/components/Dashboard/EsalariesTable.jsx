@@ -7,7 +7,7 @@ const EsalariesTable = ({items,tableHead,setItems}) => {
      <Table
        className="hover table table-borderless"
        responsive="sm"
-       style={{ height: "200px" }}
+       style={{ height: "180px" }}
      >
        <thead className="">
          {tableHead.map((cur, index) => {
@@ -66,8 +66,7 @@ const EsalariesTable = ({items,tableHead,setItems}) => {
              </tr>
            );
          })}
-       </tbody>
-       
+       </tbody>       
      </Table>
    </div>
  );

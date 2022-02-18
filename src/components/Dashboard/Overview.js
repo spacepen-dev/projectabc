@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-import EmptyData from "./EmptyData";
-import WarningPage from "./WarningPage";
 import DetailsCard from "./DetailsCard";
 import EyeSVG from "./svg/Eyes";
 import WhiteWallet from "./svg/WhiteWallet";
@@ -10,15 +9,25 @@ import ProfileWhite from "./svg/ProfileWhite";
 import SalariesHistory from "./SalariesHistory";
 import Slider from "./Slider";
 
-const Overview = ({ trial }) => {
-  const [pageId, setId] = useState(1);
+const Overview = ({ getPageId }) => {
+  const [pageId, setId] = useState(4);
   const [small, setSmall] = useState("first");
+  const [link, setLink] = useState("");
 
   const getId = (e) => {
-    console.log(e.target.id);
     setId(Number(e.target.id));
     setSmall(e.target.nextSibling.id);
   };
+
+  useEffect(() => {
+    if (pageId === 4) {
+      setLink("/dashboard/view/salary/history");
+    } else if (pageId === 7) {
+      setLink("/dashboard/view/account/history");
+    } else {
+      setLink("/dashboard/view/tax/history");
+    }
+  }, [pageId]);
 
   return (
     <Container fluid className='overview h-100'>
@@ -44,7 +53,7 @@ const Overview = ({ trial }) => {
         <div className='h-100 d-flex justify-content-between align-items-center w-100'>
           <Slider
             name='SALARY HISTORY'
-            id={1}
+            id={4}
             small={small}
             getId={getId}
             pageId={pageId}
@@ -52,7 +61,7 @@ const Overview = ({ trial }) => {
           />
           <Slider
             name='ACCOUNT HISTORY'
-            id={2}
+            id={7}
             small={small}
             getId={getId}
             pageId={pageId}
@@ -60,19 +69,26 @@ const Overview = ({ trial }) => {
           />
           <Slider
             name='TAX HISTORY'
-            id={3}
+            id={8}
             small={small}
             getId={getId}
             pageId={pageId}
             smallId='third'
           />
-          <div className=' overview-btn'>
-            <Button className='button'>View All</Button>
+          <div className='overview-btn'>
+            <Link
+              className='button d-flex text-white align-items-center justify-content-center'
+              to={link}
+              onClick={() => getPageId(pageId)}>
+              View All
+            </Link>
           </div>
         </div>
       </article>
       <article className='bottom-tab'>
-        {pageId === 1 ? <SalariesHistory /> : ""}
+        {pageId === 4 ? <SalariesHistory /> : ""}
+        {/* {pageId === 7 ? <SalariesHistory /> : ""} */}
+        {/* {pageId === 8 ? <SalariesHistory /> : ""} */}
       </article>
     </Container>
   );

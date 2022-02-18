@@ -150,6 +150,7 @@ const SideBar = ({ pageId, page }) => {
           page={page}
         />
       </div>
+      {console.log(page)}
     </section>
   );
 };
