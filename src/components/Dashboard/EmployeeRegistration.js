@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 
@@ -24,7 +24,8 @@ const EmployeeRegistration = ({
   const [showModal, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
+
   console.log(token);
   // USE EFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL
   useEffect(() => {
@@ -69,7 +70,8 @@ const EmployeeRegistration = ({
     }
   }, [token]);
   // GETTING MONTHLY SALARY FROM ANNUAL SALARY / 12
-  const getMonthlySalary = () => {
+
+  const getMonthlySalary = useCallback(() => {
     const employeeMonthlySalary = employeeData["annual"] / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
@@ -77,10 +79,10 @@ const EmployeeRegistration = ({
       currency: "NGN",
     });
     return formatter.format(employeeMonthlySalary);
-  };
+  }, [employeeData["annual"]]);
 
   // GETTING MONTHLY RELIEVES FROM ANNUAL RELIEVES / 12
-  const getMonthlyRelieves = () => {
+  const getMonthlyRelieves = useCallback(() => {
     const employeeMonthlyRelieves = employeeData["relieves"] / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
@@ -88,10 +90,10 @@ const EmployeeRegistration = ({
       currency: "NGN",
     });
     return formatter.format(employeeMonthlyRelieves);
-  };
+  }, [employeeData["relieves"]]);
 
   //  ANNUAL GROSS PAY
-  const getAnnualGross = () => {
+  const getAnnualGross = useCallback(() => {
     const AnnualGross =
       Number(employeeData["relieves"]) + Number(employeeData["annual"]);
 
@@ -100,10 +102,10 @@ const EmployeeRegistration = ({
       currency: "NGN",
     });
     return formatter.format(AnnualGross);
-  };
+  }, [employeeData["relieves"], employeeData["annual"]]);
 
   //MONTHLY GROSS PAY
-  const getMonthlyGross = () => {
+  const getMonthlyGross = useCallback(() => {
     let MonthlyGross =
       Number(employeeData["relieves"]) + Number(employeeData["annual"]) / 12;
 
@@ -112,7 +114,8 @@ const EmployeeRegistration = ({
       currency: "NGN",
     });
     return formatter.format(MonthlyGross);
-  };
+  }, [employeeData["annual"], employeeData["relieves"]]);
+
   //  ALL INPUT VARIFICATION
   const InputValidation = () => {
     let regexp =
@@ -137,151 +140,230 @@ const EmployeeRegistration = ({
       setValidation({ employeeNin: "Invalid NIN!" });
     } else if (!employeeData["role"]) {
       setValidation({ employeeRole: "Employee's role is required!" });
-    } else if (!employeeData["annual"]) {
+      // } else if (!employeeData["annual"]) {
+      //   setValidation({
+      //     employeeAnnualSalary: "Employee's annual salary is required!",
+      //   });
+    } else if (!employeeData["accountName"]) {
       setValidation({
-        employeeAnnualSalary: "Employee's annual salary is required!",
+        accountName: "Employee's account name is required!",
+      });
+    } else if (
+      !employeeData["accountNumber"] ||
+      employeeData["accountNumber"].length > 10 ||
+      employeeData["accountNumber"].length < 10
+    ) {
+      setValidation({
+        accountNumber: "Invalid Employee's account number!",
+      });
+    } else if (!employeeData["bankName"]) {
+      setValidation({
+        bankName: "Employee's bank name is required!",
       });
     } else {
-      const getToken = localStorage.getItem("token", token);
-      console.log(getToken);
-      setRequest(true);
-      employee(employeeData, getToken);
+      setIndex((oldIndex) => {
+        return oldIndex + 1;
+      });
     }
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    InputValidation();
+    const getToken = localStorage.getItem("token", token);
+
+    console.log(getToken);
+    setRequest(true);
+    employee(employeeData, getToken);
   };
 
   const nextQuestion = () => {
-    setIndex((oldIndex) => {
-      return oldIndex + 1
-    })
+    console.log(validation);
+    InputValidation();
   };
 
   const prevQuestion = () => {
     setIndex((oldIndex) => {
-      return oldIndex - 1
-    })
+      return oldIndex - 1;
+    });
   };
 
   const companyDepartment = ["Marketing", "Sales", "Engineering"];
 
-
   if (index === 0) {
-    return <Form
-      className='d-flex flex-column pt-5 justify-content-center w-100 mx-auto employee-form'
-      onSubmit={onSubmit}>
-        
-      <Row>
-        <Form.Group as={Col} controlId='formGrid'>
-          <DashBoardText
-            name='First Name'
-            label='Enter the name of your company'
-          />
-          <Input
-            inputName='firstName'
-            type='text'
-            handleChange={onHandleChange}
-            value={employeeData["firstName"]}
-            err={validation.employeeFirstName}
-            onPress={() =>
-              setValidation({
-                employeeFirstName: "",
-              })
-            }
-          />
-        </Form.Group>
-        <Form.Group as={Col} controlId='formGrid'>
-          <DashBoardText name='Last Name' label='Enter Last name of employee' />
-          <Input
-            inputName='LastName'
-            type='text'
-            handleChange={onHandleChange}
-            value={employeeData["LastName"]}
-            err={validation["employeeLastName"]}
-            onPress={() =>
-              setValidation({
-                employeeLastName: "",
-              })
-            }
-          />
-        </Form.Group>
-      </Row>
-      <Row>
-        <Form.Group as={Col} controlId='formGrid'>
-          <DashBoardText name='Email' label='Enter Employee Email Address' />
-          <Input
-            inputName='email'
-            type='text'
-            handleChange={onHandleChange}
-            value={employeeData["email"]}
-            err={validation.employeeEmail}
-            onPress={() =>
-              setValidation({
-                employeeEmail: "",
-              })
-            }
-          />
-        </Form.Group>
-        <Form.Group as={Col} controlId='formGrid'>
-          <DashBoardText
-            name='National Identity Number'
-            label='Enter National Indentity Number'
-          />
-          <Input
-            inputName='nin'
-            type='text'
-            handleChange={onHandleChange}
-            value={employeeData["nin"]}
-            err={validation.employeeNin}
-            onPress={() =>
-              setValidation({
-                employeeNin: "",
-              })
-            }
-          />
-        </Form.Group>
-      </Row>
-      <Row>
-        <Form.Group as={Col}>
-          <DashBoardText name='Department' label='Enter employee department' />
-          <select
-            name='department'
-            className=' text-center select mt-0'
-            onChange={onHandleChange}>
-            {companyDepartment.map((department) => {
-              return (
-                <option key={department} value={employeeData.department}>
-                  {department}
-                </option>
-              );
-            })}
-          </select>
-        </Form.Group>
-        <Form.Group as={Col}>
-          <DashBoardText name='Role' label='Enter Role ' />
+    return (
+      <Form
+        className='d-flex flex-column pt-5 justify-content-center w-100 mx-auto employee-form'
+        onSubmit={onSubmit}>
+        <Row>
+          <Form.Group as={Col} controlId='formGrid'>
+            <DashBoardText
+              name='First Name'
+              label='Enter the name of your company'
+            />
+            <Input
+              inputName='firstName'
+              type='text'
+              handleChange={onHandleChange}
+              value={employeeData["firstName"]}
+              err={validation.employeeFirstName}
+              onPress={() =>
+                setValidation({
+                  employeeFirstName: "",
+                })
+              }
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId='formGrid'>
+            <DashBoardText
+              name='Last Name'
+              label='Enter Last name of employee'
+            />
+            <Input
+              inputName='LastName'
+              type='text'
+              handleChange={onHandleChange}
+              value={employeeData["LastName"]}
+              err={validation["employeeLastName"]}
+              onPress={() =>
+                setValidation({
+                  employeeLastName: "",
+                })
+              }
+            />
+          </Form.Group>
+        </Row>
+        <Row>
+          <Form.Group as={Col} controlId='formGrid'>
+            <DashBoardText name='Email' label='Enter Employee Email Address' />
+            <Input
+              inputName='email'
+              type='text'
+              handleChange={onHandleChange}
+              value={employeeData["email"]}
+              err={validation.employeeEmail}
+              onPress={() =>
+                setValidation({
+                  employeeEmail: "",
+                })
+              }
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId='formGrid'>
+            <DashBoardText
+              name='National Identity Number'
+              label='Enter National Indentity Number'
+            />
+            <Input
+              inputName='nin'
+              type='text'
+              handleChange={onHandleChange}
+              value={employeeData["nin"]}
+              err={validation.employeeNin}
+              onPress={() =>
+                setValidation({
+                  employeeNin: "",
+                })
+              }
+            />
+          </Form.Group>
+        </Row>
+        <Row>
+          <Form.Group as={Col}>
+            <DashBoardText
+              name='Department'
+              label='Enter employee department'
+            />
+            <select
+              name='department'
+              className=' text-center select mt-0'
+              onChange={onHandleChange}>
+              {companyDepartment.map((department) => {
+                return (
+                  <option key={department} value={employeeData.department}>
+                    {department}
+                  </option>
+                );
+              })}
+            </select>
+          </Form.Group>
+          <Form.Group as={Col}>
+            <DashBoardText name='Role' label='Enter Role ' />
 
-          <Input
-            inputName='role'
-            type='text'
-            handleChange={onHandleChange}
-            value={employeeData["role"]}
-            err={validation.employeeRole}
-            onPress={() =>
-              setValidation({
-                employeeRole: "",
-              })
-            }
-          />
-        </Form.Group>{" "}
-      </Row>
-      <Button type='button' className='button ms-auto'
-      onClick={nextQuestion}>
+            <Input
+              inputName='role'
+              type='text'
+              handleChange={onHandleChange}
+              value={employeeData["role"]}
+              err={validation.employeeRole}
+              onPress={() =>
+                setValidation({
+                  employeeRole: "",
+                })
+              }
+            />
+          </Form.Group>{" "}
+        </Row>
+        <Row>
+          <Form.Group as={Col}>
+            <DashBoardText
+              name='Account Name'
+              label='Enter Employee Account Name '
+            />
+
+            <Input
+              inputName='accountName'
+              type='text'
+              handleChange={onHandleChange}
+              value={employeeData["accountName"]}
+              err={validation.accountName}
+              onPress={() =>
+                setValidation({
+                  accountName: "",
+                })
+              }
+            />
+          </Form.Group>
+          <Form.Group as={Col}>
+            <DashBoardText name='Bank Name' label='Enter Employee Bank Name' />
+            <Input
+              inputName='bankName'
+              type='text'
+              handleChange={onHandleChange}
+              value={employeeData["bankName"]}
+              err={validation.bankName}
+              onPress={() =>
+                setValidation({
+                  bankName: "",
+                })
+              }
+            />
+          </Form.Group>{" "}
+        </Row>
+        <Row>
+          <Form.Group as={Col}>
+            <DashBoardText
+              name='Account Number'
+              label='Enter Employee Account Number'
+            />
+            <Input
+              inputName='accountNumber'
+              type='number'
+              handleChange={onHandleChange}
+              value={employeeData["accountNumber"]}
+              err={validation.accountNumber}
+              onPress={() =>
+                setValidation({
+                  accountNumber: "",
+                })
+              }
+            />
+          </Form.Group>{" "}
+        </Row>
+        <Button type='button' className='button ms-auto' onClick={nextQuestion}>
           Continue
         </Button>
-    </Form>
+      </Form>
+    );
   }
 
   return (
@@ -374,14 +456,15 @@ const EmployeeRegistration = ({
         </Form.Group>
       </Row>
       <div className='ms-auto mt-4 double-btns'>
-        <Button type='button' className={`button ms-auto d-${removeBtn} `}>
+        <Button
+          type='button'
+          className={`button double-btns ms-auto d-${removeBtn} `}>
           Delete
         </Button>
-        <Button type='button' className='button ms-auto'
-      onClick={prevQuestion}>
+        <Button type='button' className='button ms-auto' onClick={prevQuestion}>
           Back
         </Button>
-        <LoaderButton btnName='SAVE' btnStyle='ms-4' request={request} />
+        <LoaderButton btnName='Register' btnStyle='ms-4' request={request} />
       </div>
       {showModal && (
         <NetWorkErrors

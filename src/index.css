@@ -270,7 +270,8 @@ Label {
   outline: none;
   transition: border 0.01 ease;
   max-width: 42.25rem !important;
-  height: 3rem;
+  height: 2.5rem;
+  margin: 0.5rem 0;
 }
 
 .field-container {

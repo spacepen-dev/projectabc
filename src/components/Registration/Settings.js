@@ -204,7 +204,6 @@ const Settings = ({
               <div id='dropdownList' class='dropdown-content shadow'>
                 {BankList()}
               </div> */}
-            )}
           </div>
           <div className='field-container'>
             <LabelText

@@ -17,6 +17,9 @@ const AddEmployee = ({
     nin: "",
     email: "",
     relieves: 0,
+    accountName: "",
+    accountNumber: "",
+    bankName: "",
   });
 
   const onHandleChange = (e) => {

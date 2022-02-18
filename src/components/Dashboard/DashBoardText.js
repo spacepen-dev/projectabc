@@ -7,12 +7,12 @@ const DashBoardText = ({ name, label }) => {
       <label
         className='pb-0 w-100 '
         style={{
-          fontSize: "1.5rem",
-          lineHeight: "1.8rem",
+          fontSize: "0.98rem",
+          lineHeight: "1.5rem",
         }}>
         {name}
       </label>
-      <FormText className='w-100 border-0 fs-8 sub-text'>{label}</FormText>
+      <FormText className='w-100 border-0 sub-text'>{label}</FormText>
     </span>
   );
 };
