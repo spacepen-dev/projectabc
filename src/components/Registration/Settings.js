@@ -18,7 +18,8 @@ const Settings = ({
   checkStatus,
   accountName,
   bank,
-  account,
+  salary,
+  companySize,
   tax,
   prevPage,
   formData,
@@ -31,8 +32,10 @@ const Settings = ({
   const [success, setSuccess] = useState("");
   const [showModal, setShow] = useState(false);
   const [accountNameErr, setAccountNameErr] = useState("");
-  const [accountNumberErr, setAccountNumberErr] = useState("");
+  const [maxSalaryErr, setMaxSalaryErr] = useState("");
   const [bankNameErr, setBankNameErr] = useState("");
+
+  const companySizes = ["0-5", "6-10", "11-20", "21-30", "31-above"];
 
   const navigate = useNavigate();
 
@@ -81,8 +84,8 @@ const Settings = ({
       setAccountNameErr("Account name is required!");
     } else if (!bank) {
       setBankNameErr("Bank name is required");
-    } else if (!account || account.length < 10 || account.length > 10) {
-      setAccountNumberErr("Invalid account number");
+    } else if (!salary) {
+      setMaxSalaryErr("Maximum salary is required");
     } else {
       setRequest(true);
       companyReg(formData);
@@ -98,91 +101,83 @@ const Settings = ({
   }
 
   return (
-    <div className='mx-auto w-75'>
+    <div className="mx-auto w-75">
       {success && <VerificationModal message={success} close={closeModal} />}
 
       <div>
         <SubHeader>Fill in your company bank account details</SubHeader>
       </div>
       <div>
-        <Form className='ms-2' onSubmit={onSubmit}>
-          <div className='field-container'>
+        <Form className="ms-2" onSubmit={onSubmit}>
+          <LabelText
+            label="Select the size range of your company"
+            name="Company Size"
+          />
+
+          <div sm="10" className="field-container">
+            <select
+              name="companySize"
+              className="text-center select"
+              onChange={handleChange}
+            >
+              {companySizes.map((companySize) => {
+                return (
+                  <option key={companySize} value={companySize}>
+                    {companySize}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          <div className="field-container">
             <LabelText
-              label='Enter the full account name of your company'
-              name='Account Name'
+              label="Enter the maximun salary of your employee"
+              name="Employee Max Salary"
             />
 
             <Input
-              inputName='accountName'
-              type='text'
+              inputName="salary"
+              type="number"
               handleChange={handleChange}
-              err={accountNameErr}
-              onPress={() => setAccountNameErr("")}
-              value={accountName}
+              err={maxSalaryErr}
+              onPress={() => setMaxSalaryErr("")}
+              value={salary}
             />
           </div>
-          <div className='field-container'>
+          <Col className="d-flex toggle-input justify-content-between align-items-center">
             <LabelText
-              label='Enter the bank official account of your company'
-              name='Bank Name'
-            />
-            <Input
-              inputName='bank'
-              type='text'
-              err={bankNameErr}
-              handleChange={handleChange}
-              onPress={() => setBankNameErr("")}
-              value={bank}
-            />
-          </div>
-          <div className='field-container'>
-            <LabelText
-              label='Enter the full account name of your company'
-              name='Account Number'
-            />
-
-            <Input
-              inputName='account'
-              type='number'
-              handleChange={handleChange}
-              err={accountNumberErr}
-              onPress={() => setAccountNumberErr("")}
-              value={account}
-            />
-          </div>
-          <Col className='d-flex toggle-input justify-content-between align-items-center'>
-            <LabelText
-              name='PAYE'
-              inputname='PAYE Taxes'
+              name="PAYE"
+              inputname="PAYE Taxes"
               label="
         Do you want to pay/deduct your employee's taxes automatically"
             />
-            <div className='toggle-container d-flex justify-content-evenly align-items-center'>
+            <div className="toggle-container d-flex justify-content-evenly align-items-center">
               Yes
-              <label className='switch'>
+              <label className="switch">
                 <input
-                  name='tax'
-                  id='tax'
-                  inputname='tax'
-                  type='checkbox'
+                  name="tax"
+                  id="tax"
+                  inputname="tax"
+                  type="checkbox"
                   value={tax}
                   checked={check}
                   onChange={handleChange}
                 />
-                <span className='slider'></span>
+                <span className="slider"></span>
               </label>
               No
             </div>
           </Col>
-          <div className='button-container double-btns d-flex justify-content-end align-items-end'>
-            <Button type='button' className='button ms-auto' onClick={prevPage}>
+          <div className="button-container double-btns d-flex justify-content-end align-items-end">
+            <Button type="button" className="button ms-auto" onClick={prevPage}>
               Back
             </Button>
             <LoaderButton
-              btnName='FINISH'
-              btnStyle='ms-4'
+              btnName="FINISH"
+              btnStyle="ms-4"
               request={request}
-              spinnerStyle='bg-transparent'
+              spinnerStyle="bg-transparent"
             />
           </div>
         </Form>
