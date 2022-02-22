@@ -192,17 +192,18 @@ const EmployeeRegistration = ({
   if (index === 0) {
     return (
       <Form
-        className='d-flex flex-column pt-5 justify-content-center w-100 mx-auto employee-form'
-        onSubmit={onSubmit}>
+        className="d-flex flex-column pt-5 justify-content-center w-100 mx-auto employee-form"
+        onSubmit={onSubmit}
+      >
         <Row>
-          <Form.Group as={Col} controlId='formGrid'>
+          <Form.Group as={Col} controlId="formGrid">
             <DashBoardText
-              name='First Name'
-              label='Enter the name of your company'
+              name="First Name"
+              label="Enter the name of your company"
             />
             <Input
-              inputName='firstName'
-              type='text'
+              inputName="firstName"
+              type="text"
               handleChange={onHandleChange}
               value={employeeData["firstName"]}
               err={validation.employeeFirstName}
@@ -213,14 +214,14 @@ const EmployeeRegistration = ({
               }
             />
           </Form.Group>
-          <Form.Group as={Col} controlId='formGrid'>
+          <Form.Group as={Col} controlId="formGrid">
             <DashBoardText
-              name='Last Name'
-              label='Enter Last name of employee'
+              name="Last Name"
+              label="Enter Last name of employee"
             />
             <Input
-              inputName='LastName'
-              type='text'
+              inputName="LastName"
+              type="text"
               handleChange={onHandleChange}
               value={employeeData["LastName"]}
               err={validation["employeeLastName"]}
@@ -233,11 +234,11 @@ const EmployeeRegistration = ({
           </Form.Group>
         </Row>
         <Row>
-          <Form.Group as={Col} controlId='formGrid'>
-            <DashBoardText name='Email' label='Enter Employee Email Address' />
+          <Form.Group as={Col} controlId="formGrid">
+            <DashBoardText name="Email" label="Enter Employee Email Address" />
             <Input
-              inputName='email'
-              type='text'
+              inputName="email"
+              type="text"
               handleChange={onHandleChange}
               value={employeeData["email"]}
               err={validation.employeeEmail}
@@ -248,14 +249,14 @@ const EmployeeRegistration = ({
               }
             />
           </Form.Group>
-          <Form.Group as={Col} controlId='formGrid'>
+          <Form.Group as={Col} controlId="formGrid">
             <DashBoardText
-              name='National Identity Number'
-              label='Enter National Indentity Number'
+              name="National Identity Number"
+              label="Enter National Indentity Number"
             />
             <Input
-              inputName='nin'
-              type='text'
+              inputName="nin"
+              type="text"
               handleChange={onHandleChange}
               value={employeeData["nin"]}
               err={validation.employeeNin}
@@ -270,13 +271,14 @@ const EmployeeRegistration = ({
         <Row>
           <Form.Group as={Col}>
             <DashBoardText
-              name='Department'
-              label='Enter employee department'
+              name="Department"
+              label="Enter employee department"
             />
             <select
-              name='department'
-              className=' text-center select mt-0'
-              onChange={onHandleChange}>
+              name="department"
+              className=" text-left select mt-0"
+              onChange={onHandleChange}
+            >
               {companyDepartment.map((department) => {
                 return (
                   <option key={department} value={employeeData.department}>
@@ -287,11 +289,11 @@ const EmployeeRegistration = ({
             </select>
           </Form.Group>
           <Form.Group as={Col}>
-            <DashBoardText name='Role' label='Enter Role ' />
+            <DashBoardText name="Role" label="Enter Role " />
 
             <Input
-              inputName='role'
-              type='text'
+              inputName="role"
+              type="text"
               handleChange={onHandleChange}
               value={employeeData["role"]}
               err={validation.employeeRole}
@@ -306,13 +308,13 @@ const EmployeeRegistration = ({
         <Row>
           <Form.Group as={Col}>
             <DashBoardText
-              name='Account Name'
-              label='Enter Employee Account Name '
+              name="Account Name"
+              label="Enter Employee Account Name "
             />
 
             <Input
-              inputName='accountName'
-              type='text'
+              inputName="accountName"
+              type="text"
               handleChange={onHandleChange}
               value={employeeData["accountName"]}
               err={validation.accountName}
@@ -324,10 +326,10 @@ const EmployeeRegistration = ({
             />
           </Form.Group>
           <Form.Group as={Col}>
-            <DashBoardText name='Bank Name' label='Enter Employee Bank Name' />
+            <DashBoardText name="Bank Name" label="Enter Employee Bank Name" />
             <Input
-              inputName='bankName'
-              type='text'
+              inputName="bankName"
+              type="text"
               handleChange={onHandleChange}
               value={employeeData["bankName"]}
               err={validation.bankName}
@@ -342,12 +344,12 @@ const EmployeeRegistration = ({
         <Row>
           <Form.Group as={Col}>
             <DashBoardText
-              name='Account Number'
-              label='Enter Employee Account Number'
+              name="Account Number"
+              label="Enter Employee Account Number"
             />
             <Input
-              inputName='accountNumber'
-              type='number'
+              inputName="accountNumber"
+              type="number"
               handleChange={onHandleChange}
               value={employeeData["accountNumber"]}
               err={validation.accountNumber}
@@ -359,7 +361,7 @@ const EmployeeRegistration = ({
             />
           </Form.Group>{" "}
         </Row>
-        <Button type='button' className='button ms-auto' onClick={nextQuestion}>
+        <Button type="button" className="button ms-auto" onClick={nextQuestion}>
           Continue
         </Button>
       </Form>
@@ -368,17 +370,18 @@ const EmployeeRegistration = ({
 
   return (
     <Form
-      className='d-flex flex-column pt-5 justify-content-center w-100 mx-auto employee-form'
-      onSubmit={onSubmit}>
+      className="d-flex flex-column pt-5 justify-content-center w-100 mx-auto employee-form"
+      onSubmit={onSubmit}
+    >
       <Row>
-        <Form.Group as={Col} controlId='formGrid'>
+        <Form.Group as={Col} controlId="formGrid">
           <DashBoardText
-            name='Annual Gross Salary'
-            label='Enter annual gross salary'
+            name="Annual Gross Salary"
+            label="Enter annual gross salary"
           />
           <Input
-            inputName='annual'
-            type='number'
+            inputName="annual"
+            type="number"
             handleChange={onHandleChange}
             value={employeeData["annual"]}
             err={validation.employeeAnnualSalary}
@@ -389,82 +392,83 @@ const EmployeeRegistration = ({
             }
           />
         </Form.Group>
-        <Form.Group as={Col} controlId='formGrid'>
+        <Form.Group as={Col} controlId="formGrid">
           <DashBoardText
-            name='Monthly Gross Salary'
-            label='Enter employee monthly salary'
+            name="Monthly Gross Salary"
+            label="Enter employee monthly salary"
           />
           <input
             readOnly
-            name='monthly'
+            name="monthly"
             value={getMonthlySalary()}
-            className='w-100 border-1
-          registration-input rounded-1 px-2 border-1 fs-4 employer-input'
+            className="w-100 border-1
+          registration-input rounded-1 px-2 border-1 fs-4 employer-input"
           />
         </Form.Group>
       </Row>
       <Row>
-        <Form.Group as={Col} controlId='formGrid'>
+        <Form.Group as={Col} controlId="formGrid">
           <DashBoardText
-            name='Annual Relieves'
-            label='Input employee annual relieves '
+            name="Annual Relieves"
+            label="Input employee annual relieves "
           />
           <Input
-            inputName='relieves'
-            type='number'
+            inputName="relieves"
+            type="number"
             handleChange={onHandleChange}
             value={employeeData["relieves"]}
           />
         </Form.Group>
-        <Form.Group as={Col} controlId='formGrid'>
+        <Form.Group as={Col} controlId="formGrid">
           <DashBoardText
-            name='Monthly Relieves'
-            label='Enter employee monthly relieves'
+            name="Monthly Relieves"
+            label="Enter employee monthly relieves"
           />
           <input
             readOnly
-            name='monthly'
+            name="monthly"
             value={getMonthlyRelieves()}
-            className='w-100 border-1
-          registration-input rounded-1 px-2 border-1 fs-4 employer-input'
+            className="w-100 border-1
+          registration-input rounded-1 px-2 border-1 fs-4 employer-input"
           />
         </Form.Group>
       </Row>
       <Row>
-        <Form.Group as={Col} controlId='formGrid'>
-          <DashBoardText name='Annual Net ' label='Enter annual gross' />
+        <Form.Group as={Col} controlId="formGrid">
+          <DashBoardText name="Annual Net " label="Enter annual gross" />
           <input
             readOnly
-            name='annualGross'
+            name="annualGross"
             value={getAnnualGross()}
-            className='w-100 border-1
-          registration-input rounded-1 px-2 border-1 fs-4 employer-input'
+            className="w-100 border-1
+          registration-input rounded-1 px-2 border-1 fs-4 employer-input"
           />
         </Form.Group>
-        <Form.Group as={Col} controlId='formGrid'>
+        <Form.Group as={Col} controlId="formGrid">
           <DashBoardText
-            name='Monthly Net'
-            label='Enter employee monthly salary'
+            name="Monthly Net"
+            label="Enter employee monthly salary"
           />
           <input
             readOnly
-            name='monthlyGross'
+            name="monthlyGross"
             value={getMonthlyGross()}
-            className='w-100 border-1
-          registration-input rounded-1 px-2 border-1 fs-4 employer-input'
+            className="w-100 border-1
+          registration-input rounded-1 px-2 border-1 fs-4 employer-input"
           />
         </Form.Group>
       </Row>
-      <div className='ms-auto mt-4 double-btns'>
+      <div className="ms-auto mt-4 double-btns">
         <Button
-          type='button'
-          className={`button double-btns ms-auto d-${removeBtn} `}>
+          type="button"
+          className={`button double-btns ms-auto d-${removeBtn} `}
+        >
           Delete
         </Button>
-        <Button type='button' className='button ms-auto' onClick={prevQuestion}>
+        <Button type="button" className="button ms-auto" onClick={prevQuestion}>
           Back
         </Button>
-        <LoaderButton btnName='Register' btnStyle='ms-4' request={request} />
+        <LoaderButton btnName="Register" btnStyle="ms-4" request={request} />
       </div>
       {showModal && (
         <NetWorkErrors

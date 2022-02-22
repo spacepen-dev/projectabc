@@ -50,6 +50,11 @@ header {
   color: #000000;
 }
 
+.signIn-header {
+  text-align: center;
+  margin-top: 4rem;
+}
+
 .heading-container h2,
 h3,
 label {
@@ -90,7 +95,7 @@ label {
   color: var(--baseColor);
   font-family: var(--mainFont);
   font-size: 0.95rem;
-  width: 100%;
+  width: 55%;
   max-width: 42.25rem;
   height: 3rem;
   outline: none;
@@ -109,6 +114,11 @@ input[type="number"]::-webkit-outer-spin-button {
   appearance: none;
   margin: 0;
 }
+
+.button-register-div div {
+  margin: auto;
+}
+
 .button-container {
   height: 3.75rem;
   width: 100%;
@@ -132,8 +142,9 @@ input[type="number"]::-webkit-outer-spin-button {
   text-decoration: none !important;
   line-height: 1.05rem;
   width: 6.9rem;
-  height: 3.06rem;
+  height: 2.5rem;
   border: none;
+  margin-bottom: 1rem;
   border-radius: 0.3125rem;
   transition: background-color 0.5s ease;
 }
@@ -323,11 +334,12 @@ select {
 }
 
 .toggle-container {
-  width: 7.5rem;
+  width: 7rem;
   color: var(--accent);
-  font-size: 0.75rem;
-  font-weight: bold;
+  font-size: 0.9rem;
+  /* font-weight: bold; */
   line-height: 0.9rem;
+  align-items: flex-end;
   /* margin-left: 9rem !important; */
 }
 
@@ -1025,6 +1037,15 @@ p.paid-success {
   outline: none;
   font-size: 1.29rem;
   padding: 0.8rem 2rem;
+}
+
+/* REGISTRATION LABELTEXTS FONT */
+.field-container label,
+.select-fields label,
+.toggle-input label {
+  /* background-color: yellow; */
+  font-size: 1rem !important;
+  font-weight: 600;
 }
 
 @media screen and (min-width: 576px) {
