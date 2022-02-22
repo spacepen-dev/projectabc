@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 
@@ -7,7 +7,6 @@ import OTP from "./OTP";
 
 const LoginOtp = ({ LoginOTP, loginOtp, loginErr, companyEmail }) => {
   const navigate = useNavigate();
-
   const close = () => {
     navigate("/Dashboard");
   };
@@ -27,7 +26,7 @@ const mapStateToProps = (state) => {
   return {
     loginOtp: state.RegistrationReducer,
     loginErr: state.RegistrationReducer.loginErr,
-    companyEmail: state.RegistrationReducer.signIN,
+    companyEmail: state.RegistrationReducer.loginOtp,
   };
 };
 

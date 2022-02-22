@@ -59,12 +59,12 @@ label {
 }
 
 .heading-container h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   padding-bottom: 0.85rem;
 }
 .heading-container h3 {
   font-weight: 400;
-  font-size: 1.13rem;
+  font-size: 1.5rem;
   line-height: 1.39rem;
   margin-bottom: 2.35rem;
 }
@@ -131,8 +131,8 @@ input[type="number"]::-webkit-outer-spin-button {
   font-weight: 400;
   text-decoration: none !important;
   line-height: 1.05rem;
-  width: 6.9rem;
-  height: 3.06rem;
+  width: 6.6rem;
+  height: 2.9rem;
   border: none;
   border-radius: 0.3125rem;
   transition: background-color 0.5s ease;
@@ -227,6 +227,8 @@ input[type="number"]::-webkit-outer-spin-button {
   border: 1px solid #659cf0;
   z-index: 1;
   font-size: 0.85rem;
+  height: 5rem;
+  overflow-y: auto;
 }
 
 .dropdown-content .bankLinks {
@@ -934,13 +936,17 @@ td {
   z-index: 10;
 }
 
-.modal-1 .row {
+.modal-row {
   display: flex;
 }
 .column {
-  flex: 50%;
   margin-top: 2rem;
-  padding: 2rem 4rem 1rem;
+  width: 100%;
+  height: 22rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .first-column {
@@ -949,7 +955,7 @@ td {
 
 .first-column-paragraph {
   font-weight: bold;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   margin-bottom: 2rem;
   color: var(--accent);
 }
@@ -959,6 +965,7 @@ td {
   font-size: 1.125rem;
   color: var(--baseColor);
   margin-bottom: 1.4rem;
+  font-family: var(--mainFont);
 }
 
 .backdrop {
@@ -970,23 +977,6 @@ td {
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: darken;
   z-index: 5;
-}
-
-.btn1 {
-  width: 9.375rem;
-  height: 3.75rem;
-  margin-left: 4rem;
-  margin-top: 2rem;
-}
-
-.back-outline-btn {
-  /* background-color: #ffffff; */
-  border: 1.488px solid var(--baseColor);
-  color: var(--baseColor);
-}
-
-.confirm-btn {
-  background: var(--baseColor);
 }
 
 .show {
@@ -1010,17 +1000,17 @@ svg.hand-phone {
 }
 
 h5.congrats {
-  color: #23549e;
+  color: var(--baseColor);
   font-weight: bold;
 }
 
 p.paid-success {
   margin-bottom: 1.6rem;
-  color: #659cf0;
+  color: var(--accent);
 }
 
 .refresh-btn {
-  background-color: #23549e;
+  background-color: var(--baseColor);
   border-radius: 7.38577px;
   outline: none;
   font-size: 1.29rem;

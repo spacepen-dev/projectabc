@@ -101,7 +101,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
   };
 
   return (
-    <Container id='signin' className='mx-auto w-75'>
+    <Container id='signin' className='mx-auto d-flex flex-column a w-75'>
       <Header>
         <div className='heading-container'>
           <h2>Welcome Back.</h2>
@@ -120,6 +120,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
                 value={email}
                 onChange={onInputChange}
                 onInput={() => setError({ inputErr: "" })}
+                // placeholder=''
               />
               <div className=' text-danger fs-6 mt-3 pb-0'>
                 {error.inputErr && `${error.inputErr}`}

@@ -29,12 +29,20 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
       otpAction(otpNumber);
     }, 1000);
   };
+
+  // useEffect(() => {
+  //   if(getItem)
+  //   const tokens = getValues.loginOtp.data.token;
+  // }, []);
+
   useEffect(() => {
     if (!companyEmail) {
       setComEmail(null);
     } else {
-      const email = companyEmail.data.success.split(" ")[6];
-      setComEmail(email);
+      // const email = companyEmail.data.success.split(" ")[6];
+      const token = companyEmail.data.token;
+      localStorage.setItem("token", token);
+      setComEmail(companyEmail.data.accountEmail);
     }
   }, [companyEmail]);
 
@@ -77,7 +85,8 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
   };
 
   useEffect(() => {
-    sessionStorage.setItem("email", comEmail);
+    // sessionStorage.setItem("email", comEmail);
+    console.log(comEmail);
   }, [comEmail]);
 
   useEffect(() => {
@@ -145,7 +154,7 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
         <div className='otp-sub-header'>
           <p>
             Enter the 6-digit pin that was sent to{" "}
-            {sessionStorage.getItem("email", comEmail.email)}
+            {/* {sessionStorage.getItem("email", comEmail.email)} */}
           </p>
         </div>
         <div className='d-flex justify-content-between align-items-center otp-input-container'>
