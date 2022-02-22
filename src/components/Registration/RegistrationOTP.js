@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
   return {
     resOtp: state.RegistrationReducer,
     otpErr: state.RegistrationReducer.otpErr,
-    companyEmail: state.RegistrationReducer.companyRegistration,
+    companyEmail: state.RegistrationReducer.otp,
   };
 };
 

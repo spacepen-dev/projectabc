@@ -31,12 +31,11 @@ const Settings = ({
   const [serverErr, setServerErr] = useState("");
   const [success, setSuccess] = useState("");
   const [showModal, setShow] = useState(false);
-  const [accountNameErr, setAccountNameErr] = useState("");
+  // const [accountNameErr, setAccountNameErr] = useState("");
   const [maxSalaryErr, setMaxSalaryErr] = useState("");
-  const [bankNameErr, setBankNameErr] = useState("");
-  const [showDropDown, setDropDown] = useState(false);
+  // const [bankNameErr, setBankNameErr] = useState("");
 
-  const companySizes = ["0-5", "6-10", "11-20", "21-30", "31-above"];
+  const companySizes = ["1-5", "6-10", "11-20", "21-30", "31-above"];
 
   const navigate = useNavigate();
 
@@ -141,16 +140,11 @@ const Settings = ({
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!accountName) {
-      setAccountNameErr("Account name is required!");
-    } else if (!bank) {
-      setBankNameErr("Bank name is required");
-    } else if (!salary) {
-      setMaxSalaryErr("Maximum salary is required");
-    } else {
-      setRequest(true);
-      companyReg(formData);
-    }
+    // if (!salary) {
+    //   setMaxSalaryErr("Maximum salary is required");
+
+    setRequest(true);
+    companyReg(formData);
   };
 
   const closeModal = () => {
@@ -223,6 +217,36 @@ const Settings = ({
               label="Enter the maximum salary of your employee"
               name="Employee Max Salary"
             />
+          </div>
+        </Form>
+
+        <Form className="ms-2" onSubmit={onSubmit}>
+          <LabelText
+            label="Select the size range of your company"
+            name="Company Size"
+          />
+
+          <div sm="10" className="field-container">
+            <select
+              name="companySize"
+              className="text-center select"
+              onChange={handleChange}
+            >
+              {companySizes.map((companySize) => {
+                return (
+                  <option key={companySize} value={companySize}>
+                    {companySize}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          <div className="field-container">
+            <LabelText
+              label="Enter the maximun salary of your employee"
+              name="Employee Max Salary"
+            />
 
             <Input
               inputName="salary"
@@ -251,7 +275,7 @@ const Settings = ({
                   checked={check}
                   onChange={handleChange}
                 />
-                <span className="slider"> </span>
+                <span className="slider"></span>
               </label>
               Yes
             </div>

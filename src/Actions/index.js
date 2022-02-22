@@ -99,7 +99,8 @@ export const CompanyDetails = (email) => async (dispatch) => {
     dispatch({ type: "DETAILS_ERR_MESSAGE", payLoad: error });
   }
 };
-export const RegisterEmployee = (values, token) => async (dispatch) => {
+export const RegisterEmployee = (values, bank, token) => async (dispatch) => {
+  console.log(token);
   const {
     firstName,
     LastName,
@@ -109,6 +110,9 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
     department,
     relieves,
     nin,
+    accountName,
+    accountNo,
+    bankName: bank,
   } = values;
   try {
     const data = await axios.post(
