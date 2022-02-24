@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 import { Form, Row, Col, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
 import LoaderButton from "../LoaderButton";
 import NetWorkErrors from "../NetWorkErrors";
 import VerificationModal from "./VerificationModal";
+import Verification from "../Dashboard/svg/Verification";
 
 const EmployeeAccountDetails = ({
   accountName,
@@ -15,32 +16,62 @@ const EmployeeAccountDetails = ({
   err,
   onHandleChange,
   prevQuestion,
-  employee,
-  employeeErr,
-  employeeSuccess,
+  registerEmployeeAction,
+  editEmployeeAction,
+  addEmployeeLink,
+  editEmployeeLink,
+  addEmployeeErr,
+  addEmployeeSuccess,
+  editEmployeeErr,
+  editEmployeeSuccess,
+  employeeData,
   token,
 }) => {
+  const navigate = useNavigate();
+
   const [showDropDown, setDropDown] = useState(false);
   const [filterBank, setFilterBank] = useState("");
   const [validation, setValidation] = useState({});
   const [request, setRequest] = useState(false);
   const [errorMessage, setMessage] = useState("");
+  const [error, setError] = useState("");
   const [showModal, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
 
-  // useEffect(() => {
-  //   console.log(localStorage.getItem("token", token));
-  // }, []);
   // FETCH THE TOKEN FROM THE LOCAL STORAGE
-
-  // USE EFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL
   useEffect(() => {
-    if (!employeeSuccess) {
+    if (!token) {
+      console.log("no token");
+    } else {
+      setRecievedToken(token);
+    }
+  });
+
+  useEffect(() => {
+    if (!addEmployeeSuccess) {
       return null;
     } else {
       setRequest(false);
-      const { error, success } = employeeSuccess.data;
+      const { error, success } = addEmployeeSuccess.data;
+      if (error) {
+        setShow(true);
+        setError(error);
+        setShow(true);
+      } else if (success) {
+        setSuccess(success);
+      }
+    }
+  }, [addEmployeeSuccess]);
+
+  // USEEFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL FOR EDIT EMPLOYEE
+
+  useEffect(() => {
+    if (!editEmployeeSuccess) {
+      return null;
+    } else {
+      setRequest(false);
+      const { error, success } = editEmployeeSuccess.data;
       if (error) {
         setShow(true);
         setMessage(error);
@@ -49,30 +80,42 @@ const EmployeeAccountDetails = ({
         setSuccess(success);
       }
     }
-  }, [employeeSuccess]);
+  }, [editEmployeeSuccess]);
 
-  // USE EFFECT TO FETCH NETWORK ERROR
+  // USEEFFECT TO FETCH NETWORK ERROR FOR ADDEMPLOYEE
   useEffect(() => {
-    if (!employeeErr) {
+    if (!addEmployeeErr) {
       return null;
+    } else {
+      setRequest(false);
+      setShow(true);
+      setMessage(addEmployeeErr.message);
+      const removeTimeOut = setTimeout(() => {
+        setShow(false);
+      }, 4000);
+      return () => {
+        clearTimeout(removeTimeOut);
+      };
     }
-    setShow(true);
-    setMessage(employeeErr.message);
-    const removeTimeOut = setTimeout(() => {
-      setShow(false);
-    }, 4000);
-    return () => {
-      clearTimeout(removeTimeOut);
-    };
-  }, [employeeErr]);
+  }, [addEmployeeErr]);
 
-  // USE EFFECT TO FETCH TOKEN FROM REDUX STORE
+  // USEEFFECT TO FETCH NETWORK ERROR FOR EDITEMPLOYEE
   useEffect(() => {
-    if (!localStorage.setItem("token", token)) {
-      // SHOW A MODAL THAT WOULD PROMPT THE USER TO SIGN IN
+    if (!editEmployeeErr) {
+      return null;
+    } else {
+      setRequest(false);
+
+      setShow(true);
+      setMessage(editEmployeeErr.message);
+      const removeTimeOut = setTimeout(() => {
+        setShow(false);
+      }, 4000);
+      return () => {
+        clearTimeout(removeTimeOut);
+      };
     }
-    setRecievedToken(localStorage.setItem("token", token));
-  }, [token]);
+  }, [editEmployeeErr]);
 
   const BankList = () => {
     const bankName = [
@@ -160,7 +203,13 @@ const EmployeeAccountDetails = ({
       });
     } else {
       setRequest(true);
-      //   const getToken = localStorage.getItem("token", token);
+      if (editEmployeeLink) {
+        // REGISTRATION EMPLOYEE ACTION CREATOR
+        editEmployeeAction({ ...employeeData, filterBank }, receivedToken);
+      } else if (addEmployeeLink) {
+        // EDIT EMPLOYEE ACTION CREATOR
+        registerEmployeeAction({ ...employeeData, filterBank }, receivedToken);
+      }
     }
   };
 
@@ -169,7 +218,11 @@ const EmployeeAccountDetails = ({
     Validation();
   };
 
-  if (index !== 2) {
+  const refreshPage = () => {
+    // window.location.reload();
+  };
+
+  if (index !== 3) {
     return null;
   }
   return (
@@ -180,7 +233,6 @@ const EmployeeAccountDetails = ({
             name='Account Name'
             label='Enter Employee Account Name '
           />
-
           <Input
             inputName='accountName'
             type='text'
@@ -250,7 +302,16 @@ const EmployeeAccountDetails = ({
       {showModal && (
         <NetWorkErrors
           errMessage={errorMessage}
+          serverErr={error}
           removeLoader={() => setRequest(false)}
+        />
+      )}
+
+      {success && (
+        <VerificationModal
+          message={"Employee Registration successful!"}
+          close={refreshPage}
+          svg={Verification()}
         />
       )}
     </Form>

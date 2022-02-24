@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
 import Verification from "../Dashboard/svg/Verification";
-import Warning from "../Dashboard/svg/Warning";
+// import Warning from "../Dashboard/svg/Warning";
 import VerificationModal from "../Dashboard/VerificationModal";
 import LoaderModal from "../Dashboard/LoaderModal";
 import NetWorkErrors from "../NetWorkErrors";
@@ -84,10 +84,10 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
     }
   };
 
-  useEffect(() => {
-    // sessionStorage.setItem("email", comEmail);
-    console.log(comEmail);
-  }, [comEmail]);
+  // useEffect(() => {
+  //   // sessionStorage.setItem("email", comEmail);
+  //   console.log(comEmail);
+  // }, [comEmail]);
 
   useEffect(() => {
     sendOTP(otp);
@@ -117,9 +117,7 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
     setSuccess("");
     close();
   };
-  const HomePage = () => {
-    navigate("/");
-  };
+ 
 
   return (
     <Container className='otp px-1 mx-auto w-75'>
@@ -132,13 +130,13 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
           svg={Verification()}
         />
       )}
-      {!comEmail && (
+      {/* {!comEmail && (
         <VerificationModal
           message={"Session timeout. Please sign in again!"}
           close={HomePage}
           svg={Warning()}
         />
-      )}
+      )} */}
       {showModal && (
         <NetWorkErrors
           errMessage={errorMessage}

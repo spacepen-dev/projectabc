@@ -101,36 +101,15 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
   };
 
   return (
-<<<<<<< HEAD
-    <Container id="signin" className="mx-auto w-75">
-=======
     <Container id='signin' className='mx-auto d-flex flex-column a w-75'>
->>>>>>> fcf1bb6d8a9aa1e593e8e20a05a51e5adba9db32
       <Header>
-        <div className="signIn-header">
-          <div className="heading-container">
+        <div className='signIn-header'>
+          <div className='heading-container'>
             <h2>Welcome Back.</h2>
             <h3>Login to your account</h3>
           </div>
           <form onSubmit={onFormSubmit}>
             <div>
-<<<<<<< HEAD
-              <label>Email Address</label>
-              <p>Enter the official email-address of your company</p>
-
-              <div>
-                <input
-                  type="text"
-                  placeholder="mail@company.com"
-                  autoComplete="true"
-                  value={email}
-                  onChange={onInputChange}
-                  onInput={() => setError({ inputErr: "" })}
-                />
-                <div className=" text-danger fs-6 mt-3 pb-0">
-                  {error.inputErr && `${error.inputErr}`}
-                </div>
-=======
               <input
                 type='text'
                 placeholder='mail@company.com'
@@ -142,17 +121,16 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
               />
               <div className=' text-danger fs-6 mt-3 pb-0'>
                 {error.inputErr && `${error.inputErr}`}
->>>>>>> fcf1bb6d8a9aa1e593e8e20a05a51e5adba9db32
               </div>
             </div>
-            <div className="button-register-div">
-              <div className="button-container d-flex justify-content-center align-items-end">
-                <Loaderbutton btnName="SUBMIT" request={request} />
+            <div className='button-register-div'>
+              <div className='button-container d-flex justify-content-center align-items-end'>
+                <Loaderbutton btnName='SUBMIT' request={request} />
               </div>
-              <div className="py-4 mt-3 w-75 mb-3 fs-6 text-center">
+              <div className='py-4 mt-3 w-75 mb-3 fs-6 text-center'>
                 Don't have an account?{" "}
-                <Link to="/registration/company" className="d-block mt-2 fs-6 ">
-                  <p className="fs-3">Register Here</p>
+                <Link to='/registration/company' className='d-block mt-2 fs-6 '>
+                  <p className='fs-3'>Register Here</p>
                 </Link>
               </div>
             </div>

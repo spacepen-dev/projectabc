@@ -68,11 +68,11 @@ const EmployeeSalaryInfo = ({
     }
   };
 
-  if (index !== 1) {
+  if (index !== 2) {
     return null;
   }
   return (
-    <React.Fragment>
+    <div className='d-flex flex-column'>
       <Row>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
@@ -158,7 +158,13 @@ const EmployeeSalaryInfo = ({
           />
         </Form.Group>
       </Row>
-      <div className='mt-4 ms-auto double-btns'>
+      {/* <Button
+          type='button'
+          className='button ms-auto '
+          onClick={prevQuestion}>
+          Back
+        </Button> */}
+      <div className='mt-4 ms-auto double-btns '>
         <Button type='button' className='button' onClick={prevQuestion}>
           Back
         </Button>
@@ -171,7 +177,7 @@ const EmployeeSalaryInfo = ({
           Continue
         </Button>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
