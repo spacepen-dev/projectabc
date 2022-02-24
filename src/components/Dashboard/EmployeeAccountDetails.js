@@ -29,52 +29,52 @@ const EmployeeAccountDetails = ({
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
 
+  // useEffect(() => {
+  //   console.log(localStorage.getItem("token", token));
+  // }, []);
+  // FETCH THE TOKEN FROM THE LOCAL STORAGE
+
+  // USE EFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL
+  useEffect(() => {
+    if (!employeeSuccess) {
+      return null;
+    } else {
+      setRequest(false);
+      const { error, success } = employeeSuccess.data;
+      if (error) {
+        setShow(true);
+        setMessage(error);
+        setShow(true);
+      } else if (success) {
+        setSuccess(success);
+      }
+    }
+  }, [employeeSuccess]);
+
+  // USE EFFECT TO FETCH NETWORK ERROR
+  useEffect(() => {
+    if (!employeeErr) {
+      return null;
+    }
+    setShow(true);
+    setMessage(employeeErr.message);
+    const removeTimeOut = setTimeout(() => {
+      setShow(false);
+    }, 4000);
+    return () => {
+      clearTimeout(removeTimeOut);
+    };
+  }, [employeeErr]);
+
+  // USE EFFECT TO FETCH TOKEN FROM REDUX STORE
+  useEffect(() => {
+    if (!localStorage.setItem("token", token)) {
+      // SHOW A MODAL THAT WOULD PROMPT THE USER TO SIGN IN
+    }
+    setRecievedToken(localStorage.setItem("token", token));
+  }, [token]);
+
   const BankList = () => {
-    // FETCH THE TOKEN FROM THE LOCAL STORAGE
-    useEffect(() => {
-      console.log(localStorage.getItem("token", token));
-    }, []);
-
-    // USE EFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL
-    useEffect(() => {
-      if (!employeeSuccess) {
-        return null;
-      } else {
-        setRequest(false);
-        const { error, success } = employeeSuccess.data;
-        if (error) {
-          setShow(true);
-          setMessage(error);
-          setShow(true);
-        } else if (success) {
-          setSuccess(success);
-        }
-      }
-    }, [employeeSuccess]);
-
-    // USE EFFECT TO FETCH NETWORK ERROR
-    useEffect(() => {
-      if (!employeeErr) {
-        return null;
-      }
-      setShow(true);
-      setMessage(employeeErr.message);
-      const removeTimeOut = setTimeout(() => {
-        setShow(false);
-      }, 4000);
-      return () => {
-        clearTimeout(removeTimeOut);
-      };
-    }, [employeeErr]);
-
-    // USE EFFECT TO FETCH TOKEN FROM REDUX STORE
-    useEffect(() => {
-      if (!localStorage.setItem("token", token)) {
-        // SHOW A MODAL THAT WOULD PROMPT THE USER TO SIGN IN
-      }
-      setRecievedToken(localStorage.setItem("token", token));
-    }, [token]);
-
     const bankName = [
       "Access Bank Plc",
       "Accion Microfinance Bank",
