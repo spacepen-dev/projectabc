@@ -46,7 +46,7 @@ const EmployeeProfile = ({
     }
   };
 
-  if (index !== 0) {
+  if (index !== 1) {
     return null;
   }
 

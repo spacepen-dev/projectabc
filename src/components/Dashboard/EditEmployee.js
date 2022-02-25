@@ -20,10 +20,10 @@ const EditEmployee = ({
     <EmployeeRegistration
       onHandleChange={onHandleChange}
       employeeData={employeeData}
-      employee={UpdateEmployee}
-      employeeErr={updateEmployeeErr}
-      employeeSuccess={updateEmployeeSuccess}
-      token={registrationToken}
+      editEmployeeAction={UpdateEmployee}
+      editEmployeeErr={updateEmployeeErr}
+      editEmployeeSuccess={updateEmployeeSuccess}
+      editEmployeeLink='editEmployee'
     />
   );
 };
@@ -31,7 +31,6 @@ const mapStateToProps = (state) => {
   return {
     updateEmployeeErr: state.DashboardReducer.updateEmployeeErr,
     updateEmployeeSuccess: state.DashboardReducer.updateEmployees,
-    registrationToken: state.RegistrationReducer.otp,
   };
 };
 export default connect(mapStateToProps, { UpdateEmployee })(EditEmployee);

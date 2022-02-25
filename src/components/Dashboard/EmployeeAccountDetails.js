@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 import { Form, Row, Col, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
 import LoaderButton from "../LoaderButton";
 import NetWorkErrors from "../NetWorkErrors";
-import VerificationModal from "./VerificationModal";
+
+import SuccessRequestModal from "./SuccessRequestModal";
 
 const EmployeeAccountDetails = ({
   accountName,
@@ -15,66 +16,122 @@ const EmployeeAccountDetails = ({
   err,
   onHandleChange,
   prevQuestion,
-  employee,
-  employeeErr,
-  employeeSuccess,
+  registerEmployeeAction,
+  editEmployeeAction,
+  addEmployeeLink,
+  editEmployeeLink,
+  addEmployeeErr,
+  addEmployeeSuccess,
+  editEmployeeErr,
+  editEmployeeSuccess,
+  employeeData,
   token,
 }) => {
+  const navigate = useNavigate();
+
+  const FormatNum = (value) => {
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "NGN",
+      maximumSignificantDigits: 3,
+    });
+    console.log(formatter.format(value));
+    return formatter.format(value);
+  };
+
   const [showDropDown, setDropDown] = useState(false);
   const [filterBank, setFilterBank] = useState("");
   const [validation, setValidation] = useState({});
   const [request, setRequest] = useState(false);
   const [errorMessage, setMessage] = useState("");
+  const [error, setError] = useState("");
   const [showModal, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
 
-  const BankList = () => {
-    // FETCH THE TOKEN FROM THE LOCAL STORAGE
-    useEffect(() => {
-      console.log(localStorage.getItem("token", token));
-    }, []);
+  // FETCH THE TOKEN FROM THE LOCAL STORAGE
 
-    // USE EFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL
-    useEffect(() => {
-      if (!employeeSuccess) {
-        return null;
-      } else {
-        setRequest(false);
-        const { error, success } = employeeSuccess.data;
-        if (error) {
-          setShow(true);
-          setMessage(error);
-          setShow(true);
-        } else if (success) {
-          setSuccess(success);
-        }
+  useEffect(() => {
+    if (!addEmployeeSuccess) {
+      return null;
+    } else {
+      setRequest(false);
+      const { error, success } = addEmployeeSuccess.data;
+      if (error) {
+        setShow(true);
+        setError(error);
+        setShow(true);
+      } else if (success) {
+        setSuccess(success);
+        const removeTimeOut = setTimeout(() => {
+          setSuccess("");
+        }, 4000);
+        return () => {
+          clearTimeout(removeTimeOut);
+        };
       }
-    }, [employeeSuccess]);
+    }
+  }, [addEmployeeSuccess]);
 
-    // USE EFFECT TO FETCH NETWORK ERROR
-    useEffect(() => {
-      if (!employeeErr) {
-        return null;
+  // USEEFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL FOR EDIT EMPLOYEE
+
+  useEffect(() => {
+    if (!editEmployeeSuccess) {
+      return null;
+    } else {
+      setRequest(false);
+      const { error, success } = editEmployeeSuccess.data;
+      if (error) {
+        setShow(true);
+        setMessage(error);
+      } else if (success) {
+        setSuccess(success);
+        const removeTimeOut = setTimeout(() => {
+          setSuccess("");
+        }, 4000);
+        return () => {
+          clearTimeout(removeTimeOut);
+        };
       }
+    }
+  }, [editEmployeeSuccess]);
+
+  // USEEFFECT TO FETCH NETWORK ERROR FOR ADDEMPLOYEE
+  useEffect(() => {
+    if (!addEmployeeErr) {
+      return null;
+    } else {
+      setRequest(false);
       setShow(true);
-      setMessage(employeeErr.message);
+      setMessage(addEmployeeErr.message);
       const removeTimeOut = setTimeout(() => {
         setShow(false);
       }, 4000);
       return () => {
         clearTimeout(removeTimeOut);
       };
-    }, [employeeErr]);
+    }
+  }, [addEmployeeErr]);
 
-    // USE EFFECT TO FETCH TOKEN FROM REDUX STORE
-    useEffect(() => {
-      if (!localStorage.setItem("token", token)) {
-        // SHOW A MODAL THAT WOULD PROMPT THE USER TO SIGN IN
-      }
-      setRecievedToken(localStorage.setItem("token", token));
-    }, [token]);
+  // USEEFFECT TO FETCH NETWORK ERROR FOR EDITEMPLOYEE
+  useEffect(() => {
+    if (!editEmployeeErr) {
+      return null;
+    } else {
+      setRequest(false);
 
+      setShow(true);
+      setMessage(editEmployeeErr.message);
+      const removeTimeOut = setTimeout(() => {
+        setShow(false);
+      }, 4000);
+      return () => {
+        clearTimeout(removeTimeOut);
+      };
+    }
+  }, [editEmployeeErr]);
+
+  const BankList = () => {
     const bankName = [
       "Access Bank Plc",
       "Accion Microfinance Bank",
@@ -160,7 +217,13 @@ const EmployeeAccountDetails = ({
       });
     } else {
       setRequest(true);
-      //   const getToken = localStorage.getItem("token", token);
+      if (editEmployeeLink) {
+        // REGISTRATION EMPLOYEE ACTION CREATOR
+        editEmployeeAction({ ...employeeData, filterBank }, receivedToken);
+      } else if (addEmployeeLink) {
+        // EDIT EMPLOYEE ACTION CREATOR
+        registerEmployeeAction({ ...employeeData, filterBank }, receivedToken);
+      }
     }
   };
 
@@ -169,7 +232,11 @@ const EmployeeAccountDetails = ({
     Validation();
   };
 
-  if (index !== 2) {
+  const refreshPage = () => {
+    // window.location.reload();
+  };
+
+  if (index !== 3) {
     return null;
   }
   return (
@@ -180,7 +247,6 @@ const EmployeeAccountDetails = ({
             name='Account Name'
             label='Enter Employee Account Name '
           />
-
           <Input
             inputName='accountName'
             type='text'
@@ -242,6 +308,7 @@ const EmployeeAccountDetails = ({
         <Button
           type='button'
           className='button ms-auto '
+          disabled={request ? true : false}
           onClick={prevQuestion}>
           Back
         </Button>
@@ -250,9 +317,12 @@ const EmployeeAccountDetails = ({
       {showModal && (
         <NetWorkErrors
           errMessage={errorMessage}
+          serverErr={error}
           removeLoader={() => setRequest(false)}
         />
       )}
+
+      {success && <SuccessRequestModal message={success} />}
     </Form>
   );
 };

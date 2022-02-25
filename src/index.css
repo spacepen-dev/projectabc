@@ -142,7 +142,9 @@ input[type="number"]::-webkit-outer-spin-button {
   text-decoration: none !important;
   line-height: 1.05rem;
   width: 6.9rem;
+
   height: 3rem;
+
   border: none;
   margin-bottom: 1rem;
   border-radius: 0.3125rem;

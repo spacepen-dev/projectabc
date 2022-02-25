@@ -7,19 +7,15 @@ const AddEmployee = ({
   RegisterEmployee,
   registerEmployeeErr,
   registerEmployeeSuccess,
-  loginToken,
 }) => {
   const [employeeData, setEmployeData] = useState({
     firstName: "",
     LastName: "",
     role: "",
-    annual: 0,
     nin: "",
     email: "",
-    relieves: 0,
     accountName: "",
     accountNumber: "",
-    bankName: "",
   });
 
   const onHandleChange = (e) => {
@@ -34,10 +30,10 @@ const AddEmployee = ({
         buttonText='Add'
         onHandleChange={onHandleChange}
         employeeData={employeeData}
-        employee={RegisterEmployee}
-        employeeErr={registerEmployeeErr}
-        employeeSuccess={registerEmployeeSuccess}
-        token={loginToken}
+        registerEmployeeAction={RegisterEmployee}
+        addEmployeeErr={registerEmployeeErr}
+        addEmployeeSuccess={registerEmployeeSuccess}
+        addEmployeeLink='addEmployee'
       />
     </div>
   );
@@ -47,7 +43,6 @@ const mapStateToProps = (state) => {
   return {
     registerEmployeeErr: state.DashboardReducer.registerEmployeeErr,
     registerEmployeeSuccess: state.DashboardReducer.registerEmployees,
-    loginToken: state.RegistrationReducer.loginOtp,
   };
 };
 export default connect(mapStateToProps, { RegisterEmployee })(AddEmployee);
