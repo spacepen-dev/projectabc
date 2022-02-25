@@ -6,12 +6,12 @@ const PaidSuccess = () => {
   return (
     <div>
       <HandPhone />
-      <div class="hand-phone-div">
-        <h5 class="congrats">Congratulations!</h5>
-        <p class="paid-success">
+      <div className="hand-phone-div">
+        <h5 className="congrats">Congratulations!</h5>
+        <p className="paid-success">
           You have succesffully paid 50 of your employees
         </p>
-        <Button class="btn btn-primary refresh-btn">REFRESH</Button>
+        <Button className="btn btn-primary refresh-btn">REFRESH</Button>
       </div>
     </div>
   );

@@ -167,8 +167,8 @@ const ViewSalaryHisory = () => {
     },
   ];
   return (
-    <div className=''>
-      <DashboardTable heading={heading} tableData={tableData} display='flex' />
+    <div className="">
+      <DashboardTable heading={heading} tableData={tableData} display="flex" />
     </div>
   );
 };
