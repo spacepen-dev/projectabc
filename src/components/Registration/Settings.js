@@ -212,35 +212,6 @@ const Settings = ({
                 {BankList()}
              
           </div> */}
-          <div className="field-container">
-            <LabelText
-              label="Enter the maximum salary of your employee"
-              name="Employee Max Salary"
-            />
-          </div>
-        </Form>
-
-        <Form className="ms-2" onSubmit={onSubmit}>
-          <LabelText
-            label="Select the size range of your company"
-            name="Company Size"
-          />
-
-          <div sm="10" className="field-container">
-            <select
-              name="companySize"
-              className="text-center select"
-              onChange={handleChange}
-            >
-              {companySizes.map((companySize) => {
-                return (
-                  <option key={companySize} value={companySize}>
-                    {companySize}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
 
           <div className="field-container">
             <LabelText
@@ -280,18 +251,20 @@ const Settings = ({
               Yes
             </div>
           </Col>
-          <div className="button-container double-btns d-flex justify-content-end align-items-end">
-            <Button type="button" className="button ms-auto" onClick={prevPage}>
-              Back
-            </Button>
-            <LoaderButton
-              btnName="FINISH"
-              btnStyle="ms-4"
-              request={request}
-              spinnerStyle="bg-transparent"
-            />
-          </div>
         </Form>
+
+        <div className="button-container double-btns d-flex justify-content-end align-items-end">
+          <Button type="button" className="button ms-auto" onClick={prevPage}>
+            Back
+          </Button>
+          <LoaderButton
+            btnName="FINISH"
+            btnStyle="ms-4"
+            request={request}
+            spinnerStyle="bg-transparent"
+          />
+        </div>
+
         {showModal && (
           <NetWorkErrors
             errMessage={errorMessage}
