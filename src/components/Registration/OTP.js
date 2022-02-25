@@ -4,13 +4,13 @@ import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
 import Verification from "../Dashboard/svg/Verification";
-// import Warning from "../Dashboard/svg/Warning";
 import VerificationModal from "../Dashboard/VerificationModal";
 import LoaderModal from "../Dashboard/LoaderModal";
 import NetWorkErrors from "../NetWorkErrors";
 
 const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
   const navigate = useNavigate();
+
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [errorMessage, setMessage] = useState("");
   const [serverErr, setServerErr] = useState("");
@@ -30,16 +30,10 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
     }, 1000);
   };
 
-  // useEffect(() => {
-  //   if(getItem)
-  //   const tokens = getValues.loginOtp.data.token;
-  // }, []);
-
   useEffect(() => {
     if (!companyEmail) {
       setComEmail(null);
     } else {
-      // const email = companyEmail.data.success.split(" ")[6];
       const token = companyEmail.data.token;
       localStorage.setItem("token", token);
       setComEmail(companyEmail.data.accountEmail);
@@ -73,7 +67,6 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
       setSuccess(success);
       setMessage("");
       setServerErr("");
-      // navigate("/");
     }
   };
   const OtpResponse = (getValues) => {
@@ -83,11 +76,6 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
       resFunt(getValues.otp);
     }
   };
-
-  // useEffect(() => {
-  //   // sessionStorage.setItem("email", comEmail);
-  //   console.log(comEmail);
-  // }, [comEmail]);
 
   useEffect(() => {
     sendOTP(otp);
@@ -117,7 +105,6 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
     setSuccess("");
     close();
   };
- 
 
   return (
     <Container className='otp px-1 mx-auto w-75'>
@@ -130,13 +117,7 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
           svg={Verification()}
         />
       )}
-      {/* {!comEmail && (
-        <VerificationModal
-          message={"Session timeout. Please sign in again!"}
-          close={HomePage}
-          svg={Warning()}
-        />
-      )} */}
+
       {showModal && (
         <NetWorkErrors
           errMessage={errorMessage}
@@ -150,10 +131,7 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
           <h2 className='mb-3 py-2'>OTP confirmation</h2>
         </div>
         <div className='otp-sub-header'>
-          <p>
-            Enter the 6-digit pin that was sent to{" "}
-            {/* {sessionStorage.getItem("email", comEmail.email)} */}
-          </p>
+          <p>Enter the 6-digit pin that was sent to {comEmail}</p>
         </div>
         <div className='d-flex justify-content-between align-items-center otp-input-container'>
           {otp.map((inputData, index) => {

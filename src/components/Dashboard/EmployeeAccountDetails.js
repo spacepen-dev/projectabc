@@ -6,8 +6,8 @@ import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
 import LoaderButton from "../LoaderButton";
 import NetWorkErrors from "../NetWorkErrors";
-import VerificationModal from "./VerificationModal";
-import Verification from "../Dashboard/svg/Verification";
+
+import SuccessRequestModal from "./SuccessRequestModal";
 
 const EmployeeAccountDetails = ({
   accountName,
@@ -29,6 +29,16 @@ const EmployeeAccountDetails = ({
 }) => {
   const navigate = useNavigate();
 
+  const FormatNum = (value) => {
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "NGN",
+      maximumSignificantDigits: 3,
+    });
+    console.log(formatter.format(value));
+    return formatter.format(value);
+  };
+
   const [showDropDown, setDropDown] = useState(false);
   const [filterBank, setFilterBank] = useState("");
   const [validation, setValidation] = useState({});
@@ -40,13 +50,6 @@ const EmployeeAccountDetails = ({
   const [receivedToken, setRecievedToken] = useState("");
 
   // FETCH THE TOKEN FROM THE LOCAL STORAGE
-  useEffect(() => {
-    if (!token) {
-      console.log("no token");
-    } else {
-      setRecievedToken(token);
-    }
-  });
 
   useEffect(() => {
     if (!addEmployeeSuccess) {
@@ -60,6 +63,12 @@ const EmployeeAccountDetails = ({
         setShow(true);
       } else if (success) {
         setSuccess(success);
+        const removeTimeOut = setTimeout(() => {
+          setSuccess("");
+        }, 4000);
+        return () => {
+          clearTimeout(removeTimeOut);
+        };
       }
     }
   }, [addEmployeeSuccess]);
@@ -75,9 +84,14 @@ const EmployeeAccountDetails = ({
       if (error) {
         setShow(true);
         setMessage(error);
-        setShow(true);
       } else if (success) {
         setSuccess(success);
+        const removeTimeOut = setTimeout(() => {
+          setSuccess("");
+        }, 4000);
+        return () => {
+          clearTimeout(removeTimeOut);
+        };
       }
     }
   }, [editEmployeeSuccess]);
@@ -294,6 +308,7 @@ const EmployeeAccountDetails = ({
         <Button
           type='button'
           className='button ms-auto '
+          disabled={request ? true : false}
           onClick={prevQuestion}>
           Back
         </Button>
@@ -307,13 +322,7 @@ const EmployeeAccountDetails = ({
         />
       )}
 
-      {success && (
-        <VerificationModal
-          message={"Employee Registration successful!"}
-          close={refreshPage}
-          svg={Verification()}
-        />
-      )}
+      {success && <SuccessRequestModal message={success} />}
     </Form>
   );
 };

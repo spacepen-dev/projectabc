@@ -6,57 +6,67 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 const EmployeeSalaryInfo = ({
   onHandleChange,
   index,
-  annualSalary,
-  annualRelieves,
   err,
   nextQuestion,
   prevQuestion,
 }) => {
   const [validation, setValidation] = useState({});
+  const [annual, setAnnual] = useState({ annualSalary: 0, annualRelieves: 0 });
+
+  const onAnnualChange = (e) => {
+    const { name, value } = e.target;
+    let numberFormatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "NGN",
+    });
+    setAnnual(numberFormatter.format({ ...annual, [name]: value }));
+  };
 
   // GETTING MONTHLY SALARY FROM ANNUAL SALARY / 12
   const getMonthlySalary = useCallback(() => {
-    const employeeMonthlySalary = annualSalary / 12;
+    const employeeMonthlySalary = annual["annualSalary"] / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(employeeMonthlySalary);
-  }, [annualSalary]);
+  }, [annual["annualSalary"]]);
 
   // GETTING MONTHLY RELIEVES FROM ANNUAL RELIEVES / 12
   const getMonthlyRelieves = useCallback(() => {
-    const employeeMonthlyRelieves = annualRelieves / 12;
+    const employeeMonthlyRelieves = annual["annualRelieves"] / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(employeeMonthlyRelieves);
-  }, [annualRelieves]);
+  }, [annual["annualRelieves"]]);
 
   //  ANNUAL GROSS PAY
   const getAnnualGross = useCallback(() => {
-    const AnnualGross = Number(annualRelieves) + Number(annualSalary);
+    const AnnualGross =
+      Number(annual["annualSalary"]) + Number(annual["annualRelieves"]);
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(AnnualGross);
-  }, [annualRelieves, annualSalary]);
+  }, [annual["annualSalary"], annual["annualRelieves"]]);
 
   //MONTHLY GROSS PAY
   const getMonthlyGross = useCallback(() => {
-    let MonthlyGross = Number(annualRelieves) + Number(annualSalary) / 12;
+    let MonthlyGross =
+      Number(annual["annualRelieves"]) + Number(annual["annualSalary"]) / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(MonthlyGross);
-  }, [annualSalary, annualRelieves]);
+  }, [annual["annualSalary"], annual["annualRelieves"]]);
 
   const Validation = () => {
     if (!annualSalary) {
@@ -80,10 +90,10 @@ const EmployeeSalaryInfo = ({
             label='Enter annual gross salary'
           />
           <Input
-            inputName='annual'
+            inputName='annualSalary'
             type='number'
-            handleChange={onHandleChange}
-            value={annualSalary}
+            handleChange={onAnnualChange}
+            value={annual["annualSalary"]}
             err={validation.employeeAnnualSalary}
             onPress={() =>
               setValidation({
@@ -113,10 +123,10 @@ const EmployeeSalaryInfo = ({
             label='Input employee annual relieves '
           />
           <Input
-            inputName='relieves'
+            inputName='annualRelieves'
             type='number'
-            handleChange={onHandleChange}
-            value={annualRelieves}
+            handleChange={onAnnualChange}
+            value={annual["annualRelieves"]}
           />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>

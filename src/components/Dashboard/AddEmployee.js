@@ -7,16 +7,13 @@ const AddEmployee = ({
   RegisterEmployee,
   registerEmployeeErr,
   registerEmployeeSuccess,
-  loginToken,
 }) => {
   const [employeeData, setEmployeData] = useState({
     firstName: "",
     LastName: "",
     role: "",
-    annual: 0,
     nin: "",
     email: "",
-    relieves: 0,
     accountName: "",
     accountNumber: "",
   });
