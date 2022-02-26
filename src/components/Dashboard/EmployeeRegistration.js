@@ -10,7 +10,6 @@ import VerificationModal from "./VerificationModal";
 import AddEmployeeForm from "./AddEmployeeForm";
 
 const EmployeeRegistration = ({
-  // removeBtn,
   err,
   onHandleChange,
   employeeData,
@@ -22,11 +21,10 @@ const EmployeeRegistration = ({
   addEmployeeSuccess,
   editEmployeeErr,
   editEmployeeSuccess,
-  // filterBankList,
 }) => {
+
   const [index, setIndex] = useState(2);
   const [token, setToken] = useState("");
-
   const navigate = useNavigate();
 
   // GET THE TOKEN FROM LOCAL STORAGE
@@ -42,17 +40,23 @@ const EmployeeRegistration = ({
   }, []);
 
   //  ALL INPUT VARIFICATION
+
   const nextQuestion = () => {
     setIndex((oldIndex) => {
       return oldIndex + 1;
     });
+
   };
+
+
+
 
 //   const prevQuestion = () => {
 //     setIndex((oldIndex) => {
 //       return oldIndex - 1;
 //     });
 //   };
+
 
 
   const HomePage = () => {
@@ -113,9 +117,10 @@ const EmployeeRegistration = ({
             />
           )}
         </div>
+
       </div>
     </div>
   );
 };
 
-// export default EmployeeRegistration;
+export default EmployeeRegistration;

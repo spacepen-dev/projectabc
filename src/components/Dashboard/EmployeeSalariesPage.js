@@ -1,16 +1,31 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import { heading, Data } from "./utils/data";
-import ReactDOM from "react-dom";
 
-import { Form, Button } from "react-bootstrap";
-import EsalariesTable from "./EsalariesTable";
-
+import { Container, Form, Button } from "react-bootstrap";
+import MaterialTable from 'material-table'
+import { colors } from "@material-ui/core";
 const EmployeeSalariesPage = () => {
-  const [state, setState] = React.useState([]);
-  const [modalState, setmodalState] = React.useState(false);
-  function closeModal() {
-    setmodalState(false);
-  }
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(() => {
+    setTableData(Data);
+  }, []);
+
+
+  const columns = [
+    {title:'S/N',field:'id'},
+    {title:'First Name',field:'firstName'},
+    {title:'Last Name',field:'lastName'},
+    {title:'Roles',field:'role'},
+    {title:'National Identity Number',field:'nin'},
+    {title:'Email',field:'email'},
+    {title:'Annual Gross Salary',field:'annual'},
+    {title:'Monthly Gross Salary',field:'month'},
+    {title:'Relieves',field:'relieves'}
+  ]
+
+
+
   return (
     <div>
       <div className='paySelect'>
@@ -47,22 +62,22 @@ const EmployeeSalariesPage = () => {
               <option value='30'>2030</option>
             </select>
           </Form.Group>
-          <Form.Group className='mt-3' controlId='formBasicCheckbox'>
-            <Form.Check
-              type='checkbox'
-              label='Select all'
-              checked={Data.filter((value) => value.select !== true).length < 1}
-              onChange={(e) => {
-                let checked = e.target.checked;
-                setState(
-                  Data.map((value) => {
-                    value.select = checked;
-                    return value;
-                  })
-                );
-              }}
-            />
-          </Form.Group>
+//           <Form.Group className='mt-3' controlId='formBasicCheckbox'>
+//             <Form.Check
+//               type='checkbox'
+//               label='Select all'
+//               checked={Data.filter((value) => value.select !== true).length < 1}
+//               onChange={(e) => {
+//                 let checked = e.target.checked;
+//                 setState(
+//                   Data.map((value) => {
+//                     value.select = checked;
+//                     return value;
+//                   })
+//                 );
+//               }}
+//             />
+//           </Form.Group>
         </Form>
 
         <div className='pBtn'>
@@ -79,8 +94,24 @@ const EmployeeSalariesPage = () => {
         </div>
       </div>
 
-      <div className='mt-5'>
-        <EsalariesTable items={Data} setItems={setState} tableHead={heading} />
+      <div className=' mt-5'>
+        <MaterialTable columns={columns} data={tableData} components={{
+          Toolbar: "false"
+        }} options={{
+          selection: true, selectionProps: rowData => ({
+          color:'primary'
+        }),headerSelectionProps:{color:'primary'} ,headerStyle: {
+          backgroundColor: '#01579b',
+            color: '#FFF',
+            fontSize:'10px',
+           maxHeight:"5px",
+            fontWeight:'700'
+          },
+          paging:true,pageSizeOptions:[5,10,15,20],pageSize:10,paginationType:'stepped',showFirstLastPageButtons:false
+      }}/>
+
+
+
       </div>
       {modalState && <ModalPayEmployee close={closeModal} />}
     </div>
