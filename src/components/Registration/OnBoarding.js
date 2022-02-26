@@ -1,34 +1,27 @@
 import React from "react";
 
-import { Container } from "react-bootstrap";
+// import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
-import SVG from "./SVG";
+import OnBoardingSVG from "./OnBoardingSVG";
 
 const OnBoarding = () => {
   return (
-    <Container className='onboarding-container'>
-      <div className='d-flex align-items-center'>
-        <h3>DEPARTMENTS/ROLES IN YOUR ORGANIZATION</h3>
-      </div>
-      <div className='svg-container d-flex justify-content-center align-items-center mx-auto'>
-        <SVG />
-      </div>
-
-      <div className='d-flex justify-content-center align-items-center'>
-        <h3>
-          You have not added any department or role to your company profile.
-        </h3>
-      </div>
-      <div className='button-container mx-auto d-flex justify-content-center align-items-center'>
+    <div className="onboard-div">
+      <h5 className="onboard-h5">DEPARTMENTS/ROLES IN YOUR ORGANIZATION</h5>
+      <OnBoardingSVG />
+      <p className="paid-success onboard-p">
+        You haven't addded any department or role to your company profile.
+      </p>
+      <div className="">
         <Link
-          to='/add-roles'
-          type='button'
-          className='button ms-4 next d-flex justify-content-center align-items-center'>
+          to="/add-roles"
+          type="button"
+          className="button next onboard-button justify-content-center align-items-center"
+        >
           ADD
         </Link>
       </div>
-    </Container>
+    </div>
   );
 };
 

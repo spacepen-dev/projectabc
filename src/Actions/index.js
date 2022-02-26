@@ -100,6 +100,7 @@ export const CompanyDetails = (email) => async (dispatch) => {
   }
 };
 export const RegisterEmployee = (values, token) => async (dispatch) => {
+  console.log(token);
   const {
     firstName,
     LastName,
@@ -109,6 +110,9 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
     department,
     relieves,
     nin,
+    accountName,
+    accountNumber,
+    filterBank,
   } = values;
   try {
     const data = await axios.post(
@@ -117,12 +121,15 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
         employeeFirstname: firstName,
         employeeLastname: LastName,
         employee_email: email,
-        employeeAnnualSalary: annual,
         employeeRole: role,
         employeeDepartment: department,
         employeeRelieves: relieves,
         employeeNin: nin,
-        tokenKey: token,
+        token,
+        employeeAccountName: accountName,
+        employeeAccountNumber: accountNumber,
+        employeeBankName: filterBank,
+        employee_ags: annual,
       }
     );
     dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
@@ -130,16 +137,19 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
     dispatch({ type: "REGISTER_EMPLOYEE_ERR_MESSAGE", payLoad: error });
   }
 };
-export const UpdateEmployee = (values) => async (dispatch) => {
+export const UpdateEmployee = (values, token) => async (dispatch) => {
   const {
     firstName,
     LastName,
     email,
-    annual,
     role,
     department,
     relieves,
     nin,
+    annual,
+    accountName,
+    accountNumber,
+    filterBank,
   } = values;
   try {
     const data = await axios.post(
@@ -148,11 +158,15 @@ export const UpdateEmployee = (values) => async (dispatch) => {
         employeeFirstname: firstName,
         employeeLastname: LastName,
         employee_email: email,
-        employeeAnnualSalary: annual,
         employeeRole: role,
         employeeDepartment: department,
         employeeRelieves: relieves,
         employeeNin: nin,
+        token,
+        employeeAccountName: accountName,
+        employeeAccountNumber: accountNumber,
+        employeeBankName: filterBank,
+        employee_ags: annual,
       }
     );
     dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
