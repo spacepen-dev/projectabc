@@ -25,6 +25,8 @@ const EmployeeRegistration = ({
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
   const [index, setIndex] = useState(0)
+  const [focused, setFocused] = useState(false)
+  
   console.log(token);
   // USE EFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL
   useEffect(() => {
@@ -148,6 +150,36 @@ const EmployeeRegistration = ({
       employee(employeeData, getToken);
     }
   };
+  const Validation = () => {
+    let regexp =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!employeeData["firstName"]) {
+      setValidation({
+        employeeFirstName: "Employee's First name is required!",
+      });
+    } else if (!employeeData["LastName"]) {
+      setValidation({ employeeLastName: "Employee's Last name is required!" });
+    } else if (
+      !employeeData["email"] ||
+      !regexp.test(String(employeeData["email"]).toLowerCase())
+    ) {
+      setValidation({ employeeEmail: "Invalid email address!" });
+    } else if (
+      !employeeData["nin"] ||
+      employeeData["nin"].length > 11 ||
+      employeeData["nin"].length < 11
+    ) {
+      setValidation({ employeeNin: "Invalid NIN!" });
+    } else if (!employeeData["role"]) {
+      setValidation({ employeeRole: "Employee's role is required!" });
+    }
+    else {
+      setIndex((oldIndex) => {
+      return oldIndex + 1
+    })
+    }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -155,9 +187,7 @@ const EmployeeRegistration = ({
   };
 
   const nextQuestion = () => {
-    setIndex((oldIndex) => {
-      return oldIndex + 1
-    })
+     Validation()
   };
 
   const prevQuestion = () => {
@@ -165,6 +195,13 @@ const EmployeeRegistration = ({
       return oldIndex - 1
     })
   };
+  const validateAll = (e) => {
+    let { firstName, LastName, email, role, nin } = employeeData
+    if (!firstName) {
+    }
+  }
+
+
 
   const companyDepartment = ["Marketing", "Sales", "Engineering"];
 
@@ -185,6 +222,7 @@ const EmployeeRegistration = ({
             type='text'
             handleChange={onHandleChange}
             value={employeeData["firstName"]}
+           
             err={validation.employeeFirstName}
             onPress={() =>
               setValidation({
@@ -192,6 +230,7 @@ const EmployeeRegistration = ({
               })
             }
           />
+          
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText name='Last Name' label='Enter Last name of employee' />
@@ -200,6 +239,7 @@ const EmployeeRegistration = ({
             type='text'
             handleChange={onHandleChange}
             value={employeeData["LastName"]}
+            // onBlur={handlefocus}
             err={validation["employeeLastName"]}
             onPress={() =>
               setValidation({
@@ -207,6 +247,7 @@ const EmployeeRegistration = ({
               })
             }
           />
+          <span className="span">Employee's Last name is required!</span>
         </Form.Group>
       </Row>
       <Row>
@@ -217,6 +258,7 @@ const EmployeeRegistration = ({
             type='text'
             handleChange={onHandleChange}
             value={employeeData["email"]}
+            // onBlur={handlefocus}
             err={validation.employeeEmail}
             onPress={() =>
               setValidation({
@@ -224,6 +266,7 @@ const EmployeeRegistration = ({
               })
             }
           />
+          <span className="span">Invalid email!</span>
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
@@ -235,6 +278,7 @@ const EmployeeRegistration = ({
             type='text'
             handleChange={onHandleChange}
             value={employeeData["nin"]}
+            // onBlur={handlefocus}
             err={validation.employeeNin}
             onPress={() =>
               setValidation({
@@ -242,6 +286,7 @@ const EmployeeRegistration = ({
               })
             }
           />
+                    <span className="span">Invalid NIN!</span>
         </Form.Group>
       </Row>
       <Row>
@@ -267,6 +312,8 @@ const EmployeeRegistration = ({
             inputName='role'
             type='text'
             handleChange={onHandleChange}
+            // onBlur={handlefocus}
+            // required
             value={employeeData["role"]}
             err={validation.employeeRole}
             onPress={() =>
@@ -275,6 +322,7 @@ const EmployeeRegistration = ({
               })
             }
           />
+          <span className="span">Employee's role is required!</span>
         </Form.Group>{" "}
       </Row>
       <Button type='button' className='button ms-auto'
@@ -299,6 +347,7 @@ const EmployeeRegistration = ({
             type='number'
             handleChange={onHandleChange}
             value={employeeData["annual"]}
+
             err={validation.employeeAnnualSalary}
             onPress={() =>
               setValidation({

@@ -2,9 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { Table } from "react-bootstrap";
 import ViewEmployeeModal from "./ViewEmployeeModal";
 import { Pagination, Form, FormControl, Button } from "react-bootstrap";
+import { Edit,Delete,Times } from "./svg/D&&E";
 
 const DashboardTable = ({ heading, tableData, employeeData, display }) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = React.useState(false);
   const [initValue, setInitValue] = useState(employeeData);
   const [data, setData] = useState([]);
   const [tableHead, setHead] = useState([]);
@@ -66,6 +67,11 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
       }
     }
   }
+
+  const removeItem = (id) => {
+    let newData = data.filter((person) => person.id !== id);
+    setData(newData);
+  };
 
   function nextPage() {
     if (!currentPage >= numOfPages) {
@@ -147,13 +153,16 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
         </Pagination>
       </div>
 
-      {!active ? (
+      {!active ? ( 
         ""
       ) : (
-        <ViewEmployeeModal
-          modal={() => setActive(false)}
-          initialValue={initValue}
-        />
+          
+          <div className="Btn-Container">
+            <Times close={() => setActive(false)}/>
+            <Edit initialValue={initValue}/>
+            <Delete />
+          </div>
+         
       )}
     </>
   );

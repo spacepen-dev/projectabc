@@ -1,10 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
 :root {
-  --transition: all 0.3s linear;
+  --transition: all 5s ease;
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  --primary-Red: rgba(200, 16, 16, 0.9);
+  --clr-primary: #2680c0;
+  --clr-primary-5: hsl(205, 31%, 53%);
+  --clr-red-dark: hsl(360, 67%, 44%);
+  --clr-red-light: hsl(360, 71%, 66%);
+  --clr-green-dark: hsl(125, 67%, 44%);
+  --clr-green-light: hsl(125, 71%, 66%);
 }
 
 * {
@@ -766,6 +771,105 @@ td {
   justify-content: center;
   align-items: center;
 }
+
+
+/*
+=============== 
+D&&E-Button
+===============
+*/
+.Btn-Container{
+ position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  display: flex;
+  width: 25%;
+  justify-content: space-around;
+  align-items: center;
+  height: fit-content;
+  padding: 3.5rem;
+  background-color: var(--clr-primary-5);
+  border-radius: 1.5rem;
+  transform: translate(-50%, -50%);
+  outline: transparent;
+  transition: var(--transition);
+}
+
+SVG .bi{
+  background: var(--clr-primary);
+  padding: 0.375rem 0.75rem;
+  font-weight: 700;
+  transition: var(--transition);
+  font-size: 3rem;
+  margin: 0 0.15rem;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.bi-x{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-color: transparent;
+  transition: var(--transition);
+  color: var(--clr-red-dark);
+  margin-top: 0.2rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* .bi-x:hover{
+  color: var(--clr-red-dark);
+} */
+
+
+.de{
+margin-left: -0.5rem;
+}
+
+.bi-trash3{
+color: var(--clr-red-light);
+}
+.bi-trash3:hover {
+  color: var(--clr-red-dark);
+}
+.bi-pencil-square{
+color: var(--clr-green-light);
+}
+.bi-pencil-square:hover{
+color: var(--clr-green-dark);
+}
+
+/* ======================= */
+
+
+/*
+=============== 
+FORM Validate
+===============
+*/
+.span{
+    font-size: 12px;
+    padding: 3px;
+    color: red;
+    display: none ;
+}
+/* Input:invalid~.span{
+  display: block;
+} */
+
+
+
+/* ======================= */
 
 .Modal {
   position: absolute;
