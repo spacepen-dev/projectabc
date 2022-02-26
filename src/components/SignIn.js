@@ -101,9 +101,8 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
   };
 
   return (
-
-    <Container id="signin" className="mx-auto w-75">
-//     <Container id='signin' className='mx-auto d-flex flex-column a w-75'>
+    <Container id='signin' className='mx-auto w-75'>
+      {/* //     <Container id='signin' className='mx-auto d-flex flex-column a w-75'> */}
 
       <Header>
         <div className='signIn-header'>
@@ -113,24 +112,21 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
           </div>
           <form onSubmit={onFormSubmit}>
             <div>
-
               <label>Email Address</label>
               <p>Enter the official email-address of your company</p>
 
               <div>
                 <input
-                  type="text"
-                  placeholder="mail@company.com"
-                  autoComplete="true"
+                  type='text'
+                  placeholder='mail@company.com'
+                  autoComplete='true'
                   value={email}
                   onChange={onInputChange}
                   onInput={() => setError({ inputErr: "" })}
                 />
-                <div className=" text-danger fs-6 mt-3 pb-0">
+                <div className=' text-danger fs-6 mt-3 pb-0'>
                   {error.inputErr && `${error.inputErr}`}
                 </div>
-
-             
               </div>
             </div>
             <div className='button-register-div'>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -48,12 +47,11 @@ const EmployeeRegistration = ({
     });
   };
 
-//   const prevQuestion = () => {
-//     setIndex((oldIndex) => {
-//       return oldIndex - 1;
-//     });
-//   };
-
+  const prevQuestion = () => {
+    setIndex((oldIndex) => {
+      return oldIndex - 1;
+    });
+  };
 
   const HomePage = () => {
     navigate("/");
@@ -118,4 +116,4 @@ const EmployeeRegistration = ({
   );
 };
 
-// export default EmployeeRegistration;
+export default EmployeeRegistration;

@@ -3,70 +3,63 @@ import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
 import { Form, Row, Col, Button } from "react-bootstrap";
 
-const EmployeeSalaryInfo = ({
-  onHandleChange,
-  index,
-  err,
-  nextQuestion,
-  prevQuestion,
-}) => {
+const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
   const [validation, setValidation] = useState({});
-  const [annual, setAnnual] = useState({ annualSalary: 0, annualRelieves: 0 });
+  const [annualSalary, setAnnualSalary] = useState("");
+  const [annualRelieves, setAnnualRelieves] = useState(0);
 
-  const onAnnualChange = (e) => {
-    const { name, value } = e.target;
-    let numberFormatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "NGN",
-    });
-    setAnnual(numberFormatter.format({ ...annual, [name]: value }));
+  const FormatNum = (value) => {
+    const formatter = new Intl.NumberFormat();
+    return formatter.format(value);
+  };
+
+  const onAnnualSalaryChange = (e) => {
+    setAnnualSalary(e.target.value);
   };
 
   // GETTING MONTHLY SALARY FROM ANNUAL SALARY / 12
   const getMonthlySalary = useCallback(() => {
-    const employeeMonthlySalary = annual["annualSalary"] / 12;
+    const employeeMonthlySalary = annualSalary / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(employeeMonthlySalary);
-  }, [annual["annualSalary"]]);
+  }, [annualSalary]);
 
   // GETTING MONTHLY RELIEVES FROM ANNUAL RELIEVES / 12
   const getMonthlyRelieves = useCallback(() => {
-    const employeeMonthlyRelieves = annual["annualRelieves"] / 12;
+    const employeeMonthlyRelieves = annualSalary / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(employeeMonthlyRelieves);
-  }, [annual["annualRelieves"]]);
+  }, [annualSalary]);
 
   //  ANNUAL GROSS PAY
   const getAnnualGross = useCallback(() => {
-    const AnnualGross =
-      Number(annual["annualSalary"]) + Number(annual["annualRelieves"]);
+    const AnnualGross = Number(annualSalary) + Number(annualSalary);
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(AnnualGross);
-  }, [annual["annualSalary"], annual["annualRelieves"]]);
+  }, [annualSalary, annualSalary]);
 
   //MONTHLY GROSS PAY
   const getMonthlyGross = useCallback(() => {
-    let MonthlyGross =
-      Number(annual["annualRelieves"]) + Number(annual["annualSalary"]) / 12;
+    let MonthlyGross = Number(annualSalary) + Number(annualSalary) / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(MonthlyGross);
-  }, [annual["annualSalary"], annual["annualRelieves"]]);
+  }, [annualSalary, annualSalary]);
 
   const Validation = () => {
     if (!annualSalary) {
@@ -84,6 +77,7 @@ const EmployeeSalaryInfo = ({
   return (
     <div className='d-flex flex-column'>
       <Row>
+        {console.log(typeof annualSalary)}
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
             name='Annual Gross Salary'
@@ -91,15 +85,18 @@ const EmployeeSalaryInfo = ({
           />
           <Input
             inputName='annualSalary'
-            type='number'
-            handleChange={onAnnualChange}
-            value={annual["annualSalary"]}
+            type='text'
+            handleChange={onAnnualSalaryChange}
+            value={annualSalary}
             err={validation.employeeAnnualSalary}
             onPress={() =>
               setValidation({
                 employeeAnnualSalary: "",
               })
             }
+            onBlur={(e) => {
+              setAnnualSalary(e.target.value);
+            }}
           />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>
@@ -124,9 +121,9 @@ const EmployeeSalaryInfo = ({
           />
           <Input
             inputName='annualRelieves'
-            type='number'
-            handleChange={onAnnualChange}
-            value={annual["annualRelieves"]}
+            type='text'
+            // handleChange={onAnnualChange}
+            // value={annualSalary}
           />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>

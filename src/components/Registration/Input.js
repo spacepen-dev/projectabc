@@ -10,6 +10,7 @@ const Input = ({
   onPress,
   pad,
   padTop,
+  onBlur,
 }) => {
   return (
     <React.Fragment>
@@ -17,6 +18,7 @@ const Input = ({
         name={inputName}
         type={type}
         value={value}
+        onBlur={onBlur}
         onChange={handleChange}
         onInput={onPress}
         className={`w-100 border-1 ${
