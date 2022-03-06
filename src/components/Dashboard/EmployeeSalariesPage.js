@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import { heading, Data } from "./utils/data";
+import { Data } from "./utils/data";
 import { Container, Form, Button } from "react-bootstrap";
 import MaterialTable from 'material-table'
 import { colors } from "@material-ui/core";
@@ -16,10 +16,10 @@ const EmployeeSalariesPage = () => {
     {title:'First Name',field:'firstName'},
     {title:'Last Name',field:'lastName'},
     {title:'Roles',field:'role'},
-    {title:'National Identity Number',field:'nin'},
+    {title:'NIN',field:'nin'},
     {title:'Email',field:'email'},
-    {title:'Annual Gross Salary',field:'annual'},
-    {title:'Monthly Gross Salary',field:'month'},
+    {title:'Annual Salary',field:'annual'},
+    {title:'Monthly Salary',field:'month'},
     {title:'Relieves',field:'relieves'}
   ]
 
@@ -67,21 +67,17 @@ const EmployeeSalariesPage = () => {
           </Button>
         </div>
       </div>
-      <div className=' mt-5'>
+      <div style={{marginTop:'2rem'}}>
         <MaterialTable columns={columns} data={tableData} components={{
           Toolbar: "false"
-        }} options={{
+          }} options={{
           selection: true, selectionProps: rowData => ({
           color:'primary'
-        }),headerSelectionProps:{color:'primary'} ,headerStyle: {
-          backgroundColor: '#01579b',
-            color: '#FFF',
-            fontSize:'10px',
-           maxHeight:"5px",
-            fontWeight:'700'
-          },
-          paging:true,pageSizeOptions:[5,10,15,20],pageSize:10,paginationType:'stepped',showFirstLastPageButtons:false
-      }}/>
+           }),headerSelectionProps:{color:'primary'} ,
+          rowStyle: (data, index) => index % 2 == 0 ? null : { background: 'rgba(101, 156, 240, 0.1)'},
+          paging:true,pageSizeOptions:[9],pageSize:9,paginationType:'stepped',showFirstLastPageButtons:false, sorting:false
+          }} title=''
+        />
       </div>
     </div>
   );

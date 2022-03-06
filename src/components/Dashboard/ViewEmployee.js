@@ -1,229 +1,54 @@
-import React from "react";
-import DashboardTable from "./DashboardTable";
+import React,{useState,useEffect} from "react";
+import MaterialTable from 'material-table'
+import { Data } from "./utils/data";
+import { Edit, Delete, displaySVG } from './svg/D&&E';
 const ViewEmployee = () => {
-  const displaySVG = () => {
-    return (
-      <div
-        className='h-100 w-100 d-flex align-items-center justify-content-center '
-        id='circle-svg-container'
-        style={{ cursor: "pointer" }}>
-        <svg
-          id='circle-svg'
-          width='15'
-          height='15'
-          viewBox='0 0 23 5'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'>
-          <circle cx='2.5' cy='2.5' r='2.5' fill='#659CF0' />
-          <circle cx='11.5' cy='2.5' r='2.5' fill='#659CF0' />
-          <circle cx='20.5' cy='2.5' r='2.5' fill='#659CF0' />
-        </svg>
-      </div>
-    );
-  };
 
-  const heading = [
-    {
-      serialNumber: "S/N",
-      firstName: "First Name",
-      lastName: "Last Name",
-      roles: "Roles",
-      nin: "National Identity Number",
-      email: "Email",
-      annualSalary: "Annual Gross Salary",
-      month: "Monthly Gross Salary",
-      relives: "Relieves",
-      empty: "",
-    },
-  ];
+  const [tableData, setTableData] = useState([]);
 
-  const data = [
-    {
-      id: 1,
-      firstName: "EMMANUEL",
-      LastName: "DANIYAN",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 10000,
-      funt: displaySVG(),
-    },
-    {
-      id: 2,
+  useEffect(() => {
+    setTableData(Data);
+  }, []);
 
-      firstName: "EMMANUEL",
-      LastName: "DANIYAN",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 3,
+  const handleDelete = (id) => {
+    setTableData(tableData.filter((item) => item.id !== id))
+  }
 
-      firstName: "EMMANUEL",
-      LastName: "DANIYAN",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 4,
 
-      firstName: "EMMANUEL",
-      LastName: "DANIYAN",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 5,
-
-      firstName: "EMMANUEL",
-      LastName: "DANIYAN",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 6,
-
-      firstName: "EMMANUEL",
-      LastName: "DANIYAN",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 7,
-      LastName: "DANIYAN",
-      firstName: "EMMANUEL",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 8,
-      LastName: "DANIYAN",
-      firstName: "EMMANUEL",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 9,
-      LastName: "PROSPER",
-      firstName: "PMAN",
-      role: "WEB DEVELOPER",
-      nin: 987654,
-      email: "prosperpman@gmail.com",
-      annual: "50000",
-      month: "20000",
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 10,
-      LastName: "DANIYAN",
-      firstName: "EMMANUEL",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 11,
-      LastName: "DANIYAN",
-      firstName: "EMMANUEL",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 12,
-      LastName: "DANIYAN",
-      firstName: "EMMANUEL",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 13,
-      LastName: "DANIYAN",
-      firstName: "EMMANUEL",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-    {
-      id: 14,
-      LastName: "DANIYAN",
-      firstName: "EMMANUEL",
-      role: "CEO",
-      nin: 1234567,
-      email: "spacepen@gmail.com",
-      annual: 20000,
-      month: 10000,
-      relieves: 40000,
-      funt: displaySVG(),
-    },
-  ];
-
-  const employeeData = (data) => {
-    // console.log(data);
-  };
+  const columns = [
+    {title:'S/N',field:'id'},
+    {title:'First Name',field:'firstName'},
+    {title:'Last Name',field:'lastName'},
+    {title:'Roles',field:'role'},
+    {title:'NIN',field:'nin'},
+    {title:'Email',field:'email'},
+    {title:'Annual Salary',field:'annual'},
+    {title:'Monthly Salary',field:'month'},
+    {title:'Relieves',field:'relieves'}
+  ]
   return (
-    <div className=' mt-1'>
-      <DashboardTable
-        heading={heading}
-        tableData={data}
-        employeeData={employeeData}
-        display='flex'
-      />
+    <div>
+      <div style={{marginTop:'1.5rem'}}>
+        <MaterialTable columns={columns} data={tableData} options={{
+          rowStyle: (data, index) => index % 2 == 0 ? null : { background: 'rgba(101, 156, 240, 0.1)'},paging:true,pageSizeOptions:[9],pageSize:9,paginationType:'stepped',showFirstLastPageButtons:false, sorting: false,detailPanelColumnAlignment:'right'
+         }}
+         detailPanel={[
+        {
+          icon: "...",
+          tooltip: 'Save User',
+          render: rowData => {
+        return (
+          <div className="Btn-Container">
+            <Edit initialValue={rowData} />
+            <Delete Delete={() => handleDelete(rowData.id)} />
+          </div>
+        )
+      },
+        }
+          ]}
+          title=''
+        />
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import React from "react";
-import DashboardTable from "./DashboardTable";
+import React,{useState,useEffect} from "react";
+import MaterialTable from 'material-table'
 
 const ViewSalaryHisory = () => {
   const heading = [
@@ -14,7 +14,7 @@ const ViewSalaryHisory = () => {
       totalAmount: "Total amount",
     },
   ];
-  const tableData = [
+  const Data = [
     {
       paymentDate: "05-09-2022",
       paymentRef: "1023498FA",
@@ -166,9 +166,34 @@ const ViewSalaryHisory = () => {
       amount: "200,000",
     },
   ];
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(() => {
+    setTableData(Data);
+  }, []);
+
+
+  const columns = [
+    {title:'Payment date',field:'paymentDate'},
+    {title:'Payment Ref',field:'paymentRef'},
+    {title:'Tax Ref',field:'taxRef'},
+    {title:'employee',field:'employee'},
+    {title:'Yaers',field:'years'},
+    {title:'Month',field:'month'},
+    {title:'Tax',field:'tax'},
+    {title:'amount',field:'amount'},
+    
+  ]
   return (
     <div className=''>
-      <DashboardTable heading={heading} tableData={tableData} display='flex' />
+      <div style={{marginTop:'1.5rem'}}>
+        <MaterialTable columns={columns} data={tableData}
+          options={{
+          rowStyle: (data, index) => index % 2 == 0 ? null : { background: 'rgba(101, 156, 240, 0.1)'}, sorting:false,
+          paging:true,pageSizeOptions:[9],pageSize:9,paginationType:'stepped',showFirstLastPageButtons:false
+          }} title=''
+        />
+      </div>
     </div>
   );
 };

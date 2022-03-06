@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Table } from "react-bootstrap";
 import ViewEmployeeModal from "./ViewEmployeeModal";
 import { Pagination, Form, FormControl, Button } from "react-bootstrap";
-import { Edit,Delete,Times } from "./svg/D&&E";
+import { Edit,Delete } from "./svg/D&&E";
 
 const DashboardTable = ({ heading, tableData, employeeData, display }) => {
   const [active, setActive] = React.useState(false);
@@ -158,7 +158,6 @@ const DashboardTable = ({ heading, tableData, employeeData, display }) => {
       ) : (
           
           <div className="Btn-Container">
-            <Times close={() => setActive(false)}/>
             <Edit initialValue={initValue}/>
             <Delete />
           </div>
