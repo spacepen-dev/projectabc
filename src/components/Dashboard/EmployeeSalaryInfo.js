@@ -69,7 +69,7 @@ const EmployeeSalaryInfo = ({
   }, [annual["annualSalary"], annual["annualRelieves"]]);
 
   const Validation = () => {
-    if (!annualSalary) {
+    if (!annual.annualSalary) {
       setValidation({
         employeeAnnualSalary: "Employee's annual salary is required!",
       });

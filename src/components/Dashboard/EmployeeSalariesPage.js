@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from "react";
-import { heading, Data } from "./utils/data";
-
+import { Data } from "./utils/data";
 import { Container, Form, Button } from "react-bootstrap";
 import MaterialTable from 'material-table'
 import { colors } from "@material-ui/core";
@@ -17,13 +16,12 @@ const EmployeeSalariesPage = () => {
     {title:'First Name',field:'firstName'},
     {title:'Last Name',field:'lastName'},
     {title:'Roles',field:'role'},
-    {title:'National Identity Number',field:'nin'},
+    {title:'NIN',field:'nin'},
     {title:'Email',field:'email'},
-    {title:'Annual Gross Salary',field:'annual'},
-    {title:'Monthly Gross Salary',field:'month'},
+    {title:'Annual Salary',field:'annual'},
+    {title:'Monthly Salary',field:'month'},
     {title:'Relieves',field:'relieves'}
   ]
-
 
 
   return (
@@ -62,99 +60,26 @@ const EmployeeSalariesPage = () => {
               <option value='30'>2030</option>
             </select>
           </Form.Group>
-//           <Form.Group className='mt-3' controlId='formBasicCheckbox'>
-//             <Form.Check
-//               type='checkbox'
-//               label='Select all'
-//               checked={Data.filter((value) => value.select !== true).length < 1}
-//               onChange={(e) => {
-//                 let checked = e.target.checked;
-//                 setState(
-//                   Data.map((value) => {
-//                     value.select = checked;
-//                     return value;
-//                   })
-//                 );
-//               }}
-//             />
-//           </Form.Group>
         </Form>
-
         <div className='pBtn'>
-          <div className='pBtn'>
-            <Button
-              type='submit'
-              className='payBtn py-2 px-3'
-              onClick={function (e) {
-                setmodalState(true);
-              }}>
-              Pay employees
-            </Button>
-          </div>
+          <Button type='submit' className='payBtn py-2 px-3'>
+            Pay employees
+          </Button>
         </div>
       </div>
-
-      <div className=' mt-5'>
+      <div style={{marginTop:'2rem'}}>
         <MaterialTable columns={columns} data={tableData} components={{
           Toolbar: "false"
-        }} options={{
+          }} options={{
           selection: true, selectionProps: rowData => ({
           color:'primary'
-        }),headerSelectionProps:{color:'primary'} ,headerStyle: {
-          backgroundColor: '#01579b',
-            color: '#FFF',
-            fontSize:'10px',
-           maxHeight:"5px",
-            fontWeight:'700'
-          },
-          paging:true,pageSizeOptions:[5,10,15,20],pageSize:10,paginationType:'stepped',showFirstLastPageButtons:false
-      }}/>
-
-
-
+           }),headerSelectionProps:{color:'primary'} ,
+          rowStyle: (data, index) => index % 2 == 0 ? null : { background: 'rgba(101, 156, 240, 0.1)'},
+          paging:true,pageSizeOptions:[9],pageSize:9,paginationType:'stepped',showFirstLastPageButtons:false, sorting:false
+          }} title=''
+        />
       </div>
-      {modalState && <ModalPayEmployee close={closeModal} />}
     </div>
-  );
-};
-
-const ModalPayEmployee = (props) => {
-  return ReactDOM.createPortal(
-    <div>
-      <div class='backdrop hidden'></div>
-      <div class='modal-1 hidden'>
-        <div class='modal-row'>
-          <div class='column first-column'>
-            <p class='first-column-paragraph'>Month</p>
-            <p class='first-column-paragraph'>Year</p>
-            <p class='first-column-paragraph'>Number of Employees</p>
-            <p class='first-column-paragraph'>Tax deductions</p>
-            <p class='first-column-paragraph'>Amount</p>
-          </div>
-          <div class='column '>
-            <p class='second-column-paragraph'>December</p>
-            <p class='second-column-paragraph'>2022</p>
-            <p class='second-column-paragraph'>50 employees</p>
-            <p class='second-column-paragraph'>$200,000</p>
-            <p class='second-column-paragraph'>$3,000,000</p>
-          </div>
-        </div>
-        <div className='button-container double-btns d-flex justify-content-start align-items-center'>
-          <Button
-            type='button'
-            className='button ms-auto'
-            onClick={function () {
-              props.close();
-            }}>
-            Close
-          </Button>
-          <Button type='button' className='button ms-4 me-3 next'>
-            Confirm
-          </Button>
-        </div>
-      </div>
-    </div>,
-    document.querySelector("#ModalPayEmployee")
   );
 };
 
