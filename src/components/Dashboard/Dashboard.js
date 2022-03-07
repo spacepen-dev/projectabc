@@ -10,13 +10,32 @@ import ViewEmployee from "./ViewEmployee";
 import ViewSalaryHisory from "./ViewSalaryHistory";
 import { CompanyDetails } from "../../Actions";
 import EmployeeSalariesPage from "./EmployeeSalariesPage";
+import { FetchDepartment } from "../../Actions";
 
-const Dashboard = () => {
+const Dashboard = ({ FetchDepartment }) => {
   const [page, setPage] = useState(1);
+  const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
 
+  // FETCH ALL THE DATA FROM THE API (USUALLY A GET REQUEST TO FETCH ALL THE DATA NEEDED ON THE DASHBOARD)
   useEffect(() => {
+    // GET TOKEN
+    setToken(localStorage.getItem("token"));
+    // GET EMAIL
+    setEmail(localStorage.getItem("email"));
+    // FETCH THE DEPARTMENT
+
     // CompanyDetails();
   }, []);
+
+  useEffect(() => {
+    // ADD FETCH DEPARTMENT ACTION CREATOR
+    FetchDepartment(email, token);
+    /** ON ERROR SHOW WARNING MODAL AND RELOAD
+     * ON SUCCESS PUSH TO LOCAL STORAGE
+     * */
+  }, [token, email]);
+
   return (
     <Container fluid>
       <Row className='row'>
@@ -61,4 +80,4 @@ const Dashboard = () => {
     </Container>
   );
 };
-export default connect(null, { CompanyDetails })(Dashboard);
+export default connect(null, { CompanyDetails, FetchDepartment })(Dashboard);

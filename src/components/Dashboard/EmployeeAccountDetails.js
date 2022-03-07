@@ -27,18 +27,6 @@ const EmployeeAccountDetails = ({
   employeeData,
   token,
 }) => {
-  const navigate = useNavigate();
-
-  const FormatNum = (value) => {
-    const formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "NGN",
-      maximumSignificantDigits: 3,
-    });
-    console.log(formatter.format(value));
-    return formatter.format(value);
-  };
-
   const [showDropDown, setDropDown] = useState(false);
   const [filterBank, setFilterBank] = useState("");
   const [validation, setValidation] = useState({});
@@ -52,6 +40,16 @@ const EmployeeAccountDetails = ({
   // FETCH THE TOKEN FROM THE LOCAL STORAGE
 
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      setRecievedToken("");
+    } else {
+      setRecievedToken(localStorage.getItem("token"));
+    }
+  }, []);
+
+  // USEEFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL FOR ADD EMPLOYEE
+
+  useEffect(() => {
     if (!addEmployeeSuccess) {
       return null;
     } else {
@@ -60,7 +58,12 @@ const EmployeeAccountDetails = ({
       if (error) {
         setShow(true);
         setError(error);
-        setShow(true);
+        const removeTimeOut = setTimeout(() => {
+          setShow(false);
+        }, 4000);
+        return () => {
+          clearTimeout(removeTimeOut);
+        };
       } else if (success) {
         setSuccess(success);
         const removeTimeOut = setTimeout(() => {
@@ -74,7 +77,6 @@ const EmployeeAccountDetails = ({
   }, [addEmployeeSuccess]);
 
   // USEEFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL FOR EDIT EMPLOYEE
-
   useEffect(() => {
     if (!editEmployeeSuccess) {
       return null;
@@ -84,6 +86,12 @@ const EmployeeAccountDetails = ({
       if (error) {
         setShow(true);
         setMessage(error);
+        const removeTimeOut = setTimeout(() => {
+          setShow(false);
+        }, 4000);
+        return () => {
+          clearTimeout(removeTimeOut);
+        };
       } else if (success) {
         setSuccess(success);
         const removeTimeOut = setTimeout(() => {
@@ -96,7 +104,7 @@ const EmployeeAccountDetails = ({
     }
   }, [editEmployeeSuccess]);
 
-  // USEEFFECT TO FETCH NETWORK ERROR FOR ADDEMPLOYEE
+  // USEEFFECT TO FETCH NETWORK ERROR FOR ADD EMPLOYEE
   useEffect(() => {
     if (!addEmployeeErr) {
       return null;
@@ -113,13 +121,12 @@ const EmployeeAccountDetails = ({
     }
   }, [addEmployeeErr]);
 
-  // USEEFFECT TO FETCH NETWORK ERROR FOR EDITEMPLOYEE
+  // USEEFFECT TO FETCH NETWORK ERROR FOR EDIT EMPLOYEE
   useEffect(() => {
     if (!editEmployeeErr) {
       return null;
     } else {
       setRequest(false);
-
       setShow(true);
       setMessage(editEmployeeErr.message);
       const removeTimeOut = setTimeout(() => {
@@ -184,7 +191,7 @@ const EmployeeAccountDetails = ({
       return (
         <React.Fragment>
           <li
-            key={cur}
+            key={index}
             class='bankLinks'
             onClick={() => {
               setFilterBank(cur);
@@ -230,10 +237,6 @@ const EmployeeAccountDetails = ({
   const onSubmit = (e) => {
     e.preventDefault();
     Validation();
-  };
-
-  const refreshPage = () => {
-    // window.location.reload();
   };
 
   if (index !== 3) {

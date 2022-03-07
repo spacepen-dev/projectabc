@@ -11,6 +11,7 @@ const Input = ({
   pad,
   padTop,
   onBlur,
+  onFocus,
 }) => {
   return (
     <React.Fragment>
@@ -20,6 +21,7 @@ const Input = ({
         value={value}
         onBlur={onBlur}
         onChange={handleChange}
+        onFocus={onFocus}
         onInput={onPress}
         className={`w-100 border-1 ${
           err ? "border-danger" : null

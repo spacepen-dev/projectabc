@@ -12,27 +12,27 @@ class Registration extends React.Component {
     currentForm: 1,
     name: "",
     registration: "",
-    tin: "",
     about: "",
-    location: "No state",
+    location: "--- Select State ---",
     address: "",
     email: "",
     website: "",
-    accountName: "",
-    bank: "",
-    account: "",
-    tax: "YES",
+    tax: "NO",
     checked: false,
   };
 
   onChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-    this.setState({ location: e.target.value });
+
     if (name === "tax") {
       this.setState({ checked: true });
-      this.setState({ [name]: "NO" });
+      this.setState({ [name]: "YES" });
     }
+  };
+
+  onStateChange = (e) => {
+    this.setState({ location: e.target.value });
   };
 
   // current form = 1 0r 2 should have the next button
@@ -65,7 +65,8 @@ class Registration extends React.Component {
             registration={this.state.registration}
             tin={this.state.tin}
             about={this.state.about}
-            state={this.state.location}
+            onStateChange={this.onStateChange}
+            location={this.state.location}
           />
           <Contact
             currentForm={this.state.currentForm}
@@ -80,11 +81,9 @@ class Registration extends React.Component {
             currentForm={this.state.currentForm}
             prevPage={this.prevForm}
             handleChange={this.onChange}
-            accountName={this.state.accountName}
-            bank={this.state.bank}
-            account={this.state.account}
             tax={this.state.tax}
             formData={this.state}
+            maxSalary={this.state.maxSalary}
             check={this.state.checked}
           />
         </Container>

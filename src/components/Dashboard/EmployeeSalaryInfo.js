@@ -1,20 +1,43 @@
 import React, { useCallback, useState } from "react";
+import { Form, Row, Col, Button } from "react-bootstrap";
+
 import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
-import { Form, Row, Col, Button } from "react-bootstrap";
 
 const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
   const [validation, setValidation] = useState({});
   const [annualSalary, setAnnualSalary] = useState("");
-  const [annualRelieves, setAnnualRelieves] = useState(0);
+  const [formattedAnnualSalary, setFormattedAnnualSalary] =
+    useState(annualSalary);
+  const [annualRelieves, setAnnualRelieves] = useState("");
+  const [formattedAnnualRelieves, setFormattedAnnualRelieves] =
+    useState(annualRelieves);
 
   const FormatNum = (value) => {
-    const formatter = new Intl.NumberFormat();
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "NGN",
+    });
+    if (formatter.format(value) === "NGNNaN") {
+      setValidation({
+        employeeAnnualSalary: "number only!",
+      });
+    } else if (formatter.format(value) === "NGNNaN") {
+      setValidation({
+        employeeRelieves: "number only!",
+      });
+    }
     return formatter.format(value);
   };
 
   const onAnnualSalaryChange = (e) => {
     setAnnualSalary(e.target.value);
+    setFormattedAnnualSalary(e.target.value);
+  };
+
+  const onAnnualRelieveChange = (e) => {
+    setAnnualRelieves(e.target.value);
+    setFormattedAnnualRelieves(e.target.value);
   };
 
   // GETTING MONTHLY SALARY FROM ANNUAL SALARY / 12
@@ -30,41 +53,49 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
 
   // GETTING MONTHLY RELIEVES FROM ANNUAL RELIEVES / 12
   const getMonthlyRelieves = useCallback(() => {
-    const employeeMonthlyRelieves = annualSalary / 12;
+    const employeeMonthlyRelieves = annualRelieves / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(employeeMonthlyRelieves);
-  }, [annualSalary]);
+  }, [annualRelieves]);
 
   //  ANNUAL GROSS PAY
   const getAnnualGross = useCallback(() => {
-    const AnnualGross = Number(annualSalary) + Number(annualSalary);
+    const AnnualGross = Number(annualSalary) + Number(annualRelieves);
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(AnnualGross);
-  }, [annualSalary, annualSalary]);
+  }, [annualSalary, annualRelieves]);
 
   //MONTHLY GROSS PAY
   const getMonthlyGross = useCallback(() => {
-    let MonthlyGross = Number(annualSalary) + Number(annualSalary) / 12;
+    let MonthlyGross = Number(annualSalary) + Number(annualRelieves) / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
     return formatter.format(MonthlyGross);
-  }, [annualSalary, annualSalary]);
+  }, [annualSalary, annualRelieves]);
 
   const Validation = () => {
     if (!annualSalary) {
       setValidation({
         employeeAnnualSalary: "Employee's annual salary is required!",
+      });
+    } else if (formattedAnnualSalary === "NGNNaN") {
+      setValidation({
+        employeeAnnualSalary: "number only!",
+      });
+    } else if (formattedAnnualRelieves === "NGNNaN") {
+      setValidation({
+        employeeRelieves: "number only!",
       });
     } else {
       nextQuestion();
@@ -77,7 +108,6 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
   return (
     <div className='d-flex flex-column'>
       <Row>
-        {console.log(typeof annualSalary)}
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
             name='Annual Gross Salary'
@@ -87,16 +117,17 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
             inputName='annualSalary'
             type='text'
             handleChange={onAnnualSalaryChange}
-            value={annualSalary}
+            value={formattedAnnualSalary}
             err={validation.employeeAnnualSalary}
+            onFocus={() => setFormattedAnnualSalary("")}
             onPress={() =>
               setValidation({
                 employeeAnnualSalary: "",
               })
             }
-            onBlur={(e) => {
-              setAnnualSalary(e.target.value);
-            }}
+            onBlur={() =>
+              setFormattedAnnualSalary(FormatNum(formattedAnnualSalary))
+            }
           />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>
@@ -122,8 +153,16 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
           <Input
             inputName='annualRelieves'
             type='text'
-            // handleChange={onAnnualChange}
-            // value={annualSalary}
+            handleChange={onAnnualRelieveChange}
+            value={formattedAnnualRelieves}
+            err={validation.employeeRelieves}
+            onFocus={() => setFormattedAnnualRelieves("")}
+            onPress={() =>
+              setValidation({
+                employeeRelieves: "",
+              })
+            }
+            onBlur={() => setFormattedAnnualRelieves(FormatNum(annualRelieves))}
           />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>

@@ -2,10 +2,16 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { LoginOTP } from "../../Actions";
+import { LoginOTP, ResendOTP } from "../../Actions";
 import OTP from "./OTP";
 
-const LoginOtp = ({ LoginOTP, loginOtp, loginErr, companyEmail }) => {
+const LoginOtp = ({
+  LoginOTP,
+  loginOtp,
+  loginErr,
+  companyEmail,
+  ResendOTP,
+}) => {
   const navigate = useNavigate();
   const close = () => {
     navigate("/Dashboard");
@@ -18,6 +24,7 @@ const LoginOtp = ({ LoginOTP, loginOtp, loginErr, companyEmail }) => {
       err={loginErr}
       close={close}
       companyEmail={companyEmail}
+      resendOtp={ResendOTP}
     />
   );
 };
@@ -30,4 +37,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { LoginOTP })(LoginOtp);
+export default connect(mapStateToProps, { LoginOTP, ResendOTP })(LoginOtp);

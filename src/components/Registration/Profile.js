@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Col,
-  FormText,
-  Form,
-  Button,
-  FormGroup,
-  Container,
-} from "react-bootstrap";
+import { Button, FormGroup, Container } from "react-bootstrap";
 
 import Input from "./Input";
 import SubHeader from "./SubHeader";
@@ -18,8 +11,9 @@ const Profile = ({
   name,
   registration,
   about,
-  state,
+  location,
   nextPage,
+  onStateChange,
 }) => {
   const [nameErr, setNameErr] = useState("");
   const [registrationErr, setRegistrationErr] = useState("");
@@ -27,7 +21,7 @@ const Profile = ({
   const [locationErr, setLocationErr] = useState("");
 
   const states = [
-    "No State",
+    "--- SELECT STATE ---",
     "Abia State",
     "Adamawa State",
     "Anambra State",
@@ -78,7 +72,7 @@ const Profile = ({
       setRegistrationErr("Invalid registration number");
     } else if (!about) {
       setAboutErr("About Company is Required!");
-    } else if (state === "No State") {
+    } else if (location === "No State") {
       console.log();
       setLocationErr("Invalid location");
     } else {
@@ -90,32 +84,32 @@ const Profile = ({
     return null;
   }
   return (
-    <div className="mx-auto w-75">
+    <div className='mx-auto w-75'>
       <div>
         <SubHeader>Fill in Your Company Details</SubHeader>
       </div>
       <Container>
-        <FormGroup className="ms-2">
+        <FormGroup className='ms-2'>
           {/* first input */}
-          <div className="field-container">
-            <LabelText label="Enter the name of your company" name="Name" />
+          <div className='field-container'>
+            <LabelText label='Enter the name of your company' name='Name' />
             <Input
-              inputName="name"
-              type="text"
+              inputName='name'
+              type='text'
               value={name}
               handleChange={handleChange}
               err={nameErr}
               onPress={() => setNameErr("")}
             />
           </div>
-          <div className="field-container">
+          <div className='field-container'>
             <LabelText
-              label="Input the registration number of your company"
-              name="Registration Number"
+              label='Input the registration number of your company'
+              name='Registration Number'
             />
             <Input
-              inputName="registration"
-              type="number"
+              inputName='registration'
+              type='number'
               value={registration}
               handleChange={handleChange}
               err={registrationErr}
@@ -137,14 +131,14 @@ const Profile = ({
           </div> */}
 
           {/* Third input */}
-          <div className="field-container">
+          <div className='field-container'>
             <LabelText
-              label="Tell us about your company"
-              name="About Company"
+              label='Tell us about your company'
+              name='About Company'
             />
             <Input
-              inputName="about"
-              type="text"
+              inputName='about'
+              type='text'
               value={about}
               handleChange={handleChange}
               err={aboutErr}
@@ -155,18 +149,17 @@ const Profile = ({
           </div>
           {/* fifth input */}
           {/* <div> */}
-          <div className="select-fields">
+          <div className='select-fields'>
             <LabelText
-              label="Select the location of your company in Nigeria"
-              name="State"
+              label='Select the location of your company in Nigeria'
+              name='State'
             />
 
-            <div sm="10" className="field-container">
+            <div sm='10' className='field-container'>
               <select
-                name="state"
-                className="text-left select"
-                onChange={handleChange}
-              >
+                name='location'
+                className='text-left select'
+                onChange={onStateChange}>
                 {states.map((state) => {
                   return (
                     <option key={state} value={state}>
@@ -179,12 +172,11 @@ const Profile = ({
           </div>
 
           {/* </div> */}
-          <div className="button-container d-flex justify-content-end align-items-end">
+          <div className='button-container d-flex justify-content-end align-items-end'>
             <Button
-              type="button"
-              className="button ms-4 next"
-              onClick={Validation}
-            >
+              type='button'
+              className='button ms-4 next'
+              onClick={Validation}>
               NEXT
             </Button>
           </div>

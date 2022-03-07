@@ -22,7 +22,7 @@ const AddRoles = ({ data }) => {
 
   useEffect(() => {
     data(tags);
-  }, [tags]);
+  }, [data, tags]);
 
   const closeTag = (indx) => {
     setTags([...tags.filter((tag) => tags.indexOf(tag) !== indx)]);
@@ -57,7 +57,7 @@ const AddRoles = ({ data }) => {
                 width='15'
                 height='15'
                 fill='currentColor'
-                className='bi bi-x'
+                className=''
                 viewBox='0 0 16 16'>
                 <path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z' />
               </svg>
@@ -85,15 +85,15 @@ const AddRoles = ({ data }) => {
   };
 
   const removeSuggestion = (tag) => {
-    return setDepartmentSug([...departmentSug.filter((cur) => cur != tag)]);
+    return setDepartmentSug([...departmentSug.filter((cur) => cur !== tag)]);
   };
 
   return (
     <React.Fragment>
       <div className='w-100 h-25 d-flex justify-content-between align-items-center'>
         <Input type='text' value={inputData} handleChange={onChange} />
-        <div className='mx-3'>
-          <button class='button text-white ' type='button' onClick={onClick}>
+        <div className='mx-3 pt-3'>
+          <button class=' text-white button ' type='button' onClick={onClick}>
             Add
           </button>
         </div>

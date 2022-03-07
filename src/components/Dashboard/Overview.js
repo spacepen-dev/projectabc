@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import DetailsCard from "./DetailsCard";
@@ -7,18 +7,32 @@ import EyeSVG from "./svg/Eyes";
 import WhiteWallet from "./svg/WhiteWallet";
 import ProfileWhite from "./svg/ProfileWhite";
 import SalariesHistory from "./SalariesHistory";
+import AccountHistory from "./AccountHistory";
+import TaxHistory from "./TaxHistory";
 import Slider from "./Slider";
+import TableSpinner from "./TableSpinner";
 
 const Overview = ({ getPageId }) => {
   const [pageId, setId] = useState(4);
   const [small, setSmall] = useState("first");
   const [link, setLink] = useState("");
+  const [request, setRequest] = useState(false);
 
   const getId = (e) => {
     setId(Number(e.target.id));
     setSmall(e.target.nextSibling.id);
   };
 
+  // USE EFFECT TO ADD THE LOADER WHEN FETCH DATA FROM THE DATABASE
+  useEffect(() => {
+    console.log("lololo");
+    setRequest(true);
+    setTimeout(() => {
+      setRequest(false);
+    }, 3000);
+  }, [pageId]);
+
+  // USE EFFECT TO CHNAGE THE LINK ON THE SIDE BAR
   useEffect(() => {
     if (pageId === 4) {
       setLink("/dashboard/view/salary/history");
@@ -31,12 +45,15 @@ const Overview = ({ getPageId }) => {
 
   return (
     <Container fluid className='overview h-100'>
-      <div className='d-flex justify-content-between align-items-center details-container'>
+      <div className='d-flex justify-content-between align-items-center details-container '>
         <DetailsCard
           heading=' TOTAL BALANCE'
-          number='$50,000'
-          firstSVG={EyeSVG()}
-          secondSVG={WhiteWallet()}
+          number={new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "NGN",
+          }).format(50000000)}
+          // firstSVG={}
+          secondSVG={EyeSVG()}
         />
         <DetailsCard
           heading='TOTAL EMPLOYEES'
@@ -86,9 +103,15 @@ const Overview = ({ getPageId }) => {
         </div>
       </article>
       <article className='bottom-tab'>
-        {pageId === 4 ? <SalariesHistory /> : ""}
-        {/* {pageId === 7 ? <SalariesHistory /> : ""} */}
-        {/* {pageId === 8 ? <SalariesHistory /> : ""} */}
+        <i className='bi bi-eyes-slash'></i>
+        {request && (
+          <div className='loader-container'>
+            <TableSpinner />
+          </div>
+        )}
+        {pageId === 4 && !request && <SalariesHistory />}
+        {pageId === 7 && !request && <AccountHistory />}
+        {pageId === 8 && !request && <TaxHistory />}
       </article>
     </Container>
   );

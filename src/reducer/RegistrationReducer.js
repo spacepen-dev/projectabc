@@ -10,6 +10,8 @@ const Initial_State = {
   departmentErr: null,
   detailsErr: null,
   loginOtp: null,
+  resendOtp: null,
+  resendOtpErr: null,
 };
 
 const RegistrationReducer = (state = Initial_State, action) => {
@@ -34,10 +36,12 @@ const RegistrationReducer = (state = Initial_State, action) => {
       return { ...state, loginErr: action.payLoad };
     case "DEPARTMENT_ERR_MESSAGE":
       return { ...state, departmentErr: action.payLoad };
-
     case "DETAILS_ERR_MESSAGE":
       return { ...state, detailsErr: action.payLoad };
-
+    case "RESEND_OTP":
+      return { ...state, resendOtp: action.payLoad };
+    case "RESEND_OTP_ERR_MESSAGE":
+      return { ...state, resendOtpErr: action.payLoad };
     default:
       return state;
   }

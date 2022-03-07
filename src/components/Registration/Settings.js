@@ -16,10 +16,6 @@ const Settings = ({
   handleChange,
   companyReg,
   checkStatus,
-  accountName,
-  bank,
-  salary,
-  companySize,
   tax,
   prevPage,
   formData,
@@ -31,74 +27,34 @@ const Settings = ({
   const [serverErr, setServerErr] = useState("");
   const [success, setSuccess] = useState("");
   const [showModal, setShow] = useState(false);
-  // const [accountNameErr, setAccountNameErr] = useState("");
+  const [maxSalary, setMaxSalary] = useState("");
   const [maxSalaryErr, setMaxSalaryErr] = useState("");
-  // const [bankNameErr, setBankNameErr] = useState("");
+  const [companySize, setCompanySize] = useState("");
 
   const companySizes = ["1-5", "6-10", "11-20", "21-30", "31-above"];
 
   const navigate = useNavigate();
 
-  // const BankList = () => {
-  //   const bankName = [
-  //     "Access Bank Plc",
-  //     "Accion Microfinance Bank",
-  //     "Citibank Nigeria Limited",
-  //     "Covenant Mirofinance Bank Ltd",
-  //     "Ecobank Nigeria Plc",
-  //     "Empire Trust Microfinance Bank",
-  //     "Fidelity Bank Plc",
-  //     "Ecobank Nigeria Plc.",
-  //     "Empire Trust Microfinance Bank",
-  //     "Fidelity Bank Plc",
-  //     "Fina Trust Microfinance Bank",
-  //     "Finca Microfinance Bank Limited",
-  //     "First Bank of Nigeria Limited",
-  //     "First City Monument Bank Limited",
-  //     "Globus Bank Limited",
-  //     "Guaranty Trust Bank Plc",
-  //     "Heritage Banking Company Ltd",
-  //     "Infinity Microfinance Bank",
-  //     "Key Stone Bank",
-  //     "Kuda Bank",
-  //     "Mint Finex MFB",
-  //     "Mkobo MFB",
-  //     "Mutual Trust Microfinance Bank",
-  //     "Parallex Bank Limited",
-  //     "Peace Microfinance Bank",
-  //     "Pearl Microfinance Bank Limited",
-  //     "Polaris Bank",
-  //     "Providus Bank",
-  //     "Rephidim Microfinance Bank",
-  //     "Rubies Bank",
-  //     "Shepherd Trust Microfinance Bank",
-  //     "Sparkle Bank",
-  //     "Stanbic IBTC Bank Ltd",
-  //     "Standard Chartered Bank Nigeria Ltd",
-  //     "Sterling Bank Plc",
-  //     "SunTrust Bank Nigeria Limited",
-  //     "Titan Trust Bank Ltd",
-  //     "Union Bank of Nigeria Plc",
-  //     "United Bank For Africa Plc",
-  //     "Unity Bank Plc",
-  //     "VFD MFB",
-  //     "Wema Bank Plc",
-  //     "Zenith Bank Plc",
-  //   ];
-
-  //   const filterBankName = bankName.filter((name) => name.includes(bank));
-  //   console.log(filterBankName);
-  // };
-
-  /**
-   * .map((banks) => {
-      return (
-        <li class='bankLinks' onClick={() => {}}>
-          {banks}
-        </li>
-      );
+  const FormatNum = (value) => {
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "NGN",
     });
-   */
+    if (formatter.format(value) === "NGNNaN") {
+      setMaxSalaryErr("Use numbers only! Please clear all before typing.");
+      value = "";
+    }
+    return formatter.format(value);
+  };
+
+  const onSalaryChange = (e) => {
+    setMaxSalary(e.target.value);
+  };
+  const onChange = (e) => {
+    const employeeSize = e.target.value.split("-")[1];
+    setCompanySize(employeeSize);
+  };
+
   useEffect(() => {
     if (!checkStatus) {
       return null;
@@ -116,6 +72,7 @@ const Settings = ({
         };
       } else if (success) {
         setSuccess(success);
+        localStorage.setItem("email", formData.email);
         setMessage("");
         setServerErr("");
       }
@@ -137,14 +94,18 @@ const Settings = ({
     };
   }, [errMessage]);
 
+  const Validation = () => {
+    if (!maxSalary) {
+      setMaxSalaryErr("Maximum salary is required!");
+    } else {
+      setRequest(true);
+      companyReg({ ...formData, maxSalary, companySize });
+    }
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-
-    // if (!salary) {
-    //   setMaxSalaryErr("Maximum salary is required");
-
-    setRequest(true);
-    companyReg(formData);
+    Validation();
   };
 
   const closeModal = () => {
@@ -156,31 +117,28 @@ const Settings = ({
   }
 
   return (
-    <div className="mx-auto w-75">
+    <div className='mx-auto w-75'>
       {success && <VerificationModal message={success} close={closeModal} />}
-
       <div>
         <SubHeader>Fill in your company bank account details</SubHeader>
       </div>
-
       <div>
-        <Form className="ms-2" onSubmit={onSubmit}>
-          <div className="select-fields">
+        <Form className='ms-2' onSubmit={onSubmit}>
+          <div className='select-fields'>
             <LabelText
-              label="Select the size range of your company"
-              name="Company Size"
+              label='Select the size range of your company'
+              name='Company Size'
             />
 
-            <div sm="10" className="field-container">
+            <div sm='10' className='field-container'>
               <select
-                name="companySize"
-                className="text-left select"
-                onChange={handleChange}
-              >
-                {companySizes.map((companySize) => {
+                name='companySize'
+                className='text-left select'
+                onChange={onChange}>
+                {companySizes.map((size) => {
                   return (
-                    <option key={companySize} value={companySize}>
-                      {companySize}
+                    <option key={size} value={size}>
+                      {size}
                     </option>
                   );
                 })}
@@ -188,82 +146,59 @@ const Settings = ({
             </div>
           </div>
 
-          {/* <div className="field-container"> */}
-
-          {/* <div className="field-container">
+          <div className='field-container'>
             <LabelText
-              label="Enter the bank official account of your company"
-              name="Bank Name"
-            />
-            <Input
-              inputName="bank"
-              type="text"
-              err={bankNameErr}
-              handleChange={handleChange}
-              onPress={() => {
-                setBankNameErr("");
-                setDropDown(true);
-              }}
-              value={bank}
-            />
-            {BankList()}
-            {/* {!showDropDown && (
-              <div id='dropdownList' class='dropdown-content shadow'>
-                {BankList()}
-             
-          </div> */}
-
-          <div className="field-container">
-            <LabelText
-              label="Enter the maximun salary of your employee"
-              name="Employee Max Salary"
+              label='Enter the maximun salary of your employee'
+              name='Employee Max Salary'
             />
 
             <Input
-              inputName="salary"
-              type="number"
-              handleChange={handleChange}
+              inputName='maxSalary'
+              type='text'
+              value={maxSalary}
+              handleChange={onSalaryChange}
               err={maxSalaryErr}
+              onFocus={() => setMaxSalary("")}
               onPress={() => setMaxSalaryErr("")}
-              value={salary}
+              onBlur={() => setMaxSalary(FormatNum(maxSalary))}
             />
           </div>
-          <Col className="d-flex toggle-input justify-content-between align-items-center">
+          <Col className='d-flex toggle-input justify-content-between align-items-center'>
             <LabelText
-              name="PAYE"
-              inputname="PAYE Taxes"
+              name='PAYE'
+              inputname='PAYE Taxes'
               label="Do you want to pay/deduct your employee's taxes automatically"
             />
-            <div className="toggle-container d-flex justify-content-evenly">
+
+            <div className='toggle-container d-flex justify-content-evenly align-items-center'>
               No
-              <label className="switch">
+              <label className='switch mx-1'>
                 <input
-                  name="tax"
-                  id="tax"
-                  inputname="tax"
-                  type="checkbox"
+                  name='tax'
+                  id='tax'
+                  inputname='tax'
+                  type='checkbox'
                   value={tax}
                   checked={check}
                   onChange={handleChange}
                 />
-                <span className="slider"></span>
+                <span className='slider'></span>
               </label>
               Yes
             </div>
           </Col>
+          <div className='button-container double-btns d-flex justify-content-end align-items-end'>
+            <Button type='button' className='button ms-auto' onClick={prevPage}>
+              Back
+            </Button>
+            <LoaderButton
+              btnName='FINISH'
+              btnStyle='ms-4'
+              request={request}
+              spinnerStyle='bg-transparent'
+            />
+          </div>
         </Form>
-
-        <div className="button-container double-btns d-flex justify-content-end align-items-end">
-          <Button type="button" className="button ms-auto" onClick={prevPage}>
-            Back
-          </Button>
-          <LoaderButton
-            btnName="FINISH"
-            btnStyle="ms-4"
-            request={request}
-            spinnerStyle="bg-transparent"
-          />
-        </div>
 
         {showModal && (
           <NetWorkErrors
@@ -276,7 +211,7 @@ const Settings = ({
     </div>
   );
 };
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     checkStatus: state.RegistrationReducer.companyRegistration,
     errMessage: state.RegistrationReducer.registrationErr,

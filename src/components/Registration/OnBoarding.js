@@ -6,18 +6,17 @@ import OnBoardingSVG from "./OnBoardingSVG";
 
 const OnBoarding = () => {
   return (
-    <div className="onboard-div">
-      <h5 className="onboard-h5">DEPARTMENTS/ROLES IN YOUR ORGANIZATION</h5>
+    <div className='onboard-div'>
+      <h5 className='onboard-h5'>DEPARTMENTS IN YOUR ORGANIZATION</h5>
       <OnBoardingSVG />
-      <p className="paid-success onboard-p">
-        You haven't addded any department or role to your company profile.
+      <p className='paid-success onboard-p'>
+        You haven't addded any department to your company profile.
       </p>
-      <div className="">
+      <div className=''>
         <Link
-          to="/add-roles"
-          type="button"
-          className="button next onboard-button justify-content-center align-items-center"
-        >
+          to='/add-roles'
+          type='button'
+          className='button next onboard-button justify-content-center align-items-center'>
           ADD
         </Link>
       </div>

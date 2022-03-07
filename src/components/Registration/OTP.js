@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import { Container } from "react-bootstrap";
-import { useNavigate } from "react-router";
 
-import Verification from "../Dashboard/svg/Verification";
-import VerificationModal from "../Dashboard/VerificationModal";
+// import Verification from "../Dashboard/svg/Verification";
+// import VerificationModal from "../Dashboard/VerificationModal";
 import LoaderModal from "../Dashboard/LoaderModal";
 import NetWorkErrors from "../NetWorkErrors";
+import SuccessRequestModal from "../Dashboard/SuccessRequestModal";
 
-const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
-  const navigate = useNavigate();
-
+const OTP = ({ otpAction, getValues, err, companyEmail, close, resendOtp }) => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [errorMessage, setMessage] = useState("");
   const [serverErr, setServerErr] = useState("");
@@ -19,31 +17,40 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
   const [active, setActive] = useState(false);
   const [comEmail, setComEmail] = useState("");
 
-  const sendOTP = (otp) => {
+  useEffect(() => {
     const otpNumber = parseInt(otp.join(""));
     if (otp.join("").length < 6) {
       return null;
     }
     setActive(true);
-    setTimeout(() => {
-      otpAction(otpNumber);
+    const Id = setTimeout(() => {
+      otpAction(otpNumber, comEmail);
     }, 1000);
-  };
+    return () => {
+      clearTimeout(Id);
+    };
+  }, [otp, otpAction, comEmail]);
+
+  // COMPANY EMAIL SAVED IN THE LOCAL STORAGE
+  useEffect(() => {
+    setComEmail(localStorage.getItem("email"));
+  }, []);
 
   useEffect(() => {
     if (!companyEmail) {
-      setComEmail(null);
+      return null;
     } else {
       const token = companyEmail.data.token;
       localStorage.setItem("token", token);
-      setComEmail(companyEmail.data.accountEmail);
     }
   }, [companyEmail]);
 
+  // NETWORK ERROR USE EFFECT
   useEffect(() => {
     if (!err) {
       return null;
     }
+    setActive(false);
     setShow(true);
     setMessage(err.message);
     const removeTimeOut = setTimeout(() => {
@@ -54,36 +61,57 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
     };
   }, [err]);
 
-  const resFunt = (data) => {
-    const { error, success } = data.data;
-    setActive(false);
-    if (error) {
-      setShow(true);
-      setServerErr(error);
-      setTimeout(() => {
-        setShow(false);
-      }, 4000);
-    } else if (success) {
-      setSuccess(success);
-      setMessage("");
-      setServerErr("");
-    }
-  };
-  const OtpResponse = (getValues) => {
+  useEffect(() => {
+    // FETCHING DATA FROM A LOGIN OTP
     if (getValues.loginOtp) {
-      resFunt(getValues.loginOtp);
+      // resFunt(getValues.loginOtp);
+      const { error, success } = getValues.loginOtp.data;
+      setActive(false);
+      if (error) {
+        setShow(true);
+        setServerErr(error);
+        const id = setTimeout(() => {
+          setShow(false);
+        }, 4000);
+        return () => {
+          clearTimeout(id);
+        };
+      } else if (success) {
+        setSuccess(success);
+        const id = setTimeout(() => {
+          setSuccess("");
+          close();
+        }, 4000);
+        return () => {
+          clearTimeout(id);
+        };
+      }
+      // FETCHING DATA FROM A REGISTRATION OTP
     } else if (getValues.otp) {
-      resFunt(getValues.otp);
+      // resFunt(getValues.otp);
+      const { error, success } = getValues.otp.data;
+      setActive(false);
+      if (error) {
+        setShow(true);
+        setServerErr(error);
+        const id = setTimeout(() => {
+          setShow(false);
+        }, 4000);
+        return () => {
+          clearTimeout(id);
+        };
+      } else if (success) {
+        setSuccess(success);
+        const id = setTimeout(() => {
+          setSuccess("");
+          close();
+        }, 4000);
+        return () => {
+          clearTimeout(id);
+        };
+      }
     }
-  };
-
-  useEffect(() => {
-    sendOTP(otp);
-  }, [otp]);
-
-  useEffect(() => {
-    OtpResponse(getValues);
-  }, [getValues]);
+  }, [getValues, close]);
 
   const handleOtp = (elem, index) => {
     // check if the value is a number or text
@@ -101,22 +129,23 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
     }
   };
 
-  const closeModal = () => {
-    setSuccess("");
-    close();
-  };
+  // const closeModal = () => {
+  //   setSuccess("");
+  //   close();
+  // };
 
   return (
     <Container className='otp px-1 mx-auto w-75'>
       {active && <LoaderModal />}
 
-      {success && (
+      {success && <SuccessRequestModal message={success} />}
+      {/* {success && (
         <VerificationModal
           message={`${success}`}
           close={closeModal}
           svg={Verification()}
         />
-      )}
+      )} */}
 
       {showModal && (
         <NetWorkErrors
@@ -155,7 +184,11 @@ const OTP = ({ otpAction, getValues, err, companyEmail, close }) => {
         </div>
         <div className='py-4 mt-3 w-75 fs-6 text-center'>
           Didn't get it in your email?{" "}
-          <span style={{ cursor: "pointer" }} onClick={() => {}}>
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              resendOtp(comEmail);
+            }}>
             Resend the code
           </span>
         </div>

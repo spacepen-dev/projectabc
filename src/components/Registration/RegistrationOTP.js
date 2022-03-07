@@ -2,12 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { Otp } from "../../Actions";
+import { Otp, ResendOTP } from "../../Actions";
 
 import OTP from "./OTP";
 
-const RegistrationOTP = ({ Otp, resOtp, otpErr, companyEmail }) => {
+const RegistrationOTP = ({ Otp, resOtp, otpErr, companyEmail, ResendOTP }) => {
   const navigate = useNavigate();
+
   const close = () => {
     navigate("/on-boarding");
   };
@@ -18,6 +19,7 @@ const RegistrationOTP = ({ Otp, resOtp, otpErr, companyEmail }) => {
       err={otpErr}
       close={close}
       companyEmail={companyEmail}
+      resendOtp={ResendOTP}
     />
   );
 };
@@ -30,4 +32,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { Otp })(RegistrationOTP);
+export default connect(mapStateToProps, { Otp, ResendOTP })(RegistrationOTP);

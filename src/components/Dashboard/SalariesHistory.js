@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import DashboardTable from "./DashboardTable";
 
@@ -167,6 +167,18 @@ const SalariesHistory = () => {
       amount: "200,000",
     },
   ];
+
+  const [request, setRequest] = useState(false);
+
+  // USE EFFECT TO ADD THE LOADER ON THE SCREEN AND FETCH THE TABLE DATA
+
+  useEffect(() => {
+    setRequest(true);
+  }, []);
+
+  /**
+   * USE MEMO
+   */
   const limitDataTable = (tableData) => {
     let tdata = [];
     for (let i = 0; i < 8; i++) {
