@@ -44,10 +44,10 @@ const Overview = ({ getPageId }) => {
   }, [pageId]);
 
   return (
-    <Container fluid className='overview h-100'>
-      <div className='d-flex justify-content-between align-items-center details-container '>
+    <Container fluid className="overview h-100">
+      <div className="d-flex justify-content-between align-items-center details-container ">
         <DetailsCard
-          heading=' TOTAL BALANCE'
+          heading=" TOTAL BALANCE"
           number={new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "NGN",
@@ -56,56 +56,57 @@ const Overview = ({ getPageId }) => {
           secondSVG={EyeSVG()}
         />
         <DetailsCard
-          heading='TOTAL EMPLOYEES'
-          number='60'
+          heading="TOTAL EMPLOYEES"
+          number="60"
           secondSVG={ProfileWhite()}
         />
         <DetailsCard
-          heading='TOTAL TRANSACTIONS'
-          number='50'
+          heading="TOTAL TRANSACTIONS"
+          number="50"
           secondSVG={WhiteWallet()}
         />
       </div>
-      <article className='d-flex align-items-center top-tab'>
-        <div className='h-100 d-flex justify-content-between align-items-center w-100'>
+      <article className="d-flex align-items-center top-tab">
+        <div className="h-100 d-flex justify-content-between align-items-center w-100">
           <Slider
-            name='SALARY HISTORY'
+            name="SALARY HISTORY"
             id={4}
             small={small}
             getId={getId}
             pageId={pageId}
-            smallId='first'
+            smallId="first"
           />
           <Slider
-            name='ACCOUNT HISTORY'
+            name="ACCOUNT HISTORY"
             id={7}
             small={small}
             getId={getId}
             pageId={pageId}
-            smallId='second'
+            smallId="second"
           />
           <Slider
-            name='TAX HISTORY'
+            name="TAX HISTORY"
             id={8}
             small={small}
             getId={getId}
             pageId={pageId}
-            smallId='third'
+            smallId="third"
           />
-          <div className='overview-btn'>
+          <div className="overview-btn">
             <Link
-              className='button d-flex text-white align-items-center justify-content-center'
+              className="button d-flex text-white align-items-center justify-content-center"
               to={link}
-              onClick={() => getPageId(pageId)}>
+              onClick={() => getPageId(pageId)}
+            >
               View All
             </Link>
           </div>
         </div>
       </article>
-      <article className='bottom-tab'>
-        <i className='bi bi-eyes-slash'></i>
+      <article className="bottom-tab">
+        <i className="bi bi-eyes-slash"></i>
         {request && (
-          <div className='loader-container'>
+          <div className="loader-container">
             <TableSpinner />
           </div>
         )}
