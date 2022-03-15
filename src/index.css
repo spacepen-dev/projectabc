@@ -1206,6 +1206,74 @@ p.paid-success {
   padding-top: 1rem;
 }
 
+
+/* FreewillProfile.js Styles */
+.profile-info {
+  text-align: center;
+}
+
+.profile-texts {
+  display: inline-block;
+  margin-right: 2rem;
+  color: #659cf0;
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.freewill-address {
+  color: #23549e;
+}
+
+.profile-subHeads {
+  background: rgba(101, 156, 240, 0.1);
+  padding: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.freewill-about {
+  color: #23549e;
+  font-size: 15.1128px;
+  line-height: 25px;
+  text-align: justify;
+}
+
+.container-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column.left {
+  width: 45%;
+}
+
+.profile-list {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.column.right {
+  margin-left: 4rem;
+  width: 50%;
+}
+
+.freewill-acct {
+  width: 50%;
+}
+
+.container-flex .freewill-acct-info {
+  color: black;
+  font-size: smaller;
+}
+
+.container-flex .freewill-acct-details {
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+
+
 @media screen and (min-width: 576px) {
   /* .toggle-input {
     width: 100%;
