@@ -7,9 +7,12 @@ import SideBar from "./SideBar";
 import Overview from "./Overview";
 import AddEmployee from "./AddEmployee";
 import ViewEmployee from "./ViewEmployee";
-import ViewSalaryHisory from "./ViewSalaryHistory";
+import ViewSalaryHistory from "./ViewSalaryHistory";
+import ViewTaxHistory from "./ViewTaxHistory";
+import ViewAccountHistory from "./ViewAccountHistory";
 import { CompanyDetails } from "../../Actions";
 import EmployeeSalariesPage from "./EmployeeSalariesPage";
+import CompanyWalletPage from "./CompanyWalletPage";
 import { FetchDepartment } from "../../Actions";
 
 const Dashboard = ({ FetchDepartment }) => {
@@ -69,11 +72,20 @@ const Dashboard = ({ FetchDepartment }) => {
             />
             <Route path='/add/employee' element={<AddEmployee />} />
             <Route path='/view/employees' element={<ViewEmployee />} />
-            <Route path='/view/salary/history' element={<ViewSalaryHisory />} />
+            <Route
+              path='/view/salary/history'
+              element={<ViewSalaryHistory />}
+            />
+            <Route
+              path='/view/wallet/history'
+              element={<ViewAccountHistory />}
+            />
+            <Route path='/view/tax/history' element={<ViewTaxHistory />} />
             <Route
               path='/pay/employee/salaries'
               element={<EmployeeSalariesPage />}
             />
+            <Route path='/top/up' element={<CompanyWalletPage />} />
           </Routes>
         </Col>
       </Row>
