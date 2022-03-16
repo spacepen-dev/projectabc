@@ -1,7 +1,7 @@
 import React from "react";
 // import LogoProfile from "./svg/LogoProfile";
 
-const FreewillProfile = () => {
+const CompanyProfile = () => {
   return (
     <div>
       {/* <LogoProfile /> */}
@@ -78,4 +78,4 @@ const FreewillProfile = () => {
   );
 };
 
-export default FreewillProfile;
+export default CompanyProfile;

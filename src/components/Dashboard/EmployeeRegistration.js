@@ -57,11 +57,11 @@ const EmployeeRegistration = ({
 
   return (
     <div>
-      <div className=' w-100 mx-auto employee-form'>
-        <div className='pt-5 pb-5'>
+      <div className=" w-100 mx-auto employee-form">
+        <div className="pt-5 pb-5">
           <AddEmployeeForm currentForm={index} />
         </div>
-        <div className=' py-1 px-4'>
+        <div className=" py-1 px-4">
           <EmployeeProfile
             employeeFirstName={employeeData["firstName"]}
             employeeLastName={employeeData["LastName"]}
