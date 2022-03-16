@@ -6,6 +6,8 @@ let InitialState = {
   updateEmployeeErr: "",
   fetchDepartment: [],
   fetchDepartmentErr: "",
+  accountTopUp: null,
+  accountTopUpErr: "",
 };
 
 const DashboardReducer = (state = InitialState, action) => {
@@ -24,6 +26,10 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, fetchDepartment: action.payLoad };
     case "FETCH_DEPARTMENT_ERR_MESSAGE":
       return { ...state, fetchDepartment: action.payLoad };
+    case "ACCOUNT_TOP_UP":
+      return { ...state, accountTopUp: action.payLoad };
+    case "ACCOUNT_TOP_UP_ERR_MESSAGE":
+      return { ...state, accountTopUpErr: action.payLoad };
     default:
       return state;
   }

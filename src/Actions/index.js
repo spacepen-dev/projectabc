@@ -178,7 +178,7 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
 export const FetchDepartment = (email, token) => async (dispatch) => {
   console.log(email, token);
   try {
-    const data = await BasedURL.get("/fetchRoleDepartment.php", {
+    const data = await BasedURL.post("/fetchRoleDepartment.php", {
       companyEmail: email,
       companyToken: token,
     });
@@ -192,11 +192,26 @@ export const FetchDepartment = (email, token) => async (dispatch) => {
 // RESENT OTP ACTION
 export const ResendOTP = (email) => async (dispatch) => {
   try {
-    const data = await BasedURL.get("fetchRoleDepartment.php", {
+    const data = await BasedURL.post("/fetchRoleDepartment.php", {
       companyEmail: email,
     });
     dispatch({ type: "RESEND_OTP", payLoad: data });
   } catch (error) {
     dispatch({ type: "RESEND_OTP_ERR_MESSAGE", payLoad: error });
+  }
+};
+
+//COMPANY TOP UP ACCOUNT ACTION
+
+export const AccountTopUp = (email, token, amount) => async (dispatch) => {
+  try {
+    const data = await BasedURL.post("/fetchRoleDepartment.php", {
+      companyEmail: email,
+      companyToken: token,
+      amount,
+    });
+    dispatch({ type: "ACCOUNT_TOP_UP", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "ACCOUNT_TOP_UP_ERR_MESSAGE", payLoad: error });
   }
 };
