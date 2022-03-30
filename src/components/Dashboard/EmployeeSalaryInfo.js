@@ -1,10 +1,16 @@
-import React, { useCallback, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 
 import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
 
-const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
+const EmployeeSalaryInfo = ({
+  index,
+  err,
+  nextQuestion,
+  prevQuestion,
+  getEmployeeData,
+}) => {
   const [validation, setValidation] = useState({});
   const [annualSalary, setAnnualSalary] = useState("");
   const [formattedAnnualSalary, setFormattedAnnualSalary] =
@@ -41,7 +47,7 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
   };
 
   // GETTING MONTHLY SALARY FROM ANNUAL SALARY / 12
-  const getMonthlySalary = useCallback(() => {
+  const getMonthlySalary = useMemo(() => {
     const employeeMonthlySalary = annualSalary / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
@@ -52,7 +58,7 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
   }, [annualSalary]);
 
   // GETTING MONTHLY RELIEVES FROM ANNUAL RELIEVES / 12
-  const getMonthlyRelieves = useCallback(() => {
+  const getMonthlyRelieves = useMemo(() => {
     const employeeMonthlyRelieves = annualRelieves / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
@@ -63,7 +69,7 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
   }, [annualRelieves]);
 
   //  ANNUAL GROSS PAY
-  const getAnnualGross = useCallback(() => {
+  const getAnnualGross = useMemo(() => {
     const AnnualGross = Number(annualSalary) + Number(annualRelieves);
 
     const formatter = new Intl.NumberFormat("en-US", {
@@ -74,7 +80,7 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
   }, [annualSalary, annualRelieves]);
 
   //MONTHLY GROSS PAY
-  const getMonthlyGross = useCallback(() => {
+  const getMonthlyGross = useMemo(() => {
     let MonthlyGross = Number(annualSalary) + Number(annualRelieves) / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
@@ -99,6 +105,7 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
       });
     } else {
       nextQuestion();
+      getEmployeeData(formattedAnnualSalary, formattedAnnualRelieves);
     }
   };
 
@@ -138,7 +145,7 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
           <input
             readOnly
             name='monthly'
-            value={getMonthlySalary()}
+            value={getMonthlySalary}
             className='w-100 border-1
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />
@@ -173,7 +180,7 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
           <input
             readOnly
             name='monthly'
-            value={getMonthlyRelieves()}
+            value={getMonthlyRelieves}
             className='w-100 border-1
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />
@@ -185,7 +192,7 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
           <input
             readOnly
             name='annualGross'
-            value={getAnnualGross()}
+            value={getAnnualGross}
             className='w-100 border-1
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />
@@ -198,7 +205,7 @@ const EmployeeSalaryInfo = ({ index, err, nextQuestion, prevQuestion }) => {
           <input
             readOnly
             name='monthlyGross'
-            value={getMonthlyGross()}
+            value={getMonthlyGross}
             className='w-100 border-1
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />

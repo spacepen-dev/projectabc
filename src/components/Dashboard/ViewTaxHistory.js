@@ -1,175 +1,24 @@
 import React, { useMemo } from "react";
-import DashboardTable from "./DashboardTable";
+import Datatable from "./Datatable";
+import { taxData } from "./utils/data";
 
 const ViewSalaryHistory = () => {
-  useMemo(() => {}, []);
+  // useMemo(() => {}, []);
+
   const heading = [
-    {
-      paymentDate: "Payment date",
-      paymentRef: "Payment Ref",
-      taxRef: "Tax Ref",
-      employee: "No of employees",
-      year: "Year",
-      month: "Month",
-      totalTax: "Total tax",
-      totalAmount: "Total amount",
-    },
+    { name: "TRANSACTION REF", selector: (row) => row.transactionRef },
+    { name: "GOVERNMENT PAID", selector: (row) => row.governmentPaid },
+    { name: "TOTAL AMOUNT", selector: (row) => row.amount },
+    { name: "PAYMENT DATE", selector: (row) => row.paymentDate },
+    { name: "NO OF EMPLOYEES", selector: (row) => row.employee },
+    { name: "PAYMENT FOR", selector: (row) => row.month },
+    { name: "FORM H1", selector: (row) => row.form },
   ];
-  const tableData = [
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-    {
-      paymentDate: "05-09-2022",
-      paymentRef: "1023498FA",
-      taxRef: "1023498FA",
-      employee: "50",
-      years: "2022",
-      month: "December",
-      tax: "100,000",
-      amount: "200,000",
-    },
-  ];
+
   return (
     <div>
-      <DashboardTable heading={heading} tableData={tableData} display='flex' />
+      <Datatable columns={heading} data={taxData} />
+      {/* <DashboardTable heading={heading} tableData={tableData} display='flex' /> */}
     </div>
   );
 };

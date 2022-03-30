@@ -10,6 +10,9 @@ const AddRoles = ({ data }) => {
     "Engineering",
     "Software",
   ]);
+  // const Names = ['Thomas', "Silver", 'Prosper']
+
+  // const a = [...Names, 'Jessica']
 
   const keyPress = (e) => {
     let tag = e.target.value.replace(/\s+/g, " ");
