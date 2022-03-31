@@ -28,57 +28,58 @@ const EmployeeSalariesPage = () => {
 
   return (
     <div>
-      <div className='paySelect'>
-        <Form className='form'>
-          <Form.Group className='mb-3 form-group' controlId='formSelect'>
+      <div className="paySelect">
+        <Form className="form">
+          <Form.Group className="mb-3 form-group" controlId="formSelect">
             <Form.Label>Month</Form.Label>
-            <select size='sm'>
-              <option value='Jan'>January</option>
-              <option value='Feb'>February</option>
-              <option value='March'>March</option>
-              <option value='April'>April</option>
-              <option value='May'>May</option>
-              <option value='June'>June</option>
-              <option value='July'>July</option>
-              <option value='August'>August</option>
-              <option value='Sept'>September</option>
-              <option value='Oct'>October</option>
-              <option value='Nov'>November</option>
-              <option value='Dec'>December</option>
+            <select size="sm">
+              <option value="Jan">January</option>
+              <option value="Feb">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="Sept">September</option>
+              <option value="Oct">October</option>
+              <option value="Nov">November</option>
+              <option value="Dec">December</option>
             </select>
           </Form.Group>
-          <Form.Group className='mb-3 form-group' controlId='formSelect'>
+          <Form.Group className="mb-3 form-group" controlId="formSelect">
             <Form.Label>Year</Form.Label>
-            <select size='sm'>
-              <option value='21'>2021</option>
-              <option value='22'>2022</option>
-              <option value='23'>2023</option>
-              <option value='24'>2024</option>
-              <option value='25'>2025</option>
-              <option value='26'>2026</option>
-              <option value='27'>2027</option>
-              <option value='28'>2028</option>
-              <option value='29'>2029</option>
-              <option value='30'>2030</option>
+            <select size="sm">
+              <option value="21">2021</option>
+              <option value="22">2022</option>
+              <option value="23">2023</option>
+              <option value="24">2024</option>
+              <option value="25">2025</option>
+              <option value="26">2026</option>
+              <option value="27">2027</option>
+              <option value="28">2028</option>
+              <option value="29">2029</option>
+              <option value="30">2030</option>
             </select>
           </Form.Group>
         </Form>
 
-        <div className='pBtn'>
-          <div className='pBtn'>
+        <div className="pBtn">
+          <div className="pBtn">
             <Button
-              type='submit'
-              className='payBtn py-2 px-3'
+              type="submit"
+              className="payBtn py-2 px-3"
               onClick={function (e) {
                 setmodalState(true);
-              }}>
+              }}
+            >
               Pay employees
             </Button>
           </div>
         </div>
       </div>
 
-      <div className=' mt-5'>
+      <div className=" mt-5">
         <MaterialTable
           columns={columns}
           data={tableData}
@@ -124,7 +125,7 @@ const EmployeeSalariesPage = () => {
 //             <p class='first-column-paragraph'>Tax deductions</p>
 //             <p class='first-column-paragraph'>Amount</p>
 //           </div>
-//           <div class='column '>
+//           <div class='column second-column'>
 //             <p class='second-column-paragraph'>December</p>
 //             <p class='second-column-paragraph'>2022</p>
 //             <p class='second-column-paragraph'>50 employees</p>
