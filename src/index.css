@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
-:root {
+/* :root {
   --transition: all 5s ease;
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -10,7 +10,7 @@
   --clr-red-light: hsl(360, 71%, 66%);
   --clr-green-dark: hsl(125, 67%, 44%);
   --clr-green-light: hsl(125, 71%, 66%);
-}
+} */
 
 * {
   margin: 0;
@@ -1599,3 +1599,76 @@ p.paid-success {
 .custom-switch-input:checked ~ .custom-switch-description {
   color: #495057;
 } */
+
+.container-page {
+  background-color: rgb(203, 203, 255);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+
+  /* width: 100px; */
+}
+span {
+  margin-left: 5px;
+}
+.tb {
+  color: rgb(169, 169, 241);
+  font-size: xx-small;
+  font-weight: bold;
+}
+.amt {
+  color: var(--baseColor);
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.circle {
+  background-color: var(--page);
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.fund {
+  color: var(--baseColor);
+  margin-top: 50px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.circle-2 {
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-left: 5px;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.container-2 {
+  background-color: var(--transparent);
+  border-radius: 10px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 300px;
+  height: 80px;
+  padding-left: 15px;
+  padding-right: 70px;
+  margin-top: 10px;
+  color: var(--baseColor);
+  font-weight: bold;
+  cursor: pointer;
+}
+.choice {
+  margin-top: 15px;
+  margin-left: 15px;
+}

@@ -43,7 +43,7 @@ const TagInput = ({ SubmitDepartment, departmentMessage, departmentErr }) => {
         setServerErr(error);
         const removeTimeOut = setTimeout(() => {
           setStore(false);
-        }, 400);
+        }, 4000);
         return () => {
           clearTimeout(removeTimeOut);
         };
