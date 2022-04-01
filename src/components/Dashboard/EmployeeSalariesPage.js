@@ -95,10 +95,11 @@ const EmployeeSalariesPage = () => {
 
   return (
     <div>
-      <div className='paySelect'>
-        <Form className='form'>
-          <Form.Group className='mb-3 form-group' controlId='formSelect'>
+      <div className="paySelect">
+        <Form className="form">
+          <Form.Group className="mb-3 form-group" controlId="formSelect">
             <Form.Label>Month</Form.Label>
+
             <select size='sm' name='month' onChange={onDateChange}>
               {Months.map((month) => {
                 return (
@@ -123,11 +124,11 @@ const EmployeeSalariesPage = () => {
           </Form.Group>
         </Form>
 
-        <div className='pBtn'>
-          <div className='pBtn'>
+        <div className="pBtn">
+          <div className="pBtn">
             <Button
-              type='submit'
-              className='payBtn py-2 px-3'
+              type="submit"
+              className="payBtn py-2 px-3"
               onClick={function (e) {
                 setPayment({
                   ...payment,
@@ -135,7 +136,8 @@ const EmployeeSalariesPage = () => {
                   month: sumMonthlySalary(selectedData),
                 });
                 setmodalState(true);
-              }}>
+              }}
+            >
               Pay employees
             </Button>
           </div>
@@ -164,6 +166,9 @@ const EmployeeSalariesPage = () => {
     </div>
   );
 };
+
+
+
 
 const ModalPayEmployee = ({
   date,
@@ -229,6 +234,6 @@ const ModalPayEmployee = ({
     </div>,
     document.querySelector("#ModalPayEmployee")
   );
-};
+}
 
 export default EmployeeSalariesPage;
