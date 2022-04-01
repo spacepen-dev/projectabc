@@ -197,7 +197,7 @@ const CompanyWalletPage = ({
           ...transactionDetails,
           email: "ejembithomas61@gmail.com",
           txRef: transactionId,
-          amount: newAmount * 10,
+          amount: newAmount * 100,
         });
         // (email, amount, txRef)
         // console.log(transactionId);

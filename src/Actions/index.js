@@ -218,8 +218,8 @@ export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
   console.log(transactionId, token);
   try {
     const data = await BasedURL.post("/verifyAccountTopUpPayment.php", {
-      reference: transactionId,
       companyToken: token,
+      reference: transactionId,
     });
     dispatch({ type: "VERIFY_TOP_UP", payLoad: data });
   } catch (error) {
@@ -227,17 +227,17 @@ export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
   }
 };
 
-// FETCH ACCOUNT HISTORY
+// FETCH COMPANY DATA
 
-// export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
-//   console.log(transactionId, token);
-//   try {
-//     const data = await BasedURL.post("/verifyAccountTopUpPayment.php", {
-//       transactionId,
-//       companyToken: token,
-//     });
-//     dispatch({ type: "VERIFY_TOP_UP", payLoad: data });
-//   } catch (error) {
-//     dispatch({ type: "VERIFY_TOP_UP_ERR_MESSAGE", payLoad: error });
-//   }
-// };
+export const FetchCompanyEmployee =
+  (companyName, token) => async (dispatch) => {
+    try {
+      const data = await BasedURL.post("/fetchCompanyEmployee.php", {
+        companyName,
+        companyToken: token,
+      });
+      dispatch({ type: "FETCH_COMPANY_EMPLOYEE", payLoad: data });
+    } catch (error) {
+      dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERR_MESSAGE", payLoad: error });
+    }
+  };

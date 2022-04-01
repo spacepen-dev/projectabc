@@ -10,6 +10,8 @@ let InitialState = {
   accountTopUpErr: "",
   verifyTopUp: null,
   verifyTopUpErr: "",
+  companyEmployee: {},
+  companyEmployeeErr: "",
 };
 
 const DashboardReducer = (state = InitialState, action) => {
@@ -36,6 +38,10 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, verifyTopUp: action.payLoad };
     case "VERIFY_TOP_UP_ERR_MESSAGE":
       return { ...state, verifyTopUpErr: action.payLoad };
+    case "FETCH_COMPANY_EMPLOYEE":
+      return { ...state, companyEmployee: action.payLoad };
+    case "FETCH_COMPANY_EMPLOYEE_ERR_MESSAGE":
+      return { ...state, companyEmployeeErr: action.payLoad };
     default:
       return state;
   }
