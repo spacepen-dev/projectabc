@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
@@ -114,6 +114,7 @@ const EmployeeAccountDetails = ({
       setMessage(addEmployeeErr.message);
       const removeTimeOut = setTimeout(() => {
         setShow(false);
+        setMessage(null);
       }, 4000);
       return () => {
         clearTimeout(removeTimeOut);

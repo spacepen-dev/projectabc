@@ -34,6 +34,9 @@ const AddEmployee = ({
         addEmployeeErr={registerEmployeeErr}
         addEmployeeSuccess={registerEmployeeSuccess}
         addEmployeeLink='addEmployee'
+        getEmployeeData={(annual, relieves) =>
+          setEmployeData({ ...employeeData, annual, relieves })
+        }
       />
     </div>
   );

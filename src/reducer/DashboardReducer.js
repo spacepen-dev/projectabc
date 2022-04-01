@@ -8,6 +8,8 @@ let InitialState = {
   fetchDepartmentErr: "",
   accountTopUp: null,
   accountTopUpErr: "",
+  verifyTopUp: null,
+  verifyTopUpErr: "",
 };
 
 const DashboardReducer = (state = InitialState, action) => {
@@ -30,6 +32,10 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, accountTopUp: action.payLoad };
     case "ACCOUNT_TOP_UP_ERR_MESSAGE":
       return { ...state, accountTopUpErr: action.payLoad };
+    case "VERIFY_TOP_UP":
+      return { ...state, verifyTopUp: action.payLoad };
+    case "VERIFY_TOP_UP_ERR_MESSAGE":
+      return { ...state, verifyTopUpErr: action.payLoad };
     default:
       return state;
   }

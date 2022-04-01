@@ -1,4 +1,3 @@
-import axios from "axios";
 import BasedURL from "./BasedURL";
 
 // COMPNAY SIGN IN ACTION
@@ -103,7 +102,7 @@ export const CompanyDetails = (email) => async (dispatch) => {
 
 // REGISTER EMPLOYEE ACTION
 export const RegisterEmployee = (values, token) => async (dispatch) => {
-  console.log(token);
+  console.log(values);
   const {
     firstName,
     LastName,
@@ -130,7 +129,7 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
       employeeAccountName: accountName,
       employeeAccountNumber: accountNumber,
       employeeBankName: filterBank,
-      employee_ags: annual,
+      employeeAgs: annual,
     });
     dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
   } catch (error) {
@@ -166,7 +165,7 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
       employeeAccountName: accountName,
       employeeAccountNumber: accountNumber,
       employeeBankName: filterBank,
-      employee_ags: annual,
+      employeeAgs: annual,
     });
     dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
   } catch (error) {
@@ -176,13 +175,11 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
 
 // FETCH DEPARTMENT ACTION
 export const FetchDepartment = (email, token) => async (dispatch) => {
-  console.log(email, token);
   try {
     const data = await BasedURL.post("/fetchRoleDepartment.php", {
       companyEmail: email,
       companyToken: token,
     });
-    console.log(data);
     dispatch({ type: "FETCH_DEPARTMENT", payLoad: data });
   } catch (error) {
     dispatch({ type: "FETCH_DEPARTMENT_ERR_MESSAGE", payLoad: error });
@@ -202,10 +199,9 @@ export const ResendOTP = (email) => async (dispatch) => {
 };
 
 //COMPANY TOP UP ACCOUNT ACTION
-
 export const AccountTopUp = (email, token, amount) => async (dispatch) => {
   try {
-    const data = await BasedURL.post("/fetchRoleDepartment.php", {
+    const data = await BasedURL.post("/accountTopUp.php", {
       companyEmail: email,
       companyToken: token,
       amount,
@@ -215,3 +211,33 @@ export const AccountTopUp = (email, token, amount) => async (dispatch) => {
     dispatch({ type: "ACCOUNT_TOP_UP_ERR_MESSAGE", payLoad: error });
   }
 };
+
+// VERIFY COMPANY TOP UP
+
+export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
+  console.log(transactionId, token);
+  try {
+    const data = await BasedURL.post("/verifyAccountTopUpPayment.php", {
+      reference: transactionId,
+      companyToken: token,
+    });
+    dispatch({ type: "VERIFY_TOP_UP", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "VERIFY_TOP_UP_ERR_MESSAGE", payLoad: error });
+  }
+};
+
+// FETCH ACCOUNT HISTORY
+
+// export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
+//   console.log(transactionId, token);
+//   try {
+//     const data = await BasedURL.post("/verifyAccountTopUpPayment.php", {
+//       transactionId,
+//       companyToken: token,
+//     });
+//     dispatch({ type: "VERIFY_TOP_UP", payLoad: data });
+//   } catch (error) {
+//     dispatch({ type: "VERIFY_TOP_UP_ERR_MESSAGE", payLoad: error });
+//   }
+// };
