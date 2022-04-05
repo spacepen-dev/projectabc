@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { FetchDepartment } from "../../Actions";
 
 const EmployeeProfile = ({
   employeeEmail,
@@ -14,9 +16,14 @@ const EmployeeProfile = ({
   err,
   nextQuestion,
   onHandleChange,
+  FetchDepartment,
+  departmentRes,
 }) => {
-  const companyDepartment = ["Marketing", "Sales", "Engineering"];
   const [validation, setValidation] = useState({});
+  const [departmentData, setDepartmentData] = useState([]);
+
+  const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
 
   const Validation = () => {
     let regexp =
@@ -46,6 +53,47 @@ const EmployeeProfile = ({
     }
   };
 
+  // FETCH ALL THE DATA FROM THE API (USUALLY A GET REQUEST TO FETCH ALL THE DATA NEEDED ON THE DASHBOARD)
+  useEffect(() => {
+    if (localStorage.getItem("token") || localStorage.getItem("email")) {
+      console.log("empty");
+    }
+    // GET TOKEN
+    console.log(localStorage.getItem("token"));
+    // setToken(localStorage.getItem("token"));
+    // GET EMAIL
+    // setEmail(localStorage.getItem("email"));
+    // FETCH THE DEPARTMENT
+  }, []);
+
+  // FETCH DEPARTMENT DATA USE EFFECT
+  useEffect(() => {
+    // ADD FETCH DEPARTMENT ACTION CREATOR
+    let timeOut = setTimeout(() => {
+      const email = localStorage.getItem("email");
+      const token = localStorage.getItem("token");
+
+      FetchDepartment(email, token);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+    /**
+     * ON ERROR SHOW WARNING MODAL AND RELOAD
+     *
+     * ON SUCCESS PUSH TO LOCAL STORAGE
+     * */
+  }, [email, token]);
+
+  // GET EMPLOYEE DATA FROM THE REDUCER
+  useEffect(() => {
+    if (!departmentRes) {
+      return null;
+    }
+    setDepartmentData(departmentRes.success);
+  }, []);
+
   if (index !== 1) {
     return null;
   }
@@ -59,7 +107,7 @@ const EmployeeProfile = ({
             label='Enter the name of your company'
           />
           <Input
-            inputName='firstName'
+            inputName='employee_firstname'
             type='text'
             handleChange={onHandleChange}
             value={employeeFirstName}
@@ -74,7 +122,7 @@ const EmployeeProfile = ({
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText name='Last Name' label='Enter Last name of employee' />
           <Input
-            inputName='LastName'
+            inputName='employee_lastname'
             type='text'
             handleChange={onHandleChange}
             value={employeeLastName}
@@ -91,7 +139,7 @@ const EmployeeProfile = ({
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText name='Email' label='Enter Employee Email Address' />
           <Input
-            inputName='email'
+            inputName='employee_email'
             type='text'
             handleChange={onHandleChange}
             value={employeeEmail}
@@ -109,7 +157,7 @@ const EmployeeProfile = ({
             label='Enter National Indentity Number'
           />
           <Input
-            inputName='nin'
+            inputName='employee_nin'
             type='text'
             handleChange={onHandleChange}
             value={employeeNin}
@@ -125,14 +173,15 @@ const EmployeeProfile = ({
       <Row>
         <Form.Group as={Col}>
           <DashBoardText name='Department' label='Enter employee department' />
+          {console.log(departmentData)}
           <select
-            name='department'
-            className=' text-center select mt-0'
+            name='employee_department'
+            className='select mt-0'
             onChange={onHandleChange}>
-            {companyDepartment.map((department) => {
+            {departmentData.map(({ companyDepartment }) => {
               return (
-                <option key={department} value={employeeDepartment}>
-                  {department}
+                <option key={companyDepartment} value={companyDepartment}>
+                  {companyDepartment}
                 </option>
               );
             })}
@@ -142,7 +191,7 @@ const EmployeeProfile = ({
           <DashBoardText name='Role' label='Enter Role ' />
 
           <Input
-            inputName='role'
+            inputName='employee_role'
             type='text'
             handleChange={onHandleChange}
             value={employeeRole}
@@ -167,4 +216,10 @@ const EmployeeProfile = ({
   );
 };
 
-export default EmployeeProfile;
+const mapStateToProps = (state) => {
+  return {
+    departmentRes: state.DashboardReducer.fetchDepartment.data,
+  };
+};
+
+export default connect(mapStateToProps, { FetchDepartment })(EmployeeProfile);

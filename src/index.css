@@ -741,6 +741,7 @@ article small {
   border-top-right-radius: 1.91rem !important;
   padding: 1rem 0 !important;
   border: none;
+  text-overflow: ellipsis;
 }
 
 thead tr:first-child {

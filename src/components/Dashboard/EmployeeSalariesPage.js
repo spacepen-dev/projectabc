@@ -17,9 +17,10 @@ const EmployeeSalariesPage = () => {
     new Date().getMonth() + 6,
     new Date().getMonth() + 7,
     new Date().getMonth() + 8,
-    new Date().getMonth() + 9,
-    new Date().getMonth() - 1,
+    // new Date().getMonth() + 9,
+    new Date().getMonth() - 3,
     new Date().getMonth() - 2,
+    new Date().getMonth() - 1,
   ];
 
   const GetMonth = [
@@ -95,9 +96,9 @@ const EmployeeSalariesPage = () => {
 
   return (
     <div>
-      <div className="paySelect">
-        <Form className="form">
-          <Form.Group className="mb-3 form-group" controlId="formSelect">
+      <div className='paySelect'>
+        <Form className='form'>
+          <Form.Group className='mb-3 form-group' controlId='formSelect'>
             <Form.Label>Month</Form.Label>
 
             <select size='sm' name='month' onChange={onDateChange}>
@@ -124,11 +125,11 @@ const EmployeeSalariesPage = () => {
           </Form.Group>
         </Form>
 
-        <div className="pBtn">
-          <div className="pBtn">
+        <div className='pBtn'>
+          <div className='pBtn'>
             <Button
-              type="submit"
-              className="payBtn py-2 px-3"
+              type='submit'
+              className='payBtn py-2 px-3'
               onClick={function (e) {
                 setPayment({
                   ...payment,
@@ -136,8 +137,7 @@ const EmployeeSalariesPage = () => {
                   month: sumMonthlySalary(selectedData),
                 });
                 setmodalState(true);
-              }}
-            >
+              }}>
               Pay employees
             </Button>
           </div>
@@ -167,9 +167,6 @@ const EmployeeSalariesPage = () => {
   );
 };
 
-
-
-
 const ModalPayEmployee = ({
   date,
   payment,
@@ -197,7 +194,7 @@ const ModalPayEmployee = ({
             <p class='first-column-paragraph'>Tax deductions</p>
             <p class='first-column-paragraph'>Amount</p>
           </div>
-          <div class='column '>
+          <div class='column second-column'>
             <p class='second-column-paragraph'>{date.month}</p>
             <p class='second-column-paragraph'>{date.year}</p>
             <p class='second-column-paragraph'>{`${data.length} Employees`}</p>
@@ -234,6 +231,6 @@ const ModalPayEmployee = ({
     </div>,
     document.querySelector("#ModalPayEmployee")
   );
-}
+};
 
 export default EmployeeSalariesPage;

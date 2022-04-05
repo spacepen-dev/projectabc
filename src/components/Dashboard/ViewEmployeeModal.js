@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import ModalContainer from "./ModalContainer";
 
-const ViewEmployeeModal = ({ modal, initialValue }) => {
+const ViewEmployeeModal = ({ closeModal, initialValue }) => {
   return (
     <>
       <ModalContainer
-        closeModal={modal}
+        closeModal={closeModal}
         buttonText='Save'
         display='true'
         initialValue={initialValue}

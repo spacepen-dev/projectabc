@@ -9,14 +9,20 @@ const AddEmployee = ({
   registerEmployeeSuccess,
 }) => {
   const [employeeData, setEmployeData] = useState({
-    firstName: "",
-    LastName: "",
-    role: "",
-    nin: "",
-    email: "",
-    accountName: "",
-    accountNumber: "",
+    employee_firstname: "",
+    employee_lastname: "",
+    employee_role: "",
+    employee_nin: "",
+    employee_email: "",
+    employee_accountName: "",
+    employee_accountNumber: "",
+    employee_annual_gross_salary: "",
+    employee_annual_relives: "",
   });
+
+  // function currencyFormat(num) {
+  //   return 'NGN' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  // }
 
   const onHandleChange = (e) => {
     const { name, value } = e.target;
@@ -34,9 +40,6 @@ const AddEmployee = ({
         addEmployeeErr={registerEmployeeErr}
         addEmployeeSuccess={registerEmployeeSuccess}
         addEmployeeLink='addEmployee'
-        getEmployeeData={(annual, relieves) =>
-          setEmployeData({ ...employeeData, annual, relieves })
-        }
       />
     </div>
   );

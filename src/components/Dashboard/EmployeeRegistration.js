@@ -34,7 +34,6 @@ const EmployeeRegistration = ({
       // setRecievedToken("");
     } else {
       setToken(localStorage.getItem("token"));
-      console.log(localStorage.getItem("token"));
     }
   }, []);
 
@@ -58,17 +57,18 @@ const EmployeeRegistration = ({
 
   return (
     <div>
+      {console.log(employeeData)}
       <div className=' w-100 mx-auto employee-form'>
         <div className='pt-5 pb-5'>
           <AddEmployeeForm currentForm={index} />
         </div>
         <div className=' py-1 px-4'>
           <EmployeeProfile
-            employeeFirstName={employeeData["firstName"]}
-            employeeLastName={employeeData["LastName"]}
-            employeeNin={employeeData["nin"]}
-            employeeEmail={employeeData["email"]}
-            employeeRole={employeeData["role"]}
+            employeeFirstName={employeeData["employee_firstname"]}
+            employeeLastName={employeeData["employee_lastname"]}
+            employeeNin={employeeData["employee_nin"]}
+            employeeEmail={employeeData["employee_email"]}
+            employeeRole={employeeData["employee_role"]}
             employeeDepartment={employeeData.department}
             index={index}
             err={err}
@@ -82,14 +82,17 @@ const EmployeeRegistration = ({
             err={err}
             prevQuestion={prevQuestion}
             nextQuestion={nextQuestion}
+            annualSalary={employeeData["employee_annual_gross_salary"]}
+            annualRelieves={employeeData["employee_relives"]}
             getEmployeeData={getEmployeeData}
+            data={employeeData}
           />
           <EmployeeAccountDetails
             index={index}
             err={err}
             onHandleChange={onHandleChange}
-            accountName={employeeData["accountName"]}
-            accountNumber={employeeData["accountNumber"]}
+            accountName={employeeData["employee_bankAccount_name"]}
+            accountNumber={employeeData["employee_bankAccount_number"]}
             prevQuestion={prevQuestion}
             nextQuestion={nextQuestion}
             registerEmployeeAction={registerEmployeeAction}

@@ -9,43 +9,22 @@ const EmployeeSalaryInfo = ({
   err,
   nextQuestion,
   prevQuestion,
-  getEmployeeData,
+  annualSalary,
+  annualRelieves,
+  onHandleChange,
 }) => {
   const [validation, setValidation] = useState({});
-  const [annualSalary, setAnnualSalary] = useState("");
-  const [formattedAnnualSalary, setFormattedAnnualSalary] =
-    useState(annualSalary);
-  const [annualRelieves, setAnnualRelieves] = useState("");
-  const [formattedAnnualRelieves, setFormattedAnnualRelieves] =
-    useState(annualRelieves);
-
-  const FormatNum = (value) => {
-    const formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "NGN",
-    });
-    if (formatter.format(value) === "NGNNaN") {
-      setValidation({
-        employeeAnnualSalary: "number only!",
-      });
-    } else if (formatter.format(value) === "NGNNaN") {
-      setValidation({
-        employeeRelieves: "number only!",
-      });
-    }
-    return formatter.format(value);
-  };
-
-  const onAnnualSalaryChange = (e) => {
-    setAnnualSalary(e.target.value);
-    setFormattedAnnualSalary(e.target.value);
-  };
-
-  const onAnnualRelieveChange = (e) => {
-    setAnnualRelieves(e.target.value);
-    setFormattedAnnualRelieves(e.target.value);
-  };
-
+  /*
+   * console.log(num.toFixed(2))
+   * function currencyFormat(num) {
+   return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+console.log(currencyFormat(2665))
+   */
+  // function currencyFormat(num = 200000000) {
+  //   let numb = num.toFixed(2);
+  //   return "NGN" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  // }
   // GETTING MONTHLY SALARY FROM ANNUAL SALARY / 12
   const getMonthlySalary = useMemo(() => {
     const employeeMonthlySalary = annualSalary / 12;
@@ -70,7 +49,7 @@ const EmployeeSalaryInfo = ({
 
   //  ANNUAL GROSS PAY
   const getAnnualGross = useMemo(() => {
-    const AnnualGross = Number(annualSalary) + Number(annualRelieves);
+    const AnnualGross = annualSalary + annualRelieves;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -81,7 +60,7 @@ const EmployeeSalaryInfo = ({
 
   //MONTHLY GROSS PAY
   const getMonthlyGross = useMemo(() => {
-    let MonthlyGross = Number(annualSalary) + Number(annualRelieves) / 12;
+    let MonthlyGross = annualSalary + annualRelieves / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -95,17 +74,8 @@ const EmployeeSalaryInfo = ({
       setValidation({
         employeeAnnualSalary: "Employee's annual salary is required!",
       });
-    } else if (formattedAnnualSalary === "NGNNaN") {
-      setValidation({
-        employeeAnnualSalary: "number only!",
-      });
-    } else if (formattedAnnualRelieves === "NGNNaN") {
-      setValidation({
-        employeeRelieves: "number only!",
-      });
     } else {
       nextQuestion();
-      getEmployeeData(formattedAnnualSalary, formattedAnnualRelieves);
     }
   };
 
@@ -120,20 +90,17 @@ const EmployeeSalaryInfo = ({
             name='Annual Gross Salary'
             label='Enter annual gross salary'
           />
+          {/* {currencyFormat()} */}
           <Input
-            inputName='annualSalary'
-            type='text'
-            handleChange={onAnnualSalaryChange}
-            value={formattedAnnualSalary}
+            inputName='employee_annual_gross_salary'
+            type='number'
+            handleChange={onHandleChange}
+            value={annualSalary}
             err={validation.employeeAnnualSalary}
-            onFocus={() => setFormattedAnnualSalary("")}
             onPress={() =>
               setValidation({
                 employeeAnnualSalary: "",
               })
-            }
-            onBlur={() =>
-              setFormattedAnnualSalary(FormatNum(formattedAnnualSalary))
             }
           />
         </Form.Group>
@@ -158,18 +125,16 @@ const EmployeeSalaryInfo = ({
             label='Input employee annual relieves '
           />
           <Input
-            inputName='annualRelieves'
-            type='text'
-            handleChange={onAnnualRelieveChange}
-            value={formattedAnnualRelieves}
+            inputName='employee_relives'
+            type='number'
+            handleChange={onHandleChange}
+            value={annualRelieves}
             err={validation.employeeRelieves}
-            onFocus={() => setFormattedAnnualRelieves("")}
             onPress={() =>
               setValidation({
                 employeeRelieves: "",
               })
             }
-            onBlur={() => setFormattedAnnualRelieves(FormatNum(annualRelieves))}
           />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>

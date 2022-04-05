@@ -252,7 +252,7 @@ const EmployeeAccountDetails = ({
             label='Enter Employee Account Name '
           />
           <Input
-            inputName='accountName'
+            inputName='employee_bankAccount_name'
             type='text'
             handleChange={onHandleChange}
             value={accountName}
@@ -270,7 +270,7 @@ const EmployeeAccountDetails = ({
             label='Enter Employee Account Number'
           />
           <Input
-            inputName='accountNumber'
+            inputName='employee_bankAccount_number'
             type='number'
             handleChange={onHandleChange}
             value={accountNumber}
@@ -287,7 +287,7 @@ const EmployeeAccountDetails = ({
         <Form.Group as={Col}>
           <DashBoardText name='Bank Name' label='Enter Employee Bank Name' />
           <Input
-            inputName='bankName'
+            inputName='employee_bankname'
             type='text'
             handleChange={(e) => {
               setFilterBank(e.target.value);

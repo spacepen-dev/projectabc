@@ -1,11 +1,14 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import DataTable from "react-data-table-component";
-import TableSpinner from "./TableSpinner";
+// import TableSpinner from "./TableSpinner";
 import { FetchCompanyEmployee } from "../../Actions";
+import { DeleteEmployee, EditEmployee } from "./OptionsModal";
 
-const ViewEmployee = ({ FetchCompanyEmployee }) => {
+const ViewEmployee = ({ FetchCompanyEmployee, companyEmployee }) => {
   const [token, setToken] = useState("");
+  const [employeeData, setEmployeeData] = useState([]);
+  const [showEditModal, setEditModal] = useState(false);
 
   // FETCH  TOKEN FROM CACHE
   useEffect(() => {
@@ -19,58 +22,72 @@ const ViewEmployee = ({ FetchCompanyEmployee }) => {
 
   // FETCH ALL COMPANY EMPLOYEE DATA
   useEffect(() => {
-    FetchCompanyEmployee("Spacepen", token);
+    FetchCompanyEmployee(
+      "5245ff745564886c0aadf892117d597601b307acba4f54f55aafc33bb06bbbf6ca803e9a"
+    );
   }, []);
 
-  const displaySVG = () => {
-    return (
-      <div
-        className='h-100 w-100 d-flex align-items-center justify-content-center '
-        id='circle-svg-container'
-        style={{ cursor: "pointer" }}>
-        <svg
-          id='circle-svg'
-          width='15'
-          height='15'
-          viewBox='0 0 23 5'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'>
-          <circle cx='2.5' cy='2.5' r='2.5' fill='#659CF0' />
-          <circle cx='11.5' cy='2.5' r='2.5' fill='#659CF0' />
-          <circle cx='20.5' cy='2.5' r='2.5' fill='#659CF0' />
-        </svg>
-      </div>
-    );
-  };
+  // GET EMPLOYEE DATA
 
-  /**
- * 
- * const handleButtonClick = () => {
-14		
-15		console.log('clicked');
-16	};
- * 	{
-25				
-26				cell: () => <button onClick={handleButtonClick}>Action</button>,
-27				ignoreRowClick: true,
-28				allowOverflow: true,
-29				button: true,
-30			},
- */
+  const heading = [
+    { name: "FIRST NAME", selector: (row) => row.employee_firstname },
+    { name: "LAST NAME", selector: (row) => row.employee_lastname },
+    { name: "EMAIL", selector: (row) => row.employee_email },
+    { name: "DEPARTMENT", selector: (row) => row.employee_department },
+    { name: "ROLE", selector: (row) => row.employee_role },
+    // {
+    //   name: "MONTHLY SALARY",
+    //   selector: (row) => row.employee_monthly_gross_salary,
+    // },
+    {
+      name: "ANNUAL SALARY",
+      selector: (row) => row.employee_annual_gross_salary,
+    },
+    { name: "RELIEVES", selector: (row) => row.employee_relives },
+    { name: "ACCOUNT NAME", selector: (row) => row.employee_bankAccount_name },
+    {
+      name: "ACCOUNT NUMBER",
+      selector: (row) => row.employee_bankAccount_number,
+    },
+    // { name: "BANK NAME", selector: (row) => row.transactionStatus },
+    { name: "EMPLOYEE ID", selector: (row) => row.employee_token },
 
-  const employeeData = (data) => {
-    // console.log(data);
-  };
+    {
+      cell: (row) => <EditEmployee data={row} />,
+      ignoreRowClick: true,
+      allowOverflow: true,
+      name: "EDIT EMPLOYEE DETAILS",
+      // button: true,
+    },
+    {
+      cell: () => <DeleteEmployee />,
+      // ignoreRowClick: true,
+      allowOverflow: true,
+      name: "REMOVE EMPLOYEE",
+      // button: true,
+    },
+  ];
+
+  // GET EMPLOYEE DATA
+  useEffect(() => {
+    if (!companyEmployee) {
+      return null;
+    }
+    setEmployeeData(companyEmployee);
+  });
+
   return (
     <div className=' mt-1'>
       <DataTable
-        // columns={columns}
-        selectableRows
-        // data={Data}
+        columns={heading}
+        // selectableRows
+        data={employeeData.success}
         pagination
-
         // onSelectedRowsChange={checkedEmployeeData}
       />
+      {/* {showEditModal && <OptionsModal data={employeeData} />} */}
+
+      {/* // onSelectedRowsChange={checkedEmployeeData} */}
       {/* <DashboardTable
         heading={heading}
         tableData={data}
@@ -80,5 +97,10 @@ const ViewEmployee = ({ FetchCompanyEmployee }) => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    companyEmployee: state.DashboardReducer.companyEmployee.data,
+  };
+};
 
-export default connect(null, { FetchCompanyEmployee })(ViewEmployee);
+export default connect(mapStateToProps, { FetchCompanyEmployee })(ViewEmployee);

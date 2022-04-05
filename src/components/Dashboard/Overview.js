@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
 import DetailsCard from "./DetailsCard";
 import EyeSVG from "./svg/Eyes";
 import EyesSlash from "./svg/EyesSlash";
@@ -12,9 +12,9 @@ import AccountHistory from "./AccountHistory";
 import TaxHistory from "./TaxHistory";
 import Slider from "./Slider";
 import TableSpinner from "./TableSpinner";
-import EyeSlash from "./svg/EyesSlash";
+import { FetchWalletHistory } from "../../Actions";
 
-const Overview = ({ getPageId }) => {
+const Overview = ({ getPageId, FetchWalletHistory }) => {
   const [pageId, setId] = useState(4);
   const [small, setSmall] = useState("first");
   const [link, setLink] = useState("");
@@ -28,14 +28,29 @@ const Overview = ({ getPageId }) => {
 
   // USE EFFECT TO ADD THE LOADER WHEN FETCH DATA FROM THE DATABASE
   useEffect(() => {
-    console.log("lololo");
     setRequest(true);
     setTimeout(() => {
       setRequest(false);
     }, 3000);
   }, [pageId]);
 
-  // USE EFFECT TO CHNAGE THE LINK ON THE SIDE BAR
+  // GETTING THE TAB ON THE OVERVIEW PAGE THAT WAS SELECTED
+  // AND MAKE REQUEST BASED ON THE TAB SELECTED
+
+  const FetchOverviewData = useCallback(() => {
+    FetchWalletHistory(
+      "ejembithomas61@gmail.com",
+      "5245ff745564886c0aadf892117d597601b307acba4f54f55aafc33bb06bbbf6ca803e9a"
+    );
+  }, [pageId]);
+
+  //FETCH DATA FROM FETCH WALLET ACTION CREATOR
+
+  useEffect(() => {
+    FetchOverviewData();
+  }, []);
+
+  // USE EFFECT TO CHANGE THE LINK ON THE SIDE BAR
   useEffect(() => {
     if (pageId === 4) {
       setLink("/dashboard/view/salary/history");
@@ -49,15 +64,6 @@ const Overview = ({ getPageId }) => {
   return (
     <Container fluid className='overview h-100'>
       <div className='d-flex justify-content-between align-items-center details-container '>
-        {/* <DetailsCard
-          heading=" TOTAL BALANCE"
-          number={new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "NGN",
-          }).format(50000000)}
-          // firstSVG={}
-          secondSVG={EyeSVG()}
-        /> */}
         <div className='details-card d-flex align-items-center justify-content-around px-2'>
           <div>
             <span>
@@ -141,5 +147,4 @@ const Overview = ({ getPageId }) => {
     </Container>
   );
 };
-
-export default Overview;
+export default connect(null, { FetchWalletHistory })(Overview);

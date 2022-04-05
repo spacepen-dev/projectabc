@@ -9,6 +9,7 @@ const EditEmployee = ({
   updateEmployeeSuccess,
   UpdateEmployee,
   registrationToken,
+  close,
 }) => {
   const [employeeData, setEmployeData] = useState(initialValue);
 
@@ -17,20 +18,22 @@ const EditEmployee = ({
     setEmployeData({ ...employeeData, [name]: value });
   };
   return (
-    <EmployeeRegistration
-      onHandleChange={onHandleChange}
-      employeeData={employeeData}
-      editEmployeeAction={UpdateEmployee}
-      editEmployeeErr={updateEmployeeErr}
-      editEmployeeSuccess={updateEmployeeSuccess}
-      editEmployeeLink='editEmployee'
-    />
+    <>
+      <EmployeeRegistration
+        onHandleChange={onHandleChange}
+        employeeData={employeeData}
+        editEmployeeAction={UpdateEmployee}
+        editEmployeeErr={updateEmployeeErr}
+        editEmployeeSuccess={updateEmployeeSuccess}
+        editEmployeeLink='editEmployee'
+      />
+    </>
   );
 };
 const mapStateToProps = (state) => {
   return {
     updateEmployeeErr: state.DashboardReducer.updateEmployeeErr,
-    updateEmployeeSuccess: state.DashboardReducer.updateEmployees,
+    updateEmployeeSuccess: state.DashboardReducer.updateEmployee,
   };
 };
 export default connect(mapStateToProps, { UpdateEmployee })(EditEmployee);

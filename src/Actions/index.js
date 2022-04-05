@@ -140,32 +140,32 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
 // UPDATE EMPLOYEE DETAIL ACTION
 export const UpdateEmployee = (values, token) => async (dispatch) => {
   const {
-    firstName,
-    LastName,
-    email,
-    role,
-    department,
-    relieves,
-    nin,
-    annual,
-    accountName,
-    accountNumber,
+    employee_firstname,
+    employee_lastname,
+    employee_email,
+    employee_role,
+    employee_department,
+    employee_relives,
+    employee_nin,
+    employee_annual_gross_salary,
+    employee_bankAccount_name,
+    employee_bankAccount_number,
     filterBank,
   } = values;
   try {
     const data = await BasedURL.post("/updateEmployee.php", {
-      employeeFirstname: firstName,
-      employeeLastname: LastName,
-      employee_email: email,
-      employeeRole: role,
-      employeeDepartment: department,
-      employeeRelieves: relieves,
-      employeeNin: nin,
+      employeeFirstname: employee_firstname,
+      employeeLastname: employee_lastname,
+      employee_email: employee_email,
+      employeeRole: employee_role,
+      employeeDepartment: employee_department,
+      employeeRelieves: employee_relives,
+      employeeNin: employee_nin,
       token,
-      employeeAccountName: accountName,
-      employeeAccountNumber: accountNumber,
+      employeeAccountName: employee_bankAccount_name,
+      employeeAccountNumber: employee_bankAccount_number,
       employeeBankName: filterBank,
-      employeeAgs: annual,
+      employeeAgs: employee_annual_gross_salary,
     });
     dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
   } catch (error) {
@@ -218,8 +218,8 @@ export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
   console.log(transactionId, token);
   try {
     const data = await BasedURL.post("/verifyAccountTopUpPayment.php", {
-      companyToken: token,
       reference: transactionId,
+      companyToken: token,
     });
     dispatch({ type: "VERIFY_TOP_UP", payLoad: data });
   } catch (error) {
@@ -229,15 +229,26 @@ export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
 
 // FETCH COMPANY DATA
 
-export const FetchCompanyEmployee =
-  (companyName, token) => async (dispatch) => {
-    try {
-      const data = await BasedURL.post("/fetchCompanyEmployee.php", {
-        companyName,
-        companyToken: token,
-      });
-      dispatch({ type: "FETCH_COMPANY_EMPLOYEE", payLoad: data });
-    } catch (error) {
-      dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERR_MESSAGE", payLoad: error });
-    }
-  };
+export const FetchCompanyEmployee = (token) => async (dispatch) => {
+  try {
+    const data = await BasedURL.post("/fetchCompanyEmployee.php", {
+      companyToken: token,
+    });
+    dispatch({ type: "FETCH_COMPANY_EMPLOYEE", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERR_MESSAGE", payLoad: error });
+  }
+};
+
+// FETCH ACCOUNT DETAILS
+export const FetchWalletHistory = (email, token) => async (dispatch) => {
+  try {
+    const data = await BasedURL.post("/fetchWalletTransactions.php", {
+      companyEmail: email,
+      companyToken: token,
+    });
+    dispatch({ type: "FETCH_WALLET_HISTORY", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "FETCH_WALLET_HISTORY_ERR_MESSAGE", payLoad: error });
+  }
+};
