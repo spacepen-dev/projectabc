@@ -137,6 +137,7 @@ const CompanyWalletPage = ({
   const [showLoader, setLoader] = useState(false);
   const [success, setSuccess] = useState("");
   const [successModal, setSuccessModal] = useState(false);
+  const [onSuccessRes, setSuccessRes] = useState(null);
 
   const showModalPage = () => {
     setModal(true);
@@ -174,6 +175,7 @@ const CompanyWalletPage = ({
   useEffect(() => {
     if (!paymentResponse) {
       // RETURN NULL
+      return null;
     } else {
       // REMOVE LOADER
       setRequest(false);
@@ -196,7 +198,7 @@ const CompanyWalletPage = ({
         setTransaction({
           ...transactionDetails,
           email: "ejembithomas61@gmail.com",
-          txRef: transactionId,
+          reference: transactionId,
           amount: newAmount * 100,
         });
         // (email, amount, txRef)
@@ -210,20 +212,6 @@ const CompanyWalletPage = ({
     }
   }, [paymentResponse]);
   // ON PAYSTACK SUCCESS RESPONSE
-  const onSuccess = () => {
-    console.log("Thanks for doing business with us! Come back soon!!");
-
-    // SEND DATA TO ACTION CREATOR AND THEN TO THE DATABASE
-
-    setActive(false);
-    setModal(false);
-    const { txRef } = transaction;
-
-    setTimeout(() => {
-      setLoader(true);
-      VerifyTopUp(txRef, token);
-    }, 3000);
-  };
 
   // ON PAYSTACK CLOSE
   const onClose = () => {
@@ -245,6 +233,26 @@ const CompanyWalletPage = ({
     initializePayment(onSuccess, onClose);
     setActive(false);
     // closeModal();
+  };
+
+  const onSuccess = (data) => {
+    // console.log(data);
+    // console.log(initializePayment());
+    // console.log("Thanks for doing business with us! Come back soon!!");
+    // setSuccessRes(data.reference);
+    // console.log(data);
+
+    // SEND DATA TO ACTION CREATOR AND THEN TO THE DATABASE
+    // const { txRef } = data.reference;
+    // console.log(txRef);
+
+    setActive(false);
+    setModal(false);
+
+    setTimeout(() => {
+      setLoader(true);
+      VerifyTopUp(data.reference, token);
+    }, 3000);
   };
 
   // EFFECT FOR NETWORK ERROR
@@ -319,6 +327,7 @@ const CompanyWalletPage = ({
       <div className='col-8 '>
         <div className='container-page col-8 shadow-lg'>
           <span>
+            {console.log(onSuccessRes)}
             <p className='TB'>TOTAL BALANCE</p>
             <div className='money'>
               <p className='amt'>

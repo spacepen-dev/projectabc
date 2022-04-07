@@ -1,7 +1,6 @@
-import React, { useMemo, useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import Datatable from "./Datatable";
-import { AccountData } from "./utils/data";
 import { Form } from "react-bootstrap";
 import { FetchWalletHistory } from "../../Actions";
 
@@ -21,18 +20,18 @@ const Months = [
 ];
 
 const GetMonth = [
-  "January",
-  "February",
-  "March",
-  "April",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
   "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec",
 ];
 
 const Year = [
@@ -52,9 +51,6 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
   const [walletData, setwalletData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(currentDate);
 
-  // const [filterText, setFilterText] = React.useState("");
-
-  // useMemo(() => {}, []);
   const heading = [
     { name: "DATE", selector: (row) => row.date },
     { name: "TRANSACTION REF", selector: (row) => row.transactionId },
@@ -65,16 +61,15 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
   ];
 
   const CallFetchWalletAction = useCallback(() => {
-    FetchWalletHistory(
-      "ejembithomas61@gmail.com",
-      "5245ff745564886c0aadf892117d597601b307acba4f54f55aafc33bb06bbbf6ca803e9a"
-    );
+    const email = localStorage.getItem("email");
+    const companyToken = localStorage.getItem("token");
+    FetchWalletHistory(email, companyToken);
   }, []);
 
   //FETCH DATA FROM FETCH WALLET ACTION CREATOR
   useEffect(() => {
-    // CallFetchWalletAction();
-  }, []);
+    CallFetchWalletAction();
+  }, [CallFetchWalletAction]);
 
   // GET DATA FROM THE FETCH WALLET REDUCER
 
@@ -83,14 +78,8 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
       return null;
     } else {
       const { success } = companyWallet;
-      // console.log(success);
       setwalletData(success);
     }
-    // setwalletData({
-    //   ...success,
-    //   month: new Date().getMonth(),
-    //   year: new Date().getFullYear(),
-    // });
   }, []);
 
   const onDateChange = (e) => {
@@ -99,18 +88,17 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
   };
 
   const filteredItems = walletData.filter(
-    (item) => item
-    // item.month.includes(selectedDate.month) &&
-    // String(item.year).includes(String(selectedDate.year))
+    (item) =>
+      item.month.includes(selectedDate.month) &&
+      String(item.year).includes(String(selectedDate.year))
   );
 
   return (
     <div>
       <div className='paySelect mb-4'>
         <Form className='form'>
-          {console.log(walletData)}
           <Form.Group className='mb-3 form-group' controlId='formSelect'>
-            <Form.Label>Month</Form.Label>
+            <Form.Label>Select a Month</Form.Label>
             <select size='sm' name='month' onChange={onDateChange}>
               {Months.map((month) => {
                 return (
@@ -122,7 +110,7 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
             </select>
           </Form.Group>
           <Form.Group className='mb-3 ms-4 form-group' controlId='formSelect'>
-            <Form.Label>Year</Form.Label>
+            <Form.Label>Select a Year</Form.Label>
             <select size='sm' name='year' onChange={onDateChange}>
               {Year.map((year) => {
                 return (
@@ -143,9 +131,6 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
 const mapStateToProps = (state) => {
   return {
     companyWallet: state.DashboardReducer.companyWallet.data,
-    // paymentErrRes: state.DashboardReducer.accountTopUpErr,
-    // verifyResponse: state.DashboardReducer.verifyTopUp,
-    // verifyErrRes: state.DashboardReducer.verifyTopUpErr,
   };
 };
 

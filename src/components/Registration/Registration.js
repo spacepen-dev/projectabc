@@ -26,7 +26,7 @@ class Registration extends React.Component {
     this.setState({ [name]: value });
 
     if (name === "tax") {
-      this.setState({ checked: true });
+      this.setState({ checked: !this.state.checked });
       this.setState({ [name]: "YES" });
     }
   };

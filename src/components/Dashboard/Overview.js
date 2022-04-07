@@ -55,7 +55,7 @@ const Overview = ({ getPageId, FetchWalletHistory }) => {
     if (pageId === 4) {
       setLink("/dashboard/view/salary/history");
     } else if (pageId === 7) {
-      setLink("/dashboard/view/account/history");
+      setLink("/dashboard/view/wallet/history");
     } else {
       setLink("/dashboard/view/tax/history");
     }

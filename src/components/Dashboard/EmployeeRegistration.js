@@ -57,7 +57,6 @@ const EmployeeRegistration = ({
 
   return (
     <div>
-      {console.log(employeeData)}
       <div className=' w-100 mx-auto employee-form'>
         <div className='pt-5 pb-5'>
           <AddEmployeeForm currentForm={index} />

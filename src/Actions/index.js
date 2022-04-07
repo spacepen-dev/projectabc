@@ -104,32 +104,32 @@ export const CompanyDetails = (email) => async (dispatch) => {
 export const RegisterEmployee = (values, token) => async (dispatch) => {
   console.log(values);
   const {
-    firstName,
-    LastName,
-    email,
-    annual,
-    role,
-    department,
-    relieves,
-    nin,
-    accountName,
-    accountNumber,
+    employee_firstname,
+    employee_lastname,
+    employee_email,
+    employee_annual_gross_salary,
+    employee_role,
+    employee_department,
+    employee_relives,
+    employee_nin,
+    employee_bankAccount_name,
+    employee_bankAccount_number,
     filterBank,
   } = values;
   try {
     const data = await BasedURL.post("/registerEmployee.php", {
-      employeeFirstname: firstName,
-      employeeLastname: LastName,
-      employee_email: email,
-      employeeRole: role,
-      employeeDepartment: department,
-      employeeRelieves: relieves,
-      employeeNin: nin,
+      employeeFirstname: employee_firstname,
+      employeeLastname: employee_lastname,
+      employee_email: employee_email,
+      employeeRole: employee_role,
+      employeeDepartment: employee_department,
+      employeeRelieves: employee_relives,
+      employeeNin: employee_nin,
       token,
-      employeeAccountName: accountName,
-      employeeAccountNumber: accountNumber,
+      employeeAccountName: employee_bankAccount_name,
+      employeeAccountNumber: employee_bankAccount_number,
       employeeBankName: filterBank,
-      employeeAgs: annual,
+      employeeAgs: employee_annual_gross_salary,
     });
     dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
   } catch (error) {
@@ -151,25 +151,50 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
     employee_bankAccount_name,
     employee_bankAccount_number,
     filterBank,
+    employee_token,
   } = values;
   try {
     const data = await BasedURL.post("/updateEmployee.php", {
       employeeFirstname: employee_firstname,
       employeeLastname: employee_lastname,
-      employee_email: employee_email,
+      employeeEmail: employee_email,
       employeeRole: employee_role,
       employeeDepartment: employee_department,
-      employeeRelieves: employee_relives,
+      employeeRelives: employee_relives,
       employeeNin: employee_nin,
-      token,
       employeeAccountName: employee_bankAccount_name,
       employeeAccountNumber: employee_bankAccount_number,
       employeeBankName: filterBank,
-      employeeAgs: employee_annual_gross_salary,
+      employee_ags: employee_annual_gross_salary,
+      employee_mogs: employee_annual_gross_salary / 12,
+      companyToken: token,
+      employeeToken: employee_token,
     });
     dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
   } catch (error) {
     dispatch({ type: "UPDATE_EMPLOYEE_ERR_MESSAGE", payLoad: error });
+  }
+};
+
+// DELETE EMPLOYEE ACTION
+export const DeleteEmployeeAction = (token, values) => async (dispatch) => {
+  const {
+    employee_firstname,
+    employee_lastname,
+    employee_email,
+    employee_token,
+  } = values;
+  try {
+    const data = await BasedURL.post("/deleteEmployee.php", {
+      companyToken: token,
+      employeeToken: employee_token,
+      employeeFirstname: employee_firstname,
+      employeeLastname: employee_lastname,
+      employeeEmail: employee_email,
+    });
+    dispatch({ type: "DELETE_EMPLOYEE", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "DELETE_EMPLOYEE_ERR_MESSAGE", payLoad: error });
   }
 };
 
@@ -213,14 +238,13 @@ export const AccountTopUp = (email, token, amount) => async (dispatch) => {
 };
 
 // VERIFY COMPANY TOP UP
-
 export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
-  console.log(transactionId, token);
   try {
     const data = await BasedURL.post("/verifyAccountTopUpPayment.php", {
       reference: transactionId,
       companyToken: token,
     });
+    console.log(transactionId);
     dispatch({ type: "VERIFY_TOP_UP", payLoad: data });
   } catch (error) {
     dispatch({ type: "VERIFY_TOP_UP_ERR_MESSAGE", payLoad: error });

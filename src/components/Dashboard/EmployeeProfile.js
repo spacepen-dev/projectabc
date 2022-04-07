@@ -53,19 +53,6 @@ const EmployeeProfile = ({
     }
   };
 
-  // FETCH ALL THE DATA FROM THE API (USUALLY A GET REQUEST TO FETCH ALL THE DATA NEEDED ON THE DASHBOARD)
-  useEffect(() => {
-    if (localStorage.getItem("token") || localStorage.getItem("email")) {
-      console.log("empty");
-    }
-    // GET TOKEN
-    console.log(localStorage.getItem("token"));
-    // setToken(localStorage.getItem("token"));
-    // GET EMAIL
-    // setEmail(localStorage.getItem("email"));
-    // FETCH THE DEPARTMENT
-  }, []);
-
   // FETCH DEPARTMENT DATA USE EFFECT
   useEffect(() => {
     // ADD FETCH DEPARTMENT ACTION CREATOR
@@ -173,7 +160,6 @@ const EmployeeProfile = ({
       <Row>
         <Form.Group as={Col}>
           <DashBoardText name='Department' label='Enter employee department' />
-          {console.log(departmentData)}
           <select
             name='employee_department'
             className='select mt-0'

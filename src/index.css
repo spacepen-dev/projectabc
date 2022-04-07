@@ -1682,3 +1682,21 @@ span {
   margin-top: 15px;
   margin-left: 15px;
 }
+
+.modal-footer {
+  border: none;
+  justify-content: center;
+}
+.modal-header {
+  border: none;
+  background-color: rgba(128, 128, 128, 0.158);
+}
+.modal-body {
+  text-align: center;
+}
+.flex {
+  display: flex;
+}
+/* .button {
+  height: 100px;
+} */

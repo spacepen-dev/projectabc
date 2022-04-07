@@ -85,7 +85,7 @@ const EmployeeAccountDetails = ({
       const { error, success } = editEmployeeSuccess.data;
       if (error) {
         setShow(true);
-        setMessage(error);
+        setError(error);
         const removeTimeOut = setTimeout(() => {
           setShow(false);
         }, 4000);
@@ -302,7 +302,7 @@ const EmployeeAccountDetails = ({
             }}
           />
           {showDropDown && (
-            <div id='dropdownList' class='dropdown-content shadow'>
+            <div id='dropdownList' className='dropdown-content shadow'>
               {BankList()}
             </div>
           )}
@@ -325,7 +325,6 @@ const EmployeeAccountDetails = ({
           removeLoader={() => setRequest(false)}
         />
       )}
-
       {success && <SuccessRequestModal message={success} />}
     </Form>
   );

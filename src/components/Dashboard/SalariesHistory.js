@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-import DashboardTable from "./DashboardTable";
+import { Table } from "react-bootstrap";
 
 const SalariesHistory = () => {
   const heading = [
@@ -176,9 +175,6 @@ const SalariesHistory = () => {
     setRequest(true);
   }, []);
 
-  /**
-   * USE MEMO
-   */
   const limitDataTable = (tableData) => {
     let tdata = [];
     for (let i = 0; i < 8; i++) {
@@ -188,12 +184,40 @@ const SalariesHistory = () => {
   };
   return (
     <>
-      <DashboardTable
-        heading={heading}
-        tableData={limitDataTable(tableData)}
-        display='none'
-      />
-      {/* <TableController heading={heading} data={tableData} /> */}
+      <Table
+        className='hover table table-borderless'
+        responsive='sm'
+        style={{ height: "200px" }}>
+        <thead className=''>
+          {heading.map((cur, index) => {
+            let objValues = Object.values(cur);
+            return (
+              <tr key={index}>
+                {objValues.map((cur, index) => {
+                  return <th key={index}>{cur}</th>;
+                })}
+              </tr>
+            );
+          })}
+        </thead>
+        <tbody>
+          {limitDataTable(tableData).map((data, index) => {
+            return (
+              <tr>
+                <td key={index}>{!data ? "empty" : data.paymentDate}</td>
+                <td key={index}>{!data ? "Nill" : data.paymentRef}</td>
+                <td key={index}>{!data ? "empty" : data.taxRef}</td>
+                <td key={index}>{!data ? "empty" : data.employee}</td>
+                <td key={index}>{!data ? "empty" : data.years}</td>
+                <td key={index}>{!data ? "empty" : data.month}</td>
+                <td key={index}>{!data ? "empty" : data.amount}</td>
+                <td key={index}>{!data ? "empty" : data.tax}</td>
+                {/* <td key={index}>{!data ? "empty" : data.year}</td> */}
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
     </>
   );
 };

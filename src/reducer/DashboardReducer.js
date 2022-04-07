@@ -14,6 +14,8 @@ let InitialState = {
   companyEmployeeErr: "",
   companyWallet: {},
   companyWalletErr: "",
+  removeEmployee: null,
+  removeEmployeeErr: "",
 };
 
 const DashboardReducer = (state = InitialState, action) => {
@@ -28,6 +30,10 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, updateEmployee: action.payLoad };
     case "UPDATE_EMPLOYEE_ERR_MESSAGE":
       return { ...state, updateEmployeeErr: action.payLoad };
+    case "DELETE_EMPLOYEE":
+      return { ...state, removeEmployee: action.payLoad };
+    case "DELETE_EMPLOYEE_ERR_MESSAGE":
+      return { ...state, removeEmployeeErr: action.payLoad };
     case "FETCH_DEPARTMENT":
       return { ...state, fetchDepartment: action.payLoad };
     case "FETCH_DEPARTMENT_ERR_MESSAGE":

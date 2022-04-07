@@ -29,7 +29,7 @@ const Settings = ({
   const [showModal, setShow] = useState(false);
   const [maxSalary, setMaxSalary] = useState("");
   const [maxSalaryErr, setMaxSalaryErr] = useState("");
-  const [companySize, setCompanySize] = useState("");
+  const [companySize, setCompanySize] = useState("1-5");
 
   const companySizes = ["1-5", "6-10", "11-20", "21-30", "31-above"];
 

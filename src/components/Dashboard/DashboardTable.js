@@ -20,7 +20,7 @@ const DashboardTable = ({ heading, tableData }) => {
 
   return (
     <>
-      <Table
+      {/* <Table
         className='hover table table-borderless'
         responsive='sm'
         style={{ height: "200px" }}>
@@ -38,19 +38,44 @@ const DashboardTable = ({ heading, tableData }) => {
         </thead>
         <tbody>
           {limitDataTable(data).map((data, index) => {
-            console.log(data);
-            let values = Object.values(data);
+            // console.log(data);
+            let objValues = Object.values(data);
+            console.log(objValues);
             return (
-              <tr key={data.id} id={index}>
-                {values.map((cur, index) => {
-                  return <td key={index}>{cur}</td>;
-                })}
+              <tr>
+                <td key={index}>{objValues[0]}</td>
+                <td key={index}>{objValues[1]}</td>
               </tr>
             );
           })}
         </tbody>
-      </Table>
+      </Table> */}
     </>
   );
 };
 export default DashboardTable;
+
+{
+  /*
+  amount: "200,000"
+employee: "50"
+month: "December"
+paymentDate: "05-09-2022"
+paymentRef: "1023498FA"
+tax: "100,000"
+taxRef: "1023498FA"
+years: "2022"
+  
+  
+  
+  
+  {limitDataTable(data).map((data, index) => {
+            let objValues = Object.values(data);
+            console.log(objValues);
+            return (
+              <tr key={data.id} id={index}>
+                return <td key={index}>{data}</td>;
+              </tr>
+            );
+          })} */
+}
