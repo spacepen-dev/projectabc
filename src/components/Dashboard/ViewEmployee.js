@@ -1,10 +1,11 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import DataTable from "react-data-table-component";
 // import TableSpinner from "./TableSpinner";
 import EditCompanyEmployee from "./EditCompanyEmployee";
 import { FetchCompanyEmployee, DeleteEmployeeAction } from "../../Actions";
 import DeleteEmployee from "./OptionsModal";
+import { Button } from "react-bootstrap";
 
 const ViewEmployee = ({
   FetchCompanyEmployee,
@@ -12,6 +13,7 @@ const ViewEmployee = ({
   DeleteEmployeeAction,
 }) => {
   const [employeeData, setEmployeeData] = useState([]);
+  const [filterValue, setFilterValue] = useState("");
 
   // FETCH ALL COMPANY EMPLOYEE DATA AND FETCH TOKEN FROM CACHE
   useEffect(() => {
@@ -30,10 +32,10 @@ const ViewEmployee = ({
     { name: "EMAIL", selector: (row) => row.employee_email },
     { name: "DEPARTMENT", selector: (row) => row.employee_department },
     { name: "ROLE", selector: (row) => row.employee_role },
-    // {
-    //   name: "MONTHLY SALARY",
-    //   selector: (row) => row.employee_monthly_gross_salary,
-    // },
+    {
+      name: "MONTHLY SALARY",
+      selector: (row) => row.employee_monthly_gross_salary,
+    },
     {
       name: "ANNUAL SALARY",
       selector: (row) => row.employee_annual_gross_salary,
@@ -45,7 +47,6 @@ const ViewEmployee = ({
       selector: (row) => row.employee_bankAccount_number,
     },
     // { name: "BANK NAME", selector: (row) => row.transactionStatus },
-    { name: "EMPLOYEE ID", selector: (row) => row.employee_token },
 
     {
       cell: (row) => <EditCompanyEmployee data={row} />,
@@ -63,26 +64,60 @@ const ViewEmployee = ({
     },
   ];
 
+  const onFilterChange = (e) => {
+    setFilterValue(e.target.value);
+  };
+
   // GET EMPLOYEE DATA
   useEffect(() => {
     if (!companyEmployee) {
       return null;
     }
-    setEmployeeData(companyEmployee);
-  });
+    setEmployeeData(companyEmployee.success);
+  }, [companyEmployee]);
+
+  // const filteredItems = employeeData.filter((item) => {
+  //   return Object.values(item).contains(filterValue);
+  // });
+  //   "employeeFirstname, employeeLastname, employee_email, token, employeeNin,
+  // employeeRole, employeeDepartment, employeeAgs, employee_mogs, employeeRelieves, employeeBankName,  employeeAccountName, employeeAccountNumber, employeeBankCode"
+
+  function searchTable(val) {
+    let filterData = employeeData.filter((list) => {
+      let values = Object.values(list);
+      const searchString = String(values).includes(val.toUpperCase());
+      if (val) {
+        if (!searchString) {
+          // return "data";
+        }
+        return searchString;
+      } else if (!val) {
+        return employeeData;
+      }
+    });
+    return filterData;
+  }
+  // const filteredItems = employeeData.filter((item) => {
+  //   console.log(Object.values(item).includes(filterValue.toUpperCase()));
+  // });
 
   return (
-    <div className=' mt-1'>
-      <DataTable
-        columns={heading}
-        // selectableRows
-        data={employeeData.success}
-        pagination
-        // onSelectedRowsChange={checkedEmployeeData}
-      />
+    <div className='mt-1'>
+      <div className='filter-container d-flex align-items-end'>
+        <div className='w-50 rounded ms-auto px-2  d-flex justify-content-end align-items-center py-2'>
+          <input
+            className=' col-8 filter-input px-2'
+            type='text'
+            placeholder='Search for employees by name, role,department, annual salary, monthly salary...'
+            onChange={onFilterChange}
+          />
+        </div>
+      </div>
+      <DataTable columns={heading} data={searchTable(filterValue)} pagination />
     </div>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     companyEmployee: state.DashboardReducer.companyEmployee.data,

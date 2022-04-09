@@ -94,23 +94,31 @@ const DeleteEmployee = ({ data, DeleteEmployeeAction, removeEmployeeRes }) => {
       return null;
     } else {
       const { success, error } = removeEmployeeRes.data;
-      deleteConfirmation(false);
+      // deleteConfirmation(false);
       if (success) {
-        setMessage({ ...message, successMessage: success });
+        setMessage((state) => {
+          return { ...state, successMessage: success };
+        });
         const successTimeOut = setTimeout(() => {
-          setMessage({ ...message, successMessage: "" });
+          setMessage((state) => {
+            return { ...state, successMessage: "" };
+          });
         }, 4000);
 
         return () => {
           clearTimeout(successTimeOut);
         };
       } else if (error) {
-        setMessage({ ...message, errorMessage: error });
+        setMessage((state) => {
+          return { ...state, errorMessage: error };
+        });
 
         const errorTimeOut = setTimeout(() => {
-          clearTimeout(errorTimeOut);
           setMessage({ ...message, errorMessage: "" });
         }, 4000);
+        return () => {
+          clearTimeout(errorTimeOut);
+        };
       }
     }
   }, [removeEmployeeRes]);

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { FetchDepartment } from "../../Actions";
+import { FetchBankList } from "../../Actions";
 
 const EmployeeProfile = ({
   employeeEmail,
@@ -16,14 +16,11 @@ const EmployeeProfile = ({
   err,
   nextQuestion,
   onHandleChange,
-  FetchDepartment,
+  FetchBankList,
   departmentRes,
 }) => {
   const [validation, setValidation] = useState({});
   const [departmentData, setDepartmentData] = useState([]);
-
-  const [token, setToken] = useState("");
-  const [email, setEmail] = useState("");
 
   const Validation = () => {
     let regexp =
@@ -57,21 +54,16 @@ const EmployeeProfile = ({
   useEffect(() => {
     // ADD FETCH DEPARTMENT ACTION CREATOR
     let timeOut = setTimeout(() => {
-      const email = localStorage.getItem("email");
-      const token = localStorage.getItem("token");
-
-      FetchDepartment(email, token);
+      FetchBankList(
+        localStorage.getItem("email"),
+        localStorage.getItem("token")
+      );
     }, 3000);
 
     return () => {
       clearTimeout(timeOut);
     };
-    /**
-     * ON ERROR SHOW WARNING MODAL AND RELOAD
-     *
-     * ON SUCCESS PUSH TO LOCAL STORAGE
-     * */
-  }, [email, token]);
+  }, [FetchBankList]);
 
   // GET EMPLOYEE DATA FROM THE REDUCER
   useEffect(() => {
@@ -79,7 +71,7 @@ const EmployeeProfile = ({
       return null;
     }
     setDepartmentData(departmentRes.success);
-  }, []);
+  }, [departmentRes]);
 
   if (index !== 1) {
     return null;
@@ -159,11 +151,12 @@ const EmployeeProfile = ({
       </Row>
       <Row>
         <Form.Group as={Col}>
-          <DashBoardText name='Department' label='Enter employee department' />
+          <DashBoardText name='Department' label='Select employee department' />
           <select
             name='employee_department'
             className='select mt-0'
             onChange={onHandleChange}>
+            <option>Select department</option>;
             {departmentData.map(({ companyDepartment }) => {
               return (
                 <option key={companyDepartment} value={companyDepartment}>
@@ -208,4 +201,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { FetchDepartment })(EmployeeProfile);
+export default connect(mapStateToProps, { FetchBankList })(EmployeeProfile);

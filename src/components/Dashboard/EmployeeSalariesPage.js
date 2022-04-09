@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import DataTable from "react-data-table-component";
 
-import { Data } from "./utils/data";
 import { Form, Button } from "react-bootstrap";
 import Loaderbutton from "../LoaderButton";
+import { connect } from "react-redux";
+import { FetchCompanyEmployee } from "../../Actions";
 
-const EmployeeSalariesPage = () => {
+const EmployeeSalariesPage = ({ companyEmployee, FetchCompanyEmployee }) => {
   const Months = [
     new Date().getMonth(),
     new Date().getMonth() + 1,
@@ -56,19 +57,44 @@ const EmployeeSalariesPage = () => {
   const [payment, setPayment] = useState({});
   const [request, setRequest] = useState(false);
 
+  // MAKE REQUEST TO FETCH EMPLOYEE DATA
   useEffect(() => {
-    setTableData(Data);
+    if (!localStorage.getItem("token")) {
+      // SESSION TIME OUT MODAL
+      console.log("no token");
+    }
+    FetchCompanyEmployee(localStorage.getItem("token"));
   }, []);
 
+  // FETCH DATA FROM THE REDUX STORE
+  useEffect(() => {
+    if (!companyEmployee) {
+      return null;
+    }
+    setTableData(companyEmployee.success);
+  }, [companyEmployee]);
+
+  /**
+  //   "employeeFirstname, employeeLastname, employee_email, token, employeeNin,
+  // employeeRole, employeeDepartment, employeeAgs, employee_mogs, employeeRelieves, employeeBankName,  employeeAccountName, employeeAccountNumber, employeeBankCode"
+  "employeeFirstname, employeeLastname, employeeEmail, companyToken, employeeNin,
+employeeRole, employeeDepartment, employee_ags, employee_mogs, employeeRelives,  employeeBankName,  employeeAccountName, employeeAccountNumber, employeeToken"
+   */
+
   const columns = [
-    { name: "S/N", selector: (row) => row.id },
-    { name: "First Name", selector: (row) => row.firstName },
-    { name: "Last Name", selector: (row) => row.lastName },
-    { name: "Roles", selector: (row) => row.role },
-    { name: "Account number", selector: (row) => row.accountNumber },
-    { name: "Bank Name", selector: (row) => row.bankName },
-    { name: "Monthly Gross", selector: (row) => row.month },
-    { name: "Tax", selector: (row) => row.tax },
+    { name: "First Name", selector: (row) => row.employee_firstname },
+    { name: "Last Name", selector: (row) => row.employee_lastname },
+    { name: "Roles", selector: (row) => row.employee_role },
+    {
+      name: "Account number",
+      selector: (row) => row.employee_bankAccount_number,
+    },
+    { name: "Bank Name", selector: (row) => row.employee_bank_name },
+    {
+      name: "Monthly Gross",
+      selector: (row) => row.employee_monthly_gross_salary,
+    },
+    // { name: "Tax", selector: (row) => row.tax },
   ];
 
   const checkedEmployeeData = ({ selectedRows, selectedCount }) => {
@@ -77,7 +103,9 @@ const EmployeeSalariesPage = () => {
 
   const onDateChange = (e) => {
     const { name, value } = e.target;
-    setSelectedDate({ ...selectedDate, [name]: value });
+    setSelectedDate((state) => {
+      return { ...state, [name]: value };
+    });
   };
 
   const sumSelectedSalary = (data) => {
@@ -100,7 +128,6 @@ const EmployeeSalariesPage = () => {
         <Form className='form'>
           <Form.Group className='mb-3 form-group' controlId='formSelect'>
             <Form.Label>Month</Form.Label>
-
             <select size='sm' name='month' onChange={onDateChange}>
               {Months.map((month) => {
                 return (
@@ -131,10 +158,12 @@ const EmployeeSalariesPage = () => {
               type='submit'
               className='payBtn py-2 px-3'
               onClick={function (e) {
-                setPayment({
-                  ...payment,
-                  tax: sumSelectedSalary(selectedData),
-                  month: sumMonthlySalary(selectedData),
+                setPayment((state) => {
+                  return {
+                    ...payment,
+                    tax: sumSelectedSalary(selectedData),
+                    month: sumMonthlySalary(selectedData),
+                  };
                 });
                 setmodalState(true);
               }}>
@@ -148,7 +177,7 @@ const EmployeeSalariesPage = () => {
         <DataTable
           columns={columns}
           selectableRows
-          data={Data}
+          data={tableData}
           pagination
           onSelectedRowsChange={checkedEmployeeData}
         />
@@ -202,7 +231,7 @@ const ModalPayEmployee = ({
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "NGN",
-              }).format(tax)}
+              }).format(0)}
             </p>
             <p class='second-column-paragraph'>
               {new Intl.NumberFormat("en-US", {
@@ -233,4 +262,12 @@ const ModalPayEmployee = ({
   );
 };
 
-export default EmployeeSalariesPage;
+const mapStateToProps = (state) => {
+  return {
+    companyEmployee: state.DashboardReducer.companyEmployee.data,
+  };
+};
+
+export default connect(mapStateToProps, { FetchCompanyEmployee })(
+  EmployeeSalariesPage
+);

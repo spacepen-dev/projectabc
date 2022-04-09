@@ -305,10 +305,11 @@ Label {
   line-height: 0.9rem;
   font-family: var(--mainFont);
 }
-.registration-input {
+.registration-input,
+.filter-input {
   border-color: var(--accent);
   border-radius: 0.313rem !important;
-  border-top: 1px solid var(--accent);
+  border: 1px solid var(--accent);
   /* color: var(--baseColor) !important; */
   color: #1a1a1a !important;
   outline: none;
@@ -318,7 +319,10 @@ Label {
   height: 2.5rem;
   margin: 0.5rem 0;
 }
-
+.filter-input {
+  border-radius: 5rem !important;
+  border-color: var(--accent);
+}
 .field-container {
   margin-bottom: 1.4rem !important;
 }
@@ -578,6 +582,7 @@ otp div:last-child {
 .col-2 {
   width: calc(100vw - 19.5rem);
   height: 100vh;
+  overflow-y: auto;
 }
 
 /*
@@ -1697,6 +1702,7 @@ span {
 .flex {
   display: flex;
 }
-/* .button {
-  height: 100px;
-} */
+
+.filter-container {
+  height: 5rem;
+}

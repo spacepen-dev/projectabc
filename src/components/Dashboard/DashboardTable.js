@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import DataTable from "react-data-table-component";
 
-const DashboardTable = ({ heading, tableData }) => {
-  const [data, setData] = useState([]);
-  const [tableHead, setHead] = useState([]);
+const DashboardTable = ({ heading, data }) => {
+  // const [data, setData] = useState([]);
+  // const [tableHead, setHead] = useState([]);
 
-  useEffect(() => {
-    setHead(heading);
-    setData(tableData);
-  }, [heading, tableData]);
+  // useEffect(() => {
+  //   setHead(heading);
+  //   setData(tableData);
+  // }, [heading, tableData]);
 
-  const limitDataTable = (TransactionData) => {
-    let tdata = [];
-    for (let i = 0; i < 8; i++) {
-      tdata = [...tdata, TransactionData[i]];
-    }
-    return tdata;
-  };
+  // const limitDataTable = (TransactionData) => {
+  //   let tdata = [];
+
+  //   if (!TransactionData) {
+  //     return tdata;
+  //   }
+  //   for (let i = 0; i < 8; i++) {
+  //     tdata = [...tdata, TransactionData[i]];
+  //   }
+  //   return tdata;
+  // };
 
   return (
     <>
+      <DataTable
+        columns={heading}
+        data={data}
+        pagination
+        paginationTotalRows={1}
+        paginationRowsPerPageOptions={[5, 6, 8]}
+        paginationResetDefaultPage
+      />
+
       {/* <Table
         className='hover table table-borderless'
         responsive='sm'

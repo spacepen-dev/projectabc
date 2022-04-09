@@ -197,7 +197,7 @@ const CompanyWalletPage = ({
         setActive(true);
         setTransaction({
           ...transactionDetails,
-          email: "ejembithomas61@gmail.com",
+          email: localStorage.getItem("email"),
           reference: transactionId,
           amount: newAmount * 100,
         });

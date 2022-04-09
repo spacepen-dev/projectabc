@@ -102,7 +102,6 @@ export const CompanyDetails = (email) => async (dispatch) => {
 
 // REGISTER EMPLOYEE ACTION
 export const RegisterEmployee = (values, token) => async (dispatch) => {
-  console.log(values);
   const {
     employee_firstname,
     employee_lastname,
@@ -114,6 +113,7 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
     employee_nin,
     employee_bankAccount_name,
     employee_bankAccount_number,
+    bankCode,
     filterBank,
   } = values;
   try {
@@ -129,7 +129,9 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
       employeeAccountName: employee_bankAccount_name,
       employeeAccountNumber: employee_bankAccount_number,
       employeeBankName: filterBank,
+      employeeBankCode: bankCode,
       employeeAgs: employee_annual_gross_salary,
+      employee_mogs: employee_annual_gross_salary / "12",
     });
     dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
   } catch (error) {
@@ -151,6 +153,7 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
     employee_bankAccount_name,
     employee_bankAccount_number,
     filterBank,
+    bankCode,
     employee_token,
   } = values;
   try {
@@ -166,9 +169,10 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
       employeeAccountNumber: employee_bankAccount_number,
       employeeBankName: filterBank,
       employee_ags: employee_annual_gross_salary,
-      employee_mogs: employee_annual_gross_salary / 12,
+      employee_mogs: employee_annual_gross_salary / "12",
       companyToken: token,
       employeeToken: employee_token,
+      employeeBankCode: bankCode,
     });
     dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
   } catch (error) {
@@ -211,15 +215,27 @@ export const FetchDepartment = (email, token) => async (dispatch) => {
   }
 };
 
-// RESENT OTP ACTION
+// RESENT REGISTRATION OTP ACTION
 export const ResendOTP = (email) => async (dispatch) => {
   try {
-    const data = await BasedURL.post("/fetchRoleDepartment.php", {
+    const data = await BasedURL.post("/resendRegistrationOtp.php", {
       companyEmail: email,
     });
     dispatch({ type: "RESEND_OTP", payLoad: data });
   } catch (error) {
     dispatch({ type: "RESEND_OTP_ERR_MESSAGE", payLoad: error });
+  }
+};
+
+// RESENT LOGIN OTP ACTION
+export const ResendLoginOtp = (email) => async (dispatch) => {
+  try {
+    const data = await BasedURL.post("/resendLoginOtp.php", {
+      companyEmail: email,
+    });
+    dispatch({ type: "RESEND_LOGIN_OTP", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "RESEND_LOGIN_OTP_ERR_MESSAGE", payLoad: error });
   }
 };
 
@@ -274,5 +290,15 @@ export const FetchWalletHistory = (email, token) => async (dispatch) => {
     dispatch({ type: "FETCH_WALLET_HISTORY", payLoad: data });
   } catch (error) {
     dispatch({ type: "FETCH_WALLET_HISTORY_ERR_MESSAGE", payLoad: error });
+  }
+};
+
+// FETCH ACCOUNT DETAILS
+export const FetchBankList = () => async (dispatch) => {
+  try {
+    const data = await BasedURL.post("/fetchbanks.php");
+    dispatch({ type: "FETCH_BANK_LIST", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "FETCH_BANK_LIST_ERR_MESSAGE", payLoad: error });
   }
 };

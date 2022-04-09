@@ -12,14 +12,26 @@ import AccountHistory from "./AccountHistory";
 import TaxHistory from "./TaxHistory";
 import Slider from "./Slider";
 import TableSpinner from "./TableSpinner";
-import { FetchWalletHistory } from "../../Actions";
+import { FetchWalletHistory, FetchDepartment } from "../../Actions";
 
-const Overview = ({ getPageId, FetchWalletHistory }) => {
+const Overview = ({
+  getPageId,
+  FetchWalletHistory,
+  companyEmployee,
+  companyAmount,
+  companyWallet,
+  FetchDepartment,
+}) => {
   const [pageId, setId] = useState(4);
   const [small, setSmall] = useState("first");
   const [link, setLink] = useState("");
   const [request, setRequest] = useState(false);
   const [hideAmount, setHideAmount] = useState(false);
+  const [cardDetails, setCardDetails] = useState({
+    account: 0,
+    totalEmployee: 0,
+    totalAmount: 0,
+  });
 
   const getId = (e) => {
     setId(Number(e.target.id));
@@ -39,19 +51,24 @@ const Overview = ({ getPageId, FetchWalletHistory }) => {
 
   const FetchOverviewData = useCallback(() => {
     FetchWalletHistory(
-      "ejembithomas61@gmail.com",
-      "5245ff745564886c0aadf892117d597601b307acba4f54f55aafc33bb06bbbf6ca803e9a"
+      localStorage.getItem("email"),
+      localStorage.getItem("token")
     );
-  }, [pageId]);
+    FetchDepartment(
+      localStorage.getItem("email"),
+      localStorage.getItem("token")
+    );
+  }, [FetchWalletHistory, FetchDepartment]);
 
   //FETCH DATA FROM FETCH WALLET ACTION CREATOR
 
-  useEffect(() => {
-    FetchOverviewData();
-  }, []);
+  // useEffect(() => {
+  //   FetchOverviewData();
+  // }, []);
 
   // USE EFFECT TO CHANGE THE LINK ON THE SIDE BAR
   useEffect(() => {
+    FetchOverviewData();
     if (pageId === 4) {
       setLink("/dashboard/view/salary/history");
     } else if (pageId === 7) {
@@ -59,7 +76,80 @@ const Overview = ({ getPageId, FetchWalletHistory }) => {
     } else {
       setLink("/dashboard/view/tax/history");
     }
-  }, [pageId]);
+  }, [FetchOverviewData, pageId]);
+
+  // COMPANY TOTAL EMPLOYEE
+  const companyEmployeeFunct = useCallback(() => {
+    if (!companyEmployee) {
+      return null;
+    } else {
+      setCardDetails((state) => {
+        return {
+          ...state,
+          totalEmployee: companyEmployee.success.length,
+          // account: companyWallet.data.success.length,
+          // totalAmount: companyWallet.data.success.length,
+        };
+      });
+    }
+  }, [companyEmployee]);
+
+  /**
+ * useEffect(() => {
+    // ADD FETCH DEPARTMENT ACTION CREATOR
+    let timeOut = setTimeout(() => {
+      const email = localStorage.getItem("email");
+      const token = localStorage.getItem("token");
+
+      FetchDepartment(email, token);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+    /**
+     * ON ERROR SHOW WARNING MODAL AND RELOAD
+     *
+     * ON SUCCESS PUSH TO LOCAL STORAGE
+     * */
+  // }, [email, token]);
+
+  // COMPANY TRANCTIONAL FUNCTION
+  const companyAccountFunct = useCallback(() => {
+    if (!companyWallet) {
+      return null;
+    } else {
+      setCardDetails((state) => {
+        return {
+          ...state,
+          account: companyWallet.success.length,
+        };
+      });
+    }
+  }, [companyWallet]);
+
+  //  COMPANY WALLET FUNCTION
+
+  // const companyTransactionFunct = useCallback(() => {
+  //   if (!companyAmount) {
+  //     return null;
+  //   } else {
+  //     setCardDetails((state) => {
+  //       return {
+  //         ...state,
+  //         totalAmount: companyWallet.success.length,
+  //       };
+  //     });
+  //   }
+  // }, [companyAmount]);
+
+  useEffect(() => {
+    companyAccountFunct();
+    // companyTransactionFunct();
+    companyEmployeeFunct();
+  }, [companyAccountFunct, companyEmployeeFunct]);
+
+  // USE EFFECT TO FETCH THE DATA FOR THE TOTAL EMPLOYEE
 
   return (
     <Container fluid className='overview h-100'>
@@ -75,7 +165,7 @@ const Overview = ({ getPageId, FetchWalletHistory }) => {
                   ? new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: "NGN",
-                    }).format(50000000)
+                    }).format(cardDetails.totalAmount)
                   : "*********"}
               </h2>
             </span>
@@ -88,12 +178,12 @@ const Overview = ({ getPageId, FetchWalletHistory }) => {
         </div>
         <DetailsCard
           heading='TOTAL EMPLOYEES'
-          number='60'
+          number={cardDetails.totalEmployee}
           secondSVG={ProfileWhite()}
         />
         <DetailsCard
           heading='TOTAL TRANSACTIONS'
-          number='50'
+          number={cardDetails.account}
           secondSVG={WhiteWallet()}
         />
       </div>
@@ -147,4 +237,16 @@ const Overview = ({ getPageId, FetchWalletHistory }) => {
     </Container>
   );
 };
-export default connect(null, { FetchWalletHistory })(Overview);
+
+const mapStateToProps = (state) => {
+  return {
+    companyWallet: state.DashboardReducer.companyWallet.data,
+    companyEmployee: state.DashboardReducer.companyEmployee.data,
+    // companyAmount: state.DashboardReducer.companyAmount.data,
+  };
+};
+
+export default connect(mapStateToProps, {
+  FetchWalletHistory,
+  FetchDepartment,
+})(Overview);

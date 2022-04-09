@@ -16,6 +16,8 @@ let InitialState = {
   companyWalletErr: "",
   removeEmployee: null,
   removeEmployeeErr: "",
+  bankList: {},
+  bankListErr: "",
 };
 
 const DashboardReducer = (state = InitialState, action) => {
@@ -54,6 +56,10 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, companyWallet: action.payLoad };
     case "FETCH_WALLET_HISTORY_ERR_MESSAGE":
       return { ...state, companyWalletErr: action.payLoad };
+    case "FETCH_BANK_LIST":
+      return { ...state, bankList: action.payLoad };
+    case "FETCH_BANK_LIST_ERR_MESSAGE":
+      return { ...state, bankListErr: action.payLoad };
     default:
       return state;
   }

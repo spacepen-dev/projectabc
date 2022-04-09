@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
+import { connect } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 
 import DashBoardText from "./DashBoardText";
@@ -10,6 +11,7 @@ import NetWorkErrors from "../NetWorkErrors";
 import SuccessRequestModal from "./SuccessRequestModal";
 
 const EmployeeAccountDetails = ({
+  bankListRes,
   accountName,
   accountNumber,
   index,
@@ -29,6 +31,7 @@ const EmployeeAccountDetails = ({
 }) => {
   const [showDropDown, setDropDown] = useState(false);
   const [filterBank, setFilterBank] = useState("");
+  const [bankCode, setBankCode] = useState("");
   const [validation, setValidation] = useState({});
   const [request, setRequest] = useState(false);
   const [errorMessage, setMessage] = useState("");
@@ -36,10 +39,15 @@ const EmployeeAccountDetails = ({
   const [showModal, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
+  const [bankCodeList, setBankCodeList] = useState([]);
 
   // FETCH THE TOKEN FROM THE LOCAL STORAGE
 
   useEffect(() => {
+    setBankCodeList(() => {
+      return bankListRes.success;
+    });
+
     if (!localStorage.getItem("token")) {
       setRecievedToken("");
     } else {
@@ -140,65 +148,21 @@ const EmployeeAccountDetails = ({
   }, [editEmployeeErr]);
 
   const BankList = () => {
-    const bankName = [
-      "Access Bank Plc",
-      "Accion Microfinance Bank",
-      "Citibank Nigeria Limited",
-      "Covenant Mirofinance Bank Ltd",
-      "Ecobank Nigeria Plc",
-      "Empire Trust Microfinance Bank",
-      "Fidelity Bank Plc",
-      "Ecobank Nigeria Plc.",
-      "Empire Trust Microfinance Bank",
-      "Fidelity Bank Plc",
-      "Fina Trust Microfinance Bank",
-      "Finca Microfinance Bank Limited",
-      "First Bank of Nigeria Limited",
-      "First City Monument Bank Limited",
-      "Globus Bank Limited",
-      "Guaranty Trust Bank Plc",
-      "Heritage Banking Company Ltd",
-      "Infinity Microfinance Bank",
-      "Key Stone Bank",
-      "Kuda Bank",
-      "Mint Finex MFB",
-      "Mkobo MFB",
-      "Mutual Trust Microfinance Bank",
-      "Parallex Bank Limited",
-      "Peace Microfinance Bank",
-      "Pearl Microfinance Bank Limited",
-      "Polaris Bank",
-      "Providus Bank",
-      "Rephidim Microfinance Bank",
-      "Rubies Bank",
-      "Shepherd Trust Microfinance Bank",
-      "Sparkle Bank",
-      "Stanbic IBTC Bank Ltd",
-      "Standard Chartered Bank Nigeria Ltd",
-      "Sterling Bank Plc",
-      "SunTrust Bank Nigeria Limited",
-      "Titan Trust Bank Ltd",
-      "Union Bank of Nigeria Plc",
-      "United Bank For Africa Plc",
-      "Unity Bank Plc",
-      "VFD MFB",
-      "Wema Bank Plc",
-      "Zenith Bank Plc",
-    ];
-    const filterBankName = bankName.filter((name) =>
-      name.toLocaleLowerCase().includes(filterBank)
+    const filterBankName = bankCodeList.filter((cur) =>
+      cur.name.toLocaleLowerCase().includes(filterBank)
     );
-    const displayList = filterBankName.map((cur, index) => {
+    const displayList = filterBankName.map(({ code, name }, index) => {
       return (
         <React.Fragment>
           <li
             key={index}
             class='bankLinks'
             onClick={() => {
-              setFilterBank(cur);
+              setFilterBank(name);
               setDropDown(false);
+              setBankCode(code);
             }}>
-            {cur}
+            {name}
           </li>
         </React.Fragment>
       );
@@ -227,10 +191,16 @@ const EmployeeAccountDetails = ({
       setRequest(true);
       if (editEmployeeLink) {
         // REGISTRATION EMPLOYEE ACTION CREATOR
-        editEmployeeAction({ ...employeeData, filterBank }, receivedToken);
+        editEmployeeAction(
+          { ...employeeData, filterBank, bankCode },
+          receivedToken
+        );
       } else if (addEmployeeLink) {
         // EDIT EMPLOYEE ACTION CREATOR
-        registerEmployeeAction({ ...employeeData, filterBank }, receivedToken);
+        registerEmployeeAction(
+          { ...employeeData, filterBank, bankCode },
+          receivedToken
+        );
       }
     }
   };
@@ -330,4 +300,10 @@ const EmployeeAccountDetails = ({
   );
 };
 
-export default EmployeeAccountDetails;
+const mapStateToProps = (state) => {
+  return {
+    bankListRes: state.DashboardReducer.bankList.data,
+  };
+};
+
+export default connect(mapStateToProps)(EmployeeAccountDetails);
