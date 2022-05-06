@@ -5,7 +5,6 @@ import DataTable from "react-data-table-component";
 import EditCompanyEmployee from "./EditCompanyEmployee";
 import { FetchCompanyEmployee, DeleteEmployeeAction } from "../../Actions";
 import DeleteEmployee from "./OptionsModal";
-import { Button } from "react-bootstrap";
 
 const ViewEmployee = ({
   FetchCompanyEmployee,
@@ -22,7 +21,7 @@ const ViewEmployee = ({
       console.log("no token");
     }
     FetchCompanyEmployee(localStorage.getItem("token"));
-  }, []);
+  }, [FetchCompanyEmployee]);
 
   // GET EMPLOYEE DATA
 
@@ -86,14 +85,15 @@ const ViewEmployee = ({
     let filterData = employeeData.filter((list) => {
       let values = Object.values(list);
       const searchString = String(values).includes(val.toUpperCase());
-      if (val) {
-        if (!searchString) {
-          // return "data";
-        }
-        return searchString;
-      } else if (!val) {
-        return employeeData;
-      }
+      // if (val) {
+      //   if (!searchString) {
+      //     // return "data";
+      //   }
+      //   return searchString;
+      // } else if (!val) {
+      //   return employeeData;
+      // }
+      return val ? searchString : employeeData;
     });
     return filterData;
   }

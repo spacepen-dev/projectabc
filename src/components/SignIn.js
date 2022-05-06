@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -30,24 +30,27 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
     setEmail(accountEmail.data.accountEmail);
   }, [accountEmail]);
 
-  const OtpResponse = ({ data }) => {
-    setRequest(false);
-    const { error, success } = data;
+  const OtpResponse = useCallback(
+    ({ data }) => {
+      setRequest(false);
+      const { error, success } = data;
 
-    if (error) {
-      setError({ dataErr: error });
-      const removeTimeOut = setTimeout(() => {
-        setStore(false);
-      }, 4000);
-      return () => {
-        clearTimeout(removeTimeOut);
-      };
-    } else if (success) {
-      const successMessage = success.split(":")[1];
-      setSuccess(successMessage);
-      navigate("/login/otp");
-    }
-  };
+      if (error) {
+        setError({ dataErr: error });
+        const removeTimeOut = setTimeout(() => {
+          setStore(false);
+        }, 4000);
+        return () => {
+          clearTimeout(removeTimeOut);
+        };
+      } else if (success) {
+        const successMessage = success.split(":")[1];
+        setSuccess(successMessage);
+        navigate("/login/otp");
+      }
+    },
+    [navigate]
+  );
 
   useEffect(() => {
     if (!errMessage) {
@@ -62,14 +65,14 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
     return () => {
       clearTimeout(removeTimeOut);
     };
-  }, [errorMessage]);
+  }, [errMessage]);
 
   useEffect(() => {
     if (!logIN) {
       return null;
     }
     OtpResponse(logIN);
-  }, [logIN]);
+  }, [logIN, OtpResponse]);
 
   useEffect(() => {
     if (error.dataErr) {
@@ -83,12 +86,13 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
     e.preventDefault();
 
     let regexp =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (regexp.test(String(email).toLowerCase())) {
       // MAKE AN API REQUEST TO CHECK IF THE EMAIL IS REGISTERED
       // OBTAIN THE COMPANY DETAILS
       signIn(email);
+      localStorage.setItem("signIn_email", email);
       setError({ inputErr: "" });
       setRequest(true);
     } else {
@@ -122,7 +126,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
                   autoComplete='true'
                   value={email}
                   onChange={onInputChange}
-                  onInput={() => setError({ inputErr: "" })}
+                  onFocus={() => setError({ inputErr: "" })}
                 />
                 <div className=' text-danger fs-6 mt-3 pb-0'>
                   {error.inputErr && `${error.inputErr}`}
@@ -134,9 +138,11 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
                 <Loaderbutton btnName='SUBMIT' request={request} />
               </div>
               <div className='py-4 mt-3 w-75 mb-3 fs-6 text-center'>
-                Don't have an account?{" "}
-                <Link to='/registration/company' className='d-block mt-2 fs-6 '>
-                  <p className='fs-3'>Register Here</p>
+                Don't have an account?
+                <Link
+                  to='/registration/company'
+                  className='d-inline-block ms-2 fs-6 text-decoration-none '>
+                  Register Here
                 </Link>
               </div>
             </div>

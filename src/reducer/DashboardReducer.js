@@ -1,4 +1,6 @@
 let InitialState = {
+  companyDetails: {},
+  companyDetailsErr: "",
   dashboardDetails: {},
   registerEmployees: null,
   updateEmployee: null,
@@ -18,12 +20,20 @@ let InitialState = {
   removeEmployeeErr: "",
   bankList: {},
   bankListErr: "",
+  updateCompany: null,
+  updateCompanyErr: "",
+  resendRegistrationOtp: null,
+  resendRegistrationOtpErr: "",
+  resendLoginOtp: null,
+  resendLoginOtpErr: "",
 };
 
 const DashboardReducer = (state = InitialState, action) => {
   switch (action.type) {
-    case "COMPANY-DETAILS":
-      return { ...state, dashboardDetails: action.payLoad };
+    case "COMPANY_DETAILS":
+      return { ...state, companyDetails: action.payLoad };
+    case "COMPANY_DETAILS_ERR_MESSAGE":
+      return { ...state, companyDetailsErr: action.payLoad };
     case "REGISTER_EMPLOYEE":
       return { ...state, registerEmployees: action.payLoad };
     case "REGISTER_EMPLOYEE_ERR_MESSAGE":
@@ -60,6 +70,18 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, bankList: action.payLoad };
     case "FETCH_BANK_LIST_ERR_MESSAGE":
       return { ...state, bankListErr: action.payLoad };
+    case "UPDATE_COMPANY_DETAILS":
+      return { ...state, updateCompany: action.payLoad };
+    case "UPDATE_COMPANY_DETAILS_ERR_MESSAGE":
+      return { ...state, updateCompanyErr: action.payLoad };
+    case "RESEND_REGISTRATION_OTP":
+      return { ...state, resendRegistrationOtp: action.payLoad };
+    case "RESEND_REGISTRATION_OTP_ERR_MESSAGE":
+      return { ...state, resendRegistrationOtpErr: action.payLoad };
+    case "RESEND_LOGIN_OTP":
+      return { ...state, resendLoginOtp: action.payLoad };
+    case "RESEND_LOGIN_OTP_ERR_MESSAGE":
+      return { ...state, resendLoginOtpErr: action.payLoad };
     default:
       return state;
   }

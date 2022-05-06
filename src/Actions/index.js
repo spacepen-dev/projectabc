@@ -302,3 +302,37 @@ export const FetchBankList = () => async (dispatch) => {
     dispatch({ type: "FETCH_BANK_LIST_ERR_MESSAGE", payLoad: error });
   }
 };
+
+// FETCH ACCOUNT DETAILS
+export const UpdateCompanyDetails = (data) => async (dispatch) => {
+  const {
+    CompanyName,
+    companyEmail,
+    companyToken,
+    regNo,
+    about,
+    address,
+    state,
+    website,
+    companySize,
+    maximumEmployeeSalary,
+  } = data;
+  try {
+    const data = await BasedURL.post("/updateCompanyAccount.php", {
+      companyName: CompanyName,
+      companyEmail,
+      companyToken,
+      companyRegNo: regNo,
+      about,
+      companyAddress: address,
+      companyState: state,
+      companyWebsite: website,
+      companySize,
+      maximumEmployeeSalary,
+    });
+    console.log(state);
+    dispatch({ type: "UPDATE_COMPANY_DETAILS", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "UPDATE_COMPANY_DETAILS_ERR_MESSAGE", payLoad: error });
+  }
+};

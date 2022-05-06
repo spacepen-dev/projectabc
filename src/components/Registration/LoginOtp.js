@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { LoginOTP, ResendOTP } from "../../Actions";
+import { LoginOTP, ResendLoginOtp } from "../../Actions";
 import OTP from "./OTP";
 
 const LoginOtp = ({
@@ -10,7 +10,9 @@ const LoginOtp = ({
   loginOtp,
   loginErr,
   companyEmail,
-  ResendOTP,
+  ResendLoginOtp,
+  resendLoginOtp,
+  resendLoginOtpErr,
 }) => {
   const navigate = useNavigate();
   const close = () => {
@@ -24,7 +26,9 @@ const LoginOtp = ({
       err={loginErr}
       close={close}
       companyEmail={companyEmail}
-      resendOtp={ResendOTP}
+      resendOtp={ResendLoginOtp}
+      resendOtpRes={resendLoginOtp}
+      resendOtpResErr={resendLoginOtpErr}
     />
   );
 };
@@ -34,7 +38,9 @@ const mapStateToProps = (state) => {
     loginOtp: state.RegistrationReducer,
     loginErr: state.RegistrationReducer.loginErr,
     companyEmail: state.RegistrationReducer.loginOtp,
+    resendLoginOtp: state.DashboardReducer.resendLoginOtp,
+    resendLoginOtpErr: state.DashboardReducer.resendLoginOtpErr,
   };
 };
 
-export default connect(mapStateToProps, { LoginOTP, ResendOTP })(LoginOtp);
+export default connect(mapStateToProps, { LoginOTP, ResendLoginOtp })(LoginOtp);

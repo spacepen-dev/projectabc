@@ -44,22 +44,19 @@ const EmployeeAccountDetails = ({
   // FETCH THE TOKEN FROM THE LOCAL STORAGE
 
   useEffect(() => {
-    setBankCodeList(() => {
-      return bankListRes.success;
-    });
-
+    setBankCode(bankCodeList.success);
     if (!localStorage.getItem("token")) {
       setRecievedToken("");
     } else {
       setRecievedToken(localStorage.getItem("token"));
     }
-  }, []);
+  }, [bankCodeList.success]);
 
   // USEEFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL FOR ADD EMPLOYEE
 
   useEffect(() => {
     if (!addEmployeeSuccess) {
-      return null;
+      return;
     } else {
       setRequest(false);
       const { error, success } = addEmployeeSuccess.data;
@@ -85,37 +82,37 @@ const EmployeeAccountDetails = ({
   }, [addEmployeeSuccess]);
 
   // USEEFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL FOR EDIT EMPLOYEE
-  useEffect(() => {
-    if (!editEmployeeSuccess) {
-      return null;
-    } else {
-      setRequest(false);
-      const { error, success } = editEmployeeSuccess.data;
-      if (error) {
-        setShow(true);
-        setError(error);
-        const removeTimeOut = setTimeout(() => {
-          setShow(false);
-        }, 4000);
-        return () => {
-          clearTimeout(removeTimeOut);
-        };
-      } else if (success) {
-        setSuccess(success);
-        const removeTimeOut = setTimeout(() => {
-          setSuccess("");
-        }, 4000);
-        return () => {
-          clearTimeout(removeTimeOut);
-        };
-      }
-    }
-  }, [editEmployeeSuccess]);
+  // useEffect(() => {
+  //   if (!editEmployeeSuccess) {
+  //     return;
+  //   } else {
+  //     setRequest(false);
+  //     const { error, success } = editEmployeeSuccess.data;
+  //     if (error) {
+  //       setShow(true);
+  //       setError(error);
+  //       const removeTimeOut = setTimeout(() => {
+  //         setShow(false);
+  //       }, 4000);
+  //       return () => {
+  //         clearTimeout(removeTimeOut);
+  //       };
+  //     } else if (success) {
+  //       setSuccess(success);
+  //       const removeTimeOut = setTimeout(() => {
+  //         setSuccess("");
+  //       }, 4000);
+  //       return () => {
+  //         clearTimeout(removeTimeOut);
+  //       };
+  //     }
+  //   }
+  // }, [editEmployeeSuccess]);
 
   // USEEFFECT TO FETCH NETWORK ERROR FOR ADD EMPLOYEE
   useEffect(() => {
     if (!addEmployeeErr) {
-      return null;
+      return;
     } else {
       setRequest(false);
       setShow(true);
@@ -133,7 +130,7 @@ const EmployeeAccountDetails = ({
   // USEEFFECT TO FETCH NETWORK ERROR FOR EDIT EMPLOYEE
   useEffect(() => {
     if (!editEmployeeErr) {
-      return null;
+      return;
     } else {
       setRequest(false);
       setShow(true);
@@ -149,7 +146,7 @@ const EmployeeAccountDetails = ({
 
   const BankList = () => {
     const filterBankName = bankCodeList.filter((cur) =>
-      cur.name.toLocaleLowerCase().includes(filterBank)
+      cur.name.toLowerCase().includes(filterBank)
     );
     const displayList = filterBankName.map(({ code, name }, index) => {
       return (
