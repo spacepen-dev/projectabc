@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { NotificationProvider } from "../src/notification/NotificationProvider";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./components/App";
 import "./index.css";
@@ -14,7 +16,9 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <NotificationProvider>
+        <App />
+      </NotificationProvider>
     </Provider>
   </React.StrictMode>,
   document.querySelector("#root")

@@ -3,19 +3,17 @@ import { Alert } from "react-bootstrap";
 
 const NetWorkErrors = ({ errMessage, serverErr }) => {
   const [networkErr, setErr] = useState("");
-  const networkMessage = () => {
+
+  console.log(serverErr);
+  useEffect(() => {
     if (errMessage) {
       setErr(`${errMessage}. Check Your Internet Connection And Try Again.`);
     } else if (serverErr) {
       setErr(serverErr);
     } else {
-      return null;
+      return;
     }
-  };
-
-  useEffect(() => {
-    networkMessage();
-  }, [networkErr]);
+  }, [errMessage, serverErr]);
 
   return (
     <div className='Overlay-alert'>

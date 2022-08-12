@@ -16,6 +16,8 @@ let InitialState = {
   companyEmployeeErr: "",
   companyWallet: {},
   companyWalletErr: "",
+  companySalary: {},
+  companySalaryErr: "",
   removeEmployee: null,
   removeEmployeeErr: "",
   bankList: {},
@@ -26,6 +28,8 @@ let InitialState = {
   resendRegistrationOtpErr: "",
   resendLoginOtp: null,
   resendLoginOtpErr: "",
+  editDepartment: null,
+  editDepartmentErr: "",
 };
 
 const DashboardReducer = (state = InitialState, action) => {
@@ -66,6 +70,10 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, companyWallet: action.payLoad };
     case "FETCH_WALLET_HISTORY_ERR_MESSAGE":
       return { ...state, companyWalletErr: action.payLoad };
+    case "FETCH_SALARY_HISTORY":
+      return { ...state, companySalary: action.payLoad };
+    case "FETCH_SALARY_HISTORY_ERR_MESSAGE":
+      return { ...state, companySalaryErr: action.payLoad };
     case "FETCH_BANK_LIST":
       return { ...state, bankList: action.payLoad };
     case "FETCH_BANK_LIST_ERR_MESSAGE":
@@ -82,6 +90,10 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, resendLoginOtp: action.payLoad };
     case "RESEND_LOGIN_OTP_ERR_MESSAGE":
       return { ...state, resendLoginOtpErr: action.payLoad };
+    case "EDIT_DEPARTMENT":
+      return { ...state, editDepartment: action.payLoad };
+    case "EDIT_DEPARTMENT_ERR_MESSAGE":
+      return { ...state, editDepartmentErr: action.payLoad };
     default:
       return state;
   }

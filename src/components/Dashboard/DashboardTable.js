@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DataTable from "react-data-table-component";
 
 const DashboardTable = ({ heading, data }) => {
@@ -68,8 +68,7 @@ const DashboardTable = ({ heading, data }) => {
 };
 export default DashboardTable;
 
-{
-  /*
+/*
   amount: "200,000"
 employee: "50"
 month: "December"
@@ -91,4 +90,3 @@ years: "2022"
               </tr>
             );
           })} */
-}

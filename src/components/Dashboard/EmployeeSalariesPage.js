@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 import DataTable from "react-data-table-component";
 
@@ -6,6 +6,7 @@ import { Form, Button } from "react-bootstrap";
 import Loaderbutton from "../LoaderButton";
 import { connect } from "react-redux";
 import { FetchCompanyEmployee } from "../../Actions";
+// import { useCallback } from "react";
 
 const EmployeeSalariesPage = ({ companyEmployee, FetchCompanyEmployee }) => {
   const Months = [
@@ -14,14 +15,13 @@ const EmployeeSalariesPage = ({ companyEmployee, FetchCompanyEmployee }) => {
     new Date().getMonth() + 2,
     new Date().getMonth() + 3,
     new Date().getMonth() + 4,
-    new Date().getMonth() + 5,
-    new Date().getMonth() + 6,
-    new Date().getMonth() + 7,
-    new Date().getMonth() + 8,
+    // new Date().getMonth() + 5,
+    // new Date().getMonth() + 6,
+    // new Date().getMonth() + 7,
+    // new Date().getMonth() + 8,
     // new Date().getMonth() + 9,
-    new Date().getMonth() - 3,
-    new Date().getMonth() - 2,
-    new Date().getMonth() - 1,
+    // new Date().getMonth() - 1,
+    // new Date().getMonth() - 2,
   ];
 
   const GetMonth = [
@@ -58,13 +58,17 @@ const EmployeeSalariesPage = ({ companyEmployee, FetchCompanyEmployee }) => {
   const [request, setRequest] = useState(false);
 
   // MAKE REQUEST TO FETCH EMPLOYEE DATA
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       // SESSION TIME OUT MODAL
       console.log("no token");
     }
-    FetchCompanyEmployee(localStorage.getItem("token"));
-  }, []);
+    FetchCompanyEmployee(
+      localStorage.getItem("token"),
+      localStorage.getItem("email")
+    );
+  }, [FetchCompanyEmployee]);
 
   // FETCH DATA FROM THE REDUX STORE
   useEffect(() => {
@@ -110,16 +114,16 @@ employeeRole, employeeDepartment, employee_ags, employee_mogs, employeeRelives, 
 
   const sumSelectedSalary = (data) => {
     const sumTax = data.reduce((acc, cur) => {
+      // TAX SHOULD BE SUBTRACTED FROM THE MONTHLY SALARY
       return acc + cur.tax;
     }, 0);
     return sumTax;
   };
 
   const sumMonthlySalary = (data) => {
-    const sumMonth = data.reduce((acc, cur) => {
-      return acc + cur.month;
+    return data.reduce((acc, cur) => {
+      return acc + parseFloat(cur.employee_monthly_gross_salary);
     }, 0);
-    return sumMonth;
   };
 
   return (
@@ -157,10 +161,10 @@ employeeRole, employeeDepartment, employee_ags, employee_mogs, employeeRelives, 
             <Button
               type='submit'
               className='payBtn py-2 px-3'
-              onClick={function (e) {
+              onClick={function () {
                 setPayment((state) => {
                   return {
-                    ...payment,
+                    ...state,
                     tax: sumSelectedSalary(selectedData),
                     month: sumMonthlySalary(selectedData),
                   };
@@ -206,10 +210,10 @@ const ModalPayEmployee = ({
 }) => {
   const { tax, month } = payment;
 
+  console.log(month);
   const onConfirm = (e) => {
     e.preventDefault();
     onRequestClick(true);
-    // console.log(request);
   };
   return ReactDOM.createPortal(
     <div>

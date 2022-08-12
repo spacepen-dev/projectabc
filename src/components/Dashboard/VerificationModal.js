@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Button } from "react-bootstrap";
+
 const VerificationModal = ({ message, close, svg }) => {
   return ReactDOM.createPortal(
     <div className='Overlay-alert' onClick={close}>

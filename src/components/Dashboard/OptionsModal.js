@@ -26,7 +26,7 @@ const DeleteConfirmationModal = ({
     return () => {
       clearTimeout(timeOut);
     };
-  }, []);
+  }, [removeLoader]);
 
   const OnConfirmation = (e) => {
     e.preventDefault();
@@ -93,7 +93,7 @@ const DeleteEmployee = ({ data, DeleteEmployeeAction, removeEmployeeRes }) => {
     if (!removeEmployeeRes) {
       return null;
     } else {
-      const { success, error } = removeEmployeeRes.data;
+      let { success, error } = removeEmployeeRes.data;
       // deleteConfirmation(false);
       if (success) {
         setMessage((state) => {
@@ -113,7 +113,7 @@ const DeleteEmployee = ({ data, DeleteEmployeeAction, removeEmployeeRes }) => {
           return { ...state, errorMessage: error };
         });
 
-        const errorTimeOut = setTimeout(() => {
+        const errorTimeOut = setTimeout((message) => {
           setMessage({ ...message, errorMessage: "" });
         }, 4000);
         return () => {

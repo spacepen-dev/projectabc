@@ -15,12 +15,12 @@ class EditCompanyInfo extends Component {
 
     this.state = {
       state: this.props.data.state,
-      regNo: this.props.data.regNo,
+      regNo: this.props.data.registration_number,
       CompanyName: this.props.data.CompanyName,
       address: this.props.data.address,
       website: this.props.data.website,
       about: this.props.data.about,
-      companySize: this.props.data.companySize,
+      tin: "",
       maximumEmployeeSalary: this.props.data.maximumEmployeeSalary,
       request: false,
       networkErr: "",
@@ -85,9 +85,11 @@ class EditCompanyInfo extends Component {
       this.setState({
         validation: { companyNameErr: "Company name is required!" },
       });
-    } else if (!this.state.companySize) {
+    } else if (!this.state.tin) {
       this.setState({
-        validation: { companySizeErr: "Company size is required!" },
+        validation: {
+          tinErr: "Tax identification number is required!",
+        },
       });
     } else if (
       !this.state.regNo ||
@@ -172,16 +174,19 @@ class EditCompanyInfo extends Component {
         </Row>
         <Row>
           <Form.Group as={Col} controlId='formGrid'>
-            <DashBoardText name='Company Size' label='Enter company size' />
+            <DashBoardText
+              name='Tax Identification number'
+              label='Enter Tax Identification number'
+            />
             <Input
-              inputName='companySize'
+              inputName='tin'
               type='text'
               handleChange={this.handleChange}
-              value={this.state.companySize}
-              err={this.state.validation["companySizeErr"]}
+              value={this.state.tin}
+              err={this.state.validation["tin"]}
               onPress={() =>
                 this.setState({
-                  validation: { companySizeErr: "" },
+                  validation: { tinErr: "" },
                 })
               }
             />
@@ -245,7 +250,7 @@ class EditCompanyInfo extends Component {
             />
             <FormControl
               as='textarea'
-              Col={10}
+              column={10}
               aria-label='With textarea'
               className='registration-input w-100 border-1'
               name='about'

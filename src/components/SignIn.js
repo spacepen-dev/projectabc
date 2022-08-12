@@ -17,7 +17,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
   const [request, setRequest] = useState(false);
   const [success, setSuccess] = useState("");
   const [errStore, setStore] = useState(false);
-  const [errorMessage, setMessage] = useState("");
+  const [errorMessage, setMessage] = useState(false);
 
   const onInputChange = (e) => {
     setEmail(e.target.value);
@@ -57,9 +57,10 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
       return null;
     }
     setStore(true);
-    setMessage(errMessage.message);
+    setMessage(errMessage);
+    setRequest(false);
     const removeTimeOut = setTimeout(() => {
-      setRequest(false);
+      setMessage("");
       setStore(false);
     }, 4000);
     return () => {
@@ -92,7 +93,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
       // MAKE AN API REQUEST TO CHECK IF THE EMAIL IS REGISTERED
       // OBTAIN THE COMPANY DETAILS
       signIn(email);
-      localStorage.setItem("signIn_email", email);
+      localStorage.setItem("email", email);
       setError({ inputErr: "" });
       setRequest(true);
     } else {
@@ -128,7 +129,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
                   onChange={onInputChange}
                   onFocus={() => setError({ inputErr: "" })}
                 />
-                <div className=' text-danger fs-6 mt-3 pb-0'>
+                <div className=' text-danger fs-6 mt-3 pb-4'>
                   {error.inputErr && `${error.inputErr}`}
                 </div>
               </div>
@@ -150,14 +151,21 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
           {success && (
             <VerificationModal message={`${success}`} close={closeModal} />
           )}
+          {/* {error.dataErr && (
+            <VerificationModal
+              message={`${error.dataErr}`}
+              close={closeModal}
+            />
+          )} */}
           {errStore && (
             <NetWorkErrors
-              errMessage={errorMessage}
+              // message={error.dataErr}
+              errMessage={errorMessage.message}
               serverErr={error.dataErr}
-              close={() => {
-                setStore(null);
-              }}
-              removeLoader={() => setRequest(false)}
+              // close={() => {
+              //   setStore(null);
+              // }}
+              // removeLoader={() => setRequest(false)}
             />
           )}
         </div>

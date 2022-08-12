@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import EmployeeRegistration from "./EmployeeRegistration";
 import { RegisterEmployee } from "../../Actions";
 import { connect } from "react-redux";
@@ -14,10 +14,8 @@ const AddEmployee = ({
     employee_role: "",
     employee_nin: "",
     employee_email: "",
-    employee_accountName: "",
-    employee_accountNumber: "",
     employee_annual_gross_salary: "",
-    employee_annual_relives: "",
+    employee_annual_reliefs: "",
   });
 
   // function currencyFormat(num) {

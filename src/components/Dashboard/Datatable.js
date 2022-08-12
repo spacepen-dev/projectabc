@@ -1,12 +1,12 @@
 import React from "react";
 import DataTable from "react-data-table-component";
-import styled from "styled-components";
+// import styled from "styled-components";
 
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 
 const Datatable = ({ data, columns }) => {
-  const [resetPaginationToggle, setResetPaginationToggle] =
-    React.useState(false);
+  // const [resetPaginationToggle, setResetPaginationToggle] =
+  //   React.useState(false);
 
   // const TextField = styled.input`
   //   height: 32px;

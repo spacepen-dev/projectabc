@@ -5,6 +5,7 @@ import DataTable from "react-data-table-component";
 import EditCompanyEmployee from "./EditCompanyEmployee";
 import { FetchCompanyEmployee, DeleteEmployeeAction } from "../../Actions";
 import DeleteEmployee from "./OptionsModal";
+import { EmployeeIcon } from "./svg/SVG";
 
 const ViewEmployee = ({
   FetchCompanyEmployee,
@@ -21,6 +22,7 @@ const ViewEmployee = ({
       console.log("no token");
     }
     FetchCompanyEmployee(localStorage.getItem("token"));
+    console.log(localStorage.getItem("token"));
   }, [FetchCompanyEmployee]);
 
   // GET EMPLOYEE DATA
@@ -37,9 +39,20 @@ const ViewEmployee = ({
     },
     {
       name: "ANNUAL SALARY",
-      selector: (row) => row.employee_annual_gross_salary,
+      selector: (row) =>
+        new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "NGN",
+        }).format(row.employee_annual_gross_salary),
     },
-    { name: "RELIEVES", selector: (row) => row.employee_relives },
+    {
+      name: "RELIEVES",
+      selector: (row) =>
+        new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "NGN",
+        }).format(row.employee_relives),
+    },
     { name: "ACCOUNT NAME", selector: (row) => row.employee_bankAccount_name },
     {
       name: "ACCOUNT NUMBER",
@@ -51,7 +64,7 @@ const ViewEmployee = ({
       cell: (row) => <EditCompanyEmployee data={row} />,
       ignoreRowClick: true,
       allowOverflow: true,
-      name: "EDIT EMPLOYEE DETAILS",
+      name: "EDIT EMPLOYEE ",
     },
     {
       cell: (row) => (
@@ -93,6 +106,7 @@ const ViewEmployee = ({
       // } else if (!val) {
       //   return employeeData;
       // }
+
       return val ? searchString : employeeData;
     });
     return filterData;
@@ -100,20 +114,20 @@ const ViewEmployee = ({
   // const filteredItems = employeeData.filter((item) => {
   //   console.log(Object.values(item).includes(filterValue.toUpperCase()));
   // });
-
+  console.log(companyEmployee);
   return (
     <div className='mt-1'>
-      <div className='filter-container d-flex align-items-end'>
-        <div className='w-50 rounded ms-auto px-2  d-flex justify-content-end align-items-center py-2'>
+      <div className='filter-container d-flex align-items-end justify-content-center'>
+        <div className='w-100 px-4 py-1'>
           <input
-            className=' col-8 filter-input px-2'
+            className='w-100 filter-input px-2'
             type='text'
             placeholder='Search for employees by name, role,department, annual salary, monthly salary...'
             onChange={onFilterChange}
           />
         </div>
       </div>
-      <DataTable columns={heading} data={searchTable(filterValue)} pagination />
+      <DataTable columns={heading} data={employeeData} pagination />
     </div>
   );
 };

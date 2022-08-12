@@ -2,7 +2,7 @@ import React from "react";
 
 // import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import OnBoardingSVG from "./OnBoardingSVG";
+import { OnBoardingSVG } from "../Dashboard/svg/SVG";
 
 const OnBoarding = () => {
   return (

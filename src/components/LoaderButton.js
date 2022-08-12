@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Spinner } from "react-bootstrap";
 
 const Loaderbutton = ({ btnName, request, btnStyle, spinnerStyle }) => {

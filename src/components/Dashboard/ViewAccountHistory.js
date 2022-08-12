@@ -12,12 +12,20 @@ const Months = [
   new Date().getMonth() + 4,
   new Date().getMonth() + 5,
   new Date().getMonth() + 6,
-  new Date().getMonth() + 7,
-  new Date().getMonth() + 8,
-  new Date().getMonth() + 9,
+  // new Date().getMonth() + 7,
+  // new Date().getMonth() + 8,
+  // new Date().getMonth() + 9,
   new Date().getMonth() - 1,
   new Date().getMonth() - 2,
 ];
+
+function checkMonths() {
+  for (const month of Months) {
+    console.log(month);
+  }
+}
+
+checkMonths();
 
 const GetMonth = [
   "Jan",
@@ -60,11 +68,18 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
     { name: "TRANSACTION STATUS", selector: (row) => row.transactionStatus },
   ];
 
+  const WalletHistoryAction = useCallback(
+    (email, token) => {
+      return FetchWalletHistory(email, token);
+    },
+    [FetchWalletHistory]
+  );
+
   const CallFetchWalletAction = useCallback(() => {
     const email = localStorage.getItem("email");
     const companyToken = localStorage.getItem("token");
-    FetchWalletHistory(email, companyToken);
-  }, []);
+    WalletHistoryAction(email, companyToken);
+  }, [WalletHistoryAction]);
 
   //FETCH DATA FROM FETCH WALLET ACTION CREATOR
   useEffect(() => {
@@ -77,10 +92,11 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
     if (!companyWallet) {
       return null;
     } else {
-      const { success } = companyWallet;
-      setwalletData(success);
+      const { success, error } = companyWallet;
+      if (error) return;
+      else if (success) setwalletData(success);
     }
-  }, []);
+  }, [companyWallet]);
 
   const onDateChange = (e) => {
     const { name, value } = e.target;

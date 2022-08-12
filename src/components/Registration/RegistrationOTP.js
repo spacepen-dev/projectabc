@@ -6,9 +6,18 @@ import { Otp, ResendOTP } from "../../Actions";
 
 import OTP from "./OTP";
 
-const RegistrationOTP = ({ Otp, resOtp, otpErr, companyEmail, ResendOTP }) => {
+const RegistrationOTP = ({
+  Otp,
+  resOtp,
+  otpErr,
+  companyEmail,
+  ResendOTP,
+  resendLoginOtp,
+  resendLoginOtpErr,
+}) => {
   const navigate = useNavigate();
 
+  console.log(resendLoginOtpErr);
   const close = () => {
     navigate("/on-boarding");
   };
@@ -20,6 +29,8 @@ const RegistrationOTP = ({ Otp, resOtp, otpErr, companyEmail, ResendOTP }) => {
       close={close}
       companyEmail={companyEmail}
       resendOtp={ResendOTP}
+      resendOtpRes={resendLoginOtp}
+      resendOtpResErr={resendLoginOtpErr}
     />
   );
 };
@@ -29,6 +40,8 @@ const mapStateToProps = (state) => {
     resOtp: state.RegistrationReducer,
     otpErr: state.RegistrationReducer.otpErr,
     companyEmail: state.RegistrationReducer.otp,
+    resendLoginOtp: state.RegistrationReducer.resendLoginOtp,
+    resendLoginOtpErr: state.RegistrationReducer.resendOtpErr,
   };
 };
 

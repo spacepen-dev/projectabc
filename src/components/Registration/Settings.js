@@ -27,7 +27,7 @@ const Settings = ({
   const [serverErr, setServerErr] = useState("");
   const [success, setSuccess] = useState("");
   const [showModal, setShow] = useState(false);
-  const [maxSalary, setMaxSalary] = useState("");
+  const [maxSalary, setMaxSalary] = useState({ formated: "", value: 0 });
   const [maxSalaryErr, setMaxSalaryErr] = useState("");
   const [companySize, setCompanySize] = useState("1-5");
 
@@ -42,13 +42,17 @@ const Settings = ({
     });
     if (formatter.format(value) === "NGNNaN") {
       setMaxSalaryErr("Use numbers only! Please clear all before typing.");
+
       value = "";
     }
     return formatter.format(value);
   };
 
   const onSalaryChange = (e) => {
-    setMaxSalary(e.target.value);
+    // setMaxSalary(e.target.value);
+    setMaxSalary(() => {
+      return { formated: e.target.value, value: e.target.value };
+    });
   };
   const onChange = (e) => {
     const employeeSize = e.target.value.split("-")[1];
@@ -61,6 +65,7 @@ const Settings = ({
     } else {
       setRequest(false);
       const { error, success } = checkStatus.data;
+      console.log(error);
       if (error) {
         setShow(true);
         setServerErr(error);
@@ -71,35 +76,50 @@ const Settings = ({
           clearTimeout(removeTimeOut);
         };
       } else if (success) {
+        console.log(success);
         setSuccess(success);
         localStorage.setItem("email", formData.email);
         setMessage("");
         setServerErr("");
+      } else {
+        setShow(true);
+        setServerErr(checkStatus.data);
+        const removeTimeOut = setTimeout(() => {
+          setShow(false);
+        }, 4000);
+        return () => {
+          clearTimeout(removeTimeOut);
+        };
       }
     }
-  }, [checkStatus]);
+  }, [checkStatus, formData.email]);
 
   useEffect(() => {
     if (!errMessage) {
       return null;
     }
     setRequest(false);
-    setShow(true);
-    setMessage(errMessage.message);
+    // setShow(true);
+    setMessage(errMessage);
     const removeTimeOut = setTimeout(() => {
       setShow(false);
+      setMessage("");
     }, 4000);
     return () => {
       clearTimeout(removeTimeOut);
     };
   }, [errMessage]);
 
+  // SET COMPANY SIZE TO NUMBER
+
   const Validation = () => {
     if (!maxSalary) {
       setMaxSalaryErr("Maximum salary is required!");
     } else {
+      let numberValue = Number(maxSalary.value);
+      let convertedCompanySize = Number(companySize);
       setRequest(true);
-      companyReg({ ...formData, maxSalary, companySize });
+      companyReg({ ...formData, numberValue, convertedCompanySize });
     }
   };
 
@@ -120,6 +140,7 @@ const Settings = ({
     <div className='mx-auto w-75'>
       {success && <VerificationModal message={success} close={closeModal} />}
       <div>
+        {console.log(checkStatus)}
         <SubHeader>Fill in your company bank account details</SubHeader>
       </div>
       <div>
@@ -155,12 +176,17 @@ const Settings = ({
             <Input
               inputName='maxSalary'
               type='text'
-              value={maxSalary}
+              value={maxSalary.formated}
               handleChange={onSalaryChange}
               err={maxSalaryErr}
               onFocus={() => setMaxSalary("")}
               onPress={() => setMaxSalaryErr("")}
-              onBlur={() => setMaxSalary(FormatNum(maxSalary))}
+              // onBlur={() => setMaxSalary(FormatNum(maxSalary))}
+              onBlur={() => {
+                setMaxSalary((prev) => {
+                  return { ...prev, formated: FormatNum(maxSalary.value) };
+                });
+              }}
             />
           </div>
           <Col className='d-flex toggle-input justify-content-between align-items-center'>
@@ -199,14 +225,8 @@ const Settings = ({
             />
           </div>
         </Form>
-
-        {showModal && (
-          <NetWorkErrors
-            errMessage={errorMessage}
-            serverErr={serverErr}
-            removeLoader={() => setRequest(false)}
-          />
-        )}
+        {errorMessage && <NetWorkErrors errMessage={errorMessage.message} />}
+        {showModal && <NetWorkErrors serverErr={serverErr} />}
       </div>
     </div>
   );

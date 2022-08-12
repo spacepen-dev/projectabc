@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import AminienPay from "./AminienPay.png";
 
 const Logo = () => {
-  return <div className='logo mx-auto'>Logo</div>;
+  return (
+    <div className='logo'>
+      <img src={AminienPay} alt='AminenPay' />
+    </div>
+  );
 };
 export default Logo;

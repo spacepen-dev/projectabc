@@ -21,7 +21,7 @@ const AccountHistory = ({ companyWallet }) => {
       const { success } = companyWallet;
       setwalletData(success);
     }
-  }, []);
+  }, [companyWallet]);
 
   // const limitDataTable = (TransactionData) => {
   //   let tdata = [];

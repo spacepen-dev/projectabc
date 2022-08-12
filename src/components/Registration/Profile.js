@@ -109,7 +109,7 @@ const Profile = ({
             />
             <Input
               inputName='registration'
-              type='number'
+              type='text'
               value={registration}
               handleChange={handleChange}
               err={registrationErr}

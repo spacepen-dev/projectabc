@@ -3,10 +3,7 @@ import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import DetailsCard from "./DetailsCard";
-import EyeSVG from "./svg/Eyes";
-import EyesSlash from "./svg/EyesSlash";
-import WhiteWallet from "./svg/WhiteWallet";
-import ProfileWhite from "./svg/ProfileWhite";
+import { EyeSVG, EyeSlash, WhiteWallet, ProfileWhite } from "./svg/SVG";
 import SalariesHistory from "./SalariesHistory";
 import AccountHistory from "./AccountHistory";
 import TaxHistory from "./TaxHistory";
@@ -37,7 +34,6 @@ const Overview = ({
     setId(Number(e.target.id));
     setSmall(e.target.nextSibling.id);
   };
-
   // USE EFFECT TO ADD THE LOADER WHEN FETCH DATA FROM THE DATABASE
   useEffect(() => {
     setRequest(true);
@@ -50,6 +46,8 @@ const Overview = ({
   // AND MAKE REQUEST BASED ON THE TAB SELECTED
 
   const FetchOverviewData = useCallback(() => {
+    // FetchCompanyEmployee();
+
     FetchWalletHistory(
       localStorage.getItem("email"),
       localStorage.getItem("token")
@@ -173,7 +171,7 @@ const Overview = ({
           <div
             onClick={() => setHideAmount(!hideAmount)}
             style={{ cursor: "pointer" }}>
-            {hideAmount ? EyeSVG() : EyesSlash()}
+            {hideAmount ? EyeSlash() : EyeSVG()}
           </div>
         </div>
         <DetailsCard

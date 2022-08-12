@@ -22,9 +22,9 @@ html {
   --background: #c4c4c4c4;
   --page: #ffffff;
   --mainFont: "Lato", sans-serif;
-  --baseColor: #23549e;
-  --accent: #659cf0;
-  --button: #23549ee5;
+  --baseColor: #4836C8;
+  --accent: #6246D5;
+  --button: #4736c8e0;
   --transparent: rgba(101, 156, 240, 0.1);
 }
 
@@ -246,13 +246,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .dropdown-input:focus {
-  outline: 1px solid #23549e;
+  outline: 1px solid var(--accent);
 }
 
 .dropdown-content {
   display: block;
   width: 100%;
-  border: 1px solid #659cf0;
+  border: 1px solid var(--accent);
   z-index: 1;
   font-size: 0.85rem;
   height: 5rem;
@@ -305,8 +305,7 @@ Label {
   line-height: 0.9rem;
   font-family: var(--mainFont);
 }
-.registration-input,
-.filter-input {
+.registration-input {
   border-color: var(--accent);
   border-radius: 0.313rem !important;
   border: 1px solid var(--accent);
@@ -320,9 +319,22 @@ Label {
   margin: 0.5rem 0;
 }
 .filter-input {
-  border-radius: 5rem !important;
-  border-color: var(--accent);
+  /* border-radius: 5rem !important; */
+  border: 1px solid #f1f1f1;
+  color: #1a1a1a !important;
+  outline: none;
+  height: 2.9rem;
+  transition: all 1ms ease;
+  /* border-color: var(--accent); */
 }
+
+.filter-input:focus,.filter-input:active{
+  
+  border: 1px solid var(--transparent);
+  background-color: var(--transparent);
+}
+
+
 .field-container {
   margin-bottom: 1.4rem !important;
 }
@@ -427,7 +439,7 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px var(--accent);
 }
 
 input:checked + .slider:before {
@@ -569,7 +581,7 @@ otp div:last-child {
 
 .links {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   text-decoration: none;
   color: var(--baseColor);
@@ -1086,7 +1098,7 @@ FORM Validate
 }
 
 .error-btn {
-  background-color: #23549ee5;
+  background-color: var(--transparent);
   font-size: 0.9rem;
   padding: 0.81rem 2.18rem;
   border: none;
@@ -1705,4 +1717,56 @@ span {
 
 .filter-container {
   height: 5rem;
+}
+
+
+
+.notification-main-file {
+  /* position: absolute;
+  right: 0; */
+ color:white;
+  min-width: 210px;
+  max-width: fit-content;
+  height: 40px;
+  border-radius: 5px;
+  margin: 1px;
+ 
+  padding: 0 5px;
+  margin-top: 8px;
+  margin-right: auto;
+  margin-left: auto;
+  animation: slideIn 0.2s ease-out;
+}
+.green {
+  border: 1px solid green;
+  background-color:green;
+}
+.red{
+   border: 1px solid red;
+background-color:red
+}
+.remove{
+  transform: translateX(260px);
+  animation: slideOut 0.2s ease-out;
+}
+ @keyframes slideIn {
+   0% {
+     transform: translateX(260px)
+     
+  }
+  100%{
+    transform: translateX(0)
+
+   }
+ }
+
+ @keyframes slideOut {
+  0% {
+    transform: translateX(0)
+    
+  }
+  100%{
+    transform: translateX(260px)
+
+  }
 }

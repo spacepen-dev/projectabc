@@ -3,6 +3,7 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 
 import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
+import { payTax } from "../../components/Dashboard/utils/personalIncomeTax";
 
 const EmployeeSalaryInfo = ({
   index,
@@ -10,7 +11,7 @@ const EmployeeSalaryInfo = ({
   nextQuestion,
   prevQuestion,
   annualSalary,
-  annualRelieves,
+  annualReliefs,
   onHandleChange,
 }) => {
   const [validation, setValidation] = useState({});
@@ -36,38 +37,40 @@ console.log(currencyFormat(2665))
     return formatter.format(employeeMonthlySalary);
   }, [annualSalary]);
 
-  // GETTING MONTHLY RELIEVES FROM ANNUAL RELIEVES / 12
-  const getMonthlyRelieves = useMemo(() => {
-    const employeeMonthlyRelieves = annualRelieves / 12;
+  // GETTING MONTHLY Reliefs FROM ANNUAL Reliefs / 12
+  const getMonthlyReliefs = useMemo(() => {
+    const employeeMonthlyReliefs = Number(annualReliefs) / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
-    return formatter.format(employeeMonthlyRelieves);
-  }, [annualRelieves]);
+    return formatter.format(employeeMonthlyReliefs);
+  }, [annualReliefs]);
 
-  //  ANNUAL GROSS PAY
-  const getAnnualGross = useMemo(() => {
-    const AnnualGross = annualSalary + annualRelieves;
+  //  ANNUAL TAX DEDUCTION
+  const getAnnualTax = useMemo(() => {
+    const calcualatedTax = payTax(annualSalary);
+    // let MonthlyTax = Number(annualSalary) + Number(annualReliefs) / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
-    return formatter.format(AnnualGross);
-  }, [annualSalary, annualRelieves]);
+    return formatter.format(calcualatedTax);
+  }, [annualSalary]);
 
   //MONTHLY GROSS PAY
-  const getMonthlyGross = useMemo(() => {
-    let MonthlyGross = annualSalary + annualRelieves / 12;
+
+  const getMonthlyTax = useMemo(() => {
+    const calculatedTax = payTax(annualSalary) / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
-    return formatter.format(MonthlyGross);
-  }, [annualSalary, annualRelieves]);
+    return formatter.format(calculatedTax);
+  }, [annualSalary]);
 
   const Validation = () => {
     if (!annualSalary) {
@@ -121,31 +124,31 @@ console.log(currencyFormat(2665))
       <Row>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
-            name='Annual Relieves'
-            label='Input employee annual relieves '
+            name='Annual Reliefs/Allowance'
+            label='Enter employee annual reliefs/allowance'
           />
           <Input
-            inputName='employee_relives'
+            inputName='employee_reliefs'
             type='number'
             handleChange={onHandleChange}
-            value={annualRelieves}
-            err={validation.employeeRelieves}
+            value={annualReliefs}
+            err={validation.employeeReliefs}
             onPress={() =>
               setValidation({
-                employeeRelieves: "",
+                employeeReliefs: "",
               })
             }
           />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
-            name='Monthly Relieves'
-            label='Enter employee monthly relieves'
+            name='Monthly Reliefs/Allowance'
+            label='Employee monthly reliefs/allowance'
           />
           <input
             readOnly
             name='monthly'
-            value={getMonthlyRelieves}
+            value={getMonthlyReliefs}
             className='w-100 border-1
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />
@@ -153,24 +156,27 @@ console.log(currencyFormat(2665))
       </Row>
       <Row>
         <Form.Group as={Col} controlId='formGrid'>
-          <DashBoardText name='Annual Net ' label='Enter annual gross' />
+          <DashBoardText
+            name='Annual tax deduction '
+            label='Annual tax deduction'
+          />
           <input
             readOnly
-            name='annualGross'
-            value={getAnnualGross}
+            name='annualTax'
+            value={getAnnualTax}
             className='w-100 border-1
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
-            name='Monthly Net'
-            label='Enter employee monthly salary'
+            name='Monthly Tax Deduction'
+            label='Employee monthly tax deduction'
           />
           <input
             readOnly
-            name='monthlyGross'
-            value={getMonthlyGross}
+            name='monthlyTax'
+            value={getMonthlyTax}
             className='w-100 border-1
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />

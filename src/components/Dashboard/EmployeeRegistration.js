@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import EmployeeAccountDetails from "./EmployeeAccountDetails";
 import EmployeeSalaryInfo from "./EmployeeSalaryInfo";
 import EmployeeProfile from "./EmployeeProfile";
-import Warning from "../Dashboard/svg/Warning";
+import { Warning } from "./svg/SVG";
 import VerificationModal from "./VerificationModal";
 import AddEmployeeForm from "./AddEmployeeForm";
 
@@ -82,7 +82,7 @@ const EmployeeRegistration = ({
             prevQuestion={prevQuestion}
             nextQuestion={nextQuestion}
             annualSalary={employeeData["employee_annual_gross_salary"]}
-            annualRelieves={employeeData["employee_relives"]}
+            annualReliefs={employeeData["employee_reliefs"]}
             getEmployeeData={getEmployeeData}
             data={employeeData}
           />

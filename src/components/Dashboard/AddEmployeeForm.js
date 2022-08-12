@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Form, ProgressBar } from "react-bootstrap";
 
 const AddEmployeeForm = ({ currentForm }) => {
-  const [active, setActive] = useState("active");
+  // const [active, setActive] = useState("active");
   const [progress, setProgress] = useState("33%");
 
   useEffect(() => {
-    setActive("active");
     if (currentForm === 2) {
       setProgress("67%");
     } else if (currentForm === 3) {

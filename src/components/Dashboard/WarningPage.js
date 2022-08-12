@@ -1,7 +1,6 @@
 import React from "react";
-import Triangle from "./svg/Triangle";
+import { Triangle } from "./svg/SVG";
 import { Button } from "react-bootstrap";
-import { Container } from "react-bootstrap";
 
 const WarningPage = () => {
   return (

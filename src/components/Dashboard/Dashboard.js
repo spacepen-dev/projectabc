@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
 import { Routes, Route } from "react-router-dom";
 import SideBar from "./SideBar";
