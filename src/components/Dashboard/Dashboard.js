@@ -11,6 +11,7 @@ import ViewAccountHistory from "./ViewAccountHistory";
 import EmployeeSalariesPage from "./EmployeeSalariesPage";
 import CompanyWalletPage from "./CompanyWalletPage";
 import CompanyProfile from "./CompanyProfile";
+import SignOut from "./Signout";
 
 const Dashboard = () => {
   const [page, setPage] = useState(1);
@@ -66,6 +67,7 @@ const Dashboard = () => {
 
             <Route path='/company/profile' element={<CompanyProfile />} />
             <Route path='/top/up' element={<CompanyWalletPage />} />
+            <Route path='/signout' element={<SignOut />} />
           </Routes>
         </Col>
       </Row>

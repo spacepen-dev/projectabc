@@ -90,7 +90,6 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
 
       {active.modal && (
         <Modal show={true} centered>
-          {console.log(email)}
           <div className='col-12'>
             <div className='modal-content'>
               <div className='modal-header'>

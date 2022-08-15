@@ -142,7 +142,7 @@ const SideBar = ({ pageId, page }) => {
         <DashBoardLinks
           none='none'
           name='sign-out'
-          pathLink='sign-out'
+          pathLink='signout'
           icon={SignOut()}
           id={11}
           data={(data) => {
