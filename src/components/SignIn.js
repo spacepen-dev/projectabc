@@ -44,6 +44,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
           clearTimeout(removeTimeOut);
         };
       } else if (success) {
+        // localStorage.setItem("aminien_token", success.token);
         const successMessage = success.split(":")[1];
         setSuccess(successMessage);
         navigate("/login/otp");
@@ -93,7 +94,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
       // MAKE AN API REQUEST TO CHECK IF THE EMAIL IS REGISTERED
       // OBTAIN THE COMPANY DETAILS
       signIn(email);
-      localStorage.setItem("email", email);
+      localStorage.setItem("aminien_email", email);
       setError({ inputErr: "" });
       setRequest(true);
     } else {

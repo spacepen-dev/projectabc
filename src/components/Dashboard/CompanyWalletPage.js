@@ -9,8 +9,8 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
   const [active, setActive] = useState(false);
   const [{ email, token }] = useState(() => {
     return {
-      email: localStorage.getItem("email"),
-      token: localStorage.getItem("token"),
+      email: localStorage.getItem("aminien_email"),
+      token: localStorage.getItem("aminien_token"),
     };
   });
 
@@ -27,9 +27,13 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
       const { error, success } = accountDetails;
       if (error) {
       } else {
-        const { CompanyName, accountNumber } = success;
+        const { CompanyName, accountNumber, balance } = success;
         setAccoutDetails(() => {
-          return { accountName: CompanyName, accountNumber: accountNumber };
+          return {
+            accountName: CompanyName,
+            accountNumber: accountNumber,
+            companyBalance: balance,
+          };
         });
       }
     }
@@ -47,7 +51,7 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
                   ? new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: "NGN",
-                    }).format(1000)
+                    }).format(companyAccountDetails.companyBalance)
                   : "*********"}
               </p>
             </div>

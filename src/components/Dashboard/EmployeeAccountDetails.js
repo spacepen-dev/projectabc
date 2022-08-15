@@ -50,10 +50,10 @@ const EmployeeAccountDetails = ({
   // FETCH THE TOKEN FROM THE LOCAL STORAGE
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("aminien_token")) {
       setRecievedToken("");
     } else {
-      setRecievedToken(localStorage.getItem("token"));
+      setRecievedToken(localStorage.getItem("aminien_token"));
     }
   }, []);
 

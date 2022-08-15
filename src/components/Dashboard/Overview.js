@@ -9,7 +9,11 @@ import AccountHistory from "./AccountHistory";
 import TaxHistory from "./TaxHistory";
 import Slider from "./Slider";
 import TableSpinner from "./TableSpinner";
-import { FetchWalletHistory, FetchDepartment } from "../../Actions";
+import {
+  FetchWalletHistory,
+  FetchDepartment,
+  CompanyDetails,
+} from "../../Actions";
 
 const Overview = ({
   getPageId,
@@ -18,6 +22,7 @@ const Overview = ({
   companyAmount,
   companyWallet,
   FetchDepartment,
+  CompanyDetails,
 }) => {
   const [pageId, setId] = useState(4);
   const [small, setSmall] = useState("first");
@@ -46,15 +51,18 @@ const Overview = ({
   // AND MAKE REQUEST BASED ON THE TAB SELECTED
 
   const FetchOverviewData = useCallback(() => {
-    // FetchCompanyEmployee();
+    CompanyDetails(
+      localStorage.getItem("aminien_email"),
+      localStorage.getItem("aminien_token")
+    );
 
     FetchWalletHistory(
-      localStorage.getItem("email"),
-      localStorage.getItem("token")
+      localStorage.getItem("aminien_email"),
+      localStorage.getItem("aminien_token")
     );
     FetchDepartment(
-      localStorage.getItem("email"),
-      localStorage.getItem("token")
+      localStorage.getItem("aminien_email"),
+      localStorage.getItem("aminien_token")
     );
   }, [FetchWalletHistory, FetchDepartment]);
 
@@ -84,8 +92,8 @@ const Overview = ({
       setCardDetails((state) => {
         return {
           ...state,
-          totalEmployee: companyEmployee.success.length,
-          // account: companyWallet.data.success.length,
+          totalEmployee: companyEmployee.success.totalEmployees,
+          totalAmount: companyEmployee.success.balance,
           // totalAmount: companyWallet.data.success.length,
         };
       });
@@ -239,7 +247,7 @@ const Overview = ({
 const mapStateToProps = (state) => {
   return {
     companyWallet: state.DashboardReducer.companyWallet.data,
-    companyEmployee: state.DashboardReducer.companyEmployee.data,
+    companyEmployee: state.DashboardReducer.companyDetails.data,
     // companyAmount: state.DashboardReducer.companyAmount.data,
   };
 };
@@ -247,4 +255,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   FetchWalletHistory,
   FetchDepartment,
+  CompanyDetails,
 })(Overview);

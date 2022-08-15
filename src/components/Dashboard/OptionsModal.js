@@ -31,7 +31,7 @@ const DeleteConfirmationModal = ({
   const OnConfirmation = (e) => {
     e.preventDefault();
     removeLoader(true);
-    const companyToken = localStorage.getItem("token");
+    const companyToken = localStorage.getItem("aminien_token");
 
     deleteAction(companyToken, data);
   };

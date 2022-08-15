@@ -28,8 +28,8 @@ const reducer = (state, action) => {
 };
 
 const localStorageObject = {
-  email: localStorage.getItem("email"),
-  companyToken: localStorage.getItem("token"),
+  email: localStorage.getItem("aminien_email"),
+  companyToken: localStorage.getItem("aminien_token"),
 };
 const AddRoles = ({
   data,

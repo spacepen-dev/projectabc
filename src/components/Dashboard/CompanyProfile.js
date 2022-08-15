@@ -20,8 +20,8 @@ class CompanyProfile extends React.Component {
     super(props);
     this.state = {
       request: true,
-      companyEmail: localStorage.getItem("email"),
-      companyToken: localStorage.getItem("token"),
+      companyEmail: localStorage.getItem("aminien_email"),
+      companyToken: localStorage.getItem("aminien_token"),
       companyData: {},
       departments: [],
       errMessage: "",

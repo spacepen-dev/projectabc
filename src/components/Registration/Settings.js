@@ -76,9 +76,8 @@ const Settings = ({
           clearTimeout(removeTimeOut);
         };
       } else if (success) {
-        console.log(success);
         setSuccess(success);
-        localStorage.setItem("email", formData.email);
+        localStorage.setItem("aminien_email", formData.email);
         setMessage("");
         setServerErr("");
       } else {
@@ -140,7 +139,6 @@ const Settings = ({
     <div className='mx-auto w-75'>
       {success && <VerificationModal message={success} close={closeModal} />}
       <div>
-        {console.log(checkStatus)}
         <SubHeader>Fill in your company bank account details</SubHeader>
       </div>
       <div>

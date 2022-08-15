@@ -8,6 +8,7 @@ import SmallLoader from "../Dashboard/SmallLoader";
 import LoaderModal from "../Dashboard/LoaderModal";
 import NetWorkErrors from "../NetWorkErrors";
 import SuccessRequestModal from "../Dashboard/SuccessRequestModal";
+import { AccountTopUp } from "../../Actions";
 
 let InitialState = {
   request: false,
@@ -80,7 +81,7 @@ const OTP = ({
 
   // COMPANY EMAIL SAVED IN THE LOCAL STORAGE
   useEffect(() => {
-    setComEmail(localStorage.getItem("email"));
+    setComEmail(localStorage.getItem("aminien_email"));
   }, []);
 
   useEffect(() => {
@@ -88,8 +89,9 @@ const OTP = ({
       return;
     } else {
       const token = companyEmail.data.token;
-      console.log(token);
-      localStorage.setItem("token", token);
+      const email = companyEmail.data.email;
+      localStorage.setItem("aminien_token", token);
+      localStorage.setItem("aminien_email", email);
     }
   }, [companyEmail]);
 
@@ -97,7 +99,8 @@ const OTP = ({
     // FETCHING DATA FROM A LOGIN OTP
     if (getValues.loginOtp) {
       // resFunt(getValues.loginOtp);
-      const { error, success } = getValues.loginOtp.data;
+      const { error, success, accountEmail, token } = getValues.loginOtp.data;
+
       setActive(false);
       if (error) {
         setShow(true);
@@ -109,6 +112,8 @@ const OTP = ({
           clearTimeout(id);
         };
       } else if (success) {
+        localStorage.setItem("aminien_email", accountEmail);
+        localStorage.setItem("aminien_token", token);
         setSuccess(success);
         const id = setTimeout(() => {
           setSuccess("");
@@ -121,7 +126,7 @@ const OTP = ({
       // FETCHING DATA FROM A REGISTRATION OTP
     } else if (getValues.otp) {
       // resFunt(getValues.otp);
-      const { error, success } = getValues.otp.data;
+      const { error, success, accountEmail, token } = getValues.otp.data;
       setActive(false);
       if (error) {
         setShow(true);
@@ -133,6 +138,9 @@ const OTP = ({
           clearTimeout(id);
         };
       } else if (success) {
+        localStorage.setItem("aminien_token", token);
+        localStorage.setItem("aminien_email", accountEmail);
+
         setSuccess(success);
         const id = setTimeout(() => {
           setSuccess("");

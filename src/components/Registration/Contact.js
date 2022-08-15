@@ -78,6 +78,7 @@ const Contact = ({
               type='text'
               handleChange={handleChange}
               value={website}
+              placeholder='www.yourwebsite.com'
             />
           </div>
           <div className='button-container double-btns d-flex justify-content-end align-items-end'>

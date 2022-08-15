@@ -27,8 +27,8 @@ class EditCompanyInfo extends Component {
       errorMessage: "",
       successMessage: "",
       showNetworkErrModal: false,
-      companyToken: localStorage.getItem("token"),
-      companyEmail: localStorage.getItem("email"),
+      companyToken: localStorage.getItem("aminien_token"),
+      companyEmail: localStorage.getItem("aminien_email"),
       validation: {},
     };
   }

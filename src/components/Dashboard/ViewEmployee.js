@@ -14,15 +14,16 @@ const ViewEmployee = ({
 }) => {
   const [employeeData, setEmployeeData] = useState([]);
   const [filterValue, setFilterValue] = useState("");
+  const [pending, setPending] = useState(false);
 
   // FETCH ALL COMPANY EMPLOYEE DATA AND FETCH TOKEN FROM CACHE
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("aminien_token")) {
       // SESSION TIME OUT MODAL
       console.log("no token");
     }
-    FetchCompanyEmployee(localStorage.getItem("token"));
-    console.log(localStorage.getItem("token"));
+    setPending(true);
+    FetchCompanyEmployee(localStorage.getItem("aminien_token"));
   }, [FetchCompanyEmployee]);
 
   // GET EMPLOYEE DATA
@@ -85,6 +86,7 @@ const ViewEmployee = ({
     if (!companyEmployee) {
       return null;
     }
+    setPending(false);
     setEmployeeData(companyEmployee.success);
   }, [companyEmployee]);
 
@@ -127,7 +129,13 @@ const ViewEmployee = ({
           />
         </div>
       </div>
-      <DataTable columns={heading} data={employeeData} pagination />
+      <DataTable
+        columns={heading}
+        data={employeeData}
+        progressPending={pending}
+        striped
+        pagination
+      />
     </div>
   );
 };

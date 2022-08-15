@@ -60,13 +60,13 @@ const EmployeeSalariesPage = ({ companyEmployee, FetchCompanyEmployee }) => {
   // MAKE REQUEST TO FETCH EMPLOYEE DATA
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("aminien_token")) {
       // SESSION TIME OUT MODAL
       console.log("no token");
     }
     FetchCompanyEmployee(
-      localStorage.getItem("token"),
-      localStorage.getItem("email")
+      localStorage.getItem("aminien_token"),
+      localStorage.getItem("aminien_email")
     );
   }, [FetchCompanyEmployee]);
 

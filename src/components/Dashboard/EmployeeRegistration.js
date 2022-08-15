@@ -28,12 +28,12 @@ const EmployeeRegistration = ({
 
   // GET THE TOKEN FROM LOCAL STORAGE
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("aminien_token")) {
       // SET THE SESSTION TIME OUR MODAL TO TRUE
       setToken("");
       // setRecievedToken("");
     } else {
-      setToken(localStorage.getItem("token"));
+      setToken(localStorage.getItem("aminien_token"));
     }
   }, []);
 

@@ -76,8 +76,8 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
   );
 
   const CallFetchWalletAction = useCallback(() => {
-    const email = localStorage.getItem("email");
-    const companyToken = localStorage.getItem("token");
+    const email = localStorage.getItem("aminien_email");
+    const companyToken = localStorage.getItem("aminien_token");
     WalletHistoryAction(email, companyToken);
   }, [WalletHistoryAction]);
 

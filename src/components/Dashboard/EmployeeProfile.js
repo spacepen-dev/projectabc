@@ -55,8 +55,8 @@ const EmployeeProfile = ({
     // ADD FETCH DEPARTMENT ACTION CREATOR
     let timeOut = setTimeout(() => {
       FetchBankList(
-        localStorage.getItem("email"),
-        localStorage.getItem("token")
+        localStorage.getItem("aminien_email"),
+        localStorage.getItem("aminien_token")
       );
     }, 3000);
 

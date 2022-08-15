@@ -12,12 +12,11 @@ const RegistrationOTP = ({
   otpErr,
   companyEmail,
   ResendOTP,
-  resendLoginOtp,
-  resendLoginOtpErr,
+  resendOtp,
+  resendOtpErr,
 }) => {
   const navigate = useNavigate();
-
-  console.log(resendLoginOtpErr);
+  console.log(resendOtp);
   const close = () => {
     navigate("/on-boarding");
   };
@@ -29,8 +28,8 @@ const RegistrationOTP = ({
       close={close}
       companyEmail={companyEmail}
       resendOtp={ResendOTP}
-      resendOtpRes={resendLoginOtp}
-      resendOtpResErr={resendLoginOtpErr}
+      resendOtpRes={resendOtp}
+      resendOtpResErr={resendOtpErr}
     />
   );
 };
@@ -40,8 +39,8 @@ const mapStateToProps = (state) => {
     resOtp: state.RegistrationReducer,
     otpErr: state.RegistrationReducer.otpErr,
     companyEmail: state.RegistrationReducer.otp,
-    resendLoginOtp: state.RegistrationReducer.resendLoginOtp,
-    resendLoginOtpErr: state.RegistrationReducer.resendOtpErr,
+    resendOtp: state.RegistrationReducer.resendOtp,
+    resendOtpErr: state.RegistrationReducer.resendOtpErr,
   };
 };
 

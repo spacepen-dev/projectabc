@@ -23,12 +23,15 @@ const TagInput = ({ SubmitDepartment, departmentMessage, departmentErr }) => {
 
   // USEEFFECT TO GET DATA FROM CACHE
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (
+      !localStorage.getItem("aminien_token") ||
+      !localStorage.getItem("aninien_email")
+    ) {
       // SHOW THE WARNING MODAL
       setToken("");
     } else {
-      setToken(localStorage.getItem("token"));
-      setEmail(localStorage.getItem("email"));
+      setToken(localStorage.getItem("aminien_token"));
+      setEmail(localStorage.getItem("aminien_email"));
     }
   }, []);
 

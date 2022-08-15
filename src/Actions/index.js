@@ -137,7 +137,7 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
       employeeBankName: filterBank,
       employeeBankCode: bankCode,
       employeeAgs: employee_annual_gross_salary,
-      employee_mogs: employee_annual_gross_salary / "12",
+      employee_mgs: employee_annual_gross_salary / "12",
     });
     dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
   } catch (error) {
@@ -354,19 +354,6 @@ export const UpdateCompanyDetails = (data) => async (dispatch) => {
   }
 };
 
-// SALARY HISTORY ACTION CREATOR
-export const FetchSalaryHistory = (email, token) => async (dispatch) => {
-  try {
-    const data = await BasedURL.post("/fetchSalaryHistory.php", {
-      companyEmail: email,
-      companyToken: token,
-    });
-    dispatch({ type: "FETCH_SALARY_HISTORY", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "FETCH_SALARY_HISTORY_ERR_MESSAGE", payLoad: error });
-  }
-};
-
 // TAX HISTORY ACTION CREATOR
 
 export const FetchTaxHistory = (email, token) => async (dispatch) => {
@@ -378,5 +365,19 @@ export const FetchTaxHistory = (email, token) => async (dispatch) => {
     dispatch({ type: "FETCH_TAX_HISTORY", payLoad: data });
   } catch (error) {
     dispatch({ type: "FETCH_TAX_HISTORY_ERR_MESSAGE", payLoad: error });
+  }
+};
+
+// SALARY HISTORY ACTION CREATOR
+export const FetchSalaryHistory = (email, token) => async (dispatch) => {
+  console.log(email);
+  try {
+    const data = await BasedURL.post("fetchSalaryHistory.php", {
+      companyEmail: email,
+      companyToken: token,
+    });
+    dispatch({ type: "FETCH_SALARY_HISTORY", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "FETCH_SALARY_HISTORY_ERR_MESSAGE", payLoad: error });
   }
 };
