@@ -8,7 +8,7 @@ const VerificationModal = ({ message, close, svg }) => {
       <div
         className='Modal verify-modal d-flex flex-column align-items-center justify-content-between'
         onClick={(e) => e.stopPropagation()}>
-        <div>{svg}</div>
+        {/* <div>{svg}</div> */}
         <h3 className='ms-5'>{message}</h3>
         <div className='w-100'>
           <Button className='ms-auto d-block px-4 py-2' onClick={close}>

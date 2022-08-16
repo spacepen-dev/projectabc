@@ -1,14 +1,19 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import DataTable from "react-data-table-component";
+import VerificationModal from "./VerificationModal";
 
 import { Form, Button } from "react-bootstrap";
 import Loaderbutton from "../LoaderButton";
 import { connect } from "react-redux";
-import { FetchCompanyEmployee } from "../../Actions";
+import { FetchCompanyEmployee, PayEmployeeSalary } from "../../Actions";
 // import { useCallback } from "react";
 
-const EmployeeSalariesPage = ({ companyEmployee, FetchCompanyEmployee }) => {
+const EmployeeSalariesPage = ({
+  companyEmployee,
+  FetchCompanyEmployee,
+  PayEmployeeSalary,
+}) => {
   const Months = [
     new Date().getMonth(),
     new Date().getMonth() + 1,
@@ -77,13 +82,6 @@ const EmployeeSalariesPage = ({ companyEmployee, FetchCompanyEmployee }) => {
     }
     setTableData(companyEmployee.success);
   }, [companyEmployee]);
-
-  /**
-  //   "employeeFirstname, employeeLastname, employee_email, token, employeeNin,
-  // employeeRole, employeeDepartment, employeeAgs, employee_mogs, employeeRelieves, employeeBankName,  employeeAccountName, employeeAccountNumber, employeeBankCode"
-  "employeeFirstname, employeeLastname, employeeEmail, companyToken, employeeNin,
-employeeRole, employeeDepartment, employee_ags, employee_mogs, employeeRelives,  employeeBankName,  employeeAccountName, employeeAccountNumber, employeeToken"
-   */
 
   const columns = [
     { name: "First Name", selector: (row) => row.employee_firstname },
@@ -194,6 +192,7 @@ employeeRole, employeeDepartment, employee_ags, employee_mogs, employeeRelives, 
           onCloseModal={() => setmodalState(false)}
           request={request}
           onRequestClick={(value) => setRequest(value)}
+          payEmployee={PayEmployeeSalary}
         />
       )}
     </div>
@@ -207,14 +206,16 @@ const ModalPayEmployee = ({
   onCloseModal,
   request,
   onRequestClick,
+  payEmployee,
 }) => {
   const { tax, month } = payment;
 
-  console.log(month);
   const onConfirm = (e) => {
     e.preventDefault();
     onRequestClick(true);
+    payEmployee();
   };
+
   return ReactDOM.createPortal(
     <div>
       <div class='backdrop hidden'></div>
@@ -272,6 +273,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { FetchCompanyEmployee })(
-  EmployeeSalariesPage
-);
+export default connect(mapStateToProps, {
+  FetchCompanyEmployee,
+  PayEmployeeSalary,
+})(EmployeeSalariesPage);

@@ -3,13 +3,15 @@ import DashboardTable from "./DashboardTable";
 import { FetchSalaryHistory } from "../../Actions";
 import { connect } from "react-redux";
 
-const SalariesHistory = ({ FetchSalaryHistory }) => {
+const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
   const [{ token, email }] = useState(() => {
     return {
       token: localStorage.getItem("aminien_token"),
       email: localStorage.getItem("aminien_email"),
     };
   });
+
+  const [data, setData] = useState([]);
 
   const heading = [
     { name: "FIRST NAME", selector: (row) => row.employeeFirstname },
@@ -29,13 +31,30 @@ const SalariesHistory = ({ FetchSalaryHistory }) => {
   useEffect(() => {
     FetchSalaryHistory(email, token);
   }, [token, email, FetchSalaryHistory]);
-  const tableData = [];
+
+  useEffect(() => {
+    if (!companySalary) {
+      return null;
+    } else {
+      const { success } = companySalary;
+      setData(success);
+    }
+  }, [companySalary]);
 
   return (
     <>
-      <DashboardTable heading={heading} data={tableData} />
+      <DashboardTable heading={heading} data={data} />
     </>
   );
 };
 
-export default connect(null, { FetchSalaryHistory })(SalariesHistory);
+const mapStateToProps = (state) => {
+  return {
+    companySalary: state.DashboardReducer.companySalary.data,
+    companySalaryErr: state.DashboardReducer.companySalaryErr,
+  };
+};
+
+export default connect(mapStateToProps, { FetchSalaryHistory })(
+  SalariesHistory
+);

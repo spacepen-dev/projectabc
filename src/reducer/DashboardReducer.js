@@ -30,6 +30,8 @@ let InitialState = {
   resendLoginOtpErr: "",
   editDepartment: null,
   editDepartmentErr: "",
+  payEmployee: "",
+  payEmployeeErr: "",
 };
 
 const DashboardReducer = (state = InitialState, action) => {
@@ -94,6 +96,10 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, editDepartment: action.payLoad };
     case "EDIT_DEPARTMENT_ERR_MESSAGE":
       return { ...state, editDepartmentErr: action.payLoad };
+    case "PAY_EMPLOYEE_SALARY":
+      return { ...state, payEmployee: action.payLoad };
+    case "PAY_EMPLOYEE_SALARY_ERR_MESSAGE":
+      return { ...state, payEmployeeErr: action.payLoad };
     default:
       return state;
   }

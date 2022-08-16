@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 
 const FormHeader = ({ currentForm }) => {
-  const [active, setActive] = useState("active");
+  const [active] = useState("active");
 
   // useEffect(() => {
   //   setActive("active");
