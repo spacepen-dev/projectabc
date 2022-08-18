@@ -20,7 +20,9 @@ class EditCompanyInfo extends Component {
       address: this.props.data.address,
       website: this.props.data.website,
       about: this.props.data.about,
+      companySize: this.props.data.companySize,
       tin: "",
+      phoneNumber: "",
       maximumEmployeeSalary: this.props.data.maximumEmployeeSalary,
       request: false,
       networkErr: "",
@@ -85,12 +87,12 @@ class EditCompanyInfo extends Component {
       this.setState({
         validation: { companyNameErr: "Company name is required!" },
       });
-    } else if (!this.state.tin) {
-      this.setState({
-        validation: {
-          tinErr: "Tax identification number is required!",
-        },
-      });
+      // } else if (!this.state.tin) {
+      //   this.setState({
+      //     validation: {
+      //       tinErr: "Tax identification number is required!",
+      //     },
+      //   });
     } else if (
       !this.state.regNo ||
       this.state.regNo.length < 10 ||
@@ -125,11 +127,12 @@ class EditCompanyInfo extends Component {
       });
     } else {
       this.setState({ request: true });
-      this.props.UpdateCompanyDetails(this.state);
     }
   };
 
   onSubmit = (e) => {
+    this.props.UpdateCompanyDetails(this.state);
+    // console.log(this.state);
     e.preventDefault();
     this.Validation();
   };
@@ -243,6 +246,23 @@ class EditCompanyInfo extends Component {
           </Form.Group>
         </Row>
         <Row>
+          <Form.Group as={Col} controlId='formGrid'>
+            <DashBoardText name='Phone Number' label='Enter Phone Number' />
+            <Input
+              inputName='phoneNumber'
+              type='tel'
+              handleChange={this.handleChange}
+              value={this.state.phoneNumber}
+              err={this.state.validation["phoneNumber"]}
+              onPress={() =>
+                this.setState({
+                  validation: { phoneNumber: "" },
+                })
+              }
+            />
+          </Form.Group>
+        </Row>
+        <Row>
           <Form.Group as={Col}>
             <DashBoardText
               name='Company description'
@@ -260,6 +280,7 @@ class EditCompanyInfo extends Component {
             />
           </Form.Group>
         </Row>
+
         <div className='ms-auto mt-4 double-btns'>
           <Button
             type='button'

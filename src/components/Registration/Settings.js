@@ -31,7 +31,7 @@ const Settings = ({
   const [maxSalaryErr, setMaxSalaryErr] = useState("");
   const [companySize, setCompanySize] = useState("1-5");
 
-  const companySizes = ["1-5", "6-10", "11-20", "21-30", "31-above"];
+  const companySizes = ["School"];
 
   const navigate = useNavigate();
 
@@ -116,9 +116,9 @@ const Settings = ({
       setMaxSalaryErr("Maximum salary is required!");
     } else {
       let numberValue = Number(maxSalary.value);
-      let convertedCompanySize = Number(companySize);
+      // let convertedCompanySize = Number(companySize);
       setRequest(true);
-      companyReg({ ...formData, numberValue, convertedCompanySize });
+      companyReg({ ...formData, numberValue, companySize });
     }
   };
 

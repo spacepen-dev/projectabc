@@ -14,20 +14,34 @@ const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
   const [data, setData] = useState([]);
 
   const heading = [
+    { name: "DATE", selector: (row) => row.date },
     { name: "FIRST NAME", selector: (row) => row.employeeFirstname },
     { name: "LAST NAME", selector: (row) => row.employeeLastname },
     { name: "EMAIL", selector: (row) => row.email },
     { name: "ACCOUNT NAME", selector: (row) => row.accountName },
     { name: "ACCOUNT NUMBER", selector: (row) => row.accountNumber },
-    { name: "TAX DEDUCTED", selector: (row) => row.employeeTax },
-    { name: "SALARY", selector: (row) => row.employeeSalary },
-    { name: "DAY", selector: (row) => row.day },
-    { name: "MONTH", selector: (row) => row.month },
-    { name: "YEAR", selector: (row) => row.year },
+    {
+      name: "TAX DEDUCTED",
+      selector: (row) =>
+        new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "NGN",
+        }).format(row.employeeTax),
+    },
+    {
+      name: "SALARY PAID",
+      selector: (row) =>
+        new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "NGN",
+        }).format(row.employeeSalary),
+    },
+    // { name: "DAY", selector: (row) => row.day },
+    // { name: "MONTH", selector: (row) => row.month },
+    // { name: "YEAR", selector: (row) => row.year },
     { name: "TRANSACTION ID", selector: (row) => row.transactionId },
     { name: "TRANSACTION STATUS", selector: (row) => row.transactionStatus },
   ];
-
   useEffect(() => {
     FetchSalaryHistory(email, token);
   }, [token, email, FetchSalaryHistory]);

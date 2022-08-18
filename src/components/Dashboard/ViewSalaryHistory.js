@@ -87,6 +87,7 @@ const ViewSalaryHisory = ({
   };
 
   const heading = [
+    { name: "DATE", selector: (row) => row.date },
     { name: "FIRST NAME", selector: (row) => row.employeeFirstname },
     { name: "LAST NAME", selector: (row) => row.employeeLastname },
     { name: "EMAIL", selector: (row) => row.email },
@@ -108,9 +109,9 @@ const ViewSalaryHisory = ({
           currency: "NGN",
         }).format(row.employeeSalary),
     },
-    { name: "DAY", selector: (row) => row.day },
-    { name: "MONTH", selector: (row) => row.month },
-    { name: "YEAR", selector: (row) => row.year },
+    // { name: "DAY", selector: (row) => row.day },
+    // { name: "MONTH", selector: (row) => row.month },
+    // { name: "YEAR", selector: (row) => row.year },
     { name: "TRANSACTION ID", selector: (row) => row.transactionId },
     { name: "TRANSACTION STATUS", selector: (row) => row.transactionStatus },
   ];

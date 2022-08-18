@@ -19,14 +19,15 @@ export const companyReg = (values) => async (dispatch) => {
     name,
     registration,
     about,
-    tin,
+    // tin,
     location,
     website,
     address,
     email,
     tax,
     numberValue,
-    convertedCompanySize,
+    companySize,
+    phoneNumber,
   } = values;
   try {
     const data = await BasedURL.post("/registerCompany.php", {
@@ -40,7 +41,8 @@ export const companyReg = (values) => async (dispatch) => {
       email: email,
       tax: tax,
       maximumEmployeeSalary: numberValue,
-      companySize: convertedCompanySize,
+      companyCategory: companySize,
+      phoneNumber,
     });
     dispatch({ type: "REGISTER_COMPANY", payLoad: data });
   } catch (error) {
@@ -137,7 +139,7 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
       employeeBankName: filterBank,
       employeeBankCode: bankCode,
       employeeAgs: employee_annual_gross_salary,
-      employee_mgs: employee_annual_gross_salary / "12",
+      employeeMgs: employee_annual_gross_salary / "12",
     });
     dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
   } catch (error) {
@@ -166,16 +168,16 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
     const data = await BasedURL.post("/updateEmployee.php", {
       employeeFirstname: employee_firstname,
       employeeLastname: employee_lastname,
-      employeeEmail: employee_email,
+      employee_email,
       employeeRole: employee_role,
       employeeDepartment: employee_department,
-      employeeRelives: employee_relives,
+      employeeRelieves: employee_relives,
       employeeNin: employee_nin,
       employeeAccountName: employee_bankAccount_name,
       employeeAccountNumber: employee_bankAccount_number,
       employeeBankName: filterBank,
-      employee_ags: employee_annual_gross_salary,
-      employee_mogs: employee_annual_gross_salary / "12",
+      employeeAgs: employee_annual_gross_salary,
+      employeeMgs: employee_annual_gross_salary / "12",
       companyToken: token,
       employeeToken: employee_token,
       employeeBankCode: bankCode,
@@ -323,6 +325,7 @@ export const FetchBankList = () => async (dispatch) => {
 // FETCH ACCOUNT DETAILS
 
 export const UpdateCompanyDetails = (data) => async (dispatch) => {
+  console.log(data);
   const {
     CompanyName,
     companyEmail,
@@ -332,8 +335,9 @@ export const UpdateCompanyDetails = (data) => async (dispatch) => {
     address,
     state,
     website,
-    companySize,
     maximumEmployeeSalary,
+    tin,
+    phoneNumber,
   } = data;
   try {
     const data = await BasedURL.post("/updateCompanyAccount.php", {
@@ -345,8 +349,10 @@ export const UpdateCompanyDetails = (data) => async (dispatch) => {
       companyAddress: address,
       companyState: state,
       companyWebsite: website,
-      companySize,
+      companyCategory: "School",
       maximumEmployeeSalary,
+      companyTin: tin,
+      phoneNumber,
     });
     dispatch({ type: "UPDATE_COMPANY_DETAILS", payLoad: data });
   } catch (error) {
@@ -384,7 +390,6 @@ export const FetchSalaryHistory = (email, token) => async (dispatch) => {
 
 // PAY SALARY ACTION CREATOR
 export const PayEmployeeSalary = (email, token) => async (dispatch) => {
-  console.log(email);
   try {
     const data = await BasedURL.post("payEmployeeSalaries.php", {
       companyToken:

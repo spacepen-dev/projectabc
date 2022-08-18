@@ -13,9 +13,11 @@ const Contact = ({
   handleChange,
   prevPage,
   nextPage,
+  phoneNumber,
 }) => {
   const [addressErr, setAddressErr] = useState("");
   const [emailErr, setEmailErr] = useState("");
+  const [phoneNumberErr, setPhoneNumberErr] = useState("");
 
   let regexp =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -25,6 +27,12 @@ const Contact = ({
       setAddressErr("Company's address is required!");
     } else if (!email || !regexp.test(String(email).toLowerCase())) {
       setEmailErr("Invalid email address");
+    } else if (
+      !phoneNumber ||
+      phoneNumber.length > 11 ||
+      phoneNumber.length < 11
+    ) {
+      setPhoneNumberErr("Invalid phone number");
     } else {
       nextPage();
     }
@@ -66,6 +74,18 @@ const Contact = ({
               err={emailErr}
               onPress={() => setEmailErr("")}
               value={email}
+            />
+          </div>
+          <div className='field-container'>
+            <LabelText label='Enter company phone number' name='Phone Number' />
+
+            <Input
+              inputName='phoneNumber'
+              type='tel'
+              handleChange={handleChange}
+              err={phoneNumberErr}
+              onPress={() => setPhoneNumberErr("")}
+              value={phoneNumber}
             />
           </div>
           <div className='field-container'>

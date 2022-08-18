@@ -56,7 +56,10 @@ const EmployeeSalariesPage = ({
     year: new Date().getFullYear(),
   };
   const [tableData, setTableData] = useState([]);
-  const [modalState, setmodalState] = useState(false);
+  const [modalState, setmodalState] = useState({
+    modal: false,
+    disabled: true,
+  });
   const [selectedData, setSelectedData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [payment, setPayment] = useState({});
@@ -84,22 +87,69 @@ const EmployeeSalariesPage = ({
   }, [companyEmployee]);
 
   const columns = [
-    { name: "First Name", selector: (row) => row.employee_firstname },
-    { name: "Last Name", selector: (row) => row.employee_lastname },
-    { name: "Roles", selector: (row) => row.employee_role },
+    { name: "FIRST NAME", selector: (row) => row.employee_firstname },
+    { name: "LAST NAME", selector: (row) => row.employee_lastname },
+    { name: "EMAIL", selector: (row) => row.employee_email },
+    { name: "DEPARTMENT", selector: (row) => row.employee_department },
+    { name: "ROLE", selector: (row) => row.employee_role },
     {
-      name: "Account number",
+      name: "MONTHLY SALARY",
+      selector: (row) =>
+        new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "NGN",
+        }).format(row.employee_monthly_gross_salary),
+    },
+    {
+      name: "ANNUAL SALARY",
+      selector: (row) =>
+        new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "NGN",
+        }).format(row.employee_annual_gross_salary),
+    },
+    {
+      name: "RELIEVES",
+      selector: (row) =>
+        new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "NGN",
+        }).format(row.employee_relives),
+    },
+    { name: "ACCOUNT NAME", selector: (row) => row.employee_bankAccount_name },
+    {
+      name: "ACCOUNT NUMBER",
       selector: (row) => row.employee_bankAccount_number,
     },
-    { name: "Bank Name", selector: (row) => row.employee_bank_name },
-    {
-      name: "Monthly Gross",
-      selector: (row) => row.employee_monthly_gross_salary,
-    },
-    // { name: "Tax", selector: (row) => row.tax },
+    { name: "BANK NAME", selector: (row) => row.employee_bank_name },
+    { name: "EMPLOYEE TOKEN", selector: (row) => row.employee_token },
+
+    // {
+    //   cell: (row) => <EditCompanyEmployee data={row} />,
+    //   ignoreRowClick: true,
+    //   allowOverflow: true,
+    //   name: "EDIT EMPLOYEE ",
+    // },
+    // {
+    //   cell: (row) => (
+    //     <DeleteEmployee data={row} deleteAction={DeleteEmployeeAction} />
+    //   ),
+    //   ignoreRowClick: true,
+    //   allowOverflow: true,
+    //   name: "REMOVE EMPLOYEE",
+    // },
   ];
 
   const checkedEmployeeData = ({ selectedRows, selectedCount }) => {
+    if (!selectedCount) {
+      setmodalState((state) => {
+        return { ...state, disabled: true };
+      });
+    } else {
+      setmodalState((state) => {
+        return { ...state, disabled: false };
+      });
+    }
     setSelectedData(selectedRows, selectedCount);
   };
 
@@ -158,16 +208,19 @@ const EmployeeSalariesPage = ({
           <div className='pBtn'>
             <Button
               type='submit'
+              disabled={modalState.disabled ? true : false}
               className='payBtn py-2 px-3'
               onClick={function () {
                 setPayment((state) => {
                   return {
                     ...state,
-                    tax: sumSelectedSalary(selectedData),
+                    // tax: sumSelectedSalary(selectedData),
                     month: sumMonthlySalary(selectedData),
                   };
                 });
-                setmodalState(true);
+                setmodalState((state) => {
+                  return { ...state, modal: true };
+                });
               }}>
               Pay employees
             </Button>
@@ -184,12 +237,16 @@ const EmployeeSalariesPage = ({
           onSelectedRowsChange={checkedEmployeeData}
         />
       </div>
-      {modalState && (
+      {modalState.modal && (
         <ModalPayEmployee
           date={selectedDate}
           payment={payment}
           data={selectedData}
-          onCloseModal={() => setmodalState(false)}
+          onCloseModal={() =>
+            setmodalState((state) => {
+              return { ...state, modal: false };
+            })
+          }
           request={request}
           onRequestClick={(value) => setRequest(value)}
           payEmployee={PayEmployeeSalary}
@@ -208,12 +265,13 @@ const ModalPayEmployee = ({
   onRequestClick,
   payEmployee,
 }) => {
-  const { tax, month } = payment;
+  const { month } = payment;
 
   const onConfirm = (e) => {
     e.preventDefault();
     onRequestClick(true);
-    payEmployee();
+    payEmployee(data);
+    // console.log(data);
   };
 
   return ReactDOM.createPortal(
@@ -225,19 +283,19 @@ const ModalPayEmployee = ({
             <p class='first-column-paragraph'>Month</p>
             <p class='first-column-paragraph'>Year</p>
             <p class='first-column-paragraph'>Number of Employees</p>
-            <p class='first-column-paragraph'>Tax deductions</p>
+            {/* <p class='first-column-paragraph'>Tax deductions</p> */}
             <p class='first-column-paragraph'>Amount</p>
           </div>
           <div class='column second-column'>
             <p class='second-column-paragraph'>{date.month}</p>
             <p class='second-column-paragraph'>{date.year}</p>
             <p class='second-column-paragraph'>{`${data.length} Employees`}</p>
-            <p class='second-column-paragraph'>
+            {/* <p class='second-column-paragraph'>
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "NGN",
               }).format(0)}
-            </p>
+            </p> */}
             <p class='second-column-paragraph'>
               {new Intl.NumberFormat("en-US", {
                 style: "currency",

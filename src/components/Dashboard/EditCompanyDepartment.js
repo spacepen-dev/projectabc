@@ -229,7 +229,7 @@ const AddRoles = ({
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch({ type: "REQUEST", request: false });
+            dispatch({ type: "REQUEST", request: true });
             Validation();
             // company token and old department, new department
             EditDepartment(token.companyToken, tags, token.email);
@@ -272,7 +272,7 @@ const AddRoles = ({
         </Form>
       </Container>
       {modal.response && <SuccessRequestModal message={state.res.payload} />}
-      {modal.error && (
+      {state.error.payload && (
         <NetWorkErrors
           errMessage={state.error.payload}
           // serverErr={serverErr}

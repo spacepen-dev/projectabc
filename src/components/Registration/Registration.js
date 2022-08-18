@@ -18,6 +18,7 @@ class Registration extends React.Component {
     email: "",
     website: "",
     tax: "NO",
+    phoneNumber: "",
     checked: false,
   };
 
@@ -76,6 +77,7 @@ class Registration extends React.Component {
             address={this.state.address}
             email={this.state.email}
             website={this.state.website}
+            phoneNumber={this.state.phoneNumber}
           />
           <Settings
             currentForm={this.state.currentForm}

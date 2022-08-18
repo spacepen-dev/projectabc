@@ -36,7 +36,11 @@ const ViewEmployee = ({
     { name: "ROLE", selector: (row) => row.employee_role },
     {
       name: "MONTHLY SALARY",
-      selector: (row) => row.employee_monthly_gross_salary,
+      selector: (row) =>
+        new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "NGN",
+        }).format(row.employee_monthly_gross_salary),
     },
     {
       name: "ANNUAL SALARY",
@@ -59,7 +63,8 @@ const ViewEmployee = ({
       name: "ACCOUNT NUMBER",
       selector: (row) => row.employee_bankAccount_number,
     },
-    // { name: "BANK NAME", selector: (row) => row.transactionStatus },
+    { name: "BANK NAME", selector: (row) => row.employee_bank_name },
+    { name: "EMPLOYEE TOKEN", selector: (row) => row.employee_token },
 
     {
       cell: (row) => <EditCompanyEmployee data={row} />,

@@ -25,7 +25,7 @@ const TagInput = ({ SubmitDepartment, departmentMessage, departmentErr }) => {
   useEffect(() => {
     if (
       !localStorage.getItem("aminien_token") ||
-      !localStorage.getItem("aninien_email")
+      !localStorage.getItem("aminien_email")
     ) {
       // SHOW THE WARNING MODAL
       setToken("");
