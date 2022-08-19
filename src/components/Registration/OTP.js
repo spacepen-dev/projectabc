@@ -25,7 +25,7 @@ const reducer = (state, action) => {
     case "NETWORK_ERROR":
       return { request: false, error: action };
     default:
-      break;
+      return state;
   }
 };
 

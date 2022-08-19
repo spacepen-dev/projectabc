@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer, useCallback } from "react";
 import ReactDOM from "react-dom";
 import DataTable from "react-data-table-component";
 import VerificationModal from "./VerificationModal";
@@ -9,10 +9,44 @@ import { connect } from "react-redux";
 import { FetchCompanyEmployee, PayEmployeeSalary } from "../../Actions";
 // import { useCallback } from "react";
 
+const initial = {
+  request: false,
+  response: "",
+  netWorkError: "",
+  modal: false,
+};
+
+const reducer = (state, action) => {
+  console.log(action);
+  switch (action.type) {
+    case "REQUEST":
+      return { ...state, request: action.request };
+    case "SUCCESS_RESPONSE":
+      return {
+        ...state,
+        response: action.response,
+        modal: action.modal,
+      };
+    case "ERROR_RESPONSE":
+      return {
+        ...state,
+        response: action.response,
+        modal: action.modal,
+      };
+    case "NETWORK_ERROR":
+      return { ...state, netWorkError: action.payload };
+    case "CLOSE_MODAL":
+      return { ...state, modal: action.modal };
+    default:
+      return state;
+  }
+};
+
 const EmployeeSalariesPage = ({
   companyEmployee,
   FetchCompanyEmployee,
   PayEmployeeSalary,
+  paySalaryRes,
 }) => {
   const Months = [
     new Date().getMonth(),
@@ -65,18 +99,27 @@ const EmployeeSalariesPage = ({
   const [payment, setPayment] = useState({});
   const [request, setRequest] = useState(false);
 
+  const [CompanyDetails] = useState({
+    token: localStorage.getItem("aminien_token"),
+    email: localStorage.getItem("aminien_email"),
+  });
+
+  const [state, dispatch] = useReducer(reducer, initial);
+
   // MAKE REQUEST TO FETCH EMPLOYEE DATA
 
   useEffect(() => {
-    if (!localStorage.getItem("aminien_token")) {
+    if (!CompanyDetails.token || !CompanyDetails.email) {
       // SESSION TIME OUT MODAL
       console.log("no token");
     }
     FetchCompanyEmployee(
-      localStorage.getItem("aminien_token"),
-      localStorage.getItem("aminien_email")
+      // localStorage.getItem("aminien_token"),
+      CompanyDetails.token,
+      CompanyDetails.email
+      // localStorage.getItem("aminien_email")
     );
-  }, [FetchCompanyEmployee]);
+  }, [FetchCompanyEmployee, CompanyDetails]);
 
   // FETCH DATA FROM THE REDUX STORE
   useEffect(() => {
@@ -160,19 +203,63 @@ const EmployeeSalariesPage = ({
     });
   };
 
-  const sumSelectedSalary = (data) => {
-    const sumTax = data.reduce((acc, cur) => {
-      // TAX SHOULD BE SUBTRACTED FROM THE MONTHLY SALARY
-      return acc + cur.tax;
-    }, 0);
-    return sumTax;
-  };
+  // const sumSelectedSalary = (data) => {
+  //   const sumTax = data.reduce((acc, cur) => {
+  //     // TAX SHOULD BE SUBTRACTED FROM THE MONTHLY SALARY
+  //     return acc + cur.tax;
+  //   }, 0);
+  //   return sumTax;
+  // };
 
   const sumMonthlySalary = (data) => {
     return data.reduce((acc, cur) => {
       return acc + parseFloat(cur.employee_monthly_gross_salary);
     }, 0);
   };
+
+  const closeModal = () =>
+    setmodalState((state) => {
+      return { ...state, modal: false };
+    });
+
+  const onRequest = useCallback((arg) => {
+    dispatch({ type: "REQUEST", request: arg });
+  }, []);
+
+  const onError = useCallback((arg) => {
+    dispatch({ type: "ERROR_RESPONSE", response: arg, modal: true });
+  }, []);
+
+  const onSuccess = useCallback((arg) => {
+    dispatch({ type: "SUCCESS_RESPONSE", response: arg, modal: true });
+  }, []);
+
+  const onClose = useCallback((arg) => {
+    dispatch({ type: "CLOSE_MODAL", modal: false });
+  }, []);
+  useEffect(() => {
+    if (!paySalaryRes) return null;
+    else {
+      onRequest(false);
+      closeModal();
+      const { success, error } = paySalaryRes;
+      if (error) {
+        // Show an error modal
+        onError(error);
+      } else {
+        // dispatch({ type: "SUCCESS_RESPONSE", response: });
+        var id = setTimeout(() => {
+          onSuccess(success);
+        }, 2000);
+        // show a modal to tell the user that the payment is been processed
+        //and confirmation wouls be sent to the email
+      }
+    }
+
+    return () => {
+      clearTimeout(id);
+    };
+  }, [paySalaryRes]);
 
   return (
     <div>
@@ -236,19 +323,23 @@ const EmployeeSalariesPage = ({
           pagination
           onSelectedRowsChange={checkedEmployeeData}
         />
+        {console.log(state)}
       </div>
+      {state.modal && (
+        <VerificationModal
+          message='Successful, We are processing this payment, we will notify you when we complete the payment.'
+          close={onClose}
+        />
+      )}
       {modalState.modal && (
         <ModalPayEmployee
           date={selectedDate}
           payment={payment}
           data={selectedData}
-          onCloseModal={() =>
-            setmodalState((state) => {
-              return { ...state, modal: false };
-            })
-          }
-          request={request}
-          onRequestClick={(value) => setRequest(value)}
+          details={CompanyDetails}
+          onCloseModal={closeModal}
+          state={state}
+          onRequestClick={(value) => onRequest(value)}
           payEmployee={PayEmployeeSalary}
         />
       )}
@@ -261,16 +352,23 @@ const ModalPayEmployee = ({
   payment,
   data,
   onCloseModal,
-  request,
+  state,
   onRequestClick,
   payEmployee,
+  details: { token, email },
 }) => {
   const { month } = payment;
 
+  const sortData = function (data) {
+    data.forEach((element) => {
+      payEmployee(token, email, element);
+    });
+  };
+
   const onConfirm = (e) => {
+    console.log(sortData(data));
     e.preventDefault();
     onRequestClick(true);
-    payEmployee(data);
     // console.log(data);
   };
 
@@ -315,7 +413,7 @@ const ModalPayEmployee = ({
           </Button>
           <Loaderbutton
             btnName='CONFIRM'
-            request={request}
+            request={state.request}
             btnStyle={" ms-4 me-3 next"}
           />
         </Form>
@@ -328,6 +426,8 @@ const ModalPayEmployee = ({
 const mapStateToProps = (state) => {
   return {
     companyEmployee: state.DashboardReducer.companyEmployee.data,
+    paySalaryRes: state.DashboardReducer.payEmployee.data,
+    paySalaryErr: state.DashboardReducer.payEmployeeErr,
   };
 };
 

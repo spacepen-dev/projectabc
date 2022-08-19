@@ -389,27 +389,43 @@ export const FetchSalaryHistory = (email, token) => async (dispatch) => {
 };
 
 // PAY SALARY ACTION CREATOR
-export const PayEmployeeSalary = (email, token) => async (dispatch) => {
+export const PayEmployeeSalary = (token, email, data) => async (dispatch) => {
+  const {
+    // employee_bank_code,
+    employee_bankAccount_number,
+    employee_bankAccount_name,
+    employee_annual_gross_salary,
+    employee_bank_name,
+    employee_department,
+    employee_email,
+    employee_firstname,
+    employee_lastname,
+    employee_monthly_gross_salary,
+    employee_nin,
+    employee_token,
+    employee_relives,
+    employee_role,
+  } = data;
+
+  console.log(data);
   try {
     const data = await BasedURL.post("payEmployeeSalaries.php", {
-      companyToken:
-        "70682896e24287b0476eff2a14c148f0c2764fb175e154dcd5dece96592457942f96aa98",
-      employeeFirstname: "John",
-      employeeLastname: "Doe",
-      employeeEmail: "oviahonprosperpman32@mail.com",
-      employeeAccountName: "Oviahon Prosper",
+      companyToken: token,
+      employeeFirstname: employee_firstname,
+      employeeLastname: employee_lastname,
+      employeeEmail: employee_email,
+      employeeAccountName: employee_bankAccount_name,
       employeeAccountNumber: "1234567890",
       employeeTax: "10",
-      employeeSalary: "100",
-      employeeToken:
-        "21e07318eb4b79be34fbb1b67570f9922d805f2c15ef16ae99c5ebe8fa57f3f1409826418bdc727855f33a5f35e3fb0ab712e4b24a59542388e35e9a7194e250",
-      narration: "pay",
+      employeeSalary: employee_annual_gross_salary,
+      employeeToken: employee_token,
+      narration: "Salary have been for the month",
       employeeBankCode: "046",
       companyAccountName: "MERCHANT(manage)",
-      companyEmail: "oviahonprosperpman32@gmail.com",
+      companyEmail: email,
       companyTin: "1234",
     });
-    dispatch({ type: "PAY_EMPLOYEE_SALARY_", payLoad: data });
+    dispatch({ type: "PAY_EMPLOYEE_SALARY", payLoad: data });
   } catch (error) {
     dispatch({ type: "PAY_EMPLOYEE_SALARY_ERR_MESSAGE", payLoad: error });
   }

@@ -64,7 +64,7 @@ const Overview = ({
       localStorage.getItem("aminien_email"),
       localStorage.getItem("aminien_token")
     );
-  }, [FetchWalletHistory, FetchDepartment]);
+  }, [FetchWalletHistory, FetchDepartment, CompanyDetails]);
 
   //FETCH DATA FROM FETCH WALLET ACTION CREATOR
 

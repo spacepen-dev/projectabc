@@ -19,13 +19,13 @@ const Months = [
   new Date().getMonth() - 2,
 ];
 
-function checkMonths() {
-  for (const month of Months) {
-    console.log(month);
-  }
-}
+// function checkMonths() {
+//   for (const month of Months) {
+//     // console.log(month);
+//   }
+// }
 
-checkMonths();
+// checkMonths();
 
 const GetMonth = [
   "Jan",

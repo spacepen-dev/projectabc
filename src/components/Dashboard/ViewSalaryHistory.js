@@ -54,7 +54,7 @@ const ViewSalaryHisory = ({
   }, [FetchedData, email, token]);
 
   useEffect(() => {
-    dispatch({ type: "REQUEST", pending: true });
+    // dispatch({ type: "REQUEST", pending: true });
     if (!companySalary) {
       return null;
     } else {
@@ -126,12 +126,12 @@ const ViewSalaryHisory = ({
           return "Show error";
         }}
       />
-      {state.modal && (
+      {/* {state.modal && (
         <VerificationModal
           message={`oops! Something Went Wrong`}
           close={closeModal}
         />
-      )}
+      )} */}
     </div>
   );
 };
