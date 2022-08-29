@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useReducer, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useReducer,
+  useCallback,
+  useRef,
+} from "react";
 import ReactDOM from "react-dom";
 import DataTable from "react-data-table-component";
 import VerificationModal from "./VerificationModal";
@@ -7,12 +13,24 @@ import { Form, Button } from "react-bootstrap";
 import Loaderbutton from "../LoaderButton";
 import { connect } from "react-redux";
 import { FetchCompanyEmployee, PayEmployeeSalary } from "../../Actions";
-// import { useCallback } from "react";
+
+// export function Narration({ data }) {
+
+//   return (
+//     <textarea
+//       id={data.employee_token}
+//       type='text'
+//       className='py-5'
+//       onClick={(e) => console.log(val)}
+//       onChange={onChange}></textarea>
+//   );
+// }
 
 const initial = {
   request: false,
   response: "",
   netWorkError: "",
+  errorMessage: false,
   modal: false,
 };
 
@@ -31,7 +49,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         response: action.response,
-        modal: action.modal,
+        errorMessage: action.modal,
       };
     case "NETWORK_ERROR":
       return { ...state, netWorkError: action.payload };
@@ -48,20 +66,7 @@ const EmployeeSalariesPage = ({
   PayEmployeeSalary,
   paySalaryRes,
 }) => {
-  const Months = [
-    new Date().getMonth(),
-    new Date().getMonth() + 1,
-    new Date().getMonth() + 2,
-    new Date().getMonth() + 3,
-    new Date().getMonth() + 4,
-    // new Date().getMonth() + 5,
-    // new Date().getMonth() + 6,
-    // new Date().getMonth() + 7,
-    // new Date().getMonth() + 8,
-    // new Date().getMonth() + 9,
-    // new Date().getMonth() - 1,
-    // new Date().getMonth() - 2,
-  ];
+  const Months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   const GetMonth = [
     "January",
@@ -97,7 +102,15 @@ const EmployeeSalariesPage = ({
   const [selectedData, setSelectedData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [payment, setPayment] = useState({});
-  const [request, setRequest] = useState(false);
+  // const [request, setRequest] = useState(false);
+  const [val, setValue] = useState([]);
+
+  // const value = useRef();
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setValue([...val, { [name]: value }]);
+  };
 
   const [CompanyDetails] = useState({
     token: localStorage.getItem("aminien_token"),
@@ -132,9 +145,6 @@ const EmployeeSalariesPage = ({
   const columns = [
     { name: "FIRST NAME", selector: (row) => row.employee_firstname },
     { name: "LAST NAME", selector: (row) => row.employee_lastname },
-    { name: "EMAIL", selector: (row) => row.employee_email },
-    { name: "DEPARTMENT", selector: (row) => row.employee_department },
-    { name: "ROLE", selector: (row) => row.employee_role },
     {
       name: "MONTHLY SALARY",
       selector: (row) =>
@@ -143,28 +153,46 @@ const EmployeeSalariesPage = ({
           currency: "NGN",
         }).format(row.employee_monthly_gross_salary),
     },
+    // {
+    //   name: "RELIEVES",
+    //   selector: (row) =>
+    //     new Intl.NumberFormat("en-US", {
+    //       style: "currency",
+    //       currency: "NGN",
+    //     }).format(row.employee_relives),
+    // },
     {
-      name: "ANNUAL SALARY",
-      selector: (row) =>
-        new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "NGN",
-        }).format(row.employee_annual_gross_salary),
+      cell: (row) => (
+        <textarea
+          name='narration'
+          type='text'
+          placeholder='Add narration before selecting the employee to pay'
+          className='py-5'
+          cols={30}
+          onBlur={onChange}></textarea>
+      ),
+      // ignoreRowClick: true,
+      // allowOverflow: true,
+      name: "NARRATION",
     },
-    {
-      name: "RELIEVES",
-      selector: (row) =>
-        new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "NGN",
-        }).format(row.employee_relives),
-    },
+    // { name: "DEPARTMENT", selector: (row) => row.employee_department },
+    // { name: "ROLE", selector: (row) => row.employee_role },
+    { name: "EMAIL", selector: (row) => row.employee_email },
+    // {
+    //   name: "ANNUAL SALARY",
+    //   selector: (row) =>
+    //     new Intl.NumberFormat("en-US", {
+    //       style: "currency",
+    //       currency: "NGN",
+    //     }).format(row.employee_annual_gross_salary),
+    // },
+
     { name: "ACCOUNT NAME", selector: (row) => row.employee_bankAccount_name },
     {
       name: "ACCOUNT NUMBER",
       selector: (row) => row.employee_bankAccount_number,
     },
-    { name: "BANK NAME", selector: (row) => row.employee_bank_name },
+    // { name: "BANK NAME", selector: (row) => row.employee_bank_name },
     { name: "EMPLOYEE TOKEN", selector: (row) => row.employee_token },
 
     // {
@@ -184,6 +212,7 @@ const EmployeeSalariesPage = ({
   ];
 
   const checkedEmployeeData = ({ selectedRows, selectedCount }) => {
+    let arr = [];
     if (!selectedCount) {
       setmodalState((state) => {
         return { ...state, disabled: true };
@@ -193,7 +222,16 @@ const EmployeeSalariesPage = ({
         return { ...state, disabled: false };
       });
     }
-    setSelectedData(selectedRows, selectedCount);
+
+    val.forEach(({ narration }, index) => {
+      if (!selectedRows[index]) {
+        return;
+      } else {
+        arr.push({ ...selectedRows[index], narration });
+      }
+    });
+
+    setSelectedData(arr, selectedCount);
   };
 
   const onDateChange = (e) => {
@@ -202,7 +240,7 @@ const EmployeeSalariesPage = ({
       return { ...state, [name]: value };
     });
   };
-
+  // console.log(selectedData);
   // const sumSelectedSalary = (data) => {
   //   const sumTax = data.reduce((acc, cur) => {
   //     // TAX SHOULD BE SUBTRACTED FROM THE MONTHLY SALARY
@@ -227,7 +265,7 @@ const EmployeeSalariesPage = ({
   }, []);
 
   const onError = useCallback((arg) => {
-    dispatch({ type: "ERROR_RESPONSE", response: arg, modal: true });
+    dispatch({ type: "ERROR_RESPONSE", response: arg, errorMessage: true });
   }, []);
 
   const onSuccess = useCallback((arg) => {
@@ -238,6 +276,7 @@ const EmployeeSalariesPage = ({
     dispatch({ type: "CLOSE_MODAL", modal: false });
     window.location.reload();
   }, []);
+
   useEffect(() => {
     if (!paySalaryRes) return null;
     else {
@@ -247,11 +286,16 @@ const EmployeeSalariesPage = ({
       if (error) {
         // Show an error modal
         onError(error);
+        var errorId = setTimeout(() => {
+          // window.location.reload();
+          dispatch({ type: "ERROR_RESPONSE", errorMessage: false });
+        }, 4000);
       } else {
         // dispatch({ type: "SUCCESS_RESPONSE", response: });
         var id = setTimeout(() => {
           onSuccess(success);
-        }, 2000);
+          // window.location.reload();
+        }, 4000);
         // show a modal to tell the user that the payment is been processed
         //and confirmation wouls be sent to the email
       }
@@ -259,6 +303,7 @@ const EmployeeSalariesPage = ({
 
     return () => {
       clearTimeout(id);
+      clearTimeout(errorId);
     };
   }, [paySalaryRes]);
 
@@ -331,6 +376,9 @@ const EmployeeSalariesPage = ({
           close={onClose}
         />
       )}
+      {console.log(state.errorMessage)}
+      {/* {errorMessage && <NetWorkErrors errMessage={errorMessage.message} />} */}
+      {/* {showModal && <NetWorkErrors serverErr={serverErr} />} */}
       {modalState.modal && (
         <ModalPayEmployee
           date={selectedDate}
@@ -359,43 +407,36 @@ const ModalPayEmployee = ({
 }) => {
   const { month } = payment;
 
-  const sortData = function (data) {
-    console.log(data);
-    // data.forEach((element) => {
-    // });
-    // payEmployee(token, email, element);
-  };
-
   const onConfirm = (e) => {
-    console.log(sortData(data));
     e.preventDefault();
     onRequestClick(true);
+    payEmployee(token, email, data);
     // console.log(data);
   };
 
   return ReactDOM.createPortal(
     <div>
-      <div class='backdrop hidden'></div>
-      <div class='modal-1 hidden'>
-        <div class='modal-row'>
-          <div class='column first-column'>
-            <p class='first-column-paragraph'>Month</p>
-            <p class='first-column-paragraph'>Year</p>
-            <p class='first-column-paragraph'>Number of Employees</p>
-            {/* <p class='first-column-paragraph'>Tax deductions</p> */}
-            <p class='first-column-paragraph'>Amount</p>
+      <div className='backdrop hidden'></div>
+      <div className='modal-1 hidden'>
+        <div className='modal-row'>
+          <div className='column first-column'>
+            <p className='first-column-paragraph'>Month</p>
+            <p className='first-column-paragraph'>Year</p>
+            <p className='first-column-paragraph'>Number of Employees</p>
+            {/* <p className='first-column-paragraph'>Tax deductions</p> */}
+            <p className='first-column-paragraph'>Amount</p>
           </div>
-          <div class='column second-column'>
-            <p class='second-column-paragraph'>{date.month}</p>
-            <p class='second-column-paragraph'>{date.year}</p>
-            <p class='second-column-paragraph'>{`${data.length} Employees`}</p>
-            {/* <p class='second-column-paragraph'>
+          <div className='column second-column'>
+            <p className='second-column-paragraph'>{date.month}</p>
+            <p className='second-column-paragraph'>{date.year}</p>
+            <p className='second-column-paragraph'>{`${data.length} Employees`}</p>
+            {/* <p className='second-column-paragraph'>
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "NGN",
               }).format(0)}
             </p> */}
-            <p class='second-column-paragraph'>
+            <p className='second-column-paragraph'>
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "NGN",

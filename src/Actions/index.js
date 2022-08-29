@@ -389,43 +389,16 @@ export const FetchSalaryHistory = (email, token) => async (dispatch) => {
 };
 
 // PAY SALARY ACTION CREATOR
-export const PayEmployeeSalary = (token, email, data) => async (dispatch) => {
-  const {
-    // employee_bank_code,
-    employee_bankAccount_number,
-    employee_bankAccount_name,
-    employee_annual_gross_salary,
-    employee_bank_name,
-    employee_department,
-    employee_email,
-    employee_firstname,
-    employee_lastname,
-    employee_monthly_gross_salary,
-    employee_nin,
-    employee_token,
-    employee_relives,
-    employee_role,
-  } = data;
-
-  console.log(data);
-  try {
-    const data = await BasedURL.post("payEmployeeSalaries.php", {
-      companyToken: token,
-      employeeFirstname: employee_firstname,
-      employeeLastname: employee_lastname,
-      employeeEmail: employee_email,
-      employeeAccountName: employee_bankAccount_name,
-      employeeAccountNumber: "1234567890",
-      employeeSalary: employee_monthly_gross_salary,
-      employeeToken: employee_token,
-      narration: "Salary have been for the month",
-      employeeBankCode: "046",
-      companyAccountName: "MERCHANT(manage)",
-      companyEmail: email,
-      companyTin: "1234",
-    });
-    dispatch({ type: "PAY_EMPLOYEE_SALARY", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "PAY_EMPLOYEE_SALARY_ERR_MESSAGE", payLoad: error });
-  }
-};
+export const PayEmployeeSalary =
+  (token, email, employeesData) => async (dispatch) => {
+    try {
+      const data = await BasedURL.post("payEmployeeSalaries.php", {
+        companyToken: token,
+        companyEmail: email,
+        employees: employeesData,
+      });
+      dispatch({ type: "PAY_EMPLOYEE_SALARY", payLoad: data });
+    } catch (error) {
+      dispatch({ type: "PAY_EMPLOYEE_SALARY_ERR_MESSAGE", payLoad: error });
+    }
+  };
