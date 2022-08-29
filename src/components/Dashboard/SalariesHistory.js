@@ -2,6 +2,26 @@ import React, { useEffect, useState } from "react";
 import DashboardTable from "./DashboardTable";
 import { FetchSalaryHistory } from "../../Actions";
 import { connect } from "react-redux";
+import { Badge } from "react-bootstrap";
+
+function Badges({ row }) {
+  var bg = "";
+  function check() {
+    if (row === "pending") {
+      return (bg = "warning");
+    } else if (row === "decline") {
+      return (bg = "danger");
+    } else {
+      return (bg = "success");
+    }
+  }
+
+  return (
+    <Badge bg={check()} className='py-2'>
+      {row}
+    </Badge>
+  );
+}
 
 const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
   const [{ token, email }] = useState(() => {
@@ -40,7 +60,10 @@ const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
     // { name: "MONTH", selector: (row) => row.month },
     // { name: "YEAR", selector: (row) => row.year },
     { name: "TRANSACTION ID", selector: (row) => row.transactionId },
-    { name: "TRANSACTION STATUS", selector: (row) => row.transactionStatus },
+    {
+      name: "TRANSACTION STATUS",
+      selector: (row) => <Badges row={row.transactionStatus} />,
+    },
   ];
   useEffect(() => {
     FetchSalaryHistory(email, token);

@@ -196,14 +196,6 @@ const Overview = ({
       <article className='d-flex align-items-center top-tab'>
         <div className='h-100 d-flex justify-content-between align-items-center w-100'>
           <Slider
-            name='SALARY HISTORY'
-            id={4}
-            small={small}
-            getId={getId}
-            pageId={pageId}
-            smallId='first'
-          />
-          <Slider
             name='ACCOUNT HISTORY'
             id={7}
             small={small}
@@ -211,6 +203,15 @@ const Overview = ({
             pageId={pageId}
             smallId='second'
           />
+          <Slider
+            name='SALARY HISTORY'
+            id={4}
+            small={small}
+            getId={getId}
+            pageId={pageId}
+            smallId='first'
+          />
+
           <Slider
             name='TAX HISTORY'
             id={8}
@@ -236,8 +237,8 @@ const Overview = ({
             <TableSpinner />
           </div>
         )}
-        {pageId === 4 && !request && <SalariesHistory />}
         {pageId === 7 && !request && <AccountHistory />}
+        {pageId === 4 && !request && <SalariesHistory />}
         {pageId === 8 && !request && <TaxHistory />}
       </article>
     </Container>

@@ -131,6 +131,7 @@ class EditCompanyInfo extends Component {
   };
 
   onSubmit = (e) => {
+    this.setState({ request: true });
     this.props.UpdateCompanyDetails(this.state);
     // console.log(this.state);
     e.preventDefault();

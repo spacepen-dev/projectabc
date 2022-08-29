@@ -236,6 +236,7 @@ const EmployeeSalariesPage = ({
 
   const onClose = useCallback((arg) => {
     dispatch({ type: "CLOSE_MODAL", modal: false });
+    window.location.reload();
   }, []);
   useEffect(() => {
     if (!paySalaryRes) return null;
@@ -323,7 +324,6 @@ const EmployeeSalariesPage = ({
           pagination
           onSelectedRowsChange={checkedEmployeeData}
         />
-        {console.log(state)}
       </div>
       {state.modal && (
         <VerificationModal
@@ -360,9 +360,10 @@ const ModalPayEmployee = ({
   const { month } = payment;
 
   const sortData = function (data) {
-    data.forEach((element) => {
-      payEmployee(token, email, element);
-    });
+    console.log(data);
+    // data.forEach((element) => {
+    // });
+    // payEmployee(token, email, element);
   };
 
   const onConfirm = (e) => {

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Datatable from "./Datatable";
 import { FetchSalaryHistory } from "../../Actions";
 import VerificationModal from "./VerificationModal";
+import { Badge } from "react-bootstrap";
 
 const initial = {
   pending: true,
@@ -86,6 +87,25 @@ const ViewSalaryHisory = ({
     // navigate("otp/email-confirmation");
   };
 
+  function Badges({ row }) {
+    var bg = "";
+    function check() {
+      if (row === "pending") {
+        return (bg = "warning");
+      } else if (row === "decline") {
+        return (bg = "danger");
+      } else {
+        return (bg = "success");
+      }
+    }
+
+    return (
+      <Badge className='py-2' bg={check()}>
+        {row}
+      </Badge>
+    );
+  }
+
   const heading = [
     { name: "DATE", selector: (row) => row.date },
     { name: "FIRST NAME", selector: (row) => row.employeeFirstname },
@@ -113,7 +133,10 @@ const ViewSalaryHisory = ({
     // { name: "MONTH", selector: (row) => row.month },
     // { name: "YEAR", selector: (row) => row.year },
     { name: "TRANSACTION ID", selector: (row) => row.transactionId },
-    { name: "TRANSACTION STATUS", selector: (row) => row.transactionStatus },
+    {
+      name: "TRANSACTION STATUS",
+      selector: (row) => <Badges row={row.transactionStatus} />,
+    },
   ];
   return (
     <div className=''>

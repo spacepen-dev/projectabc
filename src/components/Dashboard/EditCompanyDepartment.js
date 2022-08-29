@@ -178,16 +178,17 @@ const AddRoles = ({
     if (!updateDepartmentErr) {
       return null;
     }
-
+    console.log();
     dispatch({ type: "NETWORK_ERROR", payload: updateDepartmentErr.message });
     setShowModal((prev) => {
       return { ...prev, errorModal: true };
     });
-
     let id = setTimeout(() => {
-      setShowModal((prev) => {
-        return { ...prev, errorModal: false };
-      });
+      dispatch({ type: "NETWORK_ERROR", payload: "" });
+      window.location.reload();
+      // setShowModal((prev) => {
+      //   return { ...prev, errorModal: false };
+      // });
     }, 4000);
 
     return () => {

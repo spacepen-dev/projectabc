@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Datatable from "./Datatable";
 import { Form } from "react-bootstrap";
 import { FetchWalletHistory } from "../../Actions";
+import { Badge } from "react-bootstrap";
 
 const Months = [
   new Date().getMonth(),
@@ -55,6 +56,25 @@ const currentDate = {
   year: new Date().getFullYear(),
 };
 
+function Badges({ row }) {
+  var bg = "";
+  function check() {
+    if (row === "pending") {
+      return (bg = "warning");
+    } else if (row === "decline") {
+      return (bg = "danger");
+    } else {
+      return (bg = "success");
+    }
+  }
+
+  return (
+    <Badge bg={check()} className='py-2'>
+      {row}
+    </Badge>
+  );
+}
+
 const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
   const [walletData, setwalletData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(currentDate);
@@ -72,16 +92,19 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
           currency: "NGN",
         }).format(row.totalAmount),
     },
-    { name: "TRANSACTION STATUS", selector: (row) => row.transactionStatus },
     {
-      name: "TAXES",
-      selector: (row) =>
-        new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "NGN",
-        }).format(row.taxes),
+      name: "TRANSACTION STATUS",
+      selector: (row) => <Badges row={row.transactionStatus} />,
     },
-    { name: "TRANSACTION NOTE", selector: (row) => row.narration },
+    // {
+    //   name: "TAXES",
+    //   selector: (row) =>
+    //     new Intl.NumberFormat("en-US", {
+    //       style: "currency",
+    //       currency: "NGN",
+    //     }).format(row.taxes),
+    // },
+    // { name: "TRANSACTION NOTE", selector: (row) => row.narration },
   ];
 
   const WalletHistoryAction = useCallback(
