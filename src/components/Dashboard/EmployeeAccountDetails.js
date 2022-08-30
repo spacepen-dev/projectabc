@@ -938,6 +938,7 @@ const EmployeeAccountDetails = ({
         setSuccess(success);
         const removeTimeOut = setTimeout(() => {
           setSuccess("");
+          window.location.reload();
         }, 4000);
         return () => {
           clearTimeout(removeTimeOut);
@@ -958,6 +959,7 @@ const EmployeeAccountDetails = ({
         setError(error);
         const removeTimeOut = setTimeout(() => {
           setShow(false);
+          window.location.reload();
         }, 4000);
         return () => {
           clearTimeout(removeTimeOut);
@@ -966,6 +968,7 @@ const EmployeeAccountDetails = ({
         setSuccess(success);
         const removeTimeOut = setTimeout(() => {
           setSuccess("");
+          window.location.reload();
         }, 4000);
         return () => {
           clearTimeout(removeTimeOut);
@@ -986,9 +989,11 @@ const EmployeeAccountDetails = ({
       const removeTimeOut = setTimeout(() => {
         setShow(false);
         setMessage(null);
+        window.location.reload();
       }, 4000);
       return () => {
         clearTimeout(removeTimeOut);
+        window.location.reload();
       };
     }
   }, [addEmployeeErr]);
@@ -1003,6 +1008,7 @@ const EmployeeAccountDetails = ({
       setMessage(editEmployeeErr.message);
       const removeTimeOut = setTimeout(() => {
         setShow(false);
+        window.location.reload();
       }, 4000);
       return () => {
         clearTimeout(removeTimeOut);
@@ -1149,7 +1155,7 @@ const EmployeeAccountDetails = ({
           onClick={prevQuestion}>
           Back
         </Button>
-        <LoaderButton btnName='Register' btnStyle='ms-4' request={request} />
+        <LoaderButton btnName='Finish' btnStyle='ms-4' request={request} />
       </div>
       {showModal && (
         <NetWorkErrors

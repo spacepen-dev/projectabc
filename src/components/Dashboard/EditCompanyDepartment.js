@@ -19,11 +19,11 @@ const reducer = (state, action) => {
     case "REQUEST":
       return { ...state, request: true };
     case "REQUEST_RESPONSE":
-      return { request: false, res: action };
+      return { ...state, request: false, res: action };
     case "NETWORK_ERROR":
-      return { request: false, error: action };
+      return { ...state, request: false, error: action };
     default:
-      break;
+      return state;
   }
 };
 
@@ -148,20 +148,20 @@ const AddRoles = ({
     if (!updateDepartment) {
       return null;
     }
-    const { success, error } = updateDepartment.data;
+    const { success, error } = updateDepartment;
     if (error) {
-      dispatch({ type: "REQUEST_RESPONSE", payload: error });
+      dispatch({ type: "REQUEST_RESPONSE", error: error });
       setShowModal((prev) => {
         return { ...prev, response: true };
       });
     }
-    dispatch({ type: "REQUEST_RESPONSE", payload: success });
+    dispatch({ type: "REQUEST_RESPONSE", res: success });
     setShowModal((prev) => {
       return { ...prev, response: true };
     });
 
     const id = setTimeout(() => {
-      dispatch({ type: "REQUEST_RESPONSE", payload: "" });
+      // dispatch({ type: "REQUEST_RESPONSE", res: "" });
       setShowModal((prev) => {
         return { ...prev, response: false };
       });
@@ -178,14 +178,13 @@ const AddRoles = ({
     if (!updateDepartmentErr) {
       return null;
     }
-    console.log();
     dispatch({ type: "NETWORK_ERROR", payload: updateDepartmentErr.message });
     setShowModal((prev) => {
       return { ...prev, errorModal: true };
     });
     let id = setTimeout(() => {
-      dispatch({ type: "NETWORK_ERROR", payload: "" });
-      window.location.reload();
+      dispatch({ type: "NETWORK_ERROR", error: "" });
+      // window.location.reload();
       // setShowModal((prev) => {
       //   return { ...prev, errorModal: false };
       // });
@@ -272,10 +271,11 @@ const AddRoles = ({
           </div>
         </Form>
       </Container>
-      {modal.response && <SuccessRequestModal message={state.res.payload} />}
-      {state.error.payload && (
+
+      {modal.response && <SuccessRequestModal message={state.res.res} />}
+      {state.error.error && (
         <NetWorkErrors
-          errMessage={state.error.payload}
+          errMessage={state.error.error}
           // serverErr={serverErr}
           close={() => {
             // setStore(null);
@@ -298,7 +298,7 @@ const AddRoles = ({
 
 const mapStateToProps = (state) => {
   return {
-    updateDepartment: state.DashboardReducer.editDepartment,
+    updateDepartment: state.DashboardReducer.editDepartment.data,
     updateDepartmentErr: state.DashboardReducer.editDepartmentErr,
     // companyDepartment: state.DashboardReducer.fetchDepartment.data,
     // employeeRoles: state.DashboardReducer.companyEmployee,

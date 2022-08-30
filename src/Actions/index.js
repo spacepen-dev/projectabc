@@ -81,7 +81,7 @@ export const LoginOTP = (code, email) => async (dispatch) => {
 export const SubmitDepartment =
   (departments, tokenKey, email) => async (dispatch) => {
     try {
-      const data = await BasedURL.post("/role_department.php", {
+      const data = await BasedURL.post("/registerDepartment.php", {
         tokenKey,
         departments,
         companyEmail: email,
@@ -131,7 +131,7 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
       employeeLastname,
       employee_email: employeeEmail,
       employeeRole,
-      employeeDepartment: "sales",
+      employeeDepartment,
       employeeRelieves: employeeRelives,
       employeeNin,
       token,
@@ -227,8 +227,8 @@ export const FetchDepartment = (email, token) => async (dispatch) => {
 export const EditDepartment =
   (token, departments, email) => async (dispatch) => {
     try {
-      const data = await BasedURL.post("/role_department.php	", {
-        tokenKey: token,
+      const data = await BasedURL.post("/registerDepartment.php	", {
+        token: token,
         departments,
         companyEmail: email,
       });

@@ -64,7 +64,7 @@ const ViewEmployee = ({
       selector: (row) => row.employeeAccountNumber,
     },
     { name: "BANK NAME", selector: (row) => row.employeeBankName },
-    { name: "EMPLOYEE TOKEN", selector: (row) => row.employeeToken },
+    // { name: "EMPLOYEE TOKEN", selector: (row) => row.employeeToken },
 
     {
       cell: (row) => <EditCompanyEmployee data={row} />,

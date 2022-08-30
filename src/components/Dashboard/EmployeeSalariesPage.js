@@ -194,7 +194,7 @@ const EmployeeSalariesPage = ({
       selector: (row) => row.employeeAccountNumber,
     },
     // { name: "BANK NAME", selector: (row) => row.employee_bank_name },
-    { name: "EMPLOYEE TOKEN", selector: (row) => row.employeeToken },
+    // { name: "EMPLOYEE TOKEN", selector: (row) => row.employeeToken },
 
     // {
     //   cell: (row) => <EditCompanyEmployee data={row} />,
