@@ -114,7 +114,7 @@ const SideBar = ({ pageId, page }) => {
           }}
           page={page}
         />
-        <DashBoardLinks
+        {/* <DashBoardLinks
           none='none'
           pathLink='/table'
           name='
@@ -125,7 +125,7 @@ const SideBar = ({ pageId, page }) => {
             pageId(data);
           }}
           page={page}
-        />
+        /> */}
 
         <DashBoardLinks
           none='none'

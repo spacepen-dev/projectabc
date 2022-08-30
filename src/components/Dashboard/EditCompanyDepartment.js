@@ -148,7 +148,7 @@ const AddRoles = ({
     if (!updateDepartment) {
       return null;
     }
-    const { success, error } = updateDepartment;
+    const { success, error } = updateDepartment.data;
     if (error) {
       dispatch({ type: "REQUEST_RESPONSE", error: error });
       setShowModal((prev) => {
@@ -298,7 +298,7 @@ const AddRoles = ({
 
 const mapStateToProps = (state) => {
   return {
-    updateDepartment: state.DashboardReducer.editDepartment.data,
+    updateDepartment: state.DashboardReducer.editDepartment,
     updateDepartmentErr: state.DashboardReducer.editDepartmentErr,
     // companyDepartment: state.DashboardReducer.fetchDepartment.data,
     // employeeRoles: state.DashboardReducer.companyEmployee,
