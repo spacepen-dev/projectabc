@@ -109,37 +109,38 @@ export const CompanyDetails = (email, token) => async (dispatch) => {
 // REGISTER EMPLOYEE ACTION
 export const RegisterEmployee = (values, token) => async (dispatch) => {
   const {
-    employee_firstname,
-    employee_lastname,
-    employee_email,
-    employee_annual_gross_salary,
-    employee_role,
-    employee_department,
-    employee_reliefs,
-    employee_nin,
+    employeeFirstname,
+    employeeLastname,
+    employeeEmail,
+    employeeAnnualGrossSalary,
+    employeeRole,
+    employeeDepartment,
+    employeeRelives,
+    employeeNin,
     // accountName,
     // accountNumber,
-    employee_bankAccount_number,
-    employee_bankAccount_name,
-    bankCode,
+    employeeAccountNumber,
+    employeeAccountName,
+    bankcode,
     filterBank,
   } = values;
+  // console.log(bankCode);
   try {
     const data = await BasedURL.post("/registerEmployee.php", {
-      employeeFirstname: employee_firstname,
-      employeeLastname: employee_lastname,
-      employee_email: employee_email,
-      employeeRole: employee_role,
-      employeeDepartment: employee_department,
-      employeeRelieves: employee_reliefs,
-      employeeNin: employee_nin,
+      employeeFirstname,
+      employeeLastname,
+      employee_email: employeeEmail,
+      employeeRole,
+      employeeDepartment: "sales",
+      employeeRelieves: employeeRelives,
+      employeeNin,
       token,
-      employeeAccountName: employee_bankAccount_name,
-      employeeAccountNumber: employee_bankAccount_number,
+      employeeAccountName,
+      employeeAccountNumber,
       employeeBankName: filterBank,
-      employeeBankCode: bankCode,
-      employeeAgs: employee_annual_gross_salary,
-      employeeMgs: employee_annual_gross_salary / "12",
+      employeeBankCode: bankcode,
+      employeeAgs: employeeAnnualGrossSalary,
+      employeeMgs: employeeAnnualGrossSalary / "12",
     });
     dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
   } catch (error) {
@@ -150,36 +151,36 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
 // UPDATE EMPLOYEE DETAIL ACTION
 export const UpdateEmployee = (values, token) => async (dispatch) => {
   const {
-    employee_firstname,
-    employee_lastname,
-    employee_email,
-    employee_role,
-    employee_department,
-    employee_relives,
-    employee_nin,
-    employee_annual_gross_salary,
-    employee_bankAccount_name,
-    employee_bankAccount_number,
+    employeeFirstname,
+    employeeLastname,
+    employeeEmail,
+    employeeRole,
+    employeeDepartment,
+    employeeRelives,
+    employeeNin,
+    employeeAnnualGrossSalary,
+    employeeAccountName,
+    employeeAccountNumber,
     filterBank,
     bankCode,
-    employee_token,
+    employeeToken,
   } = values;
   try {
     const data = await BasedURL.post("/updateEmployee.php", {
-      employeeFirstname: employee_firstname,
-      employeeLastname: employee_lastname,
-      employee_email,
-      employeeRole: employee_role,
-      employeeDepartment: employee_department,
-      employeeRelieves: employee_relives,
-      employeeNin: employee_nin,
-      employeeAccountName: employee_bankAccount_name,
-      employeeAccountNumber: employee_bankAccount_number,
+      employeeFirstname,
+      employeeLastname,
+      employee_email: employeeEmail,
+      employeeRole,
+      employeeDepartment,
+      employeeRelieves: employeeRelives,
+      employeeNin,
+      employeeAccountName,
+      employeeAccountNumber,
       employeeBankName: filterBank,
-      employeeAgs: employee_annual_gross_salary,
-      employeeMgs: employee_annual_gross_salary / "12",
+      employeeAgs: employeeAnnualGrossSalary,
+      employeeMgs: employeeAnnualGrossSalary / "12",
       companyToken: token,
-      employeeToken: employee_token,
+      employeeToken: employeeToken,
       employeeBankCode: bankCode,
     });
     dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
@@ -214,8 +215,8 @@ export const DeleteEmployeeAction = (token, values) => async (dispatch) => {
 export const FetchDepartment = (email, token) => async (dispatch) => {
   try {
     const data = await BasedURL.post("/fetchRoleDepartment.php", {
-      companyEmail: email,
       companyToken: token,
+      companyEmail: email,
     });
     dispatch({ type: "FETCH_DEPARTMENT", payLoad: data });
   } catch (error) {
@@ -392,7 +393,7 @@ export const FetchSalaryHistory = (email, token) => async (dispatch) => {
 export const PayEmployeeSalary =
   (token, email, employeesData) => async (dispatch) => {
     try {
-      const data = await BasedURL.post("payEmployeeSalaries.php", {
+      const data = await BasedURL.post("bulkSalaryPayment.php", {
         companyToken: token,
         companyEmail: email,
         employees: employeesData,

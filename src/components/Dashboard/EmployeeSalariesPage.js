@@ -13,6 +13,7 @@ import { Form, Button } from "react-bootstrap";
 import Loaderbutton from "../LoaderButton";
 import { connect } from "react-redux";
 import { FetchCompanyEmployee, PayEmployeeSalary } from "../../Actions";
+import NetWorkErrors from "../NetWorkErrors";
 
 // export function Narration({ data }) {
 
@@ -35,7 +36,6 @@ const initial = {
 };
 
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "REQUEST":
       return { ...state, request: action.request };
@@ -49,7 +49,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         response: action.response,
-        errorMessage: action.modal,
+        errorMessage: action.errorMessage,
       };
     case "NETWORK_ERROR":
       return { ...state, netWorkError: action.payload };
@@ -65,6 +65,7 @@ const EmployeeSalariesPage = ({
   FetchCompanyEmployee,
   PayEmployeeSalary,
   paySalaryRes,
+  paySalaryErr,
 }) => {
   const Months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
@@ -143,15 +144,15 @@ const EmployeeSalariesPage = ({
   }, [companyEmployee]);
 
   const columns = [
-    { name: "FIRST NAME", selector: (row) => row.employee_firstname },
-    { name: "LAST NAME", selector: (row) => row.employee_lastname },
+    { name: "FIRST NAME", selector: (row) => row.employeeFirstname },
+    { name: "LAST NAME", selector: (row) => row.employeeLastname },
     {
       name: "MONTHLY SALARY",
       selector: (row) =>
         new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "NGN",
-        }).format(row.employee_monthly_gross_salary),
+        }).format(row.employeeSalary),
     },
     // {
     //   name: "RELIEVES",
@@ -177,7 +178,7 @@ const EmployeeSalariesPage = ({
     },
     // { name: "DEPARTMENT", selector: (row) => row.employee_department },
     // { name: "ROLE", selector: (row) => row.employee_role },
-    { name: "EMAIL", selector: (row) => row.employee_email },
+    { name: "EMAIL", selector: (row) => row.employeeEmail },
     // {
     //   name: "ANNUAL SALARY",
     //   selector: (row) =>
@@ -187,13 +188,13 @@ const EmployeeSalariesPage = ({
     //     }).format(row.employee_annual_gross_salary),
     // },
 
-    { name: "ACCOUNT NAME", selector: (row) => row.employee_bankAccount_name },
+    { name: "ACCOUNT NAME", selector: (row) => row.employeeAccountName },
     {
       name: "ACCOUNT NUMBER",
-      selector: (row) => row.employee_bankAccount_number,
+      selector: (row) => row.employeeAccountNumber,
     },
     // { name: "BANK NAME", selector: (row) => row.employee_bank_name },
-    { name: "EMPLOYEE TOKEN", selector: (row) => row.employee_token },
+    { name: "EMPLOYEE TOKEN", selector: (row) => row.employeeToken },
 
     // {
     //   cell: (row) => <EditCompanyEmployee data={row} />,
@@ -251,7 +252,7 @@ const EmployeeSalariesPage = ({
 
   const sumMonthlySalary = (data) => {
     return data.reduce((acc, cur) => {
-      return acc + parseFloat(cur.employee_monthly_gross_salary);
+      return acc + parseFloat(cur.employeeSalary);
     }, 0);
   };
 
@@ -289,12 +290,12 @@ const EmployeeSalariesPage = ({
         var errorId = setTimeout(() => {
           // window.location.reload();
           dispatch({ type: "ERROR_RESPONSE", errorMessage: false });
+          // window.location.reload();
         }, 4000);
       } else {
         // dispatch({ type: "SUCCESS_RESPONSE", response: });
         var id = setTimeout(() => {
           onSuccess(success);
-          // window.location.reload();
         }, 4000);
         // show a modal to tell the user that the payment is been processed
         //and confirmation wouls be sent to the email
@@ -306,6 +307,22 @@ const EmployeeSalariesPage = ({
       clearTimeout(errorId);
     };
   }, [paySalaryRes]);
+
+  useEffect(() => {
+    console.log(paySalaryErr);
+    if (!paySalaryErr) {
+      return null;
+    } else {
+      dispatch({ type: "NETWORK_ERROR", netWorkError: paySalaryErr.message });
+      var id = setTimeout(() => {
+        dispatch({ type: "NETWORK_ERROR", netWorkError: "" });
+        window.location.reload();
+      }, 3000);
+    }
+    return () => {
+      clearTimeout(id);
+    };
+  }, [paySalaryErr]);
 
   return (
     <div>
@@ -376,9 +393,10 @@ const EmployeeSalariesPage = ({
           close={onClose}
         />
       )}
-      {console.log(state.errorMessage)}
-      {/* {errorMessage && <NetWorkErrors errMessage={errorMessage.message} />} */}
-      {/* {showModal && <NetWorkErrors serverErr={serverErr} />} */}
+      {console.log(state)}
+      {state.errorMessage && <NetWorkErrors serverErr={state.response} />}
+      {console.log(state.netWorkError)}
+      {state.netWorkError && <NetWorkErrors serverErr={state.netWorkError} />}
       {modalState.modal && (
         <ModalPayEmployee
           date={selectedDate}

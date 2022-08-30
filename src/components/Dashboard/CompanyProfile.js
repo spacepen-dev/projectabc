@@ -42,9 +42,10 @@ class CompanyProfile extends React.Component {
           // errMessage: this.props.companyRegistrationDetails.data,
         });
       }
+      // console.log(this.state.companyEmail + "and" + this.state.companyToken);
       CompanyDetails(this.state.companyEmail, this.state.companyToken);
-      FetchCompanyEmployee(this.state.companyToken, this.state.companyEmail);
       FetchDepartment(this.state.companyEmail, this.state.companyToken);
+      FetchCompanyEmployee(this.state.companyToken, this.state.companyEmail);
     }
   }
 
@@ -142,7 +143,7 @@ class CompanyProfile extends React.Component {
     return this.state.roles.map((cur, index) => {
       return (
         <React.Fragment key={index}>
-          <p class='profile-list'>{cur.employee_role}</p>
+          <p class='profile-list'>{cur.employeeRole}</p>
         </React.Fragment>
       );
     });

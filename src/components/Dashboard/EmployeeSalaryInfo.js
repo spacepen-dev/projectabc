@@ -95,7 +95,7 @@ console.log(currencyFormat(2665))
           />
           {/* {currencyFormat()} */}
           <Input
-            inputName='employee_annual_gross_salary'
+            inputName='employeeAnnualGrossSalary'
             type='number'
             handleChange={onHandleChange}
             value={annualSalary}
@@ -128,7 +128,7 @@ console.log(currencyFormat(2665))
             label='Enter employee annual reliefs/allowance'
           />
           <Input
-            inputName='employee_reliefs'
+            inputName='employeeRelives'
             type='number'
             handleChange={onHandleChange}
             value={annualReliefs}

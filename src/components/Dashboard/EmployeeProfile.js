@@ -86,7 +86,7 @@ const EmployeeProfile = ({
             label='Enter the name of your company'
           />
           <Input
-            inputName='employee_firstname'
+            inputName='employeeFirstname'
             type='text'
             handleChange={onHandleChange}
             value={employeeFirstName}
@@ -101,7 +101,7 @@ const EmployeeProfile = ({
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText name='Last Name' label='Enter Last name of employee' />
           <Input
-            inputName='employee_lastname'
+            inputName='employeeLastname'
             type='text'
             handleChange={onHandleChange}
             value={employeeLastName}
@@ -118,7 +118,7 @@ const EmployeeProfile = ({
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText name='Email' label='Enter Employee Email Address' />
           <Input
-            inputName='employee_email'
+            inputName='employeeEmail'
             type='text'
             handleChange={onHandleChange}
             value={employeeEmail}
@@ -136,7 +136,7 @@ const EmployeeProfile = ({
             label='Enter National Indentity Number'
           />
           <Input
-            inputName='employee_nin'
+            inputName='employeeNin'
             type='text'
             handleChange={onHandleChange}
             value={employeeNin}
@@ -153,7 +153,7 @@ const EmployeeProfile = ({
         <Form.Group as={Col}>
           <DashBoardText name='Department' label='Select employee department' />
           <select
-            name='employee_department'
+            name='employeeDepartment'
             className='select mt-0'
             onChange={onHandleChange}>
             <option>Select department</option>;
@@ -170,7 +170,7 @@ const EmployeeProfile = ({
           <DashBoardText name='Role' label='Enter Role ' />
 
           <Input
-            inputName='employee_role'
+            inputName='employeeRole'
             type='text'
             handleChange={onHandleChange}
             value={employeeRole}

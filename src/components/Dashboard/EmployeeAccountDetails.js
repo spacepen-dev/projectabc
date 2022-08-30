@@ -890,7 +890,7 @@ const EmployeeAccountDetails = ({
 }) => {
   const [showDropDown, setDropDown] = useState(false);
   const [filterBank, setFilterBank] = useState("");
-  const [bankCode, setBankCode] = useState("");
+  const [bankcode, setBankCode] = useState("");
   const [validation, setValidation] = useState({});
   const [request, setRequest] = useState(false);
   const [errorMessage, setMessage] = useState("");
@@ -1054,13 +1054,13 @@ const EmployeeAccountDetails = ({
       if (editEmployeeLink) {
         // REGISTRATION EMPLOYEE ACTION CREATOR
         editEmployeeAction(
-          { ...employeeData, filterBank, bankCode, accountName, accountNumber },
+          { ...employeeData, filterBank, bankcode, accountName, accountNumber },
           receivedToken
         );
       } else if (addEmployeeLink) {
         // EDIT EMPLOYEE ACTIONs
         registerEmployeeAction(
-          { ...employeeData, filterBank, bankCode },
+          { ...employeeData, filterBank, bankcode },
           receivedToken
         );
       }
@@ -1084,7 +1084,7 @@ const EmployeeAccountDetails = ({
             label='Enter Employee Account Name '
           />
           <Input
-            inputName='employee_bankAccount_name'
+            inputName='employeeAccountName'
             type='text'
             handleChange={onHandleChange}
             value={accountName}
@@ -1102,7 +1102,7 @@ const EmployeeAccountDetails = ({
             label='Enter Employee Account Number'
           />
           <Input
-            inputName='employee_bankAccount_number'
+            inputName='employeeAccountNumber'
             type='number'
             handleChange={onHandleChange}
             value={accountNumber}

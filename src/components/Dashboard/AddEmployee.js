@@ -9,13 +9,13 @@ const AddEmployee = ({
   registerEmployeeSuccess,
 }) => {
   const [employeeData, setEmployeData] = useState({
-    employee_firstname: "",
-    employee_lastname: "",
-    employee_role: "",
-    employee_nin: "",
-    employee_email: "",
-    employee_annual_gross_salary: "",
-    employee_annual_reliefs: "",
+    employeeFirstname: "",
+    employeeLastname: "",
+    employeeRole: "",
+    employeeNin: "",
+    employeeEmail: "",
+    employeeSalary: "",
+    employeeRelives: "",
   });
 
   // function currencyFormat(num) {

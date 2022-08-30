@@ -29,18 +29,18 @@ const ViewEmployee = ({
   // GET EMPLOYEE DATA
 
   const heading = [
-    { name: "FIRST NAME", selector: (row) => row.employee_firstname },
-    { name: "LAST NAME", selector: (row) => row.employee_lastname },
-    { name: "EMAIL", selector: (row) => row.employee_email },
-    { name: "DEPARTMENT", selector: (row) => row.employee_department },
-    { name: "ROLE", selector: (row) => row.employee_role },
+    { name: "FIRST NAME", selector: (row) => row.employeeFirstname },
+    { name: "LAST NAME", selector: (row) => row.employeeLastname },
+    { name: "EMAIL", selector: (row) => row.employeeEmail },
+    { name: "DEPARTMENT", selector: (row) => row.employeeDepartment },
+    { name: "ROLE", selector: (row) => row.employeeRole },
     {
       name: "MONTHLY SALARY",
       selector: (row) =>
         new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "NGN",
-        }).format(row.employee_monthly_gross_salary),
+        }).format(row.employeeSalary),
     },
     {
       name: "ANNUAL SALARY",
@@ -48,7 +48,7 @@ const ViewEmployee = ({
         new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "NGN",
-        }).format(row.employee_annual_gross_salary),
+        }).format(row.employeeAnnualGrossSalary),
     },
     {
       name: "RELIEVES",
@@ -56,15 +56,15 @@ const ViewEmployee = ({
         new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "NGN",
-        }).format(row.employee_relives),
+        }).format(row.employeeRelives),
     },
-    { name: "ACCOUNT NAME", selector: (row) => row.employee_bankAccount_name },
+    { name: "ACCOUNT NAME", selector: (row) => row.employeeAccountName },
     {
       name: "ACCOUNT NUMBER",
-      selector: (row) => row.employee_bankAccount_number,
+      selector: (row) => row.employeeAccountNumber,
     },
-    { name: "BANK NAME", selector: (row) => row.employee_bank_name },
-    { name: "EMPLOYEE TOKEN", selector: (row) => row.employee_token },
+    { name: "BANK NAME", selector: (row) => row.employeeBankName },
+    { name: "EMPLOYEE TOKEN", selector: (row) => row.employeeToken },
 
     {
       cell: (row) => <EditCompanyEmployee data={row} />,
@@ -121,7 +121,7 @@ const ViewEmployee = ({
   // const filteredItems = employeeData.filter((item) => {
   //   console.log(Object.values(item).includes(filterValue.toUpperCase()));
   // });
-  console.log(companyEmployee);
+  // console.log(companyEmployee);
   return (
     <div className='mt-1'>
       <div className='filter-container d-flex align-items-end justify-content-center'>
