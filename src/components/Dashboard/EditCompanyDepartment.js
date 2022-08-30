@@ -43,8 +43,6 @@ const AddRoles = ({
 
   const [modal, setShowModal] = useState({ response: false, error: false });
 
-  //   console.log(data);
-
   const [tags, setTags] = useState(() => {
     return data.map((element) => {
       return element.companyDepartment;
@@ -62,13 +60,6 @@ const AddRoles = ({
     "Engineering",
     "Software",
   ]);
-
-  //   const resolveDepartment = () => {};
-
-  //   console.log(resolveDepartment());
-  // const Names = ['Thomas', "Silver", 'Prosper']
-
-  // const a = [...Names, 'Jessica']
 
   const keyPress = (e) => {
     let tag = e.target.value.replace(/\s+/g, " ");
@@ -178,7 +169,7 @@ const AddRoles = ({
     if (!updateDepartmentErr) {
       return null;
     }
-    dispatch({ type: "NETWORK_ERROR", payload: updateDepartmentErr.message });
+    dispatch({ type: "NETWORK_ERROR", error: updateDepartmentErr.message });
     setShowModal((prev) => {
       return { ...prev, errorModal: true };
     });
@@ -271,7 +262,6 @@ const AddRoles = ({
           </div>
         </Form>
       </Container>
-
       {modal.response && <SuccessRequestModal message={state.res.res} />}
       {state.error.error && (
         <NetWorkErrors

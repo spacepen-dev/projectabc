@@ -79,10 +79,10 @@ export const LoginOTP = (code, email) => async (dispatch) => {
 
 // SUBMIT DEPARTMENT ACTION
 export const SubmitDepartment =
-  (departments, tokenKey, email) => async (dispatch) => {
+  (departments, token, email) => async (dispatch) => {
     try {
       const data = await BasedURL.post("/registerDepartment.php", {
-        tokenKey,
+        token,
         departments,
         companyEmail: email,
       });
