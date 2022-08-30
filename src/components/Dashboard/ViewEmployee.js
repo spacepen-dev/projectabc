@@ -5,7 +5,7 @@ import DataTable from "react-data-table-component";
 import EditCompanyEmployee from "./EditCompanyEmployee";
 import { FetchCompanyEmployee, DeleteEmployeeAction } from "../../Actions";
 import DeleteEmployee from "./OptionsModal";
-import { EmployeeIcon } from "./svg/SVG";
+// import { EmployeeIcon } from "./svg/SVG";
 
 const ViewEmployee = ({
   FetchCompanyEmployee,
@@ -95,48 +95,28 @@ const ViewEmployee = ({
     setEmployeeData(companyEmployee.success);
   }, [companyEmployee]);
 
-  // const filteredItems = employeeData.filter((item) => {
-  //   return Object.values(item).contains(filterValue);
-  // });
-  //   "employeeFirstname, employeeLastname, employee_email, token, employeeNin,
-  // employeeRole, employeeDepartment, employeeAgs, employee_mogs, employeeRelieves, employeeBankName,  employeeAccountName, employeeAccountNumber, employeeBankCode"
+  const filteredItems = employeeData?.filter((item) => {
+    return String(Object.values(item))
+      .toLowerCase()
+      .includes(filterValue.toLowerCase());
+  });
 
-  function searchTable(val) {
-    let filterData = employeeData.filter((list) => {
-      let values = Object.values(list);
-      const searchString = String(values).includes(val.toUpperCase());
-      // if (val) {
-      //   if (!searchString) {
-      //     // return "data";
-      //   }
-      //   return searchString;
-      // } else if (!val) {
-      //   return employeeData;
-      // }
-
-      return val ? searchString : employeeData;
-    });
-    return filterData;
-  }
-  // const filteredItems = employeeData.filter((item) => {
-  //   console.log(Object.values(item).includes(filterValue.toUpperCase()));
-  // });
-  // console.log(companyEmployee);
   return (
     <div className='mt-1'>
       <div className='filter-container d-flex align-items-end justify-content-center'>
-        <div className='w-100 px-4 py-1'>
+        <div className='w-100 px-4 py-2 my-2'>
           <input
-            className='w-100 filter-input px-2'
+            className='w-100 filter-input px-3 rounded'
+            id='filterInput'
             type='text'
-            placeholder='Search for employees by name, role,department, annual salary, monthly salary...'
+            placeholder='Search Employee Details...'
             onChange={onFilterChange}
           />
         </div>
       </div>
       <DataTable
         columns={heading}
-        data={employeeData}
+        data={filteredItems}
         progressPending={pending}
         striped
         pagination

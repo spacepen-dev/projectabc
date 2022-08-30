@@ -165,6 +165,7 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
     bankcode,
     employeeToken,
   } = values;
+  console.log(employeeRelives);
   try {
     const data = await BasedURL.post("/updateEmployee.php", {
       employeeFirstname,

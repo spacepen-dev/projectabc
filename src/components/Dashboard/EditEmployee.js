@@ -12,7 +12,6 @@ const EditEmployee = ({
   close,
 }) => {
   const [employeeData, setEmployeData] = useState(initialValue);
-
   const onHandleChange = (e) => {
     const { name, value } = e.target;
     setEmployeData({ ...employeeData, [name]: value });
@@ -26,6 +25,7 @@ const EditEmployee = ({
         editEmployeeErr={updateEmployeeErr}
         editEmployeeSuccess={updateEmployeeSuccess}
         editEmployeeLink='editEmployee'
+        close={close}
       />
     </>
   );

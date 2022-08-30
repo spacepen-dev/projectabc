@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 import DashBoardText from "./DashBoardText";
@@ -887,6 +888,7 @@ const EmployeeAccountDetails = ({
   editEmployeeSuccess,
   employeeData,
   token,
+  close,
 }) => {
   const [showDropDown, setDropDown] = useState(false);
   const [filterBank, setFilterBank] = useState("");
@@ -899,6 +901,8 @@ const EmployeeAccountDetails = ({
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
   const [bankCodeList, setBankCodeList] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!bankListRes) return null;
@@ -938,7 +942,8 @@ const EmployeeAccountDetails = ({
         setSuccess(success);
         const removeTimeOut = setTimeout(() => {
           setSuccess("");
-          window.location.reload();
+          // window.location.reload();
+          navigate("overview");
         }, 4000);
         return () => {
           clearTimeout(removeTimeOut);
@@ -959,7 +964,8 @@ const EmployeeAccountDetails = ({
         setError(error);
         const removeTimeOut = setTimeout(() => {
           setShow(false);
-          window.location.reload();
+          // window.location.reload();
+          // navigate("overview");
         }, 4000);
         return () => {
           clearTimeout(removeTimeOut);
@@ -968,6 +974,7 @@ const EmployeeAccountDetails = ({
         setSuccess(success);
         const removeTimeOut = setTimeout(() => {
           setSuccess("");
+          close();
           window.location.reload();
         }, 4000);
         return () => {
@@ -975,7 +982,7 @@ const EmployeeAccountDetails = ({
         };
       }
     }
-  }, [editEmployeeSuccess]);
+  }, [editEmployeeSuccess, close]);
 
   // USEEFFECT TO FETCH NETWORK ERROR FOR ADD EMPLOYEE
   useEffect(() => {
@@ -1155,6 +1162,7 @@ const EmployeeAccountDetails = ({
           onClick={prevQuestion}>
           Back
         </Button>
+
         <LoaderButton btnName='Finish' btnStyle='ms-4' request={request} />
       </div>
       {showModal && (

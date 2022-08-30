@@ -121,6 +121,9 @@ input::placeholder {
   /* color: var(--accent); */
   color: #1a1a1a;
 }
+#filterInput::placeholder{
+  font-size: 13px;
+}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

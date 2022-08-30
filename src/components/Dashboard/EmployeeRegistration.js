@@ -21,6 +21,7 @@ const EmployeeRegistration = ({
   editEmployeeErr,
   editEmployeeSuccess,
   getEmployeeData,
+  close,
 }) => {
   const [index, setIndex] = useState(1);
   const [token, setToken] = useState("");
@@ -60,6 +61,16 @@ const EmployeeRegistration = ({
       <div className=' w-100 mx-auto employee-form'>
         <div className='pt-5 pb-5'>
           <AddEmployeeForm currentForm={index} />
+          {editEmployeeLink && (
+            <div className=' d-flex justify-content-center align-items-center mt-3'>
+              <button
+                type='button'
+                className='py-1 px-2 bg-primary text-white'
+                onClick={() => close()}>
+                Close
+              </button>
+            </div>
+          )}
         </div>
         <div className=' py-1 px-4'>
           <EmployeeProfile
@@ -86,6 +97,7 @@ const EmployeeRegistration = ({
             getEmployeeData={getEmployeeData}
             data={employeeData}
           />
+
           <EmployeeAccountDetails
             index={index}
             err={err}
@@ -104,7 +116,9 @@ const EmployeeRegistration = ({
             editEmployeeSuccess={editEmployeeSuccess}
             token={token}
             employeeData={employeeData}
+            close={close}
           />
+
           {!token && (
             <VerificationModal
               message={"Session timeout. Please sign in!"}
