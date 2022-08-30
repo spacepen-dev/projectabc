@@ -162,7 +162,7 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
     employeeAccountName,
     employeeAccountNumber,
     filterBank,
-    bankCode,
+    bankcode,
     employeeToken,
   } = values;
   try {
@@ -181,7 +181,7 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
       employeeMgs: employeeAnnualGrossSalary / "12",
       companyToken: token,
       employeeToken: employeeToken,
-      employeeBankCode: bankCode,
+      employeeBankCode: bankcode,
     });
     dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
   } catch (error) {
