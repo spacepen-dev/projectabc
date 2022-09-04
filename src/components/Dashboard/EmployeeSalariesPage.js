@@ -1,10 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useReducer,
-  useCallback,
-  useRef,
-} from "react";
+import React, { useState, useEffect, useReducer, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import DataTable from "react-data-table-component";
 import VerificationModal from "./VerificationModal";
@@ -55,6 +50,8 @@ const EmployeeSalariesPage = ({
   paySalaryRes,
   paySalaryErr,
 }) => {
+  const navigate = useNavigate();
+
   let Months = new Set([
     new Date().getMonth(),
     0,
@@ -87,13 +84,8 @@ const EmployeeSalariesPage = ({
     "November",
     "December",
   ];
-  const Year = [
-    new Date().getFullYear(),
-    new Date().getFullYear() - 1,
-    new Date().getFullYear() - 2,
-    new Date().getFullYear() - 3,
-    new Date().getFullYear() - 4,
-  ];
+
+  const Year = [new Date().getFullYear(), new Date().getFullYear() - 1];
 
   const currentDate = {
     month: GetMonth[new Date().getMonth()],
@@ -218,7 +210,7 @@ const EmployeeSalariesPage = ({
   ];
 
   const checkedEmployeeData = ({ selectedRows, selectedCount }) => {
-    let arr = selectedRows;
+    let arr = [];
     if (!selectedCount) {
       setmodalState((state) => {
         return { ...state, disabled: true };
@@ -228,16 +220,22 @@ const EmployeeSalariesPage = ({
         return { ...state, disabled: false };
       });
     }
-
-    val.forEach(({ narration }, index) => {
-      if (!selectedRows[index]) {
-        console.log(selectedRows);
-        arr = selectedRows;
-      } else {
-        arr.push({ ...selectedRows[index], narration });
-      }
-    });
-
+    if (val.length === 0) {
+      selectedRows.forEach((cur) => {
+        arr.push({ ...cur, narration: "Employee Salary Paid" });
+      });
+    } else {
+      val.forEach(({ narration }, index) => {
+        if (!selectedRows[index]) {
+          arr = selectedRows;
+        } else {
+          selectedRows.forEach((cur) => {
+            // arr.push({ ...cur, narration: "Employee Salary Paid" });
+            arr.push({ ...cur, narration });
+          });
+        }
+      });
+    }
     setSelectedData(arr, selectedCount);
   };
 
@@ -271,10 +269,14 @@ const EmployeeSalariesPage = ({
     dispatch({ type: "SUCCESS_RESPONSE", response: arg, modal: true });
   }, []);
 
-  const onClose = useCallback((arg) => {
-    dispatch({ type: "CLOSE_MODAL", modal: false });
-    window.location.reload();
-  }, []);
+  const onClose = useCallback(
+    (arg) => {
+      dispatch({ type: "CLOSE_MODAL", modal: false });
+      window.location.reload();
+      navigate("/view/salary/history");
+    },
+    [navigate]
+  );
 
   useEffect(() => {
     if (!paySalaryRes) return null;
@@ -288,11 +290,12 @@ const EmployeeSalariesPage = ({
         var errorId = setTimeout(() => {
           // window.location.reload();
           dispatch({ type: "ERROR_RESPONSE", errorMessage: false });
-          // window.location.reload();
+          window.location.reload();
         }, 4000);
       } else {
         // dispatch({ type: "SUCCESS_RESPONSE", response: });
         var id = setTimeout(() => {
+          // window.location.reload();
           onSuccess(success);
         }, 4000);
         // show a modal to tell the user that the payment is been processed
@@ -304,10 +307,9 @@ const EmployeeSalariesPage = ({
       clearTimeout(id);
       clearTimeout(errorId);
     };
-  }, [paySalaryRes]);
+  }, [paySalaryRes, onError, onSuccess, onRequest]);
 
   useEffect(() => {
-    console.log(paySalaryErr);
     if (!paySalaryErr) {
       return null;
     } else {
@@ -391,9 +393,7 @@ const EmployeeSalariesPage = ({
           close={onClose}
         />
       )}
-      {console.log(state)}
       {state.errorMessage && <NetWorkErrors serverErr={state.response} />}
-      {console.log(state.netWorkError)}
       {state.netWorkError && <NetWorkErrors serverErr={state.netWorkError} />}
       {modalState.modal && (
         <ModalPayEmployee

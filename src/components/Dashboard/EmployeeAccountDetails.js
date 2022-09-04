@@ -87,7 +87,6 @@ const EmployeeAccountDetails = ({
         const removeTimeOut = setTimeout(() => {
           setSuccess("");
           window.location.reload();
-          // navigate("/dashboard/overview");
         }, 4000);
         return () => {
           clearTimeout(removeTimeOut);
@@ -175,10 +174,9 @@ const EmployeeAccountDetails = ({
       return (
         <React.Fragment>
           <li
-            key={bankCode}
+            key={index}
             class='bankLinks'
             onClick={() => {
-              console.log(bankcode);
               setFilterBank(bankName);
               setDropDown(false);
               setBankCode(bankCode);

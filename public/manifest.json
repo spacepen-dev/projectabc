@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "AimienPay",
+  "name": "The ultimate Payroll solution for modern Business",
   
   "icons": [
     {
@@ -9,12 +9,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "andriod.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "android.png",
       "type": "image/png",
       "sizes": "512x512"
     }
