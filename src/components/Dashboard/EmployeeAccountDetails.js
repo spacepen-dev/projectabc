@@ -41,15 +41,18 @@ const EmployeeAccountDetails = ({
   const [showModal, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
-  const [bankCodeList, setBankCodeList] = useState([]);
+  const [bankCodeList] = useState(() =>
+    JSON.parse(localStorage.getItem("bankList"))
+  );
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!bankListRes) return null;
     if (bankListRes.error) return null;
-    setBankCode(bankListRes.success);
-    setBankCodeList(bankListRes.success);
+    localStorage.setItem("bankList", JSON.stringify(bankListRes.success));
+    // setBankCode(bankListRes.success);
+    // setBankCodeList(bankListRes.success);
   }, [bankListRes]);
   // FETCH THE TOKEN FROM THE LOCAL STORAGE
 
@@ -84,7 +87,7 @@ const EmployeeAccountDetails = ({
         const removeTimeOut = setTimeout(() => {
           setSuccess("");
           window.location.reload();
-          navigate("/dashboard/overview");
+          // navigate("/dashboard/overview");
         }, 4000);
         return () => {
           clearTimeout(removeTimeOut);
@@ -175,6 +178,7 @@ const EmployeeAccountDetails = ({
             key={bankCode}
             class='bankLinks'
             onClick={() => {
+              console.log(bankcode);
               setFilterBank(bankName);
               setDropDown(false);
               setBankCode(bankCode);
@@ -287,7 +291,6 @@ const EmployeeAccountDetails = ({
               });
             }}
           />
-
           {showDropDown && (
             <div id='dropdownList' className='dropdown-content shadow'>
               {BankList()}

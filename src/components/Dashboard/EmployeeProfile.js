@@ -20,7 +20,9 @@ const EmployeeProfile = ({
   departmentRes,
 }) => {
   const [validation, setValidation] = useState({});
-  const [departmentData, setDepartmentData] = useState([]);
+  const [departmentData] = useState(() =>
+    JSON.parse(localStorage.getItem("department"))
+  );
 
   const Validation = () => {
     let regexp =
@@ -66,12 +68,12 @@ const EmployeeProfile = ({
   }, [FetchBankList]);
 
   // GET EMPLOYEE DATA FROM THE REDUCER
-  useEffect(() => {
-    if (!departmentRes) {
-      return null;
-    }
-    setDepartmentData(departmentRes.success);
-  }, [departmentRes]);
+  // useEffect(() => {
+  //   if (!departmentRes) {
+  //     return null;
+  //   }
+  //   setDepartmentData(departmentRes.success);
+  // }, [departmentRes]);
 
   if (index !== 1) {
     return null;
@@ -195,10 +197,10 @@ const EmployeeProfile = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    departmentRes: state.DashboardReducer.fetchDepartment.data,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     departmentRes: state.DashboardReducer.fetchDepartment.data,
+//   };
+// };
 
-export default connect(mapStateToProps, { FetchBankList })(EmployeeProfile);
+export default connect(null, { FetchBankList })(EmployeeProfile);

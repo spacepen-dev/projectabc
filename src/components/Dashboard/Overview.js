@@ -23,6 +23,7 @@ const Overview = ({
   companyWallet,
   FetchDepartment,
   CompanyDetails,
+  departmentRes,
 }) => {
   const [pageId, setId] = useState(4);
   const [small, setSmall] = useState("first");
@@ -136,26 +137,26 @@ const Overview = ({
 
   //  COMPANY WALLET FUNCTION
 
-  // const companyTransactionFunct = useCallback(() => {
-  //   if (!companyAmount) {
-  //     return null;
-  //   } else {
-  //     setCardDetails((state) => {
-  //       return {
-  //         ...state,
-  //         totalAmount: companyWallet.success.length,
-  //       };
-  //     });
-  //   }
-  // }, [companyAmount]);
+  const companyTransactionFunct = useCallback(() => {
+    if (!departmentRes) {
+      return null;
+    } else {
+      localStorage.setItem("department", JSON.stringify(departmentRes.success));
+    }
+  }, [departmentRes]);
 
+  useEffect(() => {
+    // companyAccountFunct();
+    companyTransactionFunct();
+    // companyEmployeeFunct();
+  }, [companyTransactionFunct]);
+
+  // USE EFFECT TO FETCH THE DATA FOR THE TOTAL EMPLOYEE
   useEffect(() => {
     companyAccountFunct();
     // companyTransactionFunct();
     companyEmployeeFunct();
   }, [companyAccountFunct, companyEmployeeFunct]);
-
-  // USE EFFECT TO FETCH THE DATA FOR THE TOTAL EMPLOYEE
 
   return (
     <Container fluid className='overview h-100'>
@@ -249,7 +250,8 @@ const mapStateToProps = (state) => {
   return {
     companyWallet: state.DashboardReducer.companyWallet.data,
     companyEmployee: state.DashboardReducer.companyDetails.data,
-    // companyAmount: state.DashboardReducer.companyAmount.data,
+    // companyDepartment: state.DashboardReducer.companyAmount.data,
+    departmentRes: state.DashboardReducer.fetchDepartment.data,
   };
 };
 

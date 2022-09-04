@@ -146,7 +146,7 @@ const Settings = ({
           <div className='select-fields'>
             <LabelText
               label='Select the size range of your company'
-              name='Company Size'
+              name='Company Range'
             />
 
             <div sm='10' className='field-container'>
@@ -187,7 +187,7 @@ const Settings = ({
               }}
             />
           </div>
-          <Col className='d-flex toggle-input justify-content-between align-items-center'>
+          {/* <Col className='d-flex toggle-input justify-content-between align-items-center'>
             <LabelText
               name='PAYE'
               inputname='PAYE Taxes'
@@ -210,7 +210,7 @@ const Settings = ({
               </label>
               Yes
             </div>
-          </Col>
+          </Col> */}
           <div className='button-container double-btns d-flex justify-content-end align-items-end'>
             <Button type='button' className='button ms-auto' onClick={prevPage}>
               Back

@@ -123,6 +123,7 @@ const AddRoles = ({
       return (
         <li
           key={index}
+          style={{ cursor: "pointer" }}
           className='btn-add sug-tag'
           onClick={() => {
             setTags([...tags, tag]);
@@ -156,12 +157,13 @@ const AddRoles = ({
       setShowModal((prev) => {
         return { ...prev, response: false };
       });
+      goBack(1);
     }, 4000);
 
     return () => {
       clearTimeout(id);
     };
-  }, [updateDepartment]);
+  }, [updateDepartment, goBack]);
 
   // RESPONSE FORM THE NETWORK
 
@@ -175,7 +177,7 @@ const AddRoles = ({
     });
     let id = setTimeout(() => {
       dispatch({ type: "NETWORK_ERROR", error: "" });
-      // window.location.reload();
+      window.location.reload();
       // setShowModal((prev) => {
       //   return { ...prev, errorModal: false };
       // });

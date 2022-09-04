@@ -76,6 +76,7 @@ const AddRoles = ({ data }) => {
       return (
         <li
           key={index}
+          style={{ cursor: "pointer" }}
           className='btn-add sug-tag'
           onClick={() => {
             setTags([...tags, tag]);
