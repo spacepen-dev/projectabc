@@ -83,7 +83,7 @@ const EmployeeAccountDetails = ({
         setSuccess(success);
         const removeTimeOut = setTimeout(() => {
           setSuccess("");
-          // window.location.reload();
+          window.location.reload();
           navigate("/dashboard/overview");
         }, 4000);
         return () => {

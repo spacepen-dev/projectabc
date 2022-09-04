@@ -5,19 +5,37 @@ import { Form } from "react-bootstrap";
 import { FetchWalletHistory } from "../../Actions";
 import { Badge } from "react-bootstrap";
 
-const Months = [
+let Months = new Set([
   new Date().getMonth(),
-  new Date().getMonth() + 1,
-  new Date().getMonth() + 2,
-  new Date().getMonth() + 3,
-  new Date().getMonth() + 4,
-  new Date().getMonth() + 5,
-  new Date().getMonth() + 6,
-  // new Date().getMonth() + 7,
-  // new Date().getMonth() + 8,
-  // new Date().getMonth() + 9,
-  new Date().getMonth() - 1,
-  new Date().getMonth() - 2,
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+]);
+
+Months = Array.from(Months);
+
+const GetMonth = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 // function checkMonths() {
@@ -28,21 +46,6 @@ const Months = [
 
 // checkMonths();
 
-const GetMonth = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
 const Year = [
   new Date().getFullYear(),
   new Date().getFullYear() - 1,
@@ -52,13 +55,13 @@ const Year = [
 ];
 
 const currentDate = {
-  month: GetMonth[new Date().getMonth()],
+  month: GetMonth[Months],
   year: new Date().getFullYear(),
 };
 
 function Badges({ row }) {
-  var bg = "";
   function check() {
+    var bg = "";
     if (row === "pending") {
       return (bg = "warning");
     } else if (row === "decline") {
@@ -90,7 +93,11 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
         new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "NGN",
-        }).format(row.totalAmount),
+        }).format(row.amount),
+    },
+    {
+      name: "Narration",
+      selector: (row) => <row.narration />,
     },
     {
       name: "TRANSACTION STATUS",

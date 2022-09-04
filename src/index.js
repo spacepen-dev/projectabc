@@ -9,6 +9,8 @@ import reducer from "./reducer";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+// import reportWebVitals from "./reportWebVitals";
+// import * as serviceWorkerRegistration from '../src/serviceWorkerRegistration'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
@@ -23,3 +25,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.querySelector("#root")
 );
+
+// reportWebVitals()

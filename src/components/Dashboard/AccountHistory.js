@@ -4,8 +4,8 @@ import { Badge } from "react-bootstrap";
 import DashboardTable from "./DashboardTable";
 
 function Badges({ row }) {
-  var bg = "";
   function check() {
+    var bg = "";
     if (row === "pending") {
       return (bg = "warning");
     } else if (row === "decline") {
@@ -36,7 +36,11 @@ const AccountHistory = ({ companyWallet }) => {
         new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "NGN",
-        }).format(row.totalAmount),
+        }).format(row.amount),
+    },
+    {
+      name: "NARRATION",
+      selector: (row) => row.narration,
     },
     {
       name: "TRANSACTION STATUS",

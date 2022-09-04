@@ -15,18 +15,6 @@ import { connect } from "react-redux";
 import { FetchCompanyEmployee, PayEmployeeSalary } from "../../Actions";
 import NetWorkErrors from "../NetWorkErrors";
 
-// export function Narration({ data }) {
-
-//   return (
-//     <textarea
-//       id={data.employee_token}
-//       type='text'
-//       className='py-5'
-//       onClick={(e) => console.log(val)}
-//       onChange={onChange}></textarea>
-//   );
-// }
-
 const initial = {
   request: false,
   response: "",
@@ -67,7 +55,23 @@ const EmployeeSalariesPage = ({
   paySalaryRes,
   paySalaryErr,
 }) => {
-  const Months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  let Months = new Set([
+    new Date().getMonth(),
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+  ]);
+
+  Months = Array.from(Months);
 
   const GetMonth = [
     "January",
@@ -162,20 +166,7 @@ const EmployeeSalariesPage = ({
     //       currency: "NGN",
     //     }).format(row.employee_relives),
     // },
-    {
-      cell: (row) => (
-        <textarea
-          name='narration'
-          type='text'
-          placeholder='Add narration before selecting the employee to pay'
-          className='py-5'
-          cols={30}
-          onBlur={onChange}></textarea>
-      ),
-      // ignoreRowClick: true,
-      // allowOverflow: true,
-      name: "NARRATION",
-    },
+
     // { name: "DEPARTMENT", selector: (row) => row.employee_department },
     // { name: "ROLE", selector: (row) => row.employee_role },
     { name: "EMAIL", selector: (row) => row.employeeEmail },
@@ -210,10 +201,24 @@ const EmployeeSalariesPage = ({
     //   allowOverflow: true,
     //   name: "REMOVE EMPLOYEE",
     // },
+    {
+      cell: (row) => (
+        <input
+          name='narration'
+          type='text'
+          placeholder='Add narration'
+          className='py-2'
+          onBlur={onChange}
+        />
+      ),
+      // ignoreRowClick: true,
+      // allowOverflow: true,
+      name: "NARRATION",
+    },
   ];
 
   const checkedEmployeeData = ({ selectedRows, selectedCount }) => {
-    let arr = [];
+    let arr = selectedRows;
     if (!selectedCount) {
       setmodalState((state) => {
         return { ...state, disabled: true };
@@ -226,7 +231,8 @@ const EmployeeSalariesPage = ({
 
     val.forEach(({ narration }, index) => {
       if (!selectedRows[index]) {
-        return;
+        console.log(selectedRows);
+        arr = selectedRows;
       } else {
         arr.push({ ...selectedRows[index], narration });
       }
@@ -241,14 +247,6 @@ const EmployeeSalariesPage = ({
       return { ...state, [name]: value };
     });
   };
-  // console.log(selectedData);
-  // const sumSelectedSalary = (data) => {
-  //   const sumTax = data.reduce((acc, cur) => {
-  //     // TAX SHOULD BE SUBTRACTED FROM THE MONTHLY SALARY
-  //     return acc + cur.tax;
-  //   }, 0);
-  //   return sumTax;
-  // };
 
   const sumMonthlySalary = (data) => {
     return data.reduce((acc, cur) => {
