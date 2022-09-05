@@ -158,7 +158,12 @@ const EmployeeProfile = ({
             name='employeeDepartment'
             className='select mt-0'
             onChange={onHandleChange}>
-            <option>Select department</option>;
+            {!employeeDepartment ? (
+              <option>Select department</option>
+            ) : (
+              <option>{employeeDepartment}</option>
+            )}
+            ;{/* {employeeDepartment && } */}
             {departmentData.map(({ companyDepartment }) => {
               return (
                 <option key={companyDepartment} value={companyDepartment}>

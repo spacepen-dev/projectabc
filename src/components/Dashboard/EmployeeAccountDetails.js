@@ -31,9 +31,10 @@ const EmployeeAccountDetails = ({
   token,
   close,
 }) => {
+  console.log(employeeData);
   const [showDropDown, setDropDown] = useState(false);
-  const [filterBank, setFilterBank] = useState("");
-  const [bankcode, setBankCode] = useState("");
+  const [filterBank, setFilterBank] = useState(employeeData.employeeBankName);
+  const [bankcode, setBankCode] = useState(employeeData.employeeBankCode);
   const [validation, setValidation] = useState({});
   const [request, setRequest] = useState(false);
   const [errorMessage, setMessage] = useState("");

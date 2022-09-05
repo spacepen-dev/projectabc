@@ -4,6 +4,7 @@ import ViewEmployeeModal from "./ViewEmployeeModal";
 
 // EDIT EMPLOYEE FUNCTIONALITY
 const EditCompanyEmployee = ({ data }) => {
+  console.log(data);
   const [showEditModal, setEditModal] = useState(false);
 
   const onEdit = () => {
