@@ -222,7 +222,7 @@ const EmployeeSalariesPage = ({
     }
     if (val.length === 0) {
       selectedRows.forEach((cur) => {
-        arr.push({ ...cur, narration: "Employee Salary Paid" });
+        arr.push({ ...cur, narration: "Salary Payment" });
       });
     } else {
       val.forEach(({ narration }, index) => {
