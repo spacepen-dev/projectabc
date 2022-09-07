@@ -9,7 +9,6 @@ const Contact = ({
   currentForm,
   address,
   email,
-  website,
   handleChange,
   prevPage,
   nextPage,
@@ -88,19 +87,7 @@ const Contact = ({
               value={phoneNumber}
             />
           </div>
-          <div className='field-container'>
-            <LabelText
-              label='Input the official website of your company'
-              name='Website'
-            />
-            <Input
-              inputName='website'
-              type='text'
-              handleChange={handleChange}
-              value={website}
-              placeholder='www.yourwebsite.com'
-            />
-          </div>
+
           <div className='button-container double-btns d-flex justify-content-end align-items-end'>
             <Button type='button' className='button ms-auto' onClick={prevPage}>
               Back

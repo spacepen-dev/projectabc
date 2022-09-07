@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SubHeader from "./SubHeader";
-import { Form, Col, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { connect } from "react-redux";
 
@@ -17,6 +17,7 @@ const Settings = ({
   companyReg,
   checkStatus,
   tax,
+  website,
   prevPage,
   formData,
   check,
@@ -27,36 +28,16 @@ const Settings = ({
   const [serverErr, setServerErr] = useState("");
   const [success, setSuccess] = useState("");
   const [showModal, setShow] = useState(false);
-  const [maxSalary, setMaxSalary] = useState({ formated: "", value: 0 });
-  const [maxSalaryErr, setMaxSalaryErr] = useState("");
-  const [companySize, setCompanySize] = useState("school");
-
-  const companySizes = ["School"];
+  // const [maxSalary, setMaxSalary] = useState({ formated: "", value: 0 });
+  // const [maxSalaryErr, setMaxSalaryErr] = useState("");
+  const [category, setCategory] = useState({});
 
   const navigate = useNavigate();
 
-  const FormatNum = (value) => {
-    const formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "NGN",
+  const onCategoryChange = (e) => {
+    setCategory((prev) => {
+      return { ...prev, value: e.target.value };
     });
-    if (formatter.format(value) === "NGNNaN") {
-      setMaxSalaryErr("Use numbers only! Please clear all before typing.");
-
-      value = "";
-    }
-    return formatter.format(value);
-  };
-
-  const onSalaryChange = (e) => {
-    // setMaxSalary(e.target.value);
-    setMaxSalary(() => {
-      return { formated: e.target.value, value: e.target.value };
-    });
-  };
-  const onChange = (e) => {
-    const employeeSize = e.target.value.split("-")[1];
-    setCompanySize(employeeSize);
   };
 
   useEffect(() => {
@@ -65,7 +46,6 @@ const Settings = ({
     } else {
       setRequest(false);
       const { error, success } = checkStatus.data;
-      console.log(error);
       if (error) {
         setShow(true);
         setServerErr(error);
@@ -109,22 +89,21 @@ const Settings = ({
     };
   }, [errMessage]);
 
-  // SET COMPANY SIZE TO NUMBER
-
-  const Validation = () => {
-    if (!maxSalary) {
-      setMaxSalaryErr("Maximum salary is required!");
+  // SET COMPANY Category TO NUMBER
+  const validation = () => {
+    if (!category.value) {
+      setCategory((prev) => {
+        return { ...prev, error: "Company Category is required" };
+      });
     } else {
-      let numberValue = Number(maxSalary.value);
-      // let convertedCompanySize = Number(companySize);
       setRequest(true);
-      companyReg({ ...formData, numberValue, companySize });
+      companyReg({ ...formData, companyCategory: category.value });
     }
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    Validation();
+    validation();
   };
 
   const closeModal = () => {
@@ -141,50 +120,36 @@ const Settings = ({
       <div>
         <SubHeader>Fill in your company bank account details</SubHeader>
       </div>
+
       <div>
         <Form className='ms-2' onSubmit={onSubmit}>
-          <div className='select-fields'>
-            <LabelText
-              label='Select the size range of your company'
-              name='Company Range'
-            />
-
-            <div sm='10' className='field-container'>
-              <select
-                name='companySize'
-                className='text-left select'
-                onChange={onChange}>
-                {companySizes.map((size) => {
-                  return (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-
           <div className='field-container'>
             <LabelText
-              label='Enter the maximun salary of your employee'
-              name='Employee Max Salary'
+              label='Input the official website of your company'
+              name='Website'
             />
+            <Input
+              inputName='website'
+              type='text'
+              handleChange={handleChange}
+              value={website}
+              placeholder='www.yourwebsite.com'
+            />
+          </div>
+          <div className='field-container'>
+            <LabelText label='Enter Company Category' name='Company Category' />
 
             <Input
-              inputName='maxSalary'
+              inputName='Category'
               type='text'
-              value={maxSalary.formated}
-              handleChange={onSalaryChange}
-              err={maxSalaryErr}
-              onFocus={() => setMaxSalary("")}
-              onPress={() => setMaxSalaryErr("")}
-              // onBlur={() => setMaxSalary(FormatNum(maxSalary))}
-              onBlur={() => {
-                setMaxSalary((prev) => {
-                  return { ...prev, formated: FormatNum(maxSalary.value) };
-                });
-              }}
+              value={category.value}
+              handleChange={onCategoryChange}
+              err={category.error}
+              onPress={() =>
+                setCategory((prev) => {
+                  return { ...prev, error: "" };
+                })
+              }
             />
           </div>
           {/* <Col className='d-flex toggle-input justify-content-between align-items-center'>

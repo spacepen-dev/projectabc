@@ -13,7 +13,7 @@ const SignOut = () => {
             <div className='modal-content'>
               <div className='modal-header'>
                 <h5 className='modal-title' id='exampleModalLabel'>
-                  Are You Sure You Signout?
+                  Are You Sure You Want To Signout?
                 </h5>
               </div>
               <div className='modal-body'>

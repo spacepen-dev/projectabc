@@ -19,7 +19,6 @@ class Registration extends React.Component {
     website: "",
     tax: "NO",
     phoneNumber: "",
-    checked: false,
   };
 
   onChange = (e) => {
@@ -76,7 +75,6 @@ class Registration extends React.Component {
             handleChange={this.onChange}
             address={this.state.address}
             email={this.state.email}
-            website={this.state.website}
             phoneNumber={this.state.phoneNumber}
           />
           <Settings
@@ -85,8 +83,7 @@ class Registration extends React.Component {
             handleChange={this.onChange}
             tax={this.state.tax}
             formData={this.state}
-            maxSalary={this.state.maxSalary}
-            check={this.state.checked}
+            website={this.state.website}
           />
         </Container>
       </Header>

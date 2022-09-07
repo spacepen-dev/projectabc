@@ -26,7 +26,7 @@ export const companyReg = (values) => async (dispatch) => {
     email,
     tax,
     numberValue,
-    companySize,
+    companyCategory,
     phoneNumber,
   } = values;
   try {
@@ -41,7 +41,7 @@ export const companyReg = (values) => async (dispatch) => {
       email: email,
       tax: tax,
       maximumEmployeeSalary: numberValue,
-      companyCategory: companySize,
+      companyCategory,
       phoneNumber,
     });
     dispatch({ type: "REGISTER_COMPANY", payLoad: data });
