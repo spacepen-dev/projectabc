@@ -63,12 +63,28 @@ const EmployeeRegistration = ({
           <AddEmployeeForm currentForm={index} />
           {editEmployeeLink && (
             <div className=' d-flex justify-content-center align-items-center mt-3'>
-              <button
-                type='button'
-                className='py-1 px-2 bg-primary text-white'
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='h-2'
+                style={{
+                  position: "absolute",
+                  top: "3rem",
+                  right: "3rem",
+                  // fontSize: "0.1rem",
+                  width: "2rem",
+                  cursor: "pointer",
+                }}
                 onClick={() => close()}>
-                Close
-              </button>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M6 18L18 6M6 6l12 12'
+                />
+              </svg>
             </div>
           )}
         </div>
