@@ -61,8 +61,8 @@ const currentDate = {
 
 function Badges({ row }) {
   function check() {
-    var bg = "";
     if (row === "pending") {
+      var bg = "";
       return (bg = "warning");
     } else if (row === "decline") {
       return (bg = "danger");
@@ -97,7 +97,7 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
     },
     {
       name: "Narration",
-      selector: (row) => <row.narration />,
+      selector: (row) => row.narration,
     },
     {
       name: "TRANSACTION STATUS",
@@ -149,6 +149,17 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
     setSelectedDate({ ...selectedDate, [name]: value });
   };
 
+  // function sliceMonthText() {
+  //   if (!selectedDate.month.slice) {
+  //     let currentMonth = new Date().getMonth();
+  //     let prevMonth = new Date().getMonth() - 1;
+
+  //     return currentMonth.slice(0, 3) || prevMonth.slice(0, 3);
+  //   } else {
+  //     return selectedDate.month.slice(0, 3);
+  //   }
+  // }
+
   const filteredItems = walletData.filter(
     (item) =>
       item.month.includes(selectedDate.month) &&
@@ -185,6 +196,7 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
           </Form.Group>
         </Form>
       </div>
+      {/* {console.log(filteredItems)} */}
       <Datatable columns={heading} data={filteredItems} />
     </div>
   );

@@ -18,7 +18,7 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
 
   useEffect(() => {
     CompanyDetails(email, token);
-  }, []);
+  }, [CompanyDetails, email, token]);
 
   useEffect(() => {
     if (!accountDetails) {
@@ -108,6 +108,7 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
                   /> */}
                 <div className='fund-sym'>
                   <p className='fund'>{companyAccountDetails.accountName}</p>
+                  <p className='fund'>{companyAccountDetails.CompanyName}</p>
                   <p className='fund text-dark'>
                     {companyAccountDetails.accountNumber}
                   </p>
@@ -131,8 +132,15 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
                 <Button
                   type='button'
                   className='button mx-2'
-                  onCopy={(e) => {
-                    console.log(e);
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText(companyAccountDetails.accountNumber)
+                      .then(() => {
+                        alert("copied");
+                      })
+                      .catch((err) => {
+                        alert("Error in copying", err);
+                      });
                   }}>
                   COPY
                 </Button>
