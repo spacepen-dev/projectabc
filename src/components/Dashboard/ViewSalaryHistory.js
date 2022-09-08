@@ -140,6 +140,9 @@ const ViewSalaryHisory = ({
   ];
   return (
     <div className=''>
+      <div>
+        <h4 className='entire-page-headers'>SALARY HISTORY</h4>
+      </div>
       <Datatable
         columns={heading}
         data={state.salary.salary}

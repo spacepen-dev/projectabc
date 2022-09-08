@@ -157,7 +157,8 @@ const EmployeeProfile = ({
           <select
             name='employeeDepartment'
             className='select mt-0'
-            onChange={onHandleChange}>
+            onChange={onHandleChange}
+          >
             {!employeeDepartment ? (
               <option>Select department</option>
             ) : (
@@ -195,7 +196,8 @@ const EmployeeProfile = ({
         className='button ms-auto'
         onClick={() => {
           Validation();
-        }}>
+        }}
+      >
         Next
       </Button>
     </div>

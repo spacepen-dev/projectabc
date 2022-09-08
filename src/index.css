@@ -22,8 +22,8 @@ html {
   --background: #c4c4c4c4;
   --page: #ffffff;
   --mainFont: "Lato", sans-serif;
-  --baseColor: #4836C8;
-  --accent: #6246D5;
+  --baseColor: #4836c8;
+  --accent: #6246d5;
   --button: #4736c8e0;
   --transparent: rgba(101, 156, 240, 0.1);
 }
@@ -121,7 +121,7 @@ input::placeholder {
   /* color: var(--accent); */
   color: #1a1a1a;
 }
-#filterInput::placeholder{
+#filterInput::placeholder {
   font-size: 13px;
 }
 input[type="number"]::-webkit-inner-spin-button,
@@ -130,6 +130,18 @@ input[type="number"]::-webkit-outer-spin-button {
   -moz-appearance: none;
   appearance: none;
   margin: 0;
+}
+
+.entire-page-headers {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  color: var(--baseColor);
+}
+
+.entire-page-headers.top-up {
+  margin-top: -1rem;
 }
 
 .button-register-div div {
@@ -331,12 +343,11 @@ Label {
   /* border-color: var(--accent); */
 }
 
-.filter-input:focus,.filter-input:active{
-  
+.filter-input:focus,
+.filter-input:active {
   border: 1px solid var(--transparent);
   background-color: var(--transparent);
 }
-
 
 .field-container {
   margin-bottom: 1.4rem !important;
@@ -377,7 +388,7 @@ select {
   font-size: 0.85rem;
 }
 .errorBorder {
-  border-color: #4836C8!important;
+  border-color: #4836c8 !important;
 }
 
 .switch {
@@ -1010,7 +1021,7 @@ FORM Validate
 .modaal {
   position: absolute;
   top: 0;
-  background-color: #4836C8;
+  background-color: #4836c8;
 }
 .verify-modal {
   height: 15rem;
@@ -1479,7 +1490,7 @@ p.paid-success {
     font-size: 1rem;
     width: 6.9rem;
     height: 3.88rem;
-    background-color: #4836C8;
+    background-color: #4836c8;
   }
   .onboarding-container div:nth-child(2) {
     height: 20rem;
@@ -1722,18 +1733,16 @@ span {
   height: 5rem;
 }
 
-
-
 .notification-main-file {
   /* position: absolute;
   right: 0; */
- color:white;
+  color: white;
   min-width: 210px;
   max-width: fit-content;
   height: 40px;
   border-radius: 5px;
   margin: 1px;
- 
+
   padding: 0 5px;
   margin-top: 8px;
   margin-right: auto;
@@ -1742,34 +1751,30 @@ span {
 }
 .green {
   border: 1px solid green;
-  background-color:green;
+  background-color: green;
 }
-.red{
-   border: 1px solid #4836C8;
-background-color:#4836C8
+.red {
+  border: 1px solid #4836c8;
+  background-color: #4836c8;
 }
-.remove{
+.remove {
   transform: translateX(260px);
   animation: slideOut 0.2s ease-out;
 }
- @keyframes slideIn {
-   0% {
-     transform: translateX(260px)
-     
-  }
-  100%{
-    transform: translateX(0)
-
-   }
- }
-
- @keyframes slideOut {
+@keyframes slideIn {
   0% {
-    transform: translateX(0)
-    
+    transform: translateX(260px);
   }
-  100%{
-    transform: translateX(260px)
+  100% {
+    transform: translateX(0);
+  }
+}
 
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(260px);
   }
 }

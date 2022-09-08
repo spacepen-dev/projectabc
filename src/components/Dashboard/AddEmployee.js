@@ -29,6 +29,9 @@ const AddEmployee = ({
 
   return (
     <div>
+      <div>
+        <h4 className='entire-page-headers'>ADD EMPLOYEES</h4>
+      </div>
       <EmployeeRegistration
         removeBtn='none'
         buttonText='Add'

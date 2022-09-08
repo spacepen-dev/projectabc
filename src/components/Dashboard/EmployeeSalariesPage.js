@@ -326,6 +326,9 @@ const EmployeeSalariesPage = ({
 
   return (
     <div>
+      <div>
+        <h4 className='entire-page-headers'>PAY SALARIES</h4>
+      </div>
       <div className='paySelect'>
         <Form className='form'>
           <Form.Group className='mb-3 form-group' controlId='formSelect'>
@@ -371,7 +374,8 @@ const EmployeeSalariesPage = ({
                 setmodalState((state) => {
                   return { ...state, modal: true };
                 });
-              }}>
+              }}
+            >
               Pay employees
             </Button>
           </div>
@@ -462,11 +466,13 @@ const ModalPayEmployee = ({
         </div>
         <Form
           className='button-container double-btns d-flex justify-content-start align-items-center'
-          onSubmit={onConfirm}>
+          onSubmit={onConfirm}
+        >
           <Button
             type='button'
             className='button ms-auto'
-            onClick={onCloseModal}>
+            onClick={onCloseModal}
+          >
             Close
           </Button>
           <Loaderbutton

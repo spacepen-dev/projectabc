@@ -17,6 +17,9 @@ const ViewSalaryHistory = () => {
 
   return (
     <div>
+      <div>
+        <h4 className='entire-page-headers'>TAX HISTORY</h4>
+      </div>
       <Datatable columns={heading} data={taxData} />
       {/* <DashboardTable heading={heading} tableData={tableData} display='flex' /> */}
     </div>

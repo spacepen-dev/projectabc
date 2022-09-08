@@ -41,6 +41,9 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
 
   return (
     <section className='container mt-5 d-flex flex-column align-items-center justify-content-evenly '>
+      <div>
+        <h4 className='entire-page-headers top-up'>TOP UP WALLET</h4>
+      </div>
       <div className='col-8 '>
         <div className='container-page col-8 shadow'>
           <span>
@@ -63,7 +66,8 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
               setActive((prev) => {
                 return { ...prev, hideAmount: !active.hideAmount };
               })
-            }>
+            }
+          >
             {active.hideAmount ? EyeSlash() : EyeSVG()}
           </div>
         </div>
@@ -78,7 +82,8 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
             setActive((prev) => {
               return { ...prev, modal: true };
             })
-          }>
+          }
+        >
           <div className='circle-2'></div>
           <p className='choice'>By Bank transfer</p>
         </div>
@@ -126,7 +131,8 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
                     setActive((prev) => {
                       return { ...prev, modal: false };
                     })
-                  }>
+                  }
+                >
                   CLOSE
                 </Button>
                 <Button
@@ -141,7 +147,8 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
                       .catch((err) => {
                         alert("Error in copying", err);
                       });
-                  }}>
+                  }}
+                >
                   COPY
                 </Button>
               </Form>
