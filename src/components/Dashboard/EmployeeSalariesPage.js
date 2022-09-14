@@ -326,6 +326,9 @@ const EmployeeSalariesPage = ({
 
   return (
     <div>
+      <div>
+        <h4 className='entire-page-headers'>PAY SALARIES</h4>
+      </div>
       <div className='paySelect'>
         <Form className='form'>
           <Form.Group className='mb-3 form-group' controlId='formSelect'>

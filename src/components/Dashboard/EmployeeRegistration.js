@@ -31,12 +31,12 @@ const EmployeeRegistration = ({
   useEffect(() => {
     if (!localStorage.getItem("aminien_token")) {
       // SET THE SESSTION TIME OUR MODAL TO TRUE
-      setToken("");
+      navigate("/");
       // setRecievedToken("");
     } else {
       setToken(localStorage.getItem("aminien_token"));
     }
-  }, []);
+  }, [navigate]);
 
   //  ALL INPUT VARIFICATION
 
@@ -58,6 +58,9 @@ const EmployeeRegistration = ({
 
   return (
     <div>
+      <div>
+        <h4 className='entire-page-headers'>REGISTER EMPLOYEE</h4>
+      </div>
       <div className=' w-100 mx-auto employee-form'>
         <div className='pt-5 pb-5'>
           <AddEmployeeForm currentForm={index} />
@@ -135,13 +138,13 @@ const EmployeeRegistration = ({
             close={close}
           />
 
-          {!token && (
+          {/* {!token && (
             <VerificationModal
               message={"Session timeout. Please sign in!"}
               close={HomePage}
               svg={Warning()}
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>

@@ -57,6 +57,20 @@ header {
   color: var(--baseColor);
 }
 
+.entire-page-headers {
+  /* text-align: center; */
+  /* margin-top: 2rem;
+  margin-bottom: 2rem; */
+  font-weight: 700;
+  margin: 1rem  1rem;
+  color:var(--baseColor)
+  }
+  
+  .entire-page-headers.top-up{
+  margin-top: -1rem;
+  }
+
+
 .signIn-header {
   text-align: center;
   margin-top: 4rem;
@@ -387,6 +401,7 @@ select {
   height: 2.22rem;
   border: 1px solid --baseColor;
 }
+
 
 .toggle-container {
   width: 7rem;

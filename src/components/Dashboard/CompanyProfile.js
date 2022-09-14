@@ -172,6 +172,9 @@ class CompanyProfile extends React.Component {
 
     return (
       <div>
+        <div>
+          <h4 className='entire-page-headers'>COMPANY DETAILS </h4>
+        </div>
         <div className='profile-info'>
           <div className='company-logo-div'>
             <div id='displayCompanyLogo'>

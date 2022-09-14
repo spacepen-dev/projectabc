@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import SideBar from "./SideBar";
 import Overview from "./Overview";
 import AddEmployee from "./AddEmployee";
@@ -14,7 +14,21 @@ import CompanyProfile from "./CompanyProfile";
 import SignOut from "./Signout";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [user] = useState(() => {
+    return {
+      token: localStorage.getItem("aminien_token"),
+      email: localStorage.getItem("aminien_email"),
+    };
+  });
+
+  useEffect(() => {
+    if (!user.email || !user.token) {
+      navigate("/");
+    }
+    // console.log(user);
+  }, [user, navigate]);
 
   return (
     <Container fluid>
