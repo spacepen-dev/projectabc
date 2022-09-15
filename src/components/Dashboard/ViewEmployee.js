@@ -103,6 +103,9 @@ const ViewEmployee = ({
 
   return (
     <div className='mt-1'>
+      <div>
+        <h4 className='entire-page-headers'>REGISTERED EMPLOYEE</h4>
+      </div>
       <div className='filter-container d-flex align-items-end justify-content-center'>
         <div className='w-100 px-4 py-2 my-2'>
           <input
