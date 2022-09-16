@@ -40,6 +40,8 @@ const TagInput = ({ SubmitDepartment, departmentMessage, departmentErr }) => {
     if (!departmentMessage) {
       return null;
     } else {
+      setRequest(false);
+
       const { error, success } = departmentMessage.data;
       if (error) {
         setStore(true);

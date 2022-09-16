@@ -44,10 +44,10 @@ const SignOut = () => {
                     type='button'
                     className='button mx-2'
                     onClick={() => {
-                      setActive(false);
                       localStorage.removeItem("aminien_token");
                       localStorage.removeItem("aminien_email");
                       navigate("/");
+                      setActive(false);
                     }}>
                     YES
                   </Button>

@@ -6,7 +6,7 @@ import { signIn } from "../Actions";
 import { CompanyDetails } from "../Actions";
 
 import Header from "./Header";
-import VerificationModal from "./Dashboard/VerificationModal";
+// import VerificationModal from "./Dashboard/VerificationModal";
 import Loaderbutton from "./LoaderButton";
 import NetWorkErrors from "./NetWorkErrors";
 
@@ -15,7 +15,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState({ dataErr: "", inputErr: "" });
   const [request, setRequest] = useState(false);
-  const [success, setSuccess] = useState("");
+  // const [success, setSuccess] = useState("");
   const [errStore, setStore] = useState(false);
   const [errorMessage, setMessage] = useState(false);
 
@@ -33,9 +33,18 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
   const OtpResponse = useCallback(
     ({ data }) => {
       setRequest(false);
-      const { error, success } = data;
+      const { error, success, status } = data;
 
-      if (error) {
+      if (status === "notverified") {
+        navigate("verify-email");
+        window.location.reload();
+      } else if (success && status === "verified") {
+        // localStorage.setItem("aminien_token", success.token);
+        // const successMessage = success.split(":")[1];
+        // setSuccess(successMessage);
+        navigate("/login/otp");
+        window.location.reload();
+      } else if (error) {
         setError({ dataErr: error });
         const removeTimeOut = setTimeout(() => {
           setStore(false);
@@ -43,11 +52,6 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
         return () => {
           clearTimeout(removeTimeOut);
         };
-      } else if (success) {
-        // localStorage.setItem("aminien_token", success.token);
-        const successMessage = success.split(":")[1];
-        setSuccess(successMessage);
-        navigate("/login/otp");
       }
     },
     [navigate]
@@ -102,9 +106,9 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
     }
   };
 
-  const closeModal = () => {
-    setSuccess("");
-  };
+  // const closeModal = () => {
+  //   setSuccess("");
+  // };
 
   return (
     <Container id='signin' className='mx-auto w-75'>
@@ -149,9 +153,9 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
               </div>
             </div>
           </form>
-          {success && (
+          {/* {success && (
             <VerificationModal message={`${success}`} close={closeModal} />
-          )}
+          )} */}
           {/* {error.dataErr && (
             <VerificationModal
               message={`${error.dataErr}`}

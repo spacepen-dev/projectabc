@@ -11,6 +11,7 @@ import LoginOtp from "./Registration/LoginOtp";
 import TagInput from "./Registration/TagInput";
 import SalariesPage from "./Dashboard/EmployeeSalariesPage";
 import NoPage from "./NoPage";
+import VerifyUser from "./Registration/VerifyUser";
 // import { NotificationProvider } from "./Dashboard/Notification/NotificationContainer";
 
 // CHECK FOR THE WIDTH OF THE DEVICE BEEN USED TO VISIT THE APP
@@ -35,6 +36,7 @@ const App = () => {
             path='registration/company/otp/email-confirmation'
             element={<OTP />}></Route>
           <Route path='on-Boarding' element={<OnBoarding />}></Route>
+          <Route path='verify-email' element={<VerifyUser />}></Route>
           <Route path='add-roles' element={<TagInput />}></Route>
           <Route path='Dashboard/*' element={<Dashboard />}></Route>
           <Route path='*' element={<NoPage />}></Route>
