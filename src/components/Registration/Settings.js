@@ -125,7 +125,7 @@ const Settings = ({
         <Form className='ms-2' onSubmit={onSubmit}>
           <div className='field-container'>
             <LabelText
-              label='Input the official website of your company'
+              label='Input the official website of your company(Optional)'
               name='Website'
             />
             <Input

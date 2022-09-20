@@ -100,7 +100,7 @@ const TagInput = ({ SubmitDepartment, departmentMessage, departmentErr }) => {
     <>
       <Container className='add-roles' style={{ maxWidth: "50rem" }}>
         <div className='d-flex align-items-center justify-content-center'>
-          <h3 className='text-center'>DEPARTMENTS IN YOUR ORGANIZATION</h3>
+          <h3 className='text-center'>BUSINESS ONBOARDING</h3>
         </div>
         <div className='mb-3'>
           <LabelText

@@ -91,19 +91,19 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
   const onFormSubmit = (e) => {
     e.preventDefault();
 
-    let regexp =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // let regexp =
+    //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // regexp.test(String(email).toLowerCase())
 
-    if (regexp.test(String(email).toLowerCase())) {
+    if (!email) {
       // MAKE AN API REQUEST TO CHECK IF THE EMAIL IS REGISTERED
       // OBTAIN THE COMPANY DETAILS
-      signIn(email);
-      localStorage.setItem("aminien_email", email);
-      setError({ inputErr: "" });
-      setRequest(true);
-    } else {
       setError({ inputErr: "Correct email address must be provided." });
     }
+    signIn(email);
+    localStorage.setItem("aminien_email", email);
+    setError({ inputErr: "" });
+    setRequest(true);
   };
 
   // const closeModal = () => {
@@ -123,13 +123,13 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
           <form onSubmit={onFormSubmit}>
             <div>
               <label>Email Address</label>
-              <p>Enter the official email-address of your company</p>
+              <p>Enter your business email address or phone number</p>
 
               <div>
                 <input
                   type='text'
-                  placeholder='mail@company.com'
-                  autoComplete='true'
+                  placeholder='Business email or Phone number'
+                  autoComplete='false'
                   value={email}
                   onChange={onInputChange}
                   onFocus={() => setError({ inputErr: "" })}

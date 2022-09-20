@@ -6,6 +6,7 @@ import Contact from "./Contact";
 import Settings from "./Settings";
 import Header from "../Header";
 import FormHeader from "./FormHeader";
+import { Link } from "react-router-dom";
 
 class Registration extends React.Component {
   state = {
@@ -85,6 +86,14 @@ class Registration extends React.Component {
             formData={this.state}
             website={this.state.website}
           />
+          <div className='py-4 w-100 mb-3 fs-6 text-center '>
+            Already have an account?
+            <Link
+              to='/'
+              className='d-inline-block ms-2 fs-6 text-decoration-none '>
+              Login now
+            </Link>
+          </div>
         </Container>
       </Header>
     );
