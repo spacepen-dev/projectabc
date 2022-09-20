@@ -39,12 +39,6 @@ const EmployeeProfile = ({
       !regexp.test(String(employeeEmail).toLowerCase())
     ) {
       setValidation({ employeeEmail: "Invalid email address!" });
-    } else if (
-      !employeeNin ||
-      employeeNin.length > 11 ||
-      employeeNin.length < 11
-    ) {
-      setValidation({ employeeNin: "Invalid NIN!" });
     } else if (!employeeRole) {
       setValidation({ employeeRole: "Employee's role is required!" });
     } else {

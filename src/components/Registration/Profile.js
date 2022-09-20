@@ -65,13 +65,7 @@ const Profile = ({
     if (!name) {
       setNameErr("Company Name is Required!");
     }
-    // else if (
-    //   !registration ||
-    //   registration.length < 10 ||
-    //   registration.length > 10
-    // ) {
-    //   setRegistrationErr("Invalid registration number");
-    // }
+   
     else if (!about) {
       setAboutErr("About Company is Required!");
     } else if (location === "No State") {
