@@ -34,11 +34,8 @@ const EmployeeProfile = ({
       });
     } else if (!employeeLastName) {
       setValidation({ employeeLastName: "Employee's Last name is required!" });
-    } else if (
-      !employeeEmail ||
-      !regexp.test(String(employeeEmail).toLowerCase())
-    ) {
-      setValidation({ employeeEmail: "Invalid email address!" });
+    } else if (regexp.test(String(employeeEmail).toLowerCase())) {
+      // setValidation({ employeeEmail: "Invalid email address!" });
     } else if (!employeeRole) {
       setValidation({ employeeRole: "Employee's role is required!" });
     } else {
@@ -118,7 +115,7 @@ const EmployeeProfile = ({
             type='text'
             handleChange={onHandleChange}
             value={employeeEmail}
-            err={validation.employeeEmail}
+            // err={validation.employeeEmail}
             onPress={() =>
               setValidation({
                 employeeEmail: "",
