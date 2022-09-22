@@ -27,12 +27,13 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
       const { error, success } = accountDetails;
       if (error) {
       } else {
-        const { CompanyName, accountNumber, balance } = success;
+        const { CompanyName, accountNumber, balance, bankName } = success;
         setAccoutDetails(() => {
           return {
             accountName: CompanyName,
             accountNumber: accountNumber,
             companyBalance: balance,
+            bank: bankName,
           };
         });
       }
@@ -112,7 +113,7 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
                   /> */}
                   <div className='fund-sym'>
                     <p className='fund'>{companyAccountDetails.accountName}</p>
-                    <p className='fund'>{companyAccountDetails.CompanyName}</p>
+                    <p className='fund'>{companyAccountDetails.bank}</p>
                     <p className='fund text-dark'>
                       {companyAccountDetails.accountNumber}
                     </p>

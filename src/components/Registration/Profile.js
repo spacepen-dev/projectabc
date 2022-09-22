@@ -67,7 +67,6 @@ const Profile = ({
     } else if (!about) {
       setAboutErr("About Company is Required!");
     } else if (location === "No State") {
-      console.log();
       setLocationErr("Invalid location");
     } else {
       nextPage();

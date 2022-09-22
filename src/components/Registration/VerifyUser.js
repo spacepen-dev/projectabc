@@ -6,6 +6,9 @@ import Header from "../Header";
 import Loaderbutton from "../LoaderButton";
 import { useReducer } from "react";
 import axios from "axios";
+import NetWorkErrors from "../NetWorkErrors";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const init = {
   request: false,
@@ -38,6 +41,7 @@ const reducer = (state, action) => {
 
 const VerifyUser = () => {
   const [state, dispatch] = useReducer(reducer, init);
+  const [err, setErr] = useState("");
 
   const navigate = useNavigate();
   const emailRef = useRef("");
@@ -54,26 +58,45 @@ const VerifyUser = () => {
   }
 
   async function APIREQUEST() {
-    const res = await axios.post(
-      "https://apws.spacepen.tech/verifyAccount.php",
-      {
-        companyEmail: emailRef.current,
-      }
-    );
+    try {
+      const res = await axios.post(
+        "https://apws.spacepen.tech/verifyAccount.php",
+        {
+          companyEmail: emailRef.current,
+        }
+      );
 
-    if (res.status === 200) {
-      let { error, success, token, accountEmail } = res.data;
-      if (error) {
-        dispatch({ type: "ERROR_RESPONSE", payLoad: error });
-      } else if (success) {
-        dispatch({ type: "SUCCESS_RESPONSE", payLoad: success });
-        localStorage.setItem("aminien_token", token);
-        localStorage.setItem("aminien_email", accountEmail);
+      if (res.status === 200) {
+        let { error, success, token, accountEmail } = res.data;
+        if (error) {
+          dispatch({ type: "ERROR_RESPONSE", payLoad: error });
+          setErr(error);
+        } else if (success) {
+          dispatch({ type: "SUCCESS_RESPONSE", payLoad: success });
+          localStorage.setItem("aminien_token", token);
+          localStorage.setItem("aminien_email", accountEmail);
 
-        navigate("/on-boarding");
+          navigate("/on-boarding");
+        }
       }
+    } catch (error) {
+      dispatch({ type: "ERROR_RESPONSE", payLoad: error });
+      setErr(error);
+
+      // let ID = setTimeout(() => {
+      // }, 3000);
+
+      // return () => {
+      //   clearTimeout(ID);
+      // };
     }
   }
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setErr("");
+  //   }, 3000);
+  // }, [err]);
 
   return (
     <Container id='signin' className='mx-auto w-75'>
@@ -124,6 +147,7 @@ const VerifyUser = () => {
           </form>
         </div>
       </Header>
+      {/* {state.error && <NetWorkErrors errMessage={state.error} />} */}
     </Container>
   );
 };
