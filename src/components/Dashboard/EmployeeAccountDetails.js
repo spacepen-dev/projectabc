@@ -31,7 +31,6 @@ const EmployeeAccountDetails = ({
   token,
   close,
 }) => {
-  console.log(employeeData);
   const [showDropDown, setDropDown] = useState(false);
   const [filterBank, setFilterBank] = useState(employeeData.employeeBankName);
   const [bankcode, setBankCode] = useState(employeeData.employeeBankCode);
@@ -168,26 +167,25 @@ const EmployeeAccountDetails = ({
   }, [editEmployeeErr]);
 
   const BankList = () => {
-    const filterBankName = bankCodeList.filter((cur) =>
-      cur.bankName.toLowerCase().includes(filterBank)
-    );
-    const displayList = filterBankName.map(({ bankCode, bankName }, index) => {
-      return (
-        <React.Fragment>
-          <li
-            key={index}
-            class='bankLinks'
-            onClick={() => {
-              setFilterBank(bankName);
-              setDropDown(false);
-              setBankCode(bankCode);
-            }}>
-            {bankName}
-          </li>
-        </React.Fragment>
-      );
-    });
-    return displayList;
+    const filterBankName = bankCodeList
+      .filter((cur) => cur.bankName.toLowerCase().includes(filterBank))
+      .filterBankName.map(({ bankCode, bankName }, index) => {
+        return (
+          <React.Fragment>
+            <li
+              key={index}
+              class='bankLinks'
+              onClick={() => {
+                setFilterBank(bankName);
+                setDropDown(false);
+                setBankCode(bankCode);
+              }}>
+              {bankName}
+            </li>
+          </React.Fragment>
+        );
+      });
+    return filterBankName;
   };
   const Validation = () => {
     if (!accountName) {
@@ -275,26 +273,51 @@ const EmployeeAccountDetails = ({
       <Row>
         <Form.Group as={Col}>
           <DashBoardText name='Bank Name' label='Enter Employee Bank Name' />
-          <Input
-            inputName='employee_bankname'
-            type='text'
-            handleChange={(e) => {
-              setFilterBank(e.target.value);
-            }}
-            value={filterBank}
-            err={validation.bankName}
-            onPress={() => {
-              setDropDown(true);
-              setValidation({
-                bankName: "",
-              });
-            }}
+
+          <input
+            list='bank'
+            className={`w-100 border-1 py-2 registration-input rounded-1 px-2 border-1`}
           />
-          {showDropDown && (
+          <datalist id='bank'>
+            {bankCodeList.map(({ bankCode, bankName }, index) => {
+              return (
+                <option
+                  value={bankName}
+                  // key={index}
+                  class='bankLinks'
+                  onClick={() => {
+                    setFilterBank(bankName);
+                    setDropDown(false);
+                    setBankCode(bankCode);
+                  }}>
+                  {bankCode}
+                </option>
+              );
+            })}
+            {/* {bankCodeList
+              .filter((cur) => cur.bankName.toLowerCase().includes(filterBank))
+              .map(({ bankCode, bankName }, index) => {
+                return (
+                  <option
+                    value={bankCode}
+                    // key={index}
+                    class='bankLinks'
+                    // onClick={() => {
+                    //   setFilterBank(bankName);
+                    //   setDropDown(false);
+                    //   setBankCode(bankCode);
+                    // }}
+                  >
+                    {bankName}
+                  </option>
+                );
+              })} */}
+          </datalist>
+          {/* {showDropDown && (
             <div id='dropdownList' className='dropdown-content shadow'>
               {BankList()}
             </div>
-          )}
+          )} */}
         </Form.Group>{" "}
       </Row>
       <div className='ms-auto mt-4 double-btns'>

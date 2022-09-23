@@ -19,6 +19,7 @@ const ConsolidatedRelief = function (annualSalary) {
 };
 
 //  CALCULATE THE TOTAL RELIEF
+
 const TotalRelief = function (annualSalary) {
   const total =
     redefinedTaxCalculation(annualSalary).redefinedTax() +
@@ -58,3 +59,40 @@ export const payTax = function (annualSalary) {
 
   //   return tax * 0.1017;
 };
+
+// // CALCULATED THE REDEFINED TAX
+// // const redefinedTaxCalculation = function (annualSalary) {
+// //   return minsalary, housingFund, pensionRate;
+// // };
+
+// // // CALCULATING THE ANNUAL CONSOLIDATED RELIEFS AND THE MONTHLY CONSOLIDATED RELIEFS
+// // // const ConsolidatedRelief = function (annualSalary) {
+// // //   const CRA = 0.2 * annualSalary + 200000;
+
+// // //   //   console.log(CRA);
+// // //   return CRA;
+// // // };
+
+// // //  CALCULATE THE TOTAL RELIEF
+// // const TotalRelief = function (annualSalary) {
+// //   const total =
+// //     redefinedTaxCalculation(annualSalary).redefinedTax() +
+// //     ConsolidatedRelief(annualSalary);
+// //   return total;
+// // };
+
+// // function lessThanTax(annualSalary) {
+// //   return annualSalary * 0.01;
+// // }
+
+// // function tobeTaxed(taxAbleIncome, annualSalary) {
+// //   if (taxAbleIncome >= 300000) {
+// //     return taxAbleIncome * 0.07;
+// //   } else if (taxAbleIncome >= 500000) {
+// //     return taxAbleIncome * 0.15;
+// //   } else if (taxAbleIncome >= 1600000) {
+// //     return taxAbleIncome * 0.21;
+// //   } else if (taxAbleIncome > 3200000) {
+// //     return (annualSalary - 3200000) * 0.24;
+// //   }
+// // }

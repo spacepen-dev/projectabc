@@ -4,6 +4,7 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
 import { payTax } from "../../components/Dashboard/utils/personalIncomeTax";
+import { Tax } from "./utils/NewTaxCalculation";
 
 const EmployeeSalaryInfo = ({
   index,
@@ -51,13 +52,14 @@ console.log(currencyFormat(2665))
   //  ANNUAL TAX DEDUCTION
   const getAnnualTax = useMemo(() => {
     const calcualatedTax = payTax(annualSalary);
+    console.log(calcualatedTax);
     // let MonthlyTax = Number(annualSalary) + Number(annualReliefs) / 12;
 
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "NGN",
     });
-    return formatter.format(calcualatedTax);
+    return formatter.format(Number(calcualatedTax));
   }, [annualSalary]);
 
   //MONTHLY GROSS PAY
@@ -153,6 +155,7 @@ console.log(currencyFormat(2665))
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />
         </Form.Group>
+        {Tax(24000000)}
       </Row>
       <Row>
         <Form.Group as={Col} controlId='formGrid'>
