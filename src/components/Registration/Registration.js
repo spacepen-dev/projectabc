@@ -15,6 +15,7 @@ class Registration extends React.Component {
     registration: "",
     about: "",
     location: "--- Select State ---",
+    category: "--- Select Category ---",
     address: "",
     email: "",
     website: "",
@@ -34,6 +35,9 @@ class Registration extends React.Component {
 
   onStateChange = (e) => {
     this.setState({ location: e.target.value });
+  };
+  onCategoryChange = (e) => {
+    this.setState({ category: e.target.value });
   };
 
   // current form = 1 0r 2 should have the next button
@@ -85,6 +89,8 @@ class Registration extends React.Component {
             tax={this.state.tax}
             formData={this.state}
             website={this.state.website}
+            onCategoryChange={this.onCategoryChange}
+            category={this.state.category}
           />
           <div className='py-4 w-100 mb-3 fs-6 text-center '>
             Already have an account?

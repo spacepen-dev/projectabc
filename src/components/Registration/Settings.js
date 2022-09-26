@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SubHeader from "./SubHeader";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { connect } from "react-redux";
 
@@ -10,6 +10,7 @@ import VerificationModal from "../Dashboard/VerificationModal";
 import LoaderButton from "../LoaderButton";
 import Input from "./Input";
 import NetWorkErrors from "../NetWorkErrors";
+import DashBoardText from "../Dashboard/DashBoardText";
 
 const Settings = ({
   currentForm,
@@ -22,6 +23,8 @@ const Settings = ({
   formData,
   check,
   errMessage,
+  onCategoryChange,
+  category,
 }) => {
   const [request, setRequest] = useState(false);
   const [errorMessage, setMessage] = useState("");
@@ -30,15 +33,26 @@ const Settings = ({
   const [showModal, setShow] = useState(false);
   // const [maxSalary, setMaxSalary] = useState({ formated: "", value: 0 });
   // const [maxSalaryErr, setMaxSalaryErr] = useState("");
-  const [category, setCategory] = useState({});
+  const [List] = useState([
+    "--- Select Category ---",
+    "Telecommunication",
+    "Hotel services",
+    "Security",
+    "Adminstration",
+    "Rental services",
+    "School",
+    "Bank",
+    "General services",
+    "Supplies service",
+    "Information and Communication Technology",
+    "Government MDA",
+    " Realtor",
+    "Auto sales",
+    "General Sales",
+    "Property Sales",
+  ]);
 
   const navigate = useNavigate();
-
-  const onCategoryChange = (e) => {
-    setCategory((prev) => {
-      return { ...prev, value: e.target.value };
-    });
-  };
 
   useEffect(() => {
     if (!checkStatus) {
@@ -90,20 +104,21 @@ const Settings = ({
   }, [errMessage]);
 
   // SET COMPANY Category TO NUMBER
-  const validation = () => {
-    if (!category.value) {
-      setCategory((prev) => {
-        return { ...prev, error: "Company Category is required" };
-      });
-    } else {
-      setRequest(true);
-      companyReg({ ...formData, companyCategory: category.value });
-    }
-  };
+  // const validation = () => {
+  //   if (!category.value) {
+  //     // setCategory((prev) => {
+  //     //   return { ...prev, error: "Company Category is required" };
+  //     // });
+  //   } if() {
+
+  //   }
+  // };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    validation();
+    // validation();
+    setRequest(true);
+    companyReg({ ...formData, companyCategory: category });
   };
 
   const closeModal = () => {
@@ -116,6 +131,7 @@ const Settings = ({
 
   return (
     <div className='mx-auto w-75'>
+      {console.log(category)}
       {success && <VerificationModal message={success} close={closeModal} />}
       <div>
         <SubHeader>Fill in your company bank account details</SubHeader>
@@ -125,7 +141,7 @@ const Settings = ({
         <Form className='ms-2' onSubmit={onSubmit}>
           <div className='field-container'>
             <LabelText
-              label='Input the official website of your company(Optional)'
+              label='Input the official website of your company (Optional)'
               name='Website'
             />
             <Input
@@ -137,20 +153,26 @@ const Settings = ({
             />
           </div>
           <div className='field-container'>
-            <LabelText label='Enter Company Category' name='Company Category' />
-
-            <Input
-              inputName='Category'
-              type='text'
-              value={category.value}
-              handleChange={onCategoryChange}
-              err={category.error}
-              onPress={() =>
-                setCategory((prev) => {
-                  return { ...prev, error: "" };
-                })
-              }
-            />
+            <Form.Group as={Col}>
+              <DashBoardText
+                name='Company Category'
+                label='Enter Company Category'
+              />
+              <div sm='10' className='field-container mt-3'>
+                <select
+                  name='location'
+                  className='text-left select'
+                  onChange={onCategoryChange}>
+                  {List.map((category) => {
+                    return (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            </Form.Group>
           </div>
           {/* <Col className='d-flex toggle-input justify-content-between align-items-center'>
             <LabelText
