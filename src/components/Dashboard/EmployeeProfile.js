@@ -12,6 +12,7 @@ const EmployeeProfile = ({
   employeeNin,
   employeeRole,
   employeeDepartment,
+  employeePhoneNumber,
   index,
   err,
   nextQuestion,
@@ -25,8 +26,8 @@ const EmployeeProfile = ({
   );
 
   const Validation = () => {
-    let regexp =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // let regexp =
+    //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (!employeeFirstName) {
       setValidation({
@@ -34,8 +35,8 @@ const EmployeeProfile = ({
       });
     } else if (!employeeLastName) {
       setValidation({ employeeLastName: "Employee's Last name is required!" });
-    } else if (regexp.test(String(employeeEmail).toLowerCase())) {
-      // setValidation({ employeeEmail: "Invalid email address!" });
+    } else if (!employeePhoneNumber) {
+      setValidation({ employeePhoneNumber: "Invalid Phone number!" });
     } else if (!employeeRole) {
       setValidation({ employeeRole: "Employee's role is required!" });
     } else {
@@ -71,7 +72,7 @@ const EmployeeProfile = ({
   }
 
   return (
-    <div className='d-flex flex-column pt-3 justify-content-center w-100 mx-auto employee-form'>
+    <div className='d-flex flex-column justify-content-center w-100 mx-auto employee-form'>
       <Row>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
@@ -143,30 +144,23 @@ const EmployeeProfile = ({
         </Form.Group>
       </Row>
       <Row>
-        <Form.Group as={Col}>
-          <DashBoardText name='Department' label='Select employee department' />
-          <select
-            name='employeeDepartment'
-            className='select mt-0'
-            onChange={onHandleChange}>
-            {!employeeDepartment ? (
-              <option>Select department</option>
-            ) : (
-              <option>{employeeDepartment}</option>
-            )}
-            ;{/* {employeeDepartment && } */}
-            {departmentData.map(({ companyDepartment }) => {
-              return (
-                <option key={companyDepartment} value={companyDepartment}>
-                  {companyDepartment}
-                </option>
-              );
-            })}
-          </select>
+        <Form.Group as={Col} controlId='formGrid'>
+          <DashBoardText name='Phone Number' label='Enter Phone Number' />
+          <Input
+            inputName='employeePhoneNumber'
+            type='tel'
+            handleChange={onHandleChange}
+            value={employeePhoneNumber}
+            err={validation.employeePhoneNumber}
+            onPress={() =>
+              setValidation({
+                employeePhoneNumber: "",
+              })
+            }
+          />
         </Form.Group>
         <Form.Group as={Col}>
           <DashBoardText name='Role' label='Enter Role ' />
-
           <Input
             inputName='employeeRole'
             type='text'
@@ -181,9 +175,31 @@ const EmployeeProfile = ({
           />
         </Form.Group>{" "}
       </Row>
+      <Row>
+        <Form.Group as={Col}>
+          <DashBoardText name='Department' label='Select employee department' />
+          <select
+            name='employeeDepartment'
+            className='select mt-0'
+            onChange={onHandleChange}>
+            {!employeeDepartment ? (
+              <option>Select department</option>
+            ) : (
+              <option>{employeeDepartment}</option>
+            )}
+            {departmentData.map(({ companyDepartment }) => {
+              return (
+                <option key={companyDepartment} value={companyDepartment}>
+                  {companyDepartment}
+                </option>
+              );
+            })}
+          </select>
+        </Form.Group>
+      </Row>
       <Button
         type='button'
-        className='button ms-auto'
+        className='button ms-auto mt-3'
         onClick={() => {
           Validation();
         }}>

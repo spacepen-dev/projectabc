@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import EmployeeAccountDetails from "./EmployeeAccountDetails";
 import EmployeeSalaryInfo from "./EmployeeSalaryInfo";
 import EmployeeProfile from "./EmployeeProfile";
-import { Warning } from "./svg/SVG";
-import VerificationModal from "./VerificationModal";
+// import { Warning } from "./svg/SVG";
+// import VerificationModal from "./VerificationModal";
 import AddEmployeeForm from "./AddEmployeeForm";
 
 const EmployeeRegistration = ({
@@ -52,9 +52,9 @@ const EmployeeRegistration = ({
     });
   };
 
-  const HomePage = () => {
-    navigate("/");
-  };
+  // const HomePage = () => {
+  //   navigate("/");
+  // };
 
   return (
     <div>
@@ -99,6 +99,7 @@ const EmployeeRegistration = ({
             employeeEmail={employeeData["employeeEmail"]}
             employeeRole={employeeData["employeeRole"]}
             employeeDepartment={employeeData.employeeDepartment}
+            employeePhoneNumber={employeeData["employeePhoneNumber"]}
             index={index}
             err={err}
             nextQuestion={nextQuestion}

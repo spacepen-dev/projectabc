@@ -169,7 +169,7 @@ const EmployeeAccountDetails = ({
   const BankList = () => {
     const filterBankName = bankCodeList
       .filter((cur) => cur.bankName.toLowerCase().includes(filterBank))
-      .filterBankName.map(({ bankCode, bankName }, index) => {
+      .map(({ bankCode, bankName }, index) => {
         return (
           <React.Fragment>
             <li
@@ -200,11 +200,13 @@ const EmployeeAccountDetails = ({
       setValidation({
         accountNumber: "Invalid Employee's account number!",
       });
-    } else if (!filterBank) {
-      setValidation({
-        bankName: "Employee's bank name is required!",
-      });
-    } else {
+    }
+    //  else if (!filterBank) {
+    //   setValidation({
+    //     bankName: "Employee's bank name is required!",
+    //   });
+    // }
+    else {
       setRequest(true);
       if (editEmployeeLink) {
         // REGISTRATION EMPLOYEE ACTION CREATOR
@@ -273,51 +275,26 @@ const EmployeeAccountDetails = ({
       <Row>
         <Form.Group as={Col}>
           <DashBoardText name='Bank Name' label='Enter Employee Bank Name' />
-
-          <input
-            list='bank'
-            className={`w-100 border-1 py-2 registration-input rounded-1 px-2 border-1`}
+          <Input
+            inputName='employee_bankname'
+            type='text'
+            handleChange={(e) => {
+              setFilterBank(e.target.value);
+            }}
+            value={filterBank}
+            err={validation.bankName}
+            onPress={() => {
+              setDropDown(true);
+              setValidation({
+                bankName: "",
+              });
+            }}
           />
-          <datalist id='bank'>
-            {bankCodeList.map(({ bankCode, bankName }, index) => {
-              return (
-                <option
-                  value={bankName}
-                  // key={index}
-                  class='bankLinks'
-                  onClick={() => {
-                    setFilterBank(bankName);
-                    setDropDown(false);
-                    setBankCode(bankCode);
-                  }}>
-                  {bankCode}
-                </option>
-              );
-            })}
-            {/* {bankCodeList
-              .filter((cur) => cur.bankName.toLowerCase().includes(filterBank))
-              .map(({ bankCode, bankName }, index) => {
-                return (
-                  <option
-                    value={bankCode}
-                    // key={index}
-                    class='bankLinks'
-                    // onClick={() => {
-                    //   setFilterBank(bankName);
-                    //   setDropDown(false);
-                    //   setBankCode(bankCode);
-                    // }}
-                  >
-                    {bankName}
-                  </option>
-                );
-              })} */}
-          </datalist>
-          {/* {showDropDown && (
+          {showDropDown && (
             <div id='dropdownList' className='dropdown-content shadow'>
               {BankList()}
             </div>
-          )} */}
+          )}
         </Form.Group>{" "}
       </Row>
       <div className='ms-auto mt-4 double-btns'>

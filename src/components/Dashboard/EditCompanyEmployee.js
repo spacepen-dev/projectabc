@@ -20,7 +20,7 @@ const EditCompanyEmployee = ({ data }) => {
         title='Edit employee details'
         style={{ backgroundColor: "#23549e", borderColor: "#23549e" }}
         onClick={onEdit}>
-        Edit
+        Update
       </Button>
       {showEditModal && (
         <ViewEmployeeModal initialValue={data} closeModal={closeModal} />

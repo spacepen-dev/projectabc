@@ -108,6 +108,7 @@ export const CompanyDetails = (email, token) => async (dispatch) => {
 
 // REGISTER EMPLOYEE ACTION
 export const RegisterEmployee = (values, token) => async (dispatch) => {
+  console.log(values);
   const {
     employeeFirstname,
     employeeLastname,
@@ -117,6 +118,7 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
     employeeDepartment,
     employeeRelives,
     employeeNin,
+    phoneNumber,
     // accountName,
     // accountNumber,
     employeeAccountNumber,
@@ -136,6 +138,7 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
       employeeNin,
       token,
       employeeAccountName,
+      employeePhoneNumber: phoneNumber,
       employeeAccountNumber,
       employeeBankName: filterBank,
       employeeBankCode: bankcode,
