@@ -155,7 +155,7 @@ console.log(currencyFormat(2665))
           registration-input rounded-1 px-2 border-1 fs-4 employer-input'
           />
         </Form.Group>
-        {Tax(24000000)}
+        {Tax(600000)}
       </Row>
       <Row>
         <Form.Group as={Col} controlId='formGrid'>

@@ -126,7 +126,6 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
     bankcode,
     filterBank,
   } = values;
-  // console.log(bankCode);
   try {
     const data = await BasedURL.post("/registerEmployee.php", {
       employeeFirstname,
@@ -153,6 +152,7 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
 
 // UPDATE EMPLOYEE DETAIL ACTION
 export const UpdateEmployee = (values, token) => async (dispatch) => {
+  console.log(values);
   const {
     employeeFirstname,
     employeeLastname,
@@ -331,7 +331,6 @@ export const FetchBankList = () => async (dispatch) => {
 // FETCH ACCOUNT DETAILS
 
 export const UpdateCompanyDetails = (data) => async (dispatch) => {
-  console.log(data);
   const {
     CompanyName,
     companyEmail,
@@ -382,7 +381,6 @@ export const FetchTaxHistory = (email, token) => async (dispatch) => {
 
 // SALARY HISTORY ACTION CREATOR
 export const FetchSalaryHistory = (email, token) => async (dispatch) => {
-  console.log(email);
   try {
     const data = await BasedURL.post("fetchSalaryHistory.php", {
       companyEmail: email,

@@ -95,7 +95,7 @@ const EmployeeRegistration = ({
           <EmployeeProfile
             employeeFirstName={employeeData["employeeFirstname"]}
             employeeLastName={employeeData["employeeLastname"]}
-            employeeNin={employeeData["employeeTin"]}
+            employeeTin={employeeData["employeeTin"]}
             employeeEmail={employeeData["employeeEmail"]}
             employeeRole={employeeData["employeeRole"]}
             employeeDepartment={employeeData.employeeDepartment}
