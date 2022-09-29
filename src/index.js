@@ -9,6 +9,7 @@ import reducer from "./reducer";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import ErrorBoundary from "./error";
 // import reportWebVitals from "./reportWebVitals";
 // import * as serviceWorkerRegistration from '../src/serviceWorkerRegistration'
 
@@ -19,7 +20,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <NotificationProvider>
-        <App />
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
       </NotificationProvider>
     </Provider>
   </React.StrictMode>,

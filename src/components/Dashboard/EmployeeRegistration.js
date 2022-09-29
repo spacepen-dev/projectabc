@@ -62,7 +62,7 @@ const EmployeeRegistration = ({
         <h4 className='entire-page-headers'>REGISTER EMPLOYEE</h4>
       </div>
       <div className=' w-100 mx-auto employee-form'>
-        <div className='pt-5 pb-5'>
+        <div className='pt-2 pb-5'>
           <AddEmployeeForm currentForm={index} />
           {editEmployeeLink && (
             <div className=' d-flex justify-content-center align-items-center mt-3'>
@@ -95,7 +95,7 @@ const EmployeeRegistration = ({
           <EmployeeProfile
             employeeFirstName={employeeData["employeeFirstname"]}
             employeeLastName={employeeData["employeeLastname"]}
-            employeeNin={employeeData["employeeNin"]}
+            employeeNin={employeeData["employeeTin"]}
             employeeEmail={employeeData["employeeEmail"]}
             employeeRole={employeeData["employeeRole"]}
             employeeDepartment={employeeData.employeeDepartment}

@@ -162,6 +162,9 @@ const EmployeeSalariesPage = ({
     // { name: "DEPARTMENT", selector: (row) => row.employee_department },
     // { name: "ROLE", selector: (row) => row.employee_role },
     { name: "EMAIL", selector: (row) => row.employeeEmail },
+    { name: "PHONE NUMBER", selector: (row) => row.employeePhoneNumber },
+    // { name: "PHONE NUMBER", selector: (row) => row.employeePhoneNumber },
+
     // {
     //   name: "ANNUAL SALARY",
     //   selector: (row) =>

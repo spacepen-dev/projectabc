@@ -108,7 +108,6 @@ export const CompanyDetails = (email, token) => async (dispatch) => {
 
 // REGISTER EMPLOYEE ACTION
 export const RegisterEmployee = (values, token) => async (dispatch) => {
-  console.log(values);
   const {
     employeeFirstname,
     employeeLastname,
@@ -117,8 +116,9 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
     employeeRole,
     employeeDepartment,
     employeeRelives,
-    employeeNin,
-    phoneNumber,
+    employeeTin,
+    employeePhoneNumber,
+
     // accountName,
     // accountNumber,
     employeeAccountNumber,
@@ -135,10 +135,10 @@ export const RegisterEmployee = (values, token) => async (dispatch) => {
       employeeRole,
       employeeDepartment,
       employeeRelieves: employeeRelives,
-      employeeNin,
+      employeeTin,
       token,
       employeeAccountName,
-      employeePhoneNumber: phoneNumber,
+      employeePhoneNumber: employeePhoneNumber,
       employeeAccountNumber,
       employeeBankName: filterBank,
       employeeBankCode: bankcode,
@@ -160,15 +160,15 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
     employeeRole,
     employeeDepartment,
     employeeRelives,
-    employeeNin,
+    employeeTin,
     employeeAnnualGrossSalary,
     employeeAccountName,
     employeeAccountNumber,
     filterBank,
     bankcode,
+    employeePhoneNumber,
     employeeToken,
   } = values;
-  console.log(employeeRelives);
   try {
     const data = await BasedURL.post("/updateEmployee.php", {
       employeeFirstname,
@@ -177,13 +177,14 @@ export const UpdateEmployee = (values, token) => async (dispatch) => {
       employeeRole,
       employeeDepartment,
       employeeRelieves: employeeRelives,
-      employeeNin,
+      employeeTin,
       employeeAccountName,
       employeeAccountNumber,
       employeeBankName: filterBank,
       employeeAgs: employeeAnnualGrossSalary,
       employeeMgs: employeeAnnualGrossSalary / "12",
       companyToken: token,
+      employeePhoneNumber,
       employeeToken: employeeToken,
       employeeBankCode: bankcode,
     });

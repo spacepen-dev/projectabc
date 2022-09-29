@@ -9,7 +9,7 @@ const EmployeeProfile = ({
   employeeEmail,
   employeeFirstName,
   employeeLastName,
-  employeeNin,
+  employeeTin,
   employeeRole,
   employeeDepartment,
   employeePhoneNumber,
@@ -110,7 +110,10 @@ const EmployeeProfile = ({
       </Row>
       <Row>
         <Form.Group as={Col} controlId='formGrid'>
-          <DashBoardText name='Email' label='Enter Employee Email Address' />
+          <DashBoardText
+            name='Email'
+            label='Enter Employee Email Address (Optional)'
+          />
           <Input
             inputName='employeeEmail'
             type='text'
@@ -126,18 +129,18 @@ const EmployeeProfile = ({
         </Form.Group>
         <Form.Group as={Col} controlId='formGrid'>
           <DashBoardText
-            name='National Identity Number'
-            label='Enter National Indentity Number'
+            name='Tax Identification Number'
+            label='Enter Tax Indentification Number (Optional)'
           />
           <Input
-            inputName='employeeNin'
+            inputName='employeeTin'
             type='text'
             handleChange={onHandleChange}
-            value={employeeNin}
-            err={validation.employeeNin}
+            value={employeeTin}
+            err={validation.employeeTin}
             onPress={() =>
               setValidation({
-                employeeNin: "",
+                employeeTin: "",
               })
             }
           />

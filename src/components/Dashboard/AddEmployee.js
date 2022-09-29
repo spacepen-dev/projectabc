@@ -12,7 +12,7 @@ const AddEmployee = ({
     employeeFirstname: "",
     employeeLastname: "",
     employeeRole: "",
-    employeeNin: "",
+    employeeTin: "",
     employeeEmail: "",
     employeeSalary: "",
     employeeRelives: "",
