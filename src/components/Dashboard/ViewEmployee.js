@@ -65,6 +65,7 @@ const ViewEmployee = ({
       selector: (row) => row.employeeAccountNumber,
     },
     { name: "BANK NAME", selector: (row) => row.employeeBankName },
+    { name: "TIN", selector: (row) => console.log(row.employeeTin) },
     // { name: "EMPLOYEE TOKEN", selector: (row) => row.employeeToken },
 
     {
