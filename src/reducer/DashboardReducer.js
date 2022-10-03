@@ -32,6 +32,8 @@ let InitialState = {
   editDepartmentErr: "",
   payEmployee: "",
   payEmployeeErr: "",
+  verifyNumber: {},
+  verifyNumberErr: "",
 };
 
 const DashboardReducer = (state = InitialState, action) => {
@@ -100,6 +102,10 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, payEmployee: action.payLoad };
     case "PAY_EMPLOYEE_SALARY_ERR_MESSAGE":
       return { ...state, payEmployeeErr: action.payLoad };
+    case "VERIFY_ACCOUNT_NUMBER":
+      return { ...state, verifyNumber: action.payLoad };
+    case "VERIFY_ACCOUNT_NUMBER_ERR_MESSAGE":
+      return { ...state, verifyNumberErr: action.payLoad };
     default:
       return state;
   }

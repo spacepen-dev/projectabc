@@ -122,7 +122,6 @@ const EmployeeRegistration = ({
             index={index}
             err={err}
             onHandleChange={onHandleChange}
-            accountName={employeeData["employeeAccountName"]}
             accountNumber={employeeData["employeeAccountNumber"]}
             prevQuestion={prevQuestion}
             nextQuestion={nextQuestion}

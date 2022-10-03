@@ -8,6 +8,7 @@ import DashBoardText from "./DashBoardText";
 import Input from "../Registration/Input";
 import LoaderButton from "../LoaderButton";
 import NetWorkErrors from "../NetWorkErrors";
+import AccountNameVerification from "./AccountNameVerification";
 
 import SuccessRequestModal from "./SuccessRequestModal";
 
@@ -30,6 +31,7 @@ const EmployeeAccountDetails = ({
   employeeData,
   token,
   close,
+  VerifyAccountName,
 }) => {
   const [showDropDown, setDropDown] = useState(false);
   const [filterBank, setFilterBank] = useState(employeeData.employeeBankName);
@@ -41,11 +43,31 @@ const EmployeeAccountDetails = ({
   const [showModal, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
+  const [accountVerified, setAccountName] = useState("");
   const [bankCodeList] = useState(() =>
     JSON.parse(localStorage.getItem("bankList"))
   );
 
   const navigate = useNavigate();
+
+  // GET ACCOUNT NAME
+  useEffect(() => {
+    if (!accountName) return;
+    else {
+      const { success, error } = accountName;
+      if (error) {
+        setAccountName(error);
+        // dispatch({ type: "ERROR_RESPONSE", request: false, error: error });
+      } else {
+        // dispatch({
+        setAccountName(success);
+        //   type: "SUCCESS_RESPONSE",
+        //   request: false,
+        //   success: success,
+        // });
+      }
+    }
+  }, [accountName]);
 
   useEffect(() => {
     if (!bankListRes) return null;
@@ -212,13 +234,15 @@ const EmployeeAccountDetails = ({
         // REGISTRATION EMPLOYEE ACTION CREATOR
         editEmployeeAction(
           { ...employeeData, filterBank, bankcode, accountName, accountNumber },
-          receivedToken
+          receivedToken,
+          accountVerified
         );
       } else if (addEmployeeLink) {
         // EDIT EMPLOYEE ACTIONs
         registerEmployeeAction(
           { ...employeeData, filterBank, bankcode },
-          receivedToken
+          receivedToken,
+          accountVerified
         );
       }
     }
@@ -234,44 +258,6 @@ const EmployeeAccountDetails = ({
   }
   return (
     <Form className='d-flex flex-column' onSubmit={onSubmit}>
-      <Row>
-        <Form.Group as={Col}>
-          <DashBoardText
-            name='Account Name'
-            label='Enter Employee Account Name '
-          />
-          <Input
-            inputName='employeeAccountName'
-            type='text'
-            handleChange={onHandleChange}
-            value={accountName}
-            err={validation.accountName}
-            onPress={() =>
-              setValidation({
-                accountName: "",
-              })
-            }
-          />
-        </Form.Group>
-        <Form.Group as={Col}>
-          <DashBoardText
-            name='Account Number'
-            label='Enter Employee Account Number'
-          />
-          <Input
-            inputName='employeeAccountNumber'
-            type='number'
-            handleChange={onHandleChange}
-            value={accountNumber}
-            err={validation.accountNumber}
-            onPress={() =>
-              setValidation({
-                accountNumber: "",
-              })
-            }
-          />
-        </Form.Group>{" "}
-      </Row>
       <Row>
         <Form.Group as={Col}>
           <DashBoardText name='Bank Name' label='Enter Employee Bank Name' />
@@ -296,6 +282,50 @@ const EmployeeAccountDetails = ({
             </div>
           )}
         </Form.Group>{" "}
+      </Row>
+      <Row>
+        {/* <Form.Group as={Col}>
+          <DashBoardText
+            name='Account Name'
+            label='Enter Employee Account Name '
+          />
+          <Input
+            inputName='employeeAccountName'
+            type='text'
+            handleChange={onHandleChange}
+            value={accountName}
+            err={validation.accountName}
+            onPress={() =>
+              setValidation({
+                accountName: "",
+              })
+            }
+          />
+        </Form.Group> */}
+        <Form.Group as={Col}>
+          <DashBoardText
+            name='Account Number'
+            label='Enter Employee Account Number'
+          />
+          {/* <div className=''> */}
+          <Input
+            inputName='employeeAccountNumber'
+            type='number'
+            handleChange={onHandleChange}
+            value={accountNumber}
+            err={validation.accountNumber}
+            onPress={() =>
+              setValidation({
+                accountNumber: "",
+              })
+            }
+          />
+        </Form.Group>
+        <div className='flex align-items-center'>
+          <AccountNameVerification
+            data={{ receivedToken, bankcode, accountNumber }}
+          />
+        </div>
       </Row>
       <div className='ms-auto mt-4 double-btns'>
         <Button
@@ -323,6 +353,8 @@ const EmployeeAccountDetails = ({
 const mapStateToProps = (state) => {
   return {
     bankListRes: state.DashboardReducer.bankList.data,
+    accountName: state.DashboardReducer.verifyNumber.data,
+    accountNameErr: state.DashboardReducer.verifyNumberErr,
   };
 };
 
