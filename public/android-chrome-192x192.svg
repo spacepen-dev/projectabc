@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192">
+<path style="fill:#010101; stroke:none;" d="M0 0L2 6L1 3L5 1L0 0z"/>
+<path style="fill:#810ed9; stroke:none;" d="M5.33333 0.666672L5.66667 1.33333L5.33333 0.666672z"/>
+<path style="fill:#4836c9; stroke:none;" d="M6 2L1 3L2 6L0 23L0 70L1.51389 87.7261L13 88.0008L46 88L57 81L69 76L68 74L72 74C72.5461 69.7497 76.3286 66.8267 80 65L83 51C87.8793 48.0149 86.9997 42.141 87 37L87 0L27 0C21.6272 0 9.70199 -2.2365 6 2z"/>
+<path style="fill:#010101; stroke:none;" d="M87 0L86.7724 45L80 65C75.857 66.5619 72.743 69.5663 72 74L68 74C66.5485 78.6718 61.5895 80.6571 57 81L46 88L0 88L0 103L45.9961 103.079L61 107L61 111L72 115L83 130L83 138C87.643 142.097 87 147.206 87 153C87 165.201 88.8333 179.099 86 191L121 192L192 192L192 0L87 0z"/>
+<path style="fill:#810ed9; stroke:none;" d="M86 47L87 48L86 47z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M117 47L118 48L117 47z"/>
+<path style="fill:#f9ba12; stroke:none;" d="M117 51L109 51L90 70L91 72L87 73L87 77L83 77L83 81L79 81C76.8172 85.3574 72.4743 88.8469 72.1273 94C71.7148 100.126 77.1855 106.477 81.1196 110.6C87.6713 117.467 94.274 124.785 101.344 131.098C105.294 134.625 110.298 136.187 113 141C122.882 141 149.299 145.919 153 134L157 134L157 130L161 130L161 126L175 115C176.401 103.912 178.695 96.5597 176.299 85.9105C175.369 81.7774 176.681 78.5535 172 77C171.579 64.0163 153.853 51.0013 142 51L142 47C135.699 47 119.345 43.9354 117 51z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M116 50L117 51L116 50M142 50L143 51L142 50z"/>
+<path style="fill:#810ed9; stroke:none;" d="M83 51L84 52L83 51z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M152 51L153 52L152 51z"/>
+<path style="fill:#810ed9; stroke:none;" d="M82 57L83 58L82 57M79 62L80 63L79 62z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M98 62L99 63L98 62M97 63L98 64L97 63M164 63L165 64L164 63z"/>
+<path style="fill:#810ed9; stroke:none;" d="M77 65L78 66L77 65M75 68L76 69L75 68z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M171 70L172 71L171 70M90 71L91 72L90 71z"/>
+<path style="fill:#810ed9; stroke:none;" d="M71 72L72 73L71 72M69 73L70 74L69 73M5 88L5 89L36 89L5 88z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M72 90L73 91L72 90M73 99L74 100L73 99z"/>
+<path style="fill:#810ed9; stroke:none;" d="M0.666667 103.333L1.33333 103.667L0.666667 103.333z"/>
+<path style="fill:#4836c9; stroke:none;" d="M2 190L87 192L86.9005 145.09L83 130L71 118L72 115L67 111L61 111L61 107L52 103C40.3469 104.336 27.7609 103 16 103C12.1494 103 4.81682 101.634 1.6034 104.179C-2.34865 107.309 0 121.338 0 126C0 147.41 1.57867 168.883 2 190z"/>
+<path style="fill:#810ed9; stroke:none;" d="M48 103L49 104L48 103z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M75 103L76 104L75 103z"/>
+<path style="fill:#810ed9; stroke:none;" d="M52 104L53 105L52 104z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M175 111L176 112L175 111z"/>
+<path style="fill:#810ed9; stroke:none;" d="M67 113L68 114L67 113z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M83 113L84 114L83 113z"/>
+<path style="fill:#810ed9; stroke:none;" d="M70 115L71 116L70 115M71 117L72 118L71 117z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M91 121L92 122L91 121z"/>
+<path style="fill:#810ed9; stroke:none;" d="M78 123L79 124L78 123z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M94 123L95 124L94 123M95 125L96 126L95 125z"/>
+<path style="fill:#810ed9; stroke:none;" d="M79 127L80 128L79 127z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M99 129L100 130L99 129z"/>
+<path style="fill:#810ed9; stroke:none;" d="M82 131L83 132L82 131z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M104 133L105 134L104 133z"/>
+<path style="fill:#810ed9; stroke:none;" d="M84 138L85 139L84 138M85 139L86 140L85 139z"/>
+<path style="fill:#ff0f01; stroke:none;" d="M148 140L149 141L148 140z"/>
+<path style="fill:#810ed9; stroke:none;" d="M86 142L87 143L86 142z"/>
+<path style="fill:#010101; stroke:none;" d="M0 182L0 192L9 192L9 191L2 190L0 182z"/>
+<path style="fill:#810ed9; stroke:none;" d="M2 188L3 189L2 188M3 189L4 190L3 189z"/>
+</svg>
