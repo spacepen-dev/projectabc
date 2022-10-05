@@ -5,21 +5,26 @@ const AddRoles = ({ data }) => {
   const [tags, setTags] = useState([]);
   const [inputData, setInputData] = useState("");
   const [departmentSug, setDepartmentSug] = useState([
-    "ICT",
-    "Sales",
-    "Audit",
+
     "Account",
-    "Inventory",
-    "Store",
-    "Printing",
+    "Adminstration",
+    "Audit",
+    "Bursar",
     "Control",
     "Engineering",
     "Executive",
-    "Security",
-    "Adminstration",
-    "Teacher",
+    "Inventory",
+    "ICT",
     "Propietor",
-    "Bursar",
+    "Printing",
+    "Sales",
+    "Store",
+    "Security",
+    "Teacher",
+   
+    
+   
+   
   ]);
   // const Names = ['Thomas', "Silver", 'Prosper']
 
@@ -117,8 +122,8 @@ const AddRoles = ({ data }) => {
         Click on the boxes to add department to your business
       </label>
       <div
-        className='d-flex justify-content-start align-items-center flex-wrap w-100'
-        style={{ height: "18rem" }}>
+        className='d-flex justify-content-start align-items-start flex-wrap w-100 '
+        style={{ height: "min-content" }}>
         {/* <div style={{ height: "0.1rem" }}> */}
         {/* </div> */}
         {suggestDepartment()}

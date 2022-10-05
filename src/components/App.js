@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+// import error from ".components/error";
 import SignIn from "./SignIn";
 import Registration from "./Registration/Registration";
 import OTP from "./Registration/RegistrationOTP";
@@ -12,11 +13,22 @@ import TagInput from "./Registration/TagInput";
 import SalariesPage from "./Dashboard/EmployeeSalariesPage";
 import NoPage from "./NoPage";
 import VerifyUser from "./Registration/VerifyUser";
+
 // import { NotificationProvider } from "./Dashboard/Notification/NotificationContainer";
 
 // CHECK FOR THE WIDTH OF THE DEVICE BEEN USED TO VISIT THE APP
 
 // const checkDeviceWidth = () => {};
+
+// function App {
+//   return(
+//     <div className="container">
+
+//       </error>
+//     </div>
+//   );
+// }
+
 
 const App = () => {
   return (
@@ -43,10 +55,15 @@ const App = () => {
           <Route
             path='/pay/employee/salaries'
             element={<SalariesPage />}></Route>
+         
         </Routes>
       </BrowserRouter>
     </Container>
+   
+
   );
 };
 
 export default App;
+
+
