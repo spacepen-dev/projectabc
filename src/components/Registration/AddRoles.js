@@ -6,25 +6,21 @@ const AddRoles = ({ data }) => {
   const [inputData, setInputData] = useState("");
   const [departmentSug, setDepartmentSug] = useState([
 
-    "Account",
-    "Adminstration",
+    "ICT",
+    "Sales",
     "Audit",
-    "Bursar",
+    "Account",
+    "Inventory",
+    "Store",
+    "Printing",
     "Control",
     "Engineering",
     "Executive",
-    "Inventory",
-    "ICT",
-    "Propietor",
-    "Printing",
-    "Sales",
-    "Store",
     "Security",
+    "Adminstration",
     "Teacher",
-   
-    
-   
-   
+    "Propietor",
+    "Bursar",
   ]);
   // const Names = ['Thomas', "Silver", 'Prosper']
 
@@ -118,11 +114,12 @@ const AddRoles = ({ data }) => {
           </button>
         </div>
       </div>
-      <label className=' my-2'>
+
+      <label className='my-3 '>
         Click on the boxes to add department to your business
       </label>
       <div
-        className='d-flex justify-content-start align-items-start flex-wrap w-100 '
+        className='d-flex justify-content-space-around align-items-center flex-wrap w-100  '
         style={{ height: "min-content" }}>
         {/* <div style={{ height: "0.1rem" }}> */}
         {/* </div> */}

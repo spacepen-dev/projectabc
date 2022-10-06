@@ -2,7 +2,8 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-// import error from ".components/error";
+
+// import Erroroccured from "./Erroroccured";
 import SignIn from "./SignIn";
 import Registration from "./Registration/Registration";
 import OTP from "./Registration/RegistrationOTP";
