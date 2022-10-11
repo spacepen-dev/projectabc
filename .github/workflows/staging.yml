@@ -1,18 +1,18 @@
-name: Deploy to Production
+name: Deploy to Staging
 
 on:
   push:
-    branches: main
+    branches: staging
 
 permissions:
   contents: write
 
 jobs:
   build:
-    name: Deploy to Production
+    name: Deploy to Staging
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy React to Production
+    - name: Deploy React to Staging
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -30,6 +30,6 @@ jobs:
       env:
         SUDO_PASSWORD: ${{ secrets.PASSWORD }}
         GITHUB_TOKEN: ${{ github.token }}
-        PROJECT_PATH: projectabc
+        PROJECT_PATH: staging_projectabc
         DEPLOY_PATH: main
-        REPO_URL: https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }}
+        REPO_URL: https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }} development-branch
