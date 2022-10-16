@@ -15,6 +15,7 @@ import SuccessRequestModal from "./SuccessRequestModal";
 const EmployeeAccountDetails = ({
   bankListRes,
   accountName,
+  accountNameErr,
   accountNumber,
   index,
   err,
@@ -43,12 +44,15 @@ const EmployeeAccountDetails = ({
   const [showModal, setShow] = useState(false);
   const [success, setSuccess] = useState("");
   const [receivedToken, setRecievedToken] = useState("");
-  const [accountVerified, setAccountName] = useState("");
+  const [employeeAccountName, setAccountName] = useState(employeeData.employeeAccountName);
   const [bankCodeList] = useState(() =>
     JSON.parse(localStorage.getItem("bankList"))
   );
 
   const navigate = useNavigate();
+console.log(employeeData);
+  // ACCOUNT NAME ON CHANGE
+ 
 
   // GET ACCOUNT NAME
   useEffect(() => {
@@ -69,12 +73,19 @@ const EmployeeAccountDetails = ({
     }
   }, [accountName]);
 
+
+  useEffect(() => {
+    if (!accountNameErr) return;
+    else {
+      setAccountName(accountNameErr.message);
+    }
+  }, [accountNameErr]);
+
   useEffect(() => {
     if (!bankListRes) return null;
     if (bankListRes.error) return null;
     localStorage.setItem("bankList", JSON.stringify(bankListRes.success));
-    // setBankCode(bankListRes.success);
-    // setBankCodeList(bankListRes.success);
+ 
   }, [bankListRes]);
   // FETCH THE TOKEN FROM THE LOCAL STORAGE
 
@@ -210,11 +221,8 @@ const EmployeeAccountDetails = ({
     return filterBankName;
   };
   const Validation = () => {
-    if (!accountName) {
-      setValidation({
-        accountName: "Employee's account name is required!",
-      });
-    } else if (
+  
+     if (
       !accountNumber ||
       accountNumber.length > 10 ||
       accountNumber.length < 10
@@ -235,14 +243,14 @@ const EmployeeAccountDetails = ({
         editEmployeeAction(
           { ...employeeData, filterBank, bankcode, accountName, accountNumber },
           receivedToken,
-          accountVerified
+          employeeAccountName
         );
       } else if (addEmployeeLink) {
         // EDIT EMPLOYEE ACTIONs
         registerEmployeeAction(
           { ...employeeData, filterBank, bankcode },
           receivedToken,
-          accountVerified
+          employeeAccountName
         );
       }
     }
@@ -276,6 +284,7 @@ const EmployeeAccountDetails = ({
               });
             }}
           />
+          
           {showDropDown && (
             <div id='dropdownList' className='dropdown-content shadow'>
               {BankList()}
@@ -284,24 +293,7 @@ const EmployeeAccountDetails = ({
         </Form.Group>{" "}
       </Row>
       <Row>
-        {/* <Form.Group as={Col}>
-          <DashBoardText
-            name='Account Name'
-            label='Enter Employee Account Name '
-          />
-          <Input
-            inputName='employeeAccountName'
-            type='text'
-            handleChange={onHandleChange}
-            value={accountName}
-            err={validation.accountName}
-            onPress={() =>
-              setValidation({
-                accountName: "",
-              })
-            }
-          />
-        </Form.Group> */}
+        
         <Form.Group as={Col}>
           <DashBoardText
             name='Account Number'
@@ -321,7 +313,21 @@ const EmployeeAccountDetails = ({
             }
           />
         </Form.Group>
-        <div className='flex align-items-center'>
+        <Form.Group as={Col}>
+          <DashBoardText
+            name='Account Name'
+            label='Enter Employee Account Name '
+          />
+          <input
+            inputName='employeeAccountName'
+            type='text'
+            className='w-100 border-1 registration-input rounded-1 px-2 border-1'
+            readOnly
+            value={employeeAccountName}
+          />
+          
+        </Form.Group>
+        <div className='flex align-items-center justify-content-end'>
           <AccountNameVerification
             data={{ receivedToken, bankcode, accountNumber }}
           />

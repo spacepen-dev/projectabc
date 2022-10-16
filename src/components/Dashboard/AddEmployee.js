@@ -17,6 +17,7 @@ const AddEmployee = ({
     employeeSalary: "",
     employeeRelives: "",
     employeePhoneNumber: "",
+    employeeState: ''
   });
 
   // function currencyFormat(num) {

@@ -109,7 +109,7 @@ export const CompanyDetails = (email, token) => async (dispatch) => {
 // REGISTER EMPLOYEE ACTION
 export const RegisterEmployee =
   (values, token, accountVerified) => async (dispatch) => {
-    console.log(accountVerified);
+    
     const {
       employeeFirstname,
       employeeLastname,
@@ -120,6 +120,7 @@ export const RegisterEmployee =
       employeeRelives,
       employeeTin,
       employeePhoneNumber,
+      employeeState,
 
       // accountName,
       // accountNumber,
@@ -137,6 +138,7 @@ export const RegisterEmployee =
         employeeDepartment,
         employeeRelieves: employeeRelives,
         employeeTin,
+        employeeState,
         token,
         employeeAccountName: accountVerified,
         employeePhoneNumber: employeePhoneNumber,
@@ -421,3 +423,5 @@ export const VerifyAccountName =
       dispatch({ type: "VERIFY_ACCOUNT_NUMBER_ERR_MESSAGE", payLoad: error });
     }
   };
+
+

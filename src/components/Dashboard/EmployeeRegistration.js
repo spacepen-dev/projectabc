@@ -99,6 +99,8 @@ const EmployeeRegistration = ({
             employeeEmail={employeeData["employeeEmail"]}
             employeeRole={employeeData["employeeRole"]}
             employeeDepartment={employeeData.employeeDepartment}
+            employeestate={employeeData.employeestate}
+            
             employeePhoneNumber={employeeData["employeePhoneNumber"]}
             index={index}
             err={err}
@@ -117,12 +119,14 @@ const EmployeeRegistration = ({
             getEmployeeData={getEmployeeData}
             data={employeeData}
           />
-
+          
           <EmployeeAccountDetails
             index={index}
             err={err}
             onHandleChange={onHandleChange}
             accountNumber={employeeData["employeeAccountNumber"]}
+            // accountName={employeeData.employeeAccountName}        
+            accountName={employeeData['employeeAccountName']}        
             prevQuestion={prevQuestion}
             nextQuestion={nextQuestion}
             registerEmployeeAction={registerEmployeeAction}
