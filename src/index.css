@@ -885,25 +885,28 @@ td {
   /* height: 4.31rem; */
   max-height: fit-content;
 }
-
 .Overlay,
 .Overlay-alert {
-  position: fixed;
+  position:relative;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  display: grid;
+  place-items: center;
+  
 }
 .Overlay {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  width: 100vw;
+}3
 .Overlay-alert .alert {
   max-width: 50rem;
   margin-left: auto;
 }
+
 .alert .alert-heading {
   text-align: center;
   font-weight: 400;

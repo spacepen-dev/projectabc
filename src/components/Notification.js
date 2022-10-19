@@ -14,7 +14,7 @@ class Notification extends React.Component {
         <Alert
           onClick={(e) => e.stopPropagation()}
           variant='danger'
-          className='alert text-center shadow text-bold'>
+          className='alert text-center shadow text-bold d-flex justify-content-center  '>
           {/* <strong>{`${errMessage}. Check your internet connection and try again!`}</strong> */}
           <div className='alert-icon'>
             <i className='zmdi zmdi-close-circle'></i>

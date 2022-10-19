@@ -16,16 +16,19 @@ const NetWorkErrors = ({ errMessage, serverErr }) => {
   }, [errMessage, serverErr]);
 
   return (
-    <div className='Overlay-alert'>
+    <div className = "layer d-flex justify-content-center align-items-center">
+    <div className='Overlay-alert' >
       <Alert
         onClick={(e) => e.stopPropagation()}
         variant='danger'
-        className='alert text-center shadow text-bold'>
+        className='alert text-center shadow text-center '>
+          
         <strong>{networkErr}</strong>
-        <div className='alert-icon'>
-          <i className='zmdi zmdi-close-circle'></i>
+        <div className='alert-icon '>
+          <i className='zmdi zmdi-close-circle '></i>
         </div>
       </Alert>
+    </div>
     </div>
   );
 };

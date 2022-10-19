@@ -31,6 +31,10 @@ const AddEmployeeForm = ({ currentForm }) => {
             <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
               <Form.Label>Account</Form.Label>
             </div>
+            <small className='d-inline-block'></small>
+            <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
+              <Form.Label>Pension</Form.Label>
+            </div>
           </div>
           <div className='progress'>
             <ProgressBar animated now={100} style={{ width: `${progress}` }} />
