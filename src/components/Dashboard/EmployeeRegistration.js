@@ -6,6 +6,7 @@ import EmployeeSalaryInfo from "./EmployeeSalaryInfo";
 import EmployeeProfile from "./EmployeeProfile";
 // import { Warning } from "./svg/SVG";
 // import VerificationModal from "./VerificationModal";
+import EmployeePension from "./EmployeePension";
 import AddEmployeeForm from "./AddEmployeeForm";
 
 const EmployeeRegistration = ({
@@ -23,7 +24,7 @@ const EmployeeRegistration = ({
   getEmployeeData,
   close,
 }) => {
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(3);
   const [token, setToken] = useState("");
   const navigate = useNavigate();
 
@@ -119,6 +120,7 @@ const EmployeeRegistration = ({
             getEmployeeData={getEmployeeData}
             data={employeeData}
           />
+          <EmployeePension index={index} onHandleChange={onHandleChange} data={employeeData} err={err} prevQuestion={prevQuestion} companyPensionCode={employeeData['companyPensionCode']} employeePensionCode={employeeData['employeePensionCode']} nextQuestion={nextQuestion} />
           
           <EmployeeAccountDetails
             index={index}

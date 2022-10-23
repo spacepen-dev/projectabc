@@ -12,6 +12,11 @@ import TagInput from "./Registration/TagInput";
 import SalariesPage from "./Dashboard/EmployeeSalariesPage";
 import NoPage from "./NoPage";
 import VerifyUser from "./Registration/VerifyUser";
+import Signup from "../pages/registration/signup";
+import Welcome from "../pages/registration/welcome";
+import Verification from "../pages/registration/verification/Verification";
+
+
 // import { NotificationProvider } from "./Dashboard/Notification/NotificationContainer";
 
 // CHECK FOR THE WIDTH OF THE DEVICE BEEN USED TO VISIT THE APP
@@ -24,6 +29,11 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SignIn />}></Route>
+          <Route path='/sign-up' element={<Signup />}></Route>
+          
+          <Route path='/user-welcome' element={<Welcome />}></Route>
+          <Route path='/user-verification' element={<Verification />}></Route>
+
           <Route path='login/otp' element={<LoginOtp />}></Route>
           <Route path='registration/company' element={<Registration />}></Route>
           <Route

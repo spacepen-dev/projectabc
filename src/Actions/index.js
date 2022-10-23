@@ -171,6 +171,7 @@ export const UpdateEmployee =
       bankcode,
       employeePhoneNumber,
       employeeToken,
+      employeeState
     } = values;
     try {
       const data = await BasedURL.post("/updateEmployee.php", {
@@ -181,6 +182,7 @@ export const UpdateEmployee =
         employeeDepartment,
         employeeRelieves: employeeRelives,
         employeeTin,
+        employeeState,
         employeeAccountName: accountVerified,
         employeeAccountNumber,
         employeeBankName: filterBank,
@@ -423,5 +425,40 @@ export const VerifyAccountName =
       dispatch({ type: "VERIFY_ACCOUNT_NUMBER_ERR_MESSAGE", payLoad: error });
     }
   };
+
+
+export const SignupRequest = (values, callback=(res)=> {}) => async (dispatch) => {
+  const { fullName, phoneNumber, emailAddress, password } = values;
+  try {
+    const data = await BasedURL.post("userRegistration.php", {
+      fullName,
+      phoneNumber,
+      emailAddress,
+      password
+    });
+
+    callback(data)
+    dispatch({ type: "USER_REGISTRATION", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "USER_REGISTRATION_ERR_MESSAGE", payLoad: error });
+  }
+}
+
+export const SignupVerification = (values, callback = (res) => { }) => async (dispatch) => {
+  console.log(values)
+  const { otpNumber, email } = values;
+  
+  try {
+    const data = await BasedURL.post("userAccountVerification.php", {
+      email_phone:email,
+      verification_code:otpNumber
+    });
+
+    callback(data)
+    dispatch({ type: "USER_VERIFICATION", payLoad: data });
+  } catch (error) {
+    dispatch({ type: "USER_VERIFICATION_ERR_MESSAGE", payLoad: error });
+  }
+}
 
 
