@@ -1,16 +1,17 @@
 import { useEffect, useReducer, useState } from "react";
-import { array } from "yup";
 import { NewBackground } from "../ui";
-import Logo from "../../../components/Logo";
 import LoaderModal from "../../../components/Dashboard/LoaderModal";
 import { connect } from "react-redux";
 import { SignupVerification } from "../../../Actions";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import SmallLoader from "../../../components/Dashboard/SmallLoader";
+import Header from "../../../components/Header";
 
 const init = {
     request: false,
     response: false,
     networkError: false,
+    resendOTP: false,
     message:'',
 
 }
@@ -20,9 +21,11 @@ const reducer = (state, action) => {
       case "REQUEST_OTP":
         return { ...state, request: true };
       case "RESPONSE":
-        return { request: false, response: true, message:action.message };
+        return { ...state,request: false, response: true, message:action.message };
       case "ERROR":
-        return { request: false, networkError: true, message:action.message };
+            return {...state, request: false, networkError: true, message: action.message };
+        case "RESEND_OTP":
+            return { ...state, resendOTP: true, message: action.message };
       default:
         return state;
     }
@@ -96,6 +99,8 @@ function Verification({ SignupVerification }) {
       }, [otp]);
 
     return <NewBackground>
+        <Header>
+
         <main className=" container">
             <div className="h-75 w-100 d-flex align-items-center flex-column   px-5">
 
@@ -120,17 +125,15 @@ function Verification({ SignupVerification }) {
           Didn't get it in your email?
           <span className="text-primary"
             style={{ cursor: "pointer" }}
-            // onClick={() => {
-            //   dispatch({ type: "REQUEST_OTP", request: true });
-            //   resendOtp(comEmail);
-            //             }}
-                    >
+            onClick={() => {
+                dispatch({ type: "RESEND_OTP", resendOTP: true });
+                //   resendOtp(comEmail);
+            }}
+            >
             Resend the code
-            {/* {request.request ? (
-              <SmallLoader />
-            ) : (
-              <p className={`${otpMessage}`}>{res ? res.res : error.error}</p>
-            )} */}
+            {state.resendOTP && < SmallLoader />}
+               {/* <p className={`${otpMessage}`}>{res ? res.res : error.error}</p>
+            } */}
           </span>
           {/* {error && <p className='text-danger'>{error.error}</p>} */}
                 </div>
@@ -138,6 +141,7 @@ function Verification({ SignupVerification }) {
         </div>
            {state.request && <LoaderModal/>} 
         </main>
+            </Header>
     </NewBackground>
  }
 

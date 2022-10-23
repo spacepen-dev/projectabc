@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from '../../../assets/img/logo.svg';
 import { SignupSchema } from "../yup";
-import { replace, useFormik } from "formik";
+import {  useFormik } from "formik";
 import { Error, Input } from '../ui';
 import { ButtonLoader } from "../ui";
 import { SignupRequest } from "../../../Actions";

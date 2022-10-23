@@ -445,7 +445,6 @@ export const SignupRequest = (values, callback=(res)=> {}) => async (dispatch) =
 }
 
 export const SignupVerification = (values, callback = (res) => { }) => async (dispatch) => {
-  console.log(values)
   const { otpNumber, email } = values;
   
   try {
@@ -461,4 +460,34 @@ export const SignupVerification = (values, callback = (res) => { }) => async (di
   }
 }
 
+export const EmailLogicRequest = (values, callback = (res) => { }) => async (dispatch) => {
+  const { email_phone } = values;
+  
+  try {
+    const data = await BasedURL.post("userEmailLogin.php", {
+      email_phone
+    
+    });
+
+    callback(data);
+    // dispatch({ type: "USER_", payLoad: data });
+  } catch (error) {
+    // dispatch({ type: "USER_VERIFICATION_ERR_MESSAGE", payLoad: error });
+  }
+}
+
+export const PasswordLogicRequest = (values, callback = (res) => { }) => async (dispatch) => {
+  const { password } = values;
+  
+  try {
+    const data = await BasedURL.post("userPasswordLogin.php", {
+      password
+    });
+
+    callback(data);
+    // dispatch({ type: "USER_", payLoad: data });
+  } catch (error) {
+    // dispatch({ type: "USER_VERIFICATION_ERR_MESSAGE", payLoad: error });
+  }
+};
 

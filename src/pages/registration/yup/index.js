@@ -8,3 +8,14 @@ export const SignupSchema = Yup.object().shape({
     phoneNumber: Yup.string().required('Phone number is required')
 
 })
+
+export const EmailLoginSchema = Yup.object().shape({
+    email_phone: Yup.string().required('Email address is required'),
+
+
+})
+
+export const PasswordLoginSchema = Yup.object().shape({
+    password: Yup.string().required('Password is required').min(6, 'should be more than 6 charaters')
+
+})
