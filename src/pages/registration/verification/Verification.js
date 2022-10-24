@@ -3,7 +3,7 @@ import { NewBackground } from "../ui";
 import LoaderModal from "../../../components/Dashboard/LoaderModal";
 import { connect } from "react-redux";
 import { SignupVerification } from "../../../Actions";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SmallLoader from "../../../components/Dashboard/SmallLoader";
 import Header from "../../../components/Header";
 
@@ -34,7 +34,8 @@ const reducer = (state, action) => {
 
 
 function Verification({ SignupVerification }) {
-    const path = useLocation();
+  const path = useLocation();
+  const navigate = useNavigate();
      
     const [otp, setOtp] = useState(new Array(6).fill(''));
     const [state, dispatch] = useReducer(reducer, init);
@@ -57,6 +58,12 @@ function Verification({ SignupVerification }) {
             e.target.previousSibling.focus()
         }
     }
+  
+  useEffect(() => {
+    if (!path.state) {
+      navigate('/sign-up');
+    }
+  }, [path.name]);
 
 
     useEffect(() => {
@@ -67,9 +74,9 @@ function Verification({ SignupVerification }) {
         }
 
         dispatch({ type: "REQUEST_OTP", request: false });
-        const Id = setTimeout(() => {
-            if (!path.state.email && otpNumber) {
-                return;
+      const Id = setTimeout(() => {
+            if (!path.state) {
+              return;
             }
             const value = { otpNumber, email:path.state.email }
                 SignupVerification(value, (res) => {
@@ -96,7 +103,8 @@ function Verification({ SignupVerification }) {
         return () => {
         clearTimeout(Id);
         };
-      }, [otp]);
+    }, [otp]);
+  
 
     return <NewBackground>
         <Header>
@@ -109,7 +117,7 @@ function Verification({ SignupVerification }) {
           <h2 className='mb-3 py-2 text-center text-black fw-bold'>Register Email Confirmation</h2>
         </div>
         <div className='otp-sub-header fw-bold'>
-          <p>Enter the 6-digit pin that was sent to</p>
+              <p>Enter the 6-digit pin that was sent to {path.state.email}</p>
         </div>
             <div className='d-flex justify-content-between align-items-center otp-input-container w-100 py-3'>
                 {otp.map((data,index) => {
