@@ -32,6 +32,7 @@ const ViewEmployee = ({
     { name: "FIRST NAME", selector: (row) => row.employeeFirstname },
     { name: "LAST NAME", selector: (row) => row.employeeLastname },
     { name: "EMAIL", selector: (row) => row.employeeEmail },
+    { name: "STATE", selector: (row) => row.employeeState },
     { name: "PHONE", selector: (row) => row.employeePhoneNumber },
     { name: "DEPARTMENT", selector: (row) => row.employeeDepartment },
     { name: "ROLE", selector: (row) => row.employeeRole },
