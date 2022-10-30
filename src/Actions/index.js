@@ -428,15 +428,17 @@ export const VerifyAccountName =
 
 
 export const SignupRequest = (values, callback=(res)=> {}) => async (dispatch) => {
-  const { fullName, phoneNumber, emailAddress, password } = values;
+  const { firstName, lastName, phoneNumber, emailAddress, password } = values;
   try {
     const data = await BasedURL.post("userRegistration.php", {
-      fullName,
+      firstName,
+      lastName,
       phoneNumber,
       emailAddress,
       password
     });
 
+    console.log(data)
     callback(data)
     dispatch({ type: "USER_REGISTRATION", payLoad: data });
   } catch (error) {
@@ -446,17 +448,31 @@ export const SignupRequest = (values, callback=(res)=> {}) => async (dispatch) =
 
 export const SignupVerification = (values, callback = (res) => { }) => async (dispatch) => {
   const { otpNumber, email } = values;
-  
+
   try {
     const data = await BasedURL.post("userAccountVerification.php", {
       email_phone:email,
-      verification_code:otpNumber
+      verification_code: otpNumber
     });
 
     callback(data)
     dispatch({ type: "USER_VERIFICATION", payLoad: data });
   } catch (error) {
     dispatch({ type: "USER_VERIFICATION_ERR_MESSAGE", payLoad: error });
+  }
+}
+
+
+export const ResendSignupOtp = async (email, callback = (res) => { }) => {
+  try {
+    
+    const data = await BasedURL.post("resendUserAccountVerificationCode.php", {
+      email_phone: email,
+    });
+    callback(data)
+
+  } catch (error) {
+  
   }
 }
 

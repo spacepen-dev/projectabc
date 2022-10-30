@@ -16,8 +16,9 @@ const Signup = ({ SignupRequest }) => {
 
     const formik = useFormik({
         initialValues: {
-            fullName: '',
-            email: '',
+        firstName: '',
+        lastName:'',
+            emailAddress: '',
             password: '',
             phoneNumber:'',
         },
@@ -31,14 +32,13 @@ const Signup = ({ SignupRequest }) => {
             const { status, data } = res;
             if (status !== 200) {
               // error message
-              navigate('/user-verification', { replace: true, state: { email:values.email } });
+              // navigate('/user-verification', { replace: true, state: { email:values.email } });
             } else {
               const { error } = data;
               if (error) {
-                navigate('/user-verification', { replace: true, state: { email:values.email } });
-                console.log(error);
+                // navigate('/user-verification', { replace: true, state: { email:values.email } });
               }
-              else navigate('/user-verification', { replace: true, state: { email:values.email } });
+              else navigate('/user-verification', { state: values.emailAddress});
             }
           }
         
@@ -62,18 +62,23 @@ const Signup = ({ SignupRequest }) => {
       </div>
 
       <form onSubmit={formik.handleSubmit}>
-        <div className={`${formik.errors.fullName ? 'input-cont error': 'input-cont'}`} >
-                    <Input type="text" name="fullName" placeholder="Full Name" id="userName" value={formik.values.fullName} handleChange={formik.handleChange} touched={formik.touched.fullName} error={formik.errors.fullName } />
-            {(formik.errors.fullName && formik.touched.phoneNumber) && <Error error={formik.errors.fullName} />}
+        <div className={`${formik.errors.firstName ? 'input-cont error': 'input-cont'}`} >
+                    <Input type="text" name="firstName" placeholder="First Name" id="firstName" value={formik.values.firstName} handleChange={formik.handleChange} touched={formik.touched.firstName} error={formik.errors.firstName } />
+            {(formik.errors.firstName && formik.touched.phoneNumber) && <Error error={formik.errors.firstName} />}
+          </div>
+          
+          <div className={`${formik.errors.lastName ? 'input-cont error': 'input-cont'}`} >
+                    <Input type="text" name="lastName" placeholder="Last Name" id="lastName" value={formik.values.lastName} handleChange={formik.handleChange} touched={formik.touched.lastName} error={formik.errors.lastName } />
+            {(formik.errors.lastName && formik.touched.lastName) && <Error error={formik.errors.lastName} />}
         </div>
   
         <div className={`${formik.errors.phoneNumber ? 'input-cont error': 'input-cont'}`}>
                     <Input type="text" name="phoneNumber" placeholder="Phone number" id="phoneNumber" handleChange={formik.handleChange} value={formik.values.phoneNumber} touched={formik.touched.phoneNumber } />
             {(formik.errors.phoneNumber && formik.touched.phoneNumber) && <Error error={formik.errors.phoneNumber} />}
         </div>
-        <div className={`${formik.errors.email ? 'input-cont error': 'input-cont'}`} >
-                    <Input type="email" value={formik.values.email} handleChange={formik.handleChange} name="email" placeholder="Email address" id="email" touched={formik.touched.email} />
-            {(formik.errors.email && formik.touched.email) && <Error error={formik.errors.email} />}
+        <div className={`${formik.errors.emailAddress ? 'input-cont error': 'input-cont'}`} >
+                    <Input type="emailAddress" value={formik.values.emailAddress} handleChange={formik.handleChange} name="emailAddress" placeholder="Email address" id="emailAddress" touched={formik.touched.emailAddress} />
+            {(formik.errors.emailAddress && formik.touched.emailAddress) && <Error error={formik.errors.emailAddress} />}
         </div>
 
         <div className={`${formik.errors.password ? 'input-cont pw-cont error': 'input-cont pw-cont'}`} >

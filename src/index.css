@@ -2052,3 +2052,48 @@ background-color:#4836C8
 .welcome-heading h1 {
   font-weight: 700;
 }
+.terms_page p {
+  line-height: 1.2;
+}
+
+.terms_page-para {
+  line-height: 2;
+}
+
+.biz_cont {
+  background-color: var(--white);
+  box-shadow: 0px 5px 32px var(--blackBlur);
+  width: 100%;
+}
+
+.add_acct_cont {
+  border: 1px solid var(--subText);
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  max-width: 15rem;
+  height: 13rem;
+}
+
+.lib_img {
+  width: 1rem;
+}
+
+.lib_img img {
+  width: 100%;
+}
+
+.add_img {
+  width: 3rem;
+  top: 50%;
+  left: 40%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.add_img img {
+  width: 100%;
+}
+
+.add_acct_text {
+  color: var(--spacepenBlackVariant2);
+}

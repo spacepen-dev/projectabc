@@ -16,6 +16,9 @@ import Signup from "../pages/registration/signup";
 import Welcome from "../pages/registration/welcome";
 import Verification from "../pages/registration/verification/Verification";
 import LoginPassword from "../pages/registration/loginpassword/LoginPassword";
+import TermsAndConditions from "../pages/registration/terms";
+import AddBusiness from "../pages/registration/addbusiness";
+import RegisteredBusiness from "../pages/registration/businesslist/RegisteredBusiness";
 
 
 // import { NotificationProvider } from "./Dashboard/Notification/NotificationContainer";
@@ -30,6 +33,9 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SignIn />}></Route>
+          <Route path='/register-business' element={<AddBusiness />}></Route>
+          <Route path='/registered-business' element={<RegisteredBusiness />}></Route>
+          <Route path='/terms-conditions' element={<TermsAndConditions />}></Route>
           <Route path='/sign-up' element={<Signup />}></Route>
           <Route path='/user-login' element={<EmailLogin />}></Route>
           <Route path='/user-login-password' element={<LoginPassword />}></Route>
