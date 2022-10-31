@@ -7,6 +7,7 @@ import { Input } from "../ui";
 import { useFormik } from "formik";
 import { EmailLoginSchema } from "../yup";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const EmailLogin = ({ EmailLogicRequest }) => {
     
@@ -24,8 +25,9 @@ const EmailLogin = ({ EmailLogicRequest }) => {
                     formik.setSubmitting(false)
                     if (res.status !== 200) return;
                     else {
-                        const { error, success } = res.data;
-                        if (error) navigate('/user-login-password', { replace: true, state: values.email_phone });
+                        const { error } = res.data;
+                        if (error) swal("Error!", error, "error");
+
                         else navigate('/user-login-password', { replace: true, state: values.email_phone })
                     }
                     

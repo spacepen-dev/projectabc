@@ -2,17 +2,19 @@ import { useCallback, useEffect, useReducer, useState } from "react";
 import { NewBackground } from "../ui";
 import LoaderModal from "../../../components/Dashboard/LoaderModal";
 import { connect } from "react-redux";
-import { SignupVerification, ResendLoginOtp, ResendSignupOtp } from "../../../Actions";
+import { SignupVerification, ResendSignupOtp } from "../../../Actions";
 import { useLocation, useNavigate } from "react-router-dom";
 import SmallLoader from "../../../components/Dashboard/SmallLoader";
 import Header from "../../../components/Header";
+import swal from "sweetalert";
 
 const init = {
-    request: false,
-    response: false,
-    networkError: false,
-    resendOTP: false,
-    message:'',
+  request: false,
+  response: false,
+  networkError: false,
+  resendOTP: false,
+  message: '',
+  otpMessage: ''
 
 }
 
@@ -27,7 +29,7 @@ const reducer = (state, action) => {
         case "RESEND_OTP":
         return { ...state, resendOTP: true};
       case 'RESEND_OTP_RES':
-        return {...state, resendOTP: false, message: action.message}
+        return {...state, resendOTP: false, otpMessage: action.message}
       default:
         return state;
     }
@@ -147,6 +149,8 @@ function Verification({ SignupVerification }) {
                     dispatch({ type: "RESEND_OTP_RES" });
                     const { error, success } = res.data;
                     if (error) {
+                      swal("Error!", error, "error");
+
                       dispatch({ type: "RESEND_OTP_RES", message: error });
                     
                     }
@@ -160,7 +164,9 @@ function Verification({ SignupVerification }) {
               Resend the code
               {state.resendOTP && < SmallLoader />}
             </span>
-            {state.message && !state.resendOTP && <p className='text-success mt-3'>{state.message}</p>}
+            {state.message && !state.resendOTP && <p className='text-success mt-3'>{state.message}
+            </p>}
+            {/* <Alert message={state.message}/> */}
           </div>
         </div>
         {state.request && <LoaderModal />}

@@ -8,6 +8,7 @@ import { SignupRequest } from "../../../Actions";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NewBackground } from "../ui";
+import swal from "sweetalert";
 
 const Signup = ({ SignupRequest }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,6 +37,7 @@ const Signup = ({ SignupRequest }) => {
             } else {
               const { error } = data;
               if (error) {
+                swal("Error!", error, "error");
                 // navigate('/user-verification', { replace: true, state: { email:values.email } });
               }
               else navigate('/user-verification', { state: values.emailAddress});
