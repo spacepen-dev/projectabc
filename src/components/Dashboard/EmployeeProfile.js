@@ -12,7 +12,6 @@ const EmployeeProfile = ({
   employeeTin,
   employeeRole,
   employeeDepartment,
-  employeeState,
   employeePhoneNumber,
   index,
   err,
@@ -22,56 +21,13 @@ const EmployeeProfile = ({
   departmentRes,
 }) => {
   const [validation, setValidation] = useState({});
-
-
   const [departmentData] = useState(() =>
     JSON.parse(localStorage.getItem("department"))
   );
 
-  const states = [
-    "--- SELECT STATE ---",
-    "Abia ",
-    "Adamawa ",
-    "Anambra ",
-    "Bauchi ",
-    "Bayelsa ",
-    "Borno ",
-    "Delta ",
-    "Ebonyi ",
-    "Enugu ",
-    "Gombe ",
-    "Imo ",
-    "Jigawa ",
-    "Kano ",
-    "katsina ",
-    "Kebbi ",
-    "Kogi ",
-    "Kwara ",
-    "Nasarawa ",
-    "Niger ",
-    "Ondo ",
-    "Osun ",
-    "Plateau ",
-    "Sokoto ,",
-    "Taraba ",
-    "Yobe ",
-    "Zamfara ",
-    "Ekiti ",
-    "Lagos ",
-    "Benue ",
-    "Oyo ",
-    "Ogun ",
-    "Cross River ",
-    "Rivers ",
-    "Akwa Ibom ",
-    "Kaduna ",
-    "Edo ",
-    "Abuja FCT",
-  ];
-  
-
   const Validation = () => {
-    
+    // let regexp =
+    //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (!employeeFirstName) {
       setValidation({
@@ -88,8 +44,6 @@ const EmployeeProfile = ({
     }
   };
 
-
-
   // FETCH DEPARTMENT DATA USE EFFECT
   useEffect(() => {
     // ADD FETCH DEPARTMENT ACTION CREATOR
@@ -105,7 +59,14 @@ const EmployeeProfile = ({
     };
   }, [FetchBankList]);
 
-  
+  // GET EMPLOYEE DATA FROM THE REDUCER
+  // useEffect(() => {
+  //   if (!departmentRes) {
+  //     return null;
+  //   }
+  //   setDepartmentData(departmentRes.success);
+  // }, [departmentRes]);
+
   if (index !== 1) {
     return null;
   }
@@ -220,9 +181,9 @@ const EmployeeProfile = ({
       <Row>
         <Form.Group as={Col}>
           <DashBoardText name='Department' label='Select employee department' />
-          {departmentData && <select
+          <select
             name='employeeDepartment'
-            className='select mt-2'
+            className='select mt-0'
             onChange={onHandleChange}>
             {!employeeDepartment ? (
               <option>Select department</option>
@@ -237,31 +198,7 @@ const EmployeeProfile = ({
               );
             })}
           </select>
-          }
-
         </Form.Group>
-        <Form.Group as={Col}>
-          <DashBoardText name='State of origin' label='Select state of origin' />
-          <select
-            name='employeeState'
-            className='select mt-2'
-            onChange={onHandleChange}>
-             {!employeeDepartment ? (
-              <option>Select state </option>
-            ) : (
-              <option>{employeeState}</option>
-            )}
-            {states.map(( cur, id) => {
-              return (
-                <option key={id} value={cur}>
-                  {cur}
-                </option>
-              );
-            })}
-          </select>
-
-        </Form.Group>
-        
       </Row>
       <Button
         type='button'

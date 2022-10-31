@@ -109,7 +109,7 @@ export const CompanyDetails = (email, token) => async (dispatch) => {
 // REGISTER EMPLOYEE ACTION
 export const RegisterEmployee =
   (values, token, accountVerified) => async (dispatch) => {
-    
+    console.log(accountVerified);
     const {
       employeeFirstname,
       employeeLastname,
@@ -120,7 +120,6 @@ export const RegisterEmployee =
       employeeRelives,
       employeeTin,
       employeePhoneNumber,
-      employeeState,
 
       // accountName,
       // accountNumber,
@@ -138,7 +137,6 @@ export const RegisterEmployee =
         employeeDepartment,
         employeeRelieves: employeeRelives,
         employeeTin,
-        employeeState,
         token,
         employeeAccountName: accountVerified,
         employeePhoneNumber: employeePhoneNumber,
@@ -171,7 +169,6 @@ export const UpdateEmployee =
       bankcode,
       employeePhoneNumber,
       employeeToken,
-      employeeState
     } = values;
     try {
       const data = await BasedURL.post("/updateEmployee.php", {
@@ -182,7 +179,6 @@ export const UpdateEmployee =
         employeeDepartment,
         employeeRelieves: employeeRelives,
         employeeTin,
-        employeeState,
         employeeAccountName: accountVerified,
         employeeAccountNumber,
         employeeBankName: filterBank,
@@ -425,69 +421,3 @@ export const VerifyAccountName =
       dispatch({ type: "VERIFY_ACCOUNT_NUMBER_ERR_MESSAGE", payLoad: error });
     }
   };
-
-
-export const SignupRequest = (values, callback=(res)=> {}) => async (dispatch) => {
-  const { fullName, phoneNumber, emailAddress, password } = values;
-  try {
-    const data = await BasedURL.post("userRegistration.php", {
-      fullName,
-      phoneNumber,
-      emailAddress,
-      password
-    });
-
-    callback(data)
-    dispatch({ type: "USER_REGISTRATION", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "USER_REGISTRATION_ERR_MESSAGE", payLoad: error });
-  }
-}
-
-export const SignupVerification = (values, callback = (res) => { }) => async (dispatch) => {
-  const { otpNumber, email } = values;
-  
-  try {
-    const data = await BasedURL.post("userAccountVerification.php", {
-      email_phone:email,
-      verification_code:otpNumber
-    });
-
-    callback(data)
-    dispatch({ type: "USER_VERIFICATION", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "USER_VERIFICATION_ERR_MESSAGE", payLoad: error });
-  }
-}
-
-export const EmailLogicRequest = (values, callback = (res) => { }) => async (dispatch) => {
-  const { email_phone } = values;
-  
-  try {
-    const data = await BasedURL.post("userEmailLogin.php", {
-      email_phone
-    
-    });
-
-    callback(data);
-    // dispatch({ type: "USER_", payLoad: data });
-  } catch (error) {
-    // dispatch({ type: "USER_VERIFICATION_ERR_MESSAGE", payLoad: error });
-  }
-}
-
-export const PasswordLogicRequest = (values, callback = (res) => { }) => async (dispatch) => {
-  const { password } = values;
-  
-  try {
-    const data = await BasedURL.post("userPasswordLogin.php", {
-      password
-    });
-
-    callback(data);
-    // dispatch({ type: "USER_", payLoad: data });
-  } catch (error) {
-    // dispatch({ type: "USER_VERIFICATION_ERR_MESSAGE", payLoad: error });
-  }
-};
-

@@ -27,16 +27,16 @@ const reducer = (action, state) => {
 
 const AccountNameVerification = ({
   VerifyAccountName,
-  accountNameValue,
+  accountName,
   accountNameErr,
-  data: { receivedToken, bankcode, accountNumber,employeeData },
+  data: { receivedToken, bankcode, accountNumber },
 }) => {
   const [state, dispatch] = useReducer(reducer, Initial);
 
   useEffect(() => {
-    if (!accountNameValue) return;
+    if (!accountName) return;
     else {
-      const { success, error } = accountNameValue;
+      const { success, error } = accountName;
       if (error) {
         dispatch({ type: "ERROR_RESPONSE", request: false, error: error });
       } else {
@@ -47,7 +47,7 @@ const AccountNameVerification = ({
         });
       }
     }
-  }, [accountNameValue]);
+  }, [accountName]);
 
   useEffect(() => {
     if (!accountNameErr) return;
@@ -58,7 +58,7 @@ const AccountNameVerification = ({
         network: accountNameErr.message,
       });
     }
-  }, [accountNameErr]);
+  }, []);
 
   function onClick() {
     VerifyAccountName(receivedToken, bankcode, accountNumber);
@@ -78,16 +78,15 @@ const AccountNameVerification = ({
           " Get account name"
         )}
       </Button>
-      {/* {state.success && <input type='text' value={!state.success ? employeeData.employeeAccountName:state.success} readOnly />} */}
-   
-    {/* {state.error && <span>{state.error}</span>} */}
+      {state.success && <span>{state.success}</span>}
+      {state.error && <span>{state.error}</span>}
     </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    accountNameValue: state.DashboardReducer.verifyNumber.data,
+    accountName: state.DashboardReducer.verifyNumber.data,
     accountNameErr: state.DashboardReducer.verifyNumberErr,
   };
 };
