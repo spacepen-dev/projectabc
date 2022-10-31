@@ -58,7 +58,7 @@ header {
 }
 
 .entire-page-headers {
-  /* text-align: center; */
+  text-align: center;
   /* margin-top: 2rem;
   margin-bottom: 2rem; */
   font-weight: 700;
@@ -695,9 +695,9 @@ div .form {
   /* background-color: rgb(206, 245, 167); */
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end !important;
+  margin-left: 10px !important;
 }
-
 .details-container {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -901,7 +901,7 @@ td {
 .Overlay {
   /* background-color: rgba(0, 0, 0, 0.4); */
   width: 100vw;
-}3
+}
 .Overlay-alert .alert {
   max-width: 50rem;
   margin-left: auto;
@@ -1455,10 +1455,22 @@ p.paid-success {
     height: 4rem;
   }
   .overview span {
-    font-size: 1.23rem;
+    font-size: 1rem;
+    margin-left:25px !important;
+  
   }
   .overview-btn .button {
-    width: 7rem;
+   max-width: 10rem;
+  }
+  .payBtn {
+    background-color: var(--baseColor);
+    font-size: 0.5rem;
+    /* background-color: rgb(206, 245, 167); */
+    display: flex;
+    align-items: center;
+    justify-content: end !important;
+    margin-left: 5px !important;
+    max-width: 100% !important;
   }
 
   .add-roles .button-container {
@@ -1513,8 +1525,14 @@ p.paid-success {
   .details-container {
     height: 50rem;
     flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center !important;
+   
+  
+  }
+  .container-page {
+    width: 100% !important;
+    /* width: 100px; */
   }
 
   .col-2 {
@@ -1528,12 +1546,14 @@ p.paid-success {
     width: 7rem;
   }
   .details-card {
-    width: 100% !important;
-    /* max-width: 40.63rem; */
+    /* width: 100% !important; */
+    max-width: 40.63rem;
     margin-left: 0 !important;
+    margin-top: 0px !important;
+    padding-bottom: 30px !important;
   }
   .overview-btn {
-    display: none;
+    display: block;
   }
 }
 
@@ -1542,6 +1562,10 @@ p.paid-success {
     width: 100vw !important;
     /* background-color: yellow !important; */
     /* max-width: calc(100.5rem - 27.12rem); */
+  } 
+  .container-page {
+    width: 100% !important;
+    /* width: 100px; */
   }
 
   .details-card h3 {
@@ -1656,7 +1680,7 @@ p.paid-success {
   align-items: center;
   padding: 15px;
   border-radius: 10px;
-
+ 
   /* width: 100px; */
 }
 span {

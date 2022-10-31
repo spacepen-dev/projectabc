@@ -161,7 +161,7 @@ const Overview = ({
   return (
     <Container fluid className='overview h-100'>
       <div className='d-flex justify-content-between align-items-center details-container '>
-        <div className='details-card d-flex align-items-center justify-content-around px-2'>
+        <div className='details-card d-flex align-items-center justify-content-around px-2 my-o'>
           <div>
             <span>
               <h3>TOTAL BALANCE</h3>
@@ -195,7 +195,7 @@ const Overview = ({
         />
       </div>
       <article className='d-flex align-items-center top-tab'>
-        <div className='h-100 d-flex justify-content-between align-items-center w-100'>
+        <div className='h-100 d-flex justify-content-center align-items-center w-100 '>
           <Slider
             name='ACCOUNT HISTORY'
             id={7}
@@ -203,7 +203,9 @@ const Overview = ({
             getId={getId}
             pageId={pageId}
             smallId='second'
+            
           />
+
           <Slider
             name='SALARY HISTORY'
             id={4}
@@ -221,6 +223,7 @@ const Overview = ({
             pageId={pageId}
             smallId='third'
           />
+          
           <div className='overview-btn'>
             <Link
               className='button d-flex text-white align-items-center justify-content-center'
