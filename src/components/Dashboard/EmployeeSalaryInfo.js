@@ -16,17 +16,7 @@ const EmployeeSalaryInfo = ({
   onHandleChange,
 }) => {
   const [validation, setValidation] = useState({});
-  /*
-   * console.log(num.toFixed(2))
-   * function currencyFormat(num) {
-   return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-}
-console.log(currencyFormat(2665))
-   */
-  // function currencyFormat(num = 200000000) {
-  //   let numb = num.toFixed(2);
-  //   return "NGN" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-  // }
+
   // GETTING MONTHLY SALARY FROM ANNUAL SALARY / 12
   const getMonthlySalary = useMemo(() => {
     const employeeMonthlySalary = annualSalary / 12;
@@ -95,7 +85,6 @@ console.log(currencyFormat(2665))
             name='Annual Gross Salary'
             label='Enter annual gross salary'
           />
-          {/* {currencyFormat()} */}
           <Input
             inputName='employeeAnnualGrossSalary'
             type='number'

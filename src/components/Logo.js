@@ -1,5 +1,5 @@
 import React from "react";
-import AminienPay from "./AminienPay.png";
+import AminienPay from "../assets/img/AminienPay.png";
 
 const Logo = () => {
   return (

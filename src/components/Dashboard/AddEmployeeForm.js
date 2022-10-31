@@ -3,15 +3,17 @@ import { Form, ProgressBar } from "react-bootstrap";
 
 const AddEmployeeForm = ({ currentForm }) => {
   // const [active, setActive] = useState("active");
-  const [progress, setProgress] = useState("33%");
+  const [progress, setProgress] = useState("25%");
 
   useEffect(() => {
     if (currentForm === 2) {
-      setProgress("67%");
+      setProgress("50%");
     } else if (currentForm === 3) {
-      setProgress("100%");
+      setProgress("75%");
+    } else if (currentForm === 4) {
+      setProgress('100%')
     } else if (currentForm === 1) {
-      setProgress("33%");
+      setProgress("25%");
     }
   }, [currentForm]);
 
@@ -26,6 +28,10 @@ const AddEmployeeForm = ({ currentForm }) => {
             <small className='d-inline-block'></small>
             <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
               <Form.Label>Salary</Form.Label>
+            </div>
+            <small className='d-inline-block'></small>
+            <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
+              <Form.Label>Pension</Form.Label>
             </div>
             <small className='d-inline-block'></small>
             <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
