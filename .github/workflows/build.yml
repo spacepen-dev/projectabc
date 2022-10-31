@@ -1,4 +1,4 @@
-name: Deploy to Production
+name: Update server code
 
 on:
   push:
@@ -9,10 +9,10 @@ permissions:
 
 jobs:
   build:
-    name: Deploy to Production
+    name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy React to Production
+    - name: Build React on server
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -33,3 +33,4 @@ jobs:
         PROJECT_PATH: projectabc
         DEPLOY_PATH: main
         REPO_URL: https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }}
+
