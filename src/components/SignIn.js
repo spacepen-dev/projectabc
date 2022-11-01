@@ -43,7 +43,7 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
         // const successMessage = success.split(":")[1];
         // setSuccess(successMessage);
         navigate("/login/otp");
-        window.location.reload();
+        // window.location.reload();
       } else if (error) {
         setError({ dataErr: error });
         const removeTimeOut = setTimeout(() => {
