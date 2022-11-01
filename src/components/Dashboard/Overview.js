@@ -194,8 +194,8 @@ const Overview = ({
           secondSVG={WhiteWallet()}
         />
       </div>
-      <article className='d-flex align-items-center top-tab'>
-        <div className='h-100 d-flex justify-content-center align-items-center w-100 '>
+      <article className='d-flex align-items-center top-tab justify-content-center '>
+        <div className='h-100 d-flex justify-content-center align-items-center w-100 col-lg-4 col-md-12 '>
           <Slider
             name='ACCOUNT HISTORY'
             id={7}
@@ -224,7 +224,7 @@ const Overview = ({
             smallId='third'
           />
           
-          <div className='overview-btn'>
+          <div className='overview-btn p-1'>
             <Link
               className='button d-flex text-white align-items-center justify-content-center'
               to={link}

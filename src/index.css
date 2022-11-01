@@ -757,6 +757,16 @@ article span {
   color: var(--baseColor);
   /* color: #1a1a1a; */
 }
+.overview span {
+  font-size: 1rem;
+  /* margin-left:30px !important; */
+
+
+}
+.overview-btn .button {
+  max-width: 7rem;
+  margin-left: 30px !important;
+}
 article small {
   display: block;
   width: 0;
@@ -1456,11 +1466,11 @@ p.paid-success {
   }
   .overview span {
     font-size: 1rem;
-    margin-left:25px !important;
+    /* margin-left:25px !important; */
   
   }
   .overview-btn .button {
-   max-width: 10rem;
+   max-width: 5rem;
   }
   .payBtn {
     background-color: var(--baseColor);
@@ -1523,7 +1533,7 @@ p.paid-success {
     height: 5rem !important;
   }
   .details-container {
-    height: 50rem;
+    height: 26rem;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center !important;
@@ -1540,10 +1550,11 @@ p.paid-success {
   }
 
   article span {
-    font-size: 1.13rem;
+    font-size: 1rem;
   }
   .overview-btn .button {
     width: 7rem;
+    margin-left: 10px !important;
   }
   .details-card {
     /* width: 100% !important; */
@@ -1609,6 +1620,28 @@ p.paid-success {
     width: 8rem;
   }
 }
+@media (min-width: 1024px) {
+  .details-card {
+    /* width: 100% !important; */
+    max-width: 50rem;
+    padding-bottom: 30px !important;
+  }
+  .details-container {
+    height: 20rem;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center !important;
+  }
+  .details-card h3 {
+    font-size: 0.98rem;
+    line-height: 1.26rem;
+  }
+  .details-card h2 {
+    font-size: 2.06rem;
+    line-height: 1.69rem;
+  }
+
+}
 
 @media only screen and (min-width: 992px) and (max-width: 1300px) {
   .row {
@@ -1624,6 +1657,19 @@ p.paid-success {
     background-color: var(--page) !important;
     height: 8rem !important;
   }
+  .details-card {
+    /* width: 100% !important; */
+    max-width: 40.63rem;
+    
+    padding-bottom: 30px !important;
+  }
+  .details-container {
+    height: 50rem;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center !important;
+    margin-right: 20px !important;
+  }
   .details-card h3 {
     font-size: 0.98rem;
     line-height: 1.26rem;
@@ -1635,7 +1681,6 @@ p.paid-success {
   .overview svg {
     height: 4rem;
   }
-
   article span {
     font-size: 1.2rem;
   }
