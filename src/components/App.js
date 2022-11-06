@@ -19,6 +19,8 @@ import LoginPassword from "../pages/registration/loginpassword/LoginPassword";
 import TermsAndConditions from "../pages/registration/terms";
 import AddBusiness from "../pages/registration/addbusiness";
 import RegisteredBusiness from "../pages/registration/businesslist/RegisteredBusiness";
+import BusinessCategory from "../pages/business-registration/catergory";
+import RegistraionFormController from "../pages/business-registration/main";
 
 
 // import { NotificationProvider } from "./Dashboard/Notification/NotificationContainer";
@@ -35,14 +37,23 @@ const App = () => {
           <Route path='/' element={<SignIn />}></Route>
           <Route path='/register-business' element={<AddBusiness />}></Route>
           <Route path='/registered-business' element={<RegisteredBusiness />}></Route>
-          <Route path='/terms-conditions' element={<TermsAndConditions />}></Route>
           <Route path='/sign-up' element={<Signup />}></Route>
           <Route path='/user-login' element={<EmailLogin />}></Route>
           <Route path='/user-login-password' element={<LoginPassword />}></Route>
           
           <Route path='/user-welcome' element={<Welcome />}></Route>
           <Route path='/user-verification' element={<Verification />}></Route>
+          <Route path='registration/business' element={<RegistraionFormController />}></Route>
 
+
+
+
+
+
+
+          
+
+          
           <Route path='login/otp' element={<LoginOtp />}></Route>
           <Route path='registration/company' element={<Registration />}></Route>
           <Route

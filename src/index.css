@@ -2097,3 +2097,97 @@ background-color:#4836C8
 .add_acct_text {
   color: var(--spacepenBlackVariant2);
 }
+/********************* CATEGORY STYLING ********************************/
+.category_biz_cont {
+  margin-top: 5em;
+}
+
+.category_businesses {
+  border: 1px solid var(--subText);
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  height: 10rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category_businesses:hover {
+  box-shadow: 10px 10px 10px 0 #ccc;
+}
+
+.cat_biz_img {
+  width: 3rem;
+}
+
+.cat_biz_img img {
+  width: 100%;
+}
+
+.category_btn {
+  background-color: var(--baseColor);
+  box-shadow: -13px 10px 32px var(--baseBlur);
+  border-radius: 15px 0px;
+  width: 20rem;
+}
+
+
+/* ************************Profilepage.html********************* */
+.pp_links {
+  color: var(--subText);
+}
+
+.pp_links:hover {
+  color: var(--spacepenBlackVariant2);
+}
+
+.pp_link_active {
+  color: var(--black);
+}
+
+.pp_link_active ion-icon {
+  color: var(--spacepenGreen);
+}
+
+.pp_right_section {
+  border-left: 0.5px solid var(--subText);
+}
+
+
+.pp_form input,
+.pp_form select {
+  border: 1px solid var(--outlineBlack);
+  border-radius: 10px;
+}
+
+.pp_form input::placeholder,
+.pp_form textarea::placeholder {
+  font-size: 0.7rem;
+  color: var(--subText);
+}
+
+/* ************************Profilepage2.html********************* */
+.drag_area {
+  border: 1px solid var(--outlineBlack);
+  border-radius: 10px;
+}
+
+.drag_photo {
+  width: 3rem;
+}
+
+.drag_photo img {
+  width: 100%;
+}
+
+.drag_text {
+  color: var(--spacepenBlackVariant3);
+}
+
+.drag_text span {
+  color: var(--spacepenPurple);
+  cursor: pointer;
+}
+
+.btn {
+  background-color: var(--baseColor);
+}

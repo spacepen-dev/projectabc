@@ -8,6 +8,8 @@ import { SignupRequest } from "../../../Actions";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NewBackground } from "../ui";
+import { bankList } from "../../../Actions";
+
 import swal from "sweetalert";
 
 const Signup = ({ SignupRequest }) => {
@@ -45,6 +47,20 @@ const Signup = ({ SignupRequest }) => {
           }
         
         });
+
+
+        bankList((res) => {
+          if (res) {
+            
+            if (res.status !== 200) {
+              return;
+            }
+            localStorage.setItem('BankList', JSON.stringify(res.data.success))
+          }
+  
+        })
+
+
       }
     }) 
 

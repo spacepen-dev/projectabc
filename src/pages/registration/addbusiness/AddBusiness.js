@@ -20,7 +20,7 @@ export default function AddBusiness() {
         <p className="mt-3 mb-4 heading-subtext">You don’t have any business here yet buy you can open one now</p>
       </div>
 
-      <Link to='/terms-conditions' className="pb-lg-5 d-block">
+      <Link to='/registration/business' className="pb-lg-5 d-block">
         <div className="d-flex flex-column m-auto text-center px-2 position-relative add_acct_cont">
           <div className="ml-auto mt-3 mr-3 lib_img">
             <img src={Library} alt=""/>

@@ -1,3 +1,5 @@
+import axios from "axios";
+import swal from "sweetalert";
 import BasedURL from "./BasedURL";
 
 /**********************NON ASYNC ACTION CREATOR*********************************/
@@ -328,11 +330,17 @@ export const FetchBankList = () => async (dispatch) => {
   try {
     const data = await BasedURL.post("/fetchbanks.php");
     dispatch({ type: "FETCH_BANK_LIST", payLoad: data });
+    
   } catch (error) {
     dispatch({ type: "FETCH_BANK_LIST_ERR_MESSAGE", payLoad: error });
   }
 };
 
+
+export const bankList = async (funct=(res)=> {}) => {
+  const data = await axios.post("https://apws.spacepen.tech/fetchbanks.php");
+  funct(data);
+}
 // FETCH ACCOUNT DETAILS
 
 export const UpdateCompanyDetails = (data) => async (dispatch) => {
@@ -425,6 +433,19 @@ export const VerifyAccountName =
       dispatch({ type: "VERIFY_ACCOUNT_NUMBER_ERR_MESSAGE", payLoad: error });
     }
   };
+
+export const AccountName = async({companyToken, bankCode,accountNumber}) => {
+  try {
+    const data = await BasedURL.post("verifyBankAccount.php", {
+      companyToken,
+      bankCode,
+      accountNumber,
+    });
+  } catch (error) {
+    console.log(error)
+  }
+  }
+ 
 
 
 export const SignupRequest = (values, callback=(res)=> {}) => async (dispatch) => {
