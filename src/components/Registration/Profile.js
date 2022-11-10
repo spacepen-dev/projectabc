@@ -95,13 +95,14 @@ const Profile = ({
               onPress={() => setNameErr("")}
             />
           </div>
-          <div className='field-container'>
+          <div className='field-container col-sm-12'>
             <LabelText
               label='Input the registration number of your company'
               name='Registration Number'
             />
             <Input
               inputName='registration'
+              className='col-sm-12'
               type='text'
               value={registration}
               handleChange={handleChange}

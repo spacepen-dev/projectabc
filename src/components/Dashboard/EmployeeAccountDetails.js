@@ -241,6 +241,7 @@ const EmployeeAccountDetails = ({
             label='Enter Employee Account Name '
           />
           <Input
+          className='col-sm-12'
             inputName='employeeAccountName'
             type='text'
             handleChange={onHandleChange}

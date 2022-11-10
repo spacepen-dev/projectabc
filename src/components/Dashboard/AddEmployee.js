@@ -3,6 +3,7 @@ import EmployeeRegistration from "./EmployeeRegistration";
 import { RegisterEmployee } from "../../Actions";
 import { connect } from "react-redux";
 
+
 const AddEmployee = ({
   RegisterEmployee,
   registerEmployeeErr,

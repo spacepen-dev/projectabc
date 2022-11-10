@@ -32,7 +32,7 @@ const Dashboard = () => {
 
   return (
     <Container fluid>
-      <Row className='row'>
+      <Row className='row d-flex justify content-center'>
         <Navbar bg='light' className='nav-bar' expand={false}>
           <Container fluid>
             <Navbar.Toggle aria-controls='offcanvasNavbar' />

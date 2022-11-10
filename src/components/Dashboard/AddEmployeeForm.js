@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, ProgressBar } from "react-bootstrap";
 
+
 const AddEmployeeForm = ({ currentForm }) => {
   // const [active, setActive] = useState("active");
   const [progress, setProgress] = useState("33%");
@@ -19,24 +20,24 @@ const AddEmployeeForm = ({ currentForm }) => {
     <div>
       <div className='d-flex flex-column align-items-center'>
         <div className='range-container'>
-          <div className='d-flex justify-content-evenly align-items-center w-100'>
+          <div className='d-flex justify-content-evenly align-items-center w-100 col-sm-12'>
             <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
               <Form.Label>Profile</Form.Label>
             </div>
             <small className='d-inline-block'></small>
-            <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
+            <div className='p-3 d-flex flex-column justify-content-center align-items-center col-sm-12'>
               <Form.Label>Salary</Form.Label>
             </div>
             <small className='d-inline-block'></small>
-            <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
+            <div className='p-3 d-flex flex-column justify-content-center align-items-center col-sm-12'>
               <Form.Label>Account</Form.Label>
             </div>
             <small className='d-inline-block'></small>
-            <div className='p-3 d-flex flex-column justify-content-center align-items-center'>
+            <div className='p-3 d-flex flex-column justify-content-center align-items-center col-sm-12'>
               <Form.Label>Pension</Form.Label>
             </div>
           </div>
-          <div className='progress'>
+          <div className='progress col-sm-12'>
             <ProgressBar animated now={100} style={{ width: `${progress}` }} />
           </div>
         </div>

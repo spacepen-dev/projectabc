@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {  } from "react-bootstrap";
 
 import EmployeeAccountDetails from "./EmployeeAccountDetails";
 import EmployeeSalaryInfo from "./EmployeeSalaryInfo";
@@ -61,18 +62,18 @@ const EmployeeRegistration = ({
       <div>
         <h4 className='entire-page-headers'>REGISTER EMPLOYEE</h4>
       </div>
-      <div className=' w-100 mx-auto employee-form'>
+      <div className=' w-100 mx-auto employee-form '>
         <div className='pt-5 pb-5'>
           <AddEmployeeForm currentForm={index} />
           {editEmployeeLink && (
-            <div className=' d-flex justify-content-center align-items-center mt-3'>
+            <div className=' d-flex justify-content-center align-items-center mt-3 '>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
                 viewBox='0 0 24 24'
                 strokeWidth={1.5}
                 stroke='currentColor'
-                className='h-2'
+                className='h-2 '
                 style={{
                   position: "absolute",
                   top: "3rem",
@@ -91,8 +92,9 @@ const EmployeeRegistration = ({
             </div>
           )}
         </div>
-        <div className=' py-1 px-4'>
+        <div className=' py-1 px-4 col-sm-12 col-lg-6'>
           <EmployeeProfile
+        
             employeeFirstName={employeeData["employeeFirstname"]}
             employeeLastName={employeeData["employeeLastname"]}
             employeeNin={employeeData["employeeNin"]}

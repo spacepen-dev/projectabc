@@ -7,13 +7,13 @@ import { OnBoardingSVG } from "../Dashboard/svg/SVG";
 const OnBoarding = () => {
   return (
     <div className='onboard-div'>
-      <h5 className='onboard-h5'>Business Onboarding</h5>
-      <OnBoardingSVG />
+      <h5 className='onboard-h5  '>Business Onboarding</h5>
+      <OnBoardingSVG className='d-flex justify-content-sm-start col-md-12'/>
       <p className='paid-success onboard-p'>
         We are setting up your business, Kindly add the departments in your
         business.
       </p>
-      <div className=''>
+      <div className=' '>
         <Link
           to='/add-roles'
           type='button'
