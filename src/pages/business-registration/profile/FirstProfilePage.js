@@ -3,7 +3,7 @@ import { Button, FormIndicator, Input, Label, RegistrationFormHeader, Error} fro
 import { RegistrationContext } from "../main/RegistrationForm";
 import { FormContainer } from "../main/RegistrationFormComp";
 
-export default function FirstProfilePage({handleChange,businessNameValue,tradingNameValue,registrationNumberValue, businessTouched, businessError, registrationTouched, registrationError}) {
+export default function FirstProfilePage({handleChange,businessNameValue,tradingNameValue,registrationNumberValue, businessTouched, businessError, registrationTouched, registrationError, prevPage}) {
 
     const { page, ChangePage } = useContext(RegistrationContext);
 
@@ -54,7 +54,7 @@ export default function FirstProfilePage({handleChange,businessNameValue,trading
     }
 
 
-    return <FormContainer name='Profile' pageName='Profile'>
+    return <FormContainer name='Profile' pageName='Profile' desc='Choose the business you want to transact now'>
         {/* <!-- Heading --> */}
 
         {/* <!-- Form --> */}
@@ -73,7 +73,8 @@ export default function FirstProfilePage({handleChange,businessNameValue,trading
                 <Label name='Registration Number' styles='mb-3' />
                 <Input {...registrationNumber} />
             </div>
-            <div class="mb-3 d-flex justify-content-end">
+            <div class="mb-3 d-flex  justify-content-center">
+            <Button name='BACK' onClick={prevPage} type='button' styles='btn bg-white text-black p-3 category_btn' />
                 <Button name='CONTINUE' onClick={ChangePage} type='button' disabled={!businessNameValue && !registrationNumberValue ? true : false} styles='btn text-white p-3 category_btn' />
                             
             </div>

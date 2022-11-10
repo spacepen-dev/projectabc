@@ -3,7 +3,7 @@ import { RegistrationContext } from "../main/RegistrationForm";
 import { FundUI } from "../main/RegistrationFormComp"
 
 
-export default function Pension({ click, res, pensionValue, handleChange }) {
+export default function Pension({ click, res, pensionValue, handleChange, prevPage }) {
     
     const { page, ChangePage } = useContext(RegistrationContext);
 
@@ -13,11 +13,9 @@ export default function Pension({ click, res, pensionValue, handleChange }) {
         ChangePage,
         name: 'Pension',
         res,
-
+        prevPage:prevPage,
         pageName:'Funds',
-       
-        // desc: 'Choose the business you want to transact now.',
-        label:'Company pension code',
+       label:'Company pension code',
         props: {
             id: 'pension',
             styles: 'form-control py-2',

@@ -3,11 +3,12 @@ import { Button, FormIndicator, Input, Label, RegistrationFormHeader, Select } f
 import { LGA } from "../../registration/lga";
 import { RegistrationContext } from "../main/RegistrationForm";
 import { stateFunt} from "./ProfileComp";
+import { FormContainer } from "../main/RegistrationFormComp";
 
 
 
 
-export default function ThirdProfilePage({ stateValue, lgaValue, tinValue, handleChange }) {
+export default function ThirdProfilePage({ stateValue, lgaValue, tinValue, handleChange, prevPage }) {
   
   const { page, ChangePage } = useContext(RegistrationContext);
   const [lga, setLga] = useState([]);
@@ -44,21 +45,14 @@ function lagFunt() {
 }
 
 
-  return <div className="mt-3 mt-md-5 container">
-    <div className="row">
-      {/* <!-- Left Section --> */}
-      <FormIndicator pageName='Profile' />
-      {/* <!-- Right Section --> */}
-      <div className="col">
-        <div className="pp_right_section">
-          <RegistrationFormHeader name='Profile' desc='Choose the business you want to transact now' />
+  return <FormContainer name='Profile' pageName='Profile' desc='Choose the business you want to transact now'>
           {/* <!-- Form --> */}
-          <form className="px-3 mt-5 pp_form">
+          <form className="px-3 mt-5 pp_form   ">
             <div className="form-group mb-4">
               <Label name='State' styles='mb-3' />
               <Select elem={stateFunt} name='state' onChange={handleChange} value={stateValue} />
             </div>
-            <div className="form-group mb-4">
+            <div className="form-group  mb-4">
               <Label name='Local government' styles='mb-3' />
               <Select elem={lagFunt} name='lga' onChange={handleChange} value={lgaValue} />
 
@@ -73,12 +67,10 @@ function lagFunt() {
                 state government)</small>
             </div>
             
-            <div className="mb-3 d-flex justify-content-end">
+            <div className="mb-3 mt-5 button_container d-flex justify-content-between">
+            <Button name='BACK' onClick={prevPage} type='button' styles='btn bg-white text-black pt-2 px-3 category_btn' />
               <Button onClick={ChangePage} disabled={(!lgaValue) ? true : false} name='NEXT' type='button' styles='btn text-white p-3 category_btn' />
             </div>
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
+      </FormContainer>
 }

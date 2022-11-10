@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { RegistrationContext } from "../main/RegistrationForm";
 import { FundUI } from "../main/RegistrationFormComp"
 
-export default function Insurance({click,res, insuranceValue, handleChange}) {
+export default function Insurance({click,res, insuranceValue, handleChange, prevPage}) {
         const { page, ChangePage } = useContext(RegistrationContext);
 
         const props = {
@@ -11,6 +11,7 @@ export default function Insurance({click,res, insuranceValue, handleChange}) {
                 label: 'Company health insurance code',
                 click,
                 ChangePage,
+                prevPage,
                 res,
                 pageName:'Funds',
                 props: {

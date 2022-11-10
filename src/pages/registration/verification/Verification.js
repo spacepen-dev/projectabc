@@ -4,6 +4,7 @@ import LoaderModal from "../../../components/Dashboard/LoaderModal";
 import { connect } from "react-redux";
 import { SignupVerification, ResendSignupOtp } from "../../../Actions";
 import { useLocation, useNavigate } from "react-router-dom";
+import { SaveToken } from "../../../lib/sharedfuntions";
 import SmallLoader from "../../../components/Dashboard/SmallLoader";
 import Header from "../../../components/Header";
 import swal from "sweetalert";
@@ -78,14 +79,15 @@ function Verification({ SignupVerification }) {
           if (res.status !== 200) {
               return;
           }
-          const { error, success } = res.data;
+        const { error, success, user_token } = res.data;        
           
           if (error) {
               dispatch({ type: "RESPONSE", response:true, request: false, message: error });
 
           }
           else if (success) {
-            navigate('/register-business', {replace: true})
+            navigate('/register-business', { replace: true })
+            SaveToken(user_token)
            
           }
       }

@@ -434,15 +434,17 @@ export const VerifyAccountName =
     }
   };
 
-export const AccountName = async({companyToken, bankCode,accountNumber}) => {
+export const AccountName = async({userToken, bankCode,accountNumber}, funct=(res,error)=> {} ) => {
   try {
     const data = await BasedURL.post("verifyBankAccount.php", {
-      companyToken,
+      userToken,
       bankCode,
       accountNumber,
     });
+  funct(data,false)
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    funct(error, true)
   }
   }
  

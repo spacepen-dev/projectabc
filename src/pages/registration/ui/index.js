@@ -86,19 +86,20 @@ export function FormIndicator({pageName}) {
     const validation = pageName === 'Validation' ? 'pp_link_active' : '';
 
 
-    return <div className="col-3 d-none d-sm-flex justify-content-center align-items-center">
-    <nav className="nav flex-column">
+    return <div className="col-3 d-none d-lg-flex justify-content-center align-items-center">
+        {console.log(pageName)}
+    <nav className="nav flex-column justify-content-center  pp_right_section">
         <a href="/" className={`nav-link d-flex mb-4 align-items-center pp_links ${profile}`}>
-                <Checkicon name={pageName} /> <span className="d-inline-block ms-2">Profile</span>
+                <Checkicon name={profile} /> <span className="d-inline-block ms-2">Profile</span>
         </a>
         <a href="contact.html" className={`nav-link d-flex mb-4 align-items-center pp_links ${contact}`}>
-        <Checkicon/> <span className="d-inline-block ms-2">Contact</span>
+                <Checkicon name={contact} /> <span className="d-inline-block ms-2">Contact</span>
         </a>
         <a href="/" className={`nav-link d-flex mb-4 align-items-center pp_links ${funds}`}>
-        <Checkicon/><span className="d-inline-block ms-2">Funds</span>
+        <Checkicon name={funds}/><span className="d-inline-block ms-2">Funds</span>
         </a>
         <a href="/" className={`nav-link d-flex mb-4 align-items-center pp_links ${validation}`}>
-        <Checkicon/><span className="d-inline-block ms-2">Account validation</span>
+        <Checkicon  name={validation}/><span className="d-inline-block ms-2">Account validation</span>
         </a>
     </nav>
 </div>

@@ -5,11 +5,12 @@ export function FormContainer({children, name, desc, pageName}) {
     return <div class="mt-3 mt-md-5 container">
     <div class="row">
         {/* <!-- Left Section --> */}
-       <FormIndicator pageName={pageName} />
+            <FormIndicator pageName={pageName} />
+            {console.log(pageName)}
 
         {/* <!-- Right Section --> */}
         <div class="col">
-            <div class="pp_right_section">
+            <div>
                 {/* <!-- Heading --> */}
                     <RegistrationFormHeader name={name} desc={desc} />
                     {children}
@@ -23,7 +24,7 @@ export function FormContainer({children, name, desc, pageName}) {
 
 
 
-export function FundUI({ desc, click, ChangePage,label,props, res, name }) {
+export function FundUI({ desc, click, ChangePage,label,props, res, name, pageName, prevPage }) {
     const buttonRef = useRef();
 
     function ChooseYes() {
@@ -46,14 +47,13 @@ export function FundUI({ desc, click, ChangePage,label,props, res, name }) {
        
     },[props.value,res])
 
-    return <FormContainer name={name} desc={desc}>
+    return <FormContainer name={name} desc={desc} pageName={pageName}>
         <div class="row justify-content-center" style={{ height: '60vh' }}>
             <div className="col-md-6 my-5 mx-auto">
                 <h3 className="mt-5 text-center">
                     {desc}
                 </h3>
-                {console.log(props.value)}
-                <div className="d-flex align-items-center justify-content-center mt-5">
+                <div className=" d-flex align-items-center justify-content-center mt-5">
                     <Button name='Yes' type='button' onClick={ChooseYes} styles='btn text-white px-4' />
                     <Button name='No' onClick={ChooseNO} type='button' styles='btn text-black bg-white shadow px-4 ms-4' />
 
@@ -66,7 +66,8 @@ export function FundUI({ desc, click, ChangePage,label,props, res, name }) {
             </div>}
             
 
-            <div class="mb-3 d-flex justify-content-end align-items-center">
+            <div class="mb-3 d-flex justify-content-evenly align-items-center">
+                <Button name='BACK' buttonref={buttonRef} onClick={prevPage} type='button' styles='btn bg-white text-black py-3 px-3 category_btn' />
                 <Button name='CONTINUE' buttonref={buttonRef} onClick={ChangePage} type='button' styles='btn text-white p-3 category_btn' />
                               
             </div>

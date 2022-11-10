@@ -3,7 +3,7 @@ import { Button, Input, Label,  } from "../../registration/ui";
 import { RegistrationContext } from "../main/RegistrationForm";
 import { FormContainer } from "../main/RegistrationFormComp";
 
-export default function BusinessContact({phone ,addressValue, email, website, handleChange}) {
+export default function BusinessContact({phone ,addressValue, email, website, handleChange, prevPage}) {
 
     const { page, ChangePage } = useContext(RegistrationContext);
 
@@ -21,7 +21,7 @@ export default function BusinessContact({phone ,addressValue, email, website, ha
 
 
     const emailProps = {
-        type: "text",
+        type: "email",
         styles: 'form-control py-2',
         placeholder: "E.g businessName@mail.com",
         id: "emailAddress",
@@ -81,7 +81,8 @@ export default function BusinessContact({phone ,addressValue, email, website, ha
                 <Label name='Business website (optional)' styles='mb-3' />
                 <Input {...websiteprops} />
             </div>
-            <div class="mb-3 d-flex justify-content-end">
+            <div class="mb-3 d-flex button_container justify-content-between">
+                <Button name='BACK' onClick={prevPage} type='button' styles='btn text-black bg-white p-3 category_btn' />
                 <Button name='NEXT' disabled={(!addressValue && !email && !phone) ? true : false } onClick={ChangePage} type='button' styles='btn text-white p-3 category_btn' />
                             
             </div>
