@@ -224,7 +224,8 @@ const Overview = ({
             smallId='third'
           />
           
-          <div className='overview-btn p-1'>
+          
+          <div className='overview-btn p-1 col-sm-6'>
             <Link
               className='button d-flex text-white align-items-center justify-content-center'
               to={link}

@@ -92,7 +92,7 @@ const EmployeeRegistration = ({
             </div>
           )}
         </div>
-        <div className=' py-1 px-4 col-sm-12 col-lg-6'>
+        <div className=' py-1 px-4 '>
           <EmployeeProfile
         
             employeeFirstName={employeeData["employeeFirstname"]}

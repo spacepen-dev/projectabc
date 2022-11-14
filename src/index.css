@@ -761,7 +761,7 @@ article span {
 }
 .overview span {
   font-size: 1rem;
-  margin-left:40px !important;
+  /* margin-left:40px !important; */
 
 
 }
@@ -1556,7 +1556,7 @@ p.paid-success {
     font-size: 1rem;
   }
   .overview-btn .button {
-    width: 7rem;
+    width: 7rem ;
     margin-left: 10px !important;
   }
   .details-card {

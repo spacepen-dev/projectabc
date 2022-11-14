@@ -58,7 +58,7 @@ class Registration extends React.Component {
   render() {
     return (
       <Header>
-        <Container className='section mx-auto' style={{ maxWidth: "50.13rem" }}>
+        <Container className='section mx-auto col-md-12 col-sm-12'  style={{ maxWidth: "50.13rem" }}>
           <div>
             <FormHeader currentForm={this.state.currentForm} />
           </div>
