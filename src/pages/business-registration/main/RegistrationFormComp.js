@@ -6,7 +6,6 @@ export function FormContainer({children, name, desc, pageName}) {
     <div class="row">
         {/* <!-- Left Section --> */}
             <FormIndicator pageName={pageName} />
-            {console.log(pageName)}
 
         {/* <!-- Right Section --> */}
         <div class="col">

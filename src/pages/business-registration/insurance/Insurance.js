@@ -25,7 +25,7 @@ export default function Insurance({click,res, insuranceValue, handleChange, prev
                 }
         }
 
-        if (page !== 8) {
+        if (page !== 7) {
         return null;
         }
 

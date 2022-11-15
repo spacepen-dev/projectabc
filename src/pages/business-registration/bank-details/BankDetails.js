@@ -1,26 +1,45 @@
-import React, { useContext, useState } from "react";
-import { Button, Input, Label } from "../../registration/ui";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, ButtonLoader, Input, Label } from "../../registration/ui";
+import { connect } from "react-redux";
 import { RegistrationContext } from "../main/RegistrationForm";
 import { FormContainer } from "../main/RegistrationFormComp";
-import { useBankList, useToken } from "../../../hooks/hooks";
-import { AccountName } from "../../../Actions";
+import { AccountName, RegisterBusiness } from "../../../Actions";
 import SmallLoader from "../../../components/Dashboard/SmallLoader";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
+import useToken from "../../../hooks/useToken";
+import useBankList from "../../../hooks/useBankList";
+import { SavedBusinessToken } from "../../../lib/sharedfuntions";
 
 
 
 
-
-
-
-export default function BankDetails({ businessAccountNumber, handleChange, getbankcode,getaccountname, bankDetails, handleSubmit,values }) {
+function BankDetails({ businessAccountNumber, handleChange, getbankcode, getaccountname, bankDetails, handleSubmit, formik, prevPage, RegisterBusiness, formValue, businessDetails }) {
+    const navigate = useNavigate()
+     
     const { token } = useToken();
     const [ bank ] = useBankList();
-    const { page, ChangePage } = useContext(RegistrationContext);
+    const { page } = useContext(RegistrationContext);
     const [loading, setLoading] = useState(false)
 
 
-    const [data, setData] = useState({value:'',show:false});
+     const [data, setData] = useState({ value: '', show: false });
+     
+
+
+    useEffect(() => {
+        if (!businessDetails) return null;
+        const { success, error, networkError, message } = businessDetails;
+        if (error) {
+            swal("Error!", message);
+        } else if (success) {
+            navigate('upload-image', { replace: true });
+            SavedBusinessToken(message)
+        } else if (networkError) {
+            swal("Error!", message);
+             
+        }
+    }, [businessDetails, navigate]);
 
     const BankList = () => {
         const filterBankName = bank.filter((cur) => cur.bankName.toLowerCase().includes(data.value))
@@ -64,7 +83,7 @@ export default function BankDetails({ businessAccountNumber, handleChange, getba
             if (res) {
                 setLoading(false);
                
-                getaccountname(res.data.success)
+                getaccountname(res.data.success);
             
             } else {
                 swal(error, 'Network error!, check your network and click on the get account name again.');
@@ -73,10 +92,10 @@ export default function BankDetails({ businessAccountNumber, handleChange, getba
 }
 
 
-    if (page !== 10) {
+    if (page !== 9) {
         return null;
     }
-    return <FormContainer name='Business Bank Account' pageName='Contact' desc='We will create a bank account for your business to make salary payment transactions.'>
+    return <FormContainer name='Business Bank Account' pageName='Validation' desc='We will create a bank account for your business to make salary payment transactions.'>
         {/* <!-- Heading --> */}
         <p className="text-center  heading-subtext text-black">We will only accept bank transfers from this bank account to the wallet account we will create for your business.</p>
         {/* <!-- Form --> */}
@@ -91,6 +110,7 @@ export default function BankDetails({ businessAccountNumber, handleChange, getba
                 <Label name='Choose Bank Name' styles='mb-3' />
                 <input
                     type='text'
+                    
                     onChange={(e) => {
                         setData((state) => {
                             return { ...state, value: e.target.value, show: true }
@@ -115,11 +135,22 @@ export default function BankDetails({ businessAccountNumber, handleChange, getba
                 {loading && < SmallLoader />}
                 {bankDetails.owner && <input className='form-control py-2 mt-2' type='text' readOnly value={bankDetails.owner} />}
             </div>
-            <div class="mb-3 d-flex justify-content-end">
-                <Button name='FINISH' disabled={!bankDetails.owner ? true : false} type='submit' styles='btn text-white p-3 category_btn' />
+            <div class="mb-3 mt-5 button_container d-flex justify-content-center">
+                <Button name='BACK'  type='button' styles='btn bg-white text-black py-3 px-3 category_btn' onClick={prevPage} />
+                
+                <ButtonLoader type='submit' disabled={!bankDetails.owner ? true : false}  styles='btn text-white p-3 category_btn' name='FINISH' request={businessDetails.isLoading} />
                             
             </div>
         </form>
           
     </FormContainer>
-}
+ }
+
+const mapStateToProps = (state) => {
+    const res = state.BusinessRegistration;    
+    return {
+        businessDetails: res,
+    };
+};
+
+export default connect(mapStateToProps, { RegisterBusiness })(BankDetails);

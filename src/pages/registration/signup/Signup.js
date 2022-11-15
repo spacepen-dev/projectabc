@@ -51,11 +51,12 @@ const Signup = ({ SignupRequest }) => {
 
         bankList((res) => {
           if (res) {
+            localStorage.setItem('BankList', JSON.stringify(res.data.success));
             
             if (res.status !== 200) {
               return;
             }
-            localStorage.setItem('BankList', JSON.stringify(res.data.success))
+            localStorage.setItem('BankList', JSON.stringify(res.data.success));
           }
   
         })
@@ -67,58 +68,58 @@ const Signup = ({ SignupRequest }) => {
 
   return <NewBackground>
     <main className="container">
-    <article className="login-cont">
-      <div className="heading-cont">
-        <div className="logo-cont">
-          <img src={Logo} class="comp-logo" alt="Orio logo"/>
-        </div>
-        <h2 className="heading-text">
-          Welcome To AimienPay
+      <article className="login-cont">
+        <div className="heading-cont">
+          <div className="logo-cont">
+            <img src={Logo} class="comp-logo" alt="Orio logo" />
+          </div>
+          <h2 className="heading-text">
+            Welcome To AimienPay
           </h2>
           
-        <p className="heading-subtext">Create an account</p>
-      </div>
+          <p className="heading-subtext">Create an account</p>
+        </div>
 
-      <form onSubmit={formik.handleSubmit}>
-        <div className={`${formik.errors.firstName ? 'input-cont error': 'input-cont'}`} >
-                    <Input type="text" name="firstName" placeholder="First Name" id="firstName" value={formik.values.firstName} handleChange={formik.handleChange} touched={formik.touched.firstName} error={formik.errors.firstName } />
+        <form onSubmit={formik.handleSubmit}>
+          <div className={`${formik.errors.firstName ? 'input-cont error' : 'input-cont'}`} >
+            <Input type="text" name="firstName" placeholder="First Name" id="firstName" value={formik.values.firstName} handleChange={formik.handleChange} touched={formik.touched.firstName} error={formik.errors.firstName} />
             {(formik.errors.firstName && formik.touched.phoneNumber) && <Error error={formik.errors.firstName} />}
           </div>
           
-          <div className={`${formik.errors.lastName ? 'input-cont error': 'input-cont'}`} >
-                    <Input type="text" name="lastName" placeholder="Last Name" id="lastName" value={formik.values.lastName} handleChange={formik.handleChange} touched={formik.touched.lastName} error={formik.errors.lastName } />
+          <div className={`${formik.errors.lastName ? 'input-cont error' : 'input-cont'}`} >
+            <Input type="text" name="lastName" placeholder="Last Name" id="lastName" value={formik.values.lastName} handleChange={formik.handleChange} touched={formik.touched.lastName} error={formik.errors.lastName} />
             {(formik.errors.lastName && formik.touched.lastName) && <Error error={formik.errors.lastName} />}
-        </div>
+          </div>
   
-        <div className={`${formik.errors.phoneNumber ? 'input-cont error': 'input-cont'}`}>
-                    <Input type="text" name="phoneNumber" placeholder="Phone number" id="phoneNumber" handleChange={formik.handleChange} value={formik.values.phoneNumber} touched={formik.touched.phoneNumber } />
+          <div className={`${formik.errors.phoneNumber ? 'input-cont error' : 'input-cont'}`}>
+            <Input type="text" name="phoneNumber" placeholder="Phone number" id="phoneNumber" handleChange={formik.handleChange} value={formik.values.phoneNumber} touched={formik.touched.phoneNumber} />
             {(formik.errors.phoneNumber && formik.touched.phoneNumber) && <Error error={formik.errors.phoneNumber} />}
-        </div>
-        <div className={`${formik.errors.emailAddress ? 'input-cont error': 'input-cont'}`} >
-                    <Input type="emailAddress" value={formik.values.emailAddress} handleChange={formik.handleChange} name="emailAddress" placeholder="Email address" id="emailAddress" touched={formik.touched.emailAddress} />
+          </div>
+          <div className={`${formik.errors.emailAddress ? 'input-cont error' : 'input-cont'}`} >
+            <Input type="emailAddress" value={formik.values.emailAddress} handleChange={formik.handleChange} name="emailAddress" placeholder="Email address" id="emailAddress" touched={formik.touched.emailAddress} />
             {(formik.errors.emailAddress && formik.touched.emailAddress) && <Error error={formik.errors.emailAddress} />}
-        </div>
+          </div>
 
-        <div className={`${formik.errors.password ? 'input-cont pw-cont error': 'input-cont pw-cont'}`} >
-            <Input type={`${showPassword ? 'password': 'text'}`} value={formik.values.password} handleChange={formik.handleChange} placeholder="Password" name="password" id="pw" className="pwField" touched={formik.touched.phoneNumber}/>
+          <div className={`${formik.errors.password ? 'input-cont pw-cont error' : 'input-cont pw-cont'}`} >
+            <Input type={`${showPassword ? 'password' : 'text'}`} value={formik.values.password} handleChange={formik.handleChange} placeholder="Password" name="password" id="pw" className="pwField" touched={formik.touched.phoneNumber} />
 
-          <label for="pw">
+            <label for="pw">
               {showPassword && <i class="bi bi-eye" onClick={() => setShowPassword(!showPassword)}></i>}
-              {!showPassword && <i class="bi bi-eye-slash" onClick={() => setShowPassword(!showPassword)}></i> }
-                    </label>
+              {!showPassword && <i class="bi bi-eye-slash" onClick={() => setShowPassword(!showPassword)}></i>}
+            </label>
             {(formik.errors.password && formik.touched.password) && <Error error={formik.errors.password} />}
-        </div>
+          </div>
 
-        <ButtonLoader type='submit' styles='login-btn' name='SIGN UP' request={formik.isSubmitting}/>
-      </form>
-    <aside className="sign-up">
-      Already have an account? <a href="index.html">Sign In</a>
-    </aside>
-    </article>
+          <ButtonLoader type='submit' styles='login-btn' name='SIGN UP' request={formik.isSubmitting} />
+        </form>
+        <aside className="sign-up">
+          Already have an account? <a href="index.html">Sign In</a>
+        </aside>
+      </article>
 
 
-  </main>
-</NewBackground>
+    </main>
+  </NewBackground>
 }
 const mapStateToProps = (state) => {
   return state;

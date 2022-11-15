@@ -4,7 +4,8 @@ import { FundUI } from "../main/RegistrationFormComp"
 
 
 
-export default function NSITF({click, res, housingValue, handleChange}) {
+export default function NSITF({click, res, housingValue, handleChange, 
+prevPage}) {
 
     const { page, ChangePage } = useContext(RegistrationContext);
 
@@ -15,6 +16,7 @@ export default function NSITF({click, res, housingValue, handleChange}) {
         label: 'NSITF company code',
         click,
         ChangePage,
+        prevPage,
         res,
         pageName:'Funds',
         props: {
@@ -28,7 +30,7 @@ export default function NSITF({click, res, housingValue, handleChange}) {
         }
     }
     
-    if (page !== 9) {
+    if (page !== 8) {
         return null;
     }
    

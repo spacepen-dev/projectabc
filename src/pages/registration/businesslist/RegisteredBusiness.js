@@ -2,6 +2,7 @@ import { NewBackground } from "../ui";
 import Library from '../../../assets/img/library.svg';
 import Spacepen from '../../../assets/img/spacepen.svg';
 import Add from '../../../assets/img/add.svg';
+import { Link } from "react-router-dom";
 
 import Logo from '../../../assets/img/logo.svg';
 
@@ -52,6 +53,7 @@ export default function RegisteredBusiness() {
                     </div>
 
                     <div class="col-12 col-md-4">
+    <Link to='/registration/business'>
                         <div class="w-100 d-flex flex-column m-auto text-center px-2 position-relative add_acct_cont">
                             <div class="ml-auto mt-3 mr-3 lib_img">
                                 <img src={Library} alt="" />
@@ -60,7 +62,8 @@ export default function RegisteredBusiness() {
                                 <img src={Add} alt="" />
                             </div>
                             <p class="mt-auto mb-3 text-center add_acct_text">Add Account</p>
-                        </div>
+                            </div>
+                            </Link>
                     </div>
                 </div>
 

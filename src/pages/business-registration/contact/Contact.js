@@ -52,7 +52,7 @@ export default function BusinessContact({phone ,addressValue, email, website, ha
         handleChange
     }
 
-    if (page !== 6) {
+    if (page !== 5) {
         return null;
       }
 
@@ -62,8 +62,7 @@ export default function BusinessContact({phone ,addressValue, email, website, ha
         <form class="px-3 mt-5 pp_form">
             <div class="form-group mb-4">
                 <Label name='Office Address' styles='mb-3' />
-                <Input
-                    {...address} />
+                <Input {...address} />
 
             </div>
             <div class="form-group mb-4">

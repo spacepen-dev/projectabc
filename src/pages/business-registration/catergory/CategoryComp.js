@@ -1,12 +1,11 @@
 import { Image } from "../../registration/ui";
-import Library from '../../../assets/img/library.svg';
 import cate1 from '../../../assets/img/frame1.svg';
 import cate2 from '../../../assets/img/frame2.svg';
 import cate3 from '../../../assets/img/frame3.svg';
 import cate4 from '../../../assets/img/frame4.svg';
 import cate5 from '../../../assets/img/frame5.svg';
 import { Check } from "../../registration/ui";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 
 

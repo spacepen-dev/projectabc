@@ -24,8 +24,9 @@ export function Spin() {
   />
 }
 
-export function ButtonLoader({name,request, styles,type}) {
-   return <button type={type} className={styles}>{!request? name : <Spin/> }</button>
+export function ButtonLoader({ name, request, styles, type, disabled }) {
+    console.log(request)
+   return <button type={type} disabled={disabled} className={styles}>{!request? name : <Spin/> }</button>
 
 }
 
@@ -84,23 +85,30 @@ export function FormIndicator({pageName}) {
     const contact = pageName === 'Contact' ? 'pp_link_active' : '';
     const funds = pageName === 'Funds' ? 'pp_link_active' : '';
     const validation = pageName === 'Validation' ? 'pp_link_active' : '';
+    const upload = pageName === 'upload' ? 'pp_link_active' : '';
+    const department = pageName === 'Department' ? 'pp_link_active' : '';
 
 
     return <div className="col-3 d-none d-lg-flex justify-content-center align-items-center">
-        {console.log(pageName)}
-    <nav className="nav flex-column justify-content-center  pp_right_section">
-        <a href="/" className={`nav-link d-flex mb-4 align-items-center pp_links ${profile}`}>
+        <nav className="nav flex-column justify-content-center  pp_right_section">
+        <span className={`nav-link d-flex mb-4 align-items-center pp_links ${profile}`}>
                 <Checkicon name={profile} /> <span className="d-inline-block ms-2">Profile</span>
-        </a>
-        <a href="contact.html" className={`nav-link d-flex mb-4 align-items-center pp_links ${contact}`}>
+        </span>
+        <span className={`nav-link d-flex mb-4 align-items-center pp_links ${contact}`}>
                 <Checkicon name={contact} /> <span className="d-inline-block ms-2">Contact</span>
-        </a>
-        <a href="/" className={`nav-link d-flex mb-4 align-items-center pp_links ${funds}`}>
+        </span>
+        <span className={`nav-link d-flex mb-4 align-items-center pp_links ${funds}`}>
         <Checkicon name={funds}/><span className="d-inline-block ms-2">Funds</span>
-        </a>
-        <a href="/" className={`nav-link d-flex mb-4 align-items-center pp_links ${validation}`}>
+        </span>
+        <span className={`nav-link d-flex mb-4 align-items-center pp_links ${validation}`}>
         <Checkicon  name={validation}/><span className="d-inline-block ms-2">Account validation</span>
-        </a>
+            </span>
+            <span className={`nav-link d-flex mb-4 align-items-center pp_links ${upload}`}>
+        <Checkicon  name={upload}/><span className="d-inline-block ms-2">Logo Upload</span>
+        </span>
+            <span className={`nav-link d-flex mb-4 align-items-center pp_links ${department}`}>
+        <Checkicon  name={department}/><span className="d-inline-block ms-2">Add department</span>
+        </span>
     </nav>
 </div>
     

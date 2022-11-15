@@ -27,7 +27,7 @@ export default function Pension({ click, res, pensionValue, handleChange, prevPa
         }
     } 
    
-    if (page !== 7) {
+    if (page !== 6) {
         return null;
     }
 

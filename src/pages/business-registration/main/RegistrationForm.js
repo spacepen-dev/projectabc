@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import { createContext, useState } from 'react';
+import { connect } from 'react-redux';
 import TermsAndCondition from '../../registration/terms'
 import BusinessContact from "../contact";
 import Insurance from "../insurance/Insurance";
@@ -7,10 +8,11 @@ import NSITF from "../Nsitf";
 import Pension from "../pension";
 import FirstProfilePage from "../profile/FirstProfilePage";
 import SecondProfilePage from "../profile/SecondProfilePage";
-import ThirdProfilePage from "../profile/ThirdProfilePage";
 
 import BusinessCategory from '../catergory';
 import BankDetails from '../bank-details';
+import { RegisterBusiness } from '../../../Actions';
+import useToken from '../../../hooks/useToken';
 // import CompleteRegistration from '../finish';
 
 
@@ -18,13 +20,13 @@ import BankDetails from '../bank-details';
 
 export const RegistrationContext = createContext();
 
-export default function RegistraionFormController() {
+ function RegistraionFormController({RegisterBusiness}) {
 
     const [page, setPage] = useState(1);
     const [name, setName] = useState('');
     const [compliance, setCompliance] = useState({ pension: '', insurance: '', housing: '' });
     const [bankDetails, setBankDetails] = useState({ code:'', name:'', owner:''});
-
+    const { token } = useToken();
 
     function ChangePage() {
         setPage((prev) => prev + 1);
@@ -40,7 +42,6 @@ export default function RegistraionFormController() {
                 businessName: '',
                 tradingName: '',
                 registrationNumber: '',
-                companyLogo: '',
                 about: '',
                 state: '',
                 lga: '',
@@ -69,10 +70,11 @@ export default function RegistraionFormController() {
             values.nsitfCompliance = compliance.housing
             values.businessBankName = bankDetails.name
             values.businessBankAccountName = bankDetails.owner
-            values.businessBankCode=bankDetails.code
-        
-
+            values.businessBankCode = bankDetails.code
+            values.businessCategory = name
             console.log(values)
+            RegisterBusiness({...values, user_token:token})
+
         }
     })
     
@@ -93,19 +95,15 @@ export default function RegistraionFormController() {
         prevPage: prevPage
     }
     
-    const about = {
-        value: formik.values.about,
-        handleChange: formik.handleChange,
-        prevPage: prevPage
-        
-    }
     
     const thirdProfile = {
         stateValue: formik.values.state,
         lgaValue: formik.values.lga,
         tinValue: formik.values.stateTin,
         handleChange: formik.handleChange,
-        prevPage: prevPage
+        prevPage: prevPage,
+        about: formik.values.about,
+
         
         
     }
@@ -114,7 +112,7 @@ export default function RegistraionFormController() {
         phone: formik.values.phoneNumber,
         website: formik.values.website,
         email: formik.values.emailAddress,
-        address: formik.values.officeAddress,
+        addressValue: formik.values.officeAddress,
         handleChange: formik.handleChange,
         prevPage: prevPage
         // error: formik.errors.phoneNumber,
@@ -157,10 +155,13 @@ export default function RegistraionFormController() {
 
         handleChange: formik.handleChange,
         bankDetails: bankDetails,
-        getbankcode:(val,name)=> setBankDetails((state)=> {return {...state, code:val, name:name}} ),
+        getbankcode: (val, name) => setBankDetails((state) => { return { ...state, code: val, name: name } }),
         getaccountname: (val) => setBankDetails((state) => { return { ...state, owner: val } }),
         values: formik.values,
-        handleSubmit: formik.handleSubmit
+        handleSubmit: formik.handleSubmit,
+        formik: formik,
+        prevPage: prevPage,
+
     }
 
     return (
@@ -169,8 +170,7 @@ export default function RegistraionFormController() {
         
         <BusinessCategory {...categoryDetails} />
             <FirstProfilePage {...firstProfile} />
-            <SecondProfilePage {...about} />
-            <ThirdProfilePage {...thirdProfile} />
+            <SecondProfilePage {...thirdProfile} />
             <BusinessContact  {...contact} />
             <Pension {...pensionProps} />
             <Insurance {...insuranceProps} />
@@ -182,5 +182,4 @@ export default function RegistraionFormController() {
         )
 }
 
-
-
+export default connect(null, {RegisterBusiness}) (RegistraionFormController)

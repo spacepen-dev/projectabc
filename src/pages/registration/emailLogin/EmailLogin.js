@@ -8,10 +8,11 @@ import { useFormik } from "formik";
 import { EmailLoginSchema } from "../yup";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { useEffect, useState } from "react";
 
-const EmailLogin = ({ EmailLogicRequest }) => {
-    
+const EmailLogin = ({ EmailLogicRequest, login }) => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -19,23 +20,25 @@ const EmailLogin = ({ EmailLogicRequest }) => {
         },
         validationSchema: EmailLoginSchema,
         onSubmit: (values) => {
-            EmailLogicRequest(values, (res) => {
-
-                if (res) {
-                    formik.setSubmitting(false)
-                    if (res.status !== 200) return;
-                    else {
-                        const { error } = res.data;
-                        if (error) swal("Error!", error, "error");
-
-                        else navigate('/user-login-password', { replace: true, state: values.email_phone })
-                    }
-                    
-                }
-
-            })
+            
+            EmailLogicRequest(values);
+            setLoading(true)
         }
-    })
+    });
+
+    useEffect(() => {
+        if (!login) return null;
+        const { loginSuccess, loginError, loginNetworkError, loginMessage } = login;
+        setLoading(false)
+        if (loginError) {
+            swal("Error!", loginMessage);
+        } else if (loginSuccess) {
+            navigate('/user-login-password', { state: loginMessage });
+        } else if (loginNetworkError) {
+            swal("Error!", loginMessage);
+             
+        }
+    }, [login, navigate]);
 
     return <NewBackground>
         <main className="container">
@@ -56,8 +59,8 @@ const EmailLogin = ({ EmailLogicRequest }) => {
                         {(formik.errors.email_phone && formik.touched.email_phone) && <Error error={formik.errors.email_phone} />}
                     </div>
 
-                    <a href="#" className="login-forgot" target="_blank">Forgot Email?</a>
-                    <ButtonLoader type='submit' styles='login-btn' name='LOG IN' request={formik.isSubmitting} />
+                    <a href="/" className="login-forgot" target="_blank">Forgot Email?</a>
+                    <ButtonLoader type='submit' styles='login-btn' name='LOG IN' request={loading} />
                 </form>
                 <aside className="sign-up">
                     Don't have an account? <a href="signUp.html" target="_blank">Sign Up</a>
@@ -70,5 +73,10 @@ const EmailLogin = ({ EmailLogicRequest }) => {
 
 };
 
-
-export default connect(null, {EmailLogicRequest}) (EmailLogin);
+const mapStateToProps = (state) => {
+    const res = state.LoginReducers;    
+    return {
+        login: res,
+    };
+};
+export default connect(mapStateToProps, {EmailLogicRequest}) (EmailLogin);

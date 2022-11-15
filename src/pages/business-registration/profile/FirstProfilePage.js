@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { Button, FormIndicator, Input, Label, RegistrationFormHeader, Error} from "../../registration/ui";
+import { Button, Input, Label, Error} from "../../registration/ui";
 import { RegistrationContext } from "../main/RegistrationForm";
 import { FormContainer } from "../main/RegistrationFormComp";
 
 export default function FirstProfilePage({handleChange,businessNameValue,tradingNameValue,registrationNumberValue, businessTouched, businessError, registrationTouched, registrationError, prevPage}) {
 
-    const { page, ChangePage } = useContext(RegistrationContext);
+const { page, ChangePage } = useContext(RegistrationContext);
 
    
 
@@ -30,8 +30,6 @@ export default function FirstProfilePage({handleChange,businessNameValue,trading
         name: 'tradingName',
         handleChange: handleChange,
         value:tradingNameValue
-
-        
     };
 
 
@@ -53,6 +51,7 @@ export default function FirstProfilePage({handleChange,businessNameValue,trading
         return null;
     }
 
+    const disabled = (!registrationNumber.value) ? true : false
 
     return <FormContainer name='Profile' pageName='Profile' desc='Choose the business you want to transact now'>
         {/* <!-- Heading --> */}
@@ -75,7 +74,7 @@ export default function FirstProfilePage({handleChange,businessNameValue,trading
             </div>
             <div class="mb-3 d-flex  justify-content-center">
             <Button name='BACK' onClick={prevPage} type='button' styles='btn bg-white text-black p-3 category_btn' />
-                <Button name='CONTINUE' onClick={ChangePage} type='button' disabled={!businessNameValue && !registrationNumberValue ? true : false} styles='btn text-white p-3 category_btn' />
+                <Button name='CONTINUE' onClick={ChangePage} type='button' disabled={disabled} styles='btn text-white p-3 category_btn' />
                             
             </div>
         </form>

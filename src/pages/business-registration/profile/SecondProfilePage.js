@@ -1,44 +1,82 @@
-import { useContext } from "react";
-import { Button, Error, FormIndicator, Label, RegistrationFormHeader } from "../../registration/ui";
+import { useContext, useEffect, useState } from "react";
+import { Button, Input, Label, Select } from "../../registration/ui";
+import { LGA } from "../../registration/lga";
 import { RegistrationContext } from "../main/RegistrationForm";
-import UploadImage from '../../registration/ui/filepond'
+import { stateFunt} from "./ProfileComp";
 import { FormContainer } from "../main/RegistrationFormComp";
 
-export default function SecondProfilePage({handleChange, value, prevPage}) {
+
+
+
+export default function SecondProfilePage({ stateValue, lgaValue, tinValue, handleChange, prevPage,about }) {
   
   const { page, ChangePage } = useContext(RegistrationContext);
+  const [lga, setLga] = useState([]);
+  
 
+
+  useEffect(() => {
+    if (!stateValue) return null;
+    setLga(()=> LGA.filter((data)=>data.state === stateValue))
+
+  }, [stateValue])
+  
+
+  
+function lagFunt() {
+  return lga.map(({ lga }, id) => {
+    return <option key={id} value={lga}>{lga}</option>
+  });
+  };
+  
   if (page !== 4) {
     return null;
-  }
+  };
+
+  const props = {
+    styles: 'form-control py-2',
+    name: 'stateTin',
+    type:"text",
+    value: tinValue,  
+    handleChange:handleChange, 
+    placeholder:"Input TIN here (optional)", 
+    id:"tin"
+
+}
+
 
   return <FormContainer name='Profile' pageName='Profile' desc='Choose the business you want to transact now'>
-      {/* <!-- Left Section --> */}
-
           {/* <!-- Form --> */}
-          <form className="px-3 mt-5 pp_form">
-      <div className="form-group">
-        
-            <Label name='Company Logo' styles='mb-3' />
-            <div className="p-5  mb-4 d-flex w-100 flex-column align-items-center justify-content-center text-center drag_area">
-              <div className="mb-2 drag_photo">
-                <img src="img/dragphoto.svg" alt=""/>
-              </div>
-              <small className="drag_text">Drag file here to <br/> upload or <span>choose file</span> </small>
-              {/* <UploadImage /> */}
-            </div>
-            </div>
-
+          <form className="px-3 mt-5 pp_form   ">
             <div className="form-group mb-4">
+              <Label name='State' styles='mb-3' />
+              <Select elem={stateFunt} name='state' onChange={handleChange} value={stateValue} />
+            </div>
+            <div className="form-group  mb-4">
+              <Label name='Local government' styles='mb-3' />
+              <Select elem={lagFunt} name='lga' onChange={handleChange} value={lgaValue} />
+
+      </div>
+      
+      <div className="form-group mb-4">
               <Label name='About Business' styles='mb-3' />
-              <textarea name="about" value={value} onChange={handleChange} className="form-control" placeholder="In two sentences, tell us about your company"
+              <textarea name="about" value={about} onChange={handleChange} className="form-control" placeholder="In two sentences, tell us about your company"
                 id="about" cols="30" rows="5"></textarea>
             </div>
+            <div className="form-group mb-4">
+              <Label name='TIN' styles='mb-3' />
 
-            <div className="mb-5 d-flex button_container justify-content-between">
-              <Button name='BACK' onClick={prevPage} type='button' styles='btn bg-white text-black pt-2 px-3 category_btn' />
-              <Button name='CONTINUE' disabled={!value? true: false} onClick={ChangePage} type='button' styles='btn text-white p-3 category_btn' />
+              <Input {...props} />
+
+              
+              <small className='d-inline-block mt-2'>(If your company does not have a TIN Number, click <a href="/">here</a> to register one with your
+                state government)</small>
+            </div>
+            
+            <div className="mb-3 mt-5 button_container d-flex justify-content-between">
+            <Button name='BACK' onClick={prevPage} type='button' styles='btn bg-white text-black pt-2 px-3 category_btn' />
+              <Button onClick={ChangePage} disabled={(!lgaValue) ? true : false} name='NEXT' type='button' styles='btn text-white p-3 category_btn' />
             </div>
           </form>
-        </FormContainer>
+      </FormContainer>
 }

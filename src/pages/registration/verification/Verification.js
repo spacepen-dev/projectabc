@@ -105,7 +105,7 @@ function Verification({ SignupVerification }) {
         dispatch({ type: "REQUEST_OTP", request: false });
       const Id = setTimeout(() => {
            
-            const value = { otpNumber, email:path.state }
+        const value = { otpNumber, email: path.state }
                 ApiResponse(value)
         
         }, 1000);

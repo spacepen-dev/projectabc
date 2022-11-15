@@ -26,8 +26,8 @@ export default function UploadImage() {
         onupdatefiles={setFiles}
         allowMultiple={true}
         maxFiles={3}
-        server="/api"
-        name="files" /* sets the file input name, it's filepond by default */
+        server={`https://haypex.com.ng/dev/ABC/aimienpay_temp/uploadBusinessLogo.php/`}
+        name="logo" /* sets the file input name, it's filepond by default */
         //labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
           />
           {/* {console.log(File)} */}

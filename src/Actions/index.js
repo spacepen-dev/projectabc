@@ -88,9 +88,18 @@ export const SubmitDepartment =
         departments,
         companyEmail: email,
       });
-      dispatch({ type: "DEPARTMENT", payLoad: data });
+      dispatch({ type: "ADD_DEPARTMENT", payLoad: data });
+      if (data) {
+        const { error, success } = data.data;
+        if (error) {
+          dispatch({ type: "ADD_DEPARTMENT_ERROR", payLoad: error});
+        } else if (success) {
+          dispatch({ type: "ADD_DEPARTMENT_SUCCESS", payLoad: success});
+        }
+      } 
+      return;
     } catch (error) {
-      dispatch({ type: "DEPARTMENT_ERR_MESSAGE", payLoad: error });
+      dispatch({ type: "ADD_DEPARTMENT_ERR_MESSAGE", payLoad: error });
     }
   };
 
@@ -508,25 +517,63 @@ export const EmailLogicRequest = (values, callback = (res) => { }) => async (dis
     
     });
 
-    callback(data);
-    // dispatch({ type: "USER_", payLoad: data });
+    dispatch({ type: "EMAIL_LOGIN" });
+    if (data) {
+      const { success, error, email_address } = data.data;
+      console.log(data)
+      if (error) {
+        dispatch({ type: "LOGIN_ERROR_RESPONSE", payLoad: error });
+      } else if (success) {
+        dispatch({ type: "LOGIN_SUCCESS_RESPONSE", payLoad: email_address });
+      }
+    }
+
   } catch (error) {
-    // dispatch({ type: "USER_VERIFICATION_ERR_MESSAGE", payLoad: error });
+    dispatch({ type: "EMAIL_LOGIN_ERR_MESSAGE", payLoad: error });
   }
 }
 
-export const PasswordLogicRequest = (values, callback = (res) => { }) => async (dispatch) => {
-  const { password } = values;
-  
+export const PasswordLogicRequest = (values) => async (dispatch) => {  
+  console.log(values)
   try {
-    const data = await BasedURL.post("userPasswordLogin.php", {
-      password
-    });
+    const data = await BasedURL.post("userPasswordLogin.php", {...values});
 
-    callback(data);
-    // dispatch({ type: "USER_", payLoad: data });
+    dispatch({ type: "PASSWORD_LOGIN" });
+    if (data) {
+      const { success, error, user_token } = data.data;
+      if (error) {
+        dispatch({ type: "PASSWORD_ERROR_RESPONSE", payLoad: error });
+      } else if (success) {
+        
+        dispatch({ type: "PASSWORD_SUCCESS_RESPONSE", payLoad: user_token });
+      }
+    }
   } catch (error) {
-    // dispatch({ type: "USER_VERIFICATION_ERR_MESSAGE", payLoad: error });
+    dispatch({ type: "PASSWORD_LOGIN_ERR_MESSAGE", payLoad: error });
   }
 };
 
+
+
+export const RegisterBusiness = (values) => async (dispatch) =>
+{
+  
+  console.log(values);
+  try {
+    const data = await BasedURL.post("registerBusiness.php", { ...values });
+
+    dispatch({ type: "REGISTER_BUSINESS" });
+
+    if (data) {
+      const { success, error, businessToken } = data.data;
+      if (error) {
+        dispatch({ type: "REGISTER_BUSINESS_ERROR_RESPONSE", payLoad: error });
+      } else if (success) {
+        
+        dispatch({ type: "REGISTER_BUSINESS_SUCCESS_RESPONSE", payLoad: businessToken });
+      }
+    }
+  } catch (err) {
+    dispatch({ type: "REGISTER_BUSINESS_ERR_MESSAGE", payLoad: err });
+  }
+};
