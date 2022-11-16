@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 // Import React FilePond
-import { FilePond,  registerPlugin } from 'react-filepond'
+import { FilePond,  registerPlugin,  } from 'react-filepond'
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css'
@@ -17,20 +17,43 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
 // Our app
-export default function UploadImage() {
-  const [files, setFiles] = useState([])
+export default function UploadImage({ businessToken, userToken }) {
+  
+  const [files, setFiles] = useState([]);
+  const [uploaded, setUploaded] = useState([]);
+
+  const ref = useRef();
+  const serverConfig = {
+    process: {
+      url: "./server"
+    }
+  };
+
+  const handleUploaded = (error, file) => {
+    if (!error) {
+      setUploaded([...uploaded, file]);
+      ref.current?.removeFile(file.id);
+    }
+  };
   return (
     <div className="App">
+      {console.log(uploaded)}
       <FilePond
+        // oninit={(pond)=> a(pond)}
+        ref={ref}
         files={files}
+        instantUpload={true}
+        onprocessfile={handleUploaded}
+        acceptedFileTypes={["image/png", "image/jpeg"]}
         onupdatefiles={setFiles}
         allowMultiple={true}
         maxFiles={3}
-        server={`https://haypex.com.ng/dev/ABC/aimienpay_temp/uploadBusinessLogo.php/`}
+        proc
+        // server='/api'
+        // server={`https://haypex.com.ng/dev/ABC/aimienpay_temp/uploadBusinessLogo.php/${businessToken}/${userToken}`}
         name="logo" /* sets the file input name, it's filepond by default */
         //labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
           />
-          {/* {console.log(File)} */}
     </div>
   )
 }

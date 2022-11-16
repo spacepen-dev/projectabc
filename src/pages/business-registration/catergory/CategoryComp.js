@@ -59,24 +59,22 @@ export function Category({getName}) {
     function categoryName(id) {
         
        getName(DETAILS.find((det) => det.id === id))
-    }
-
-
+    };
 
     return DETAILS.map(({ id, name, image, icon }, index) => {
-        return  <div key={id} class="col-12 col-sm-6 col-md-4 col-xl-2 mb-4 mb-4-0">
-            <div class="w-100 d-flex flex-column m-auto text-center px-2 position-relative category_businesses" onClick={() => {
+        return  <div key={id} className="col-12 col-sm-6 col-md-4 col-xl-2 mb-4 mb-4-0">
+            <div className="w-100 d-flex flex-column m-auto text-center px-2 position-relative category_businesses" onClick={() => {
                 changeColor(id);
                 categoryName(id);
                 
             }}>
-          <div class="ml-auto mb-1 mt-3 mr-3 lib_img">
-                    {icon(cateId, index)}
+          <div className="ml-auto mb-1 mt-3 mr-3 lib_img">
+        {icon(cateId, index)}
           </div>
-          <div class="m-auto cat_biz_img">
-                    <Image url={image} styles='' alt={name} />
+          <div className="m-auto cat_biz_img">
+        <Image url={image} styles='' alt={name} />
           </div>
-                <p class="mt-2 text-center add_acct_text">{name}</p>
+                <p className="mt-2 text-center add_acct_text">{name}</p>
         </div>
       </div>
     })

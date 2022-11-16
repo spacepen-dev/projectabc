@@ -1,19 +1,21 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import DetailsCard from "./DetailsCard";
-import { EyeSVG, EyeSlash, WhiteWallet, ProfileWhite } from "./svg/SVG";
-import SalariesHistory from "./SalariesHistory";
-import AccountHistory from "./AccountHistory";
-import TaxHistory from "./TaxHistory";
-import Slider from "./Slider";
-import TableSpinner from "./TableSpinner";
+import DetailsCard from "../DetailsCard";
+import { EyeSVG, EyeSlash, WhiteWallet, ProfileWhite } from "../svg/SVG";
+import AccountHistory from "../AccountHistory";
+import TaxHistory from "../TaxHistory";
+import Slider from "../Slider";
+import TableSpinner from "../TableSpinner";
 import {
   FetchWalletHistory,
   FetchDepartment,
   CompanyDetails,
-} from "../../Actions";
+} from "../../../Actions";
+import useBusinessToken from "../../../hooks/useBusinessToken";
+import useToken from "../../../hooks/useToken";
+import SalariesHistory from "../salary-history";
 
 const Overview = ({
   getPageId,
@@ -25,6 +27,8 @@ const Overview = ({
   CompanyDetails,
   departmentRes,
 }) => {
+  const { bizToken } = useBusinessToken();
+  const { token } = useToken();
   const [pageId, setId] = useState(4);
   const [small, setSmall] = useState("first");
   const [link, setLink] = useState("");
@@ -35,6 +39,15 @@ const Overview = ({
     totalEmployee: 0,
     totalAmount: 0,
   });
+
+  const values = useMemo(() => {
+    return { businessToken:bizToken, userToken:token, emailAddress: 'oviahonprosperpman32@gmail.com' }
+  }, [bizToken, token]);
+  
+
+  const value = useMemo(() => {
+    return { companyToken: bizToken, companyEmail: 'oviahonprosperpman32@gmail.com' }
+  },[bizToken]);
 
   const getId = (e) => {
     setId(Number(e.target.id));
@@ -52,26 +65,21 @@ const Overview = ({
   // AND MAKE REQUEST BASED ON THE TAB SELECTED
 
   const FetchOverviewData = useCallback(() => {
-    CompanyDetails(
-      localStorage.getItem("aminien_email"),
-      localStorage.getItem("aminien_token")
-    );
+    FetchWalletHistory(value);
+    FetchDepartment(value);
+  }, [FetchWalletHistory, FetchDepartment, value]);
 
-    FetchWalletHistory(
-      localStorage.getItem("aminien_email"),
-      localStorage.getItem("aminien_token")
-    );
-    FetchDepartment(
-      localStorage.getItem("aminien_email"),
-      localStorage.getItem("aminien_token")
-    );
-  }, [FetchWalletHistory, FetchDepartment, CompanyDetails]);
+  // const FetchOverviewData = useCallback(() => {
+  //   CompanyDetails(value);
+  //   FetchWalletHistory(value);
+  //   FetchDepartment(value);
+  // }, [FetchWalletHistory, FetchDepartment, CompanyDetails, value]);
 
   //FETCH DATA FROM FETCH WALLET ACTION CREATOR
 
-  // useEffect(() => {
-  //   FetchOverviewData();
-  // }, []);
+  useEffect(() => {
+    CompanyDetails(values);
+  }, [values, CompanyDetails]);
 
   // USE EFFECT TO CHANGE THE LINK ON THE SIDE BAR
   useEffect(() => {
@@ -90,14 +98,14 @@ const Overview = ({
     if (!companyEmployee) {
       return null;
     } else {
-      setCardDetails((state) => {
-        return {
-          ...state,
-          totalEmployee: companyEmployee.success.totalEmployees,
-          totalAmount: companyEmployee.success.balance,
-          // totalAmount: companyWallet.data.success.length,
-        };
-      });
+      // setCardDetails((state) => {
+      //   return {
+      //     ...state,
+      //     totalEmployee: companyEmployee.success.totalEmployees,
+      //     totalAmount: companyEmployee.success.balance,
+      //     // totalAmount: companyWallet.data.success.length,
+      //   };
+      // });
     }
   }, [companyEmployee]);
 
@@ -126,12 +134,15 @@ const Overview = ({
     if (!companyWallet) {
       return null;
     } else {
-      setCardDetails((state) => {
-        return {
-          ...state,
-          account: companyWallet.success.length,
-        };
-      });
+      const { Data } = companyWallet.Data;
+      if (Data > 1) {
+        setCardDetails((state) => {
+          return {
+            ...state,
+            account: companyWallet.length,
+          };
+        });
+      }
     }
   }, [companyWallet]);
 
@@ -146,6 +157,7 @@ const Overview = ({
   }, [departmentRes]);
 
   useEffect(() => {
+
     // companyAccountFunct();
     companyTransactionFunct();
     // companyEmployeeFunct();
@@ -153,6 +165,7 @@ const Overview = ({
 
   // USE EFFECT TO FETCH THE DATA FOR THE TOTAL EMPLOYEE
   useEffect(() => {
+    
     companyAccountFunct();
     // companyTransactionFunct();
     companyEmployeeFunct();
@@ -248,10 +261,10 @@ const Overview = ({
 
 const mapStateToProps = (state) => {
   return {
-    companyWallet: state.DashboardReducer.companyWallet.data,
-    companyEmployee: state.DashboardReducer.companyDetails.data,
+    companyWallet: state.FetchWalletHistory,
+    // companyEmployee: state.CompanyDetailsReducers,
     // companyDepartment: state.DashboardReducer.companyAmount.data,
-    departmentRes: state.DashboardReducer.fetchDepartment.data,
+    departmentRes: state.FetchBusinessDepartment,
   };
 };
 

@@ -3,46 +3,47 @@ import { Form, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import LabelText from "../../../components/Registration/LabelText";
 import AddRoles from "./AddRoles";
-import LoaderButton from "../../../components/LoaderButton";
 import { SubmitDepartment } from "../../../Actions";
 import { FormContainer } from "../main/RegistrationFormComp";
+import { ButtonLoader } from "../../registration/ui";
+import useBusinessToken from '../../../hooks/useBusinessToken';
+import useToken from "../../../hooks/useToken";
+import swal from "sweetalert";
 
-const AddDepartment = ({ SubmitDepartment, departmentMessage, departmentErr }) => {
+const AddDepartment = ({ SubmitDepartment, businessDepartment }) => {
+
   const navigate = useNavigate();
+
   const [department, setDepartment] = useState({ department: [] });
-  const [request, setRequest] = useState(false);
-  const [token, setToken] = useState(null);
-  const [email, setEmail] = useState(null);
-
-  // USEEFFECT TO GET DATA FROM CACHE
-  // useEffect(() => {
-  //   if (
-  //     !localStorage.getItem("aminien_token") ||
-  //     !localStorage.getItem("aminien_email")
-  //   ) {
-  //     // SHOW THE WARNING MODAL
-  //     setToken("");
-  //   } else {
-  //     setToken(localStorage.getItem("aminien_token"));
-  //     setEmail(localStorage.getItem("aminien_email"));
-  //   }
-  // }, []);
-
-  // USEEFFECT TO FETCH THE SERVER SUCCESS MESSAGE AND ERROR MESSAGE
+  const [isLoading, setLoading] = useState(false)
+  const { bizToken } = useBusinessToken();
+  const { token } = useToken()
   
-
-
+  
   const Validation = () => {
+    const email = 'ejembithomas@tratrust.com'
     if (department.length === 0) {
-      // setStore(true);
       
     } else {
-      // setRequest(true);
-      SubmitDepartment(department, token, email);
+      setLoading(true)
+      SubmitDepartment({ departments:department, businessToken: bizToken, emailAddress: email, userToken:token });
     }
   };
+
+  useEffect(() => {
+    if (!businessDepartment) return null;
+    setLoading(false)
+    const { success, error, networkError, message } = businessDepartment;
+    if (error) {
+        swal("Error!", message);
+    } else if (success) {
+        navigate('/registered-business', { replace: true });
+    } else if (networkError) {
+        swal("Error!", message);
+         
+    }
+}, [businessDepartment, navigate]);
 
   return <FormContainer name='Add department' pageName='Department' desc='Add department available in your organization'>
     <Container className='add-roles' style={{ maxWidth: "50rem" }}>
@@ -54,11 +55,8 @@ const AddDepartment = ({ SubmitDepartment, departmentMessage, departmentErr }) =
           class='d-flex flex-column justify-content-between align-items-start'>
           <AddRoles data={(val) => setDepartment(val)} />
           <div className='button-container w-100 d-flex justify-content-end'>
-            <LoaderButton
-              btnName='Save'
-              btnStyles={"d-block me-auto"}
-              request={request}
-            />
+           
+           <ButtonLoader type='submit' styles='btn text-white p-3 category_btn' name='SUBMIT' request={isLoading} />
           </div>
         </Form>
       </Container>
@@ -67,11 +65,9 @@ const AddDepartment = ({ SubmitDepartment, departmentMessage, departmentErr }) =
 };
 
 const mapStateToProps = (state) => {
-  // return {
-  //   // registrationToken: state.RegistrationReducer.otp,
-  //   departmentMessage: state.RegistrationReducer.department,
-  //   departmentErr: state.RegistrationReducer.departmentErr,
-  // };
+  return {
+    businessDepartment:state.AddDepartment
+  }
 };
 
 export default connect(mapStateToProps, { SubmitDepartment })(AddDepartment);

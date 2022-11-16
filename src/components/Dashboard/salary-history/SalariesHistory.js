@@ -1,37 +1,27 @@
 import React, { useEffect, useState } from "react";
-import DashboardTable from "./DashboardTable";
-import { FetchSalaryHistory } from "../../Actions";
+import DashboardTable from "../DashboardTable";
+import { FetchSalaryHistory } from "../../../Actions";
 import { connect } from "react-redux";
 import { Badge } from "react-bootstrap";
+import useBusinessToken from "../../../hooks/useBusinessToken";
+import useToken from "../../../hooks/useToken";
+import useBadge from "../../../hooks/useBadge";
 
 function Badges({ row }) {
-  var bg = "";
-  function check() {
-    if (row === "pending") {
-      return (bg = "warning");
-    } else if (row === "decline") {
-      return (bg = "danger");
-    } else {
-      return (bg = "success");
-    }
-  }
+  const { bg } = useBadge(row);
 
-  return (
-    <Badge bg={check()} className='py-2'>
+ return (
+    <Badge bg={bg} className='py-2'>
       {row}
     </Badge>
   );
 }
 
 const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
-  const [{ token, email }] = useState(() => {
-    return {
-      token: localStorage.getItem("aminien_token"),
-      email: localStorage.getItem("aminien_email"),
-    };
-  });
-
+  const { bizToken } = useBusinessToken();
+  const { token } = useToken();
   const [data, setData] = useState([]);
+
 
   const heading = [
     { name: "DATE", selector: (row) => row.date },
@@ -65,16 +55,19 @@ const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
       selector: (row) => <Badges row={row.transactionStatus} />,
     },
   ];
+
+
   useEffect(() => {
-    FetchSalaryHistory(email, token);
-  }, [token, email, FetchSalaryHistory]);
+    FetchSalaryHistory({ businessToken: bizToken, userToken: token });
+  }, [FetchSalaryHistory, bizToken, token]);
+
 
   useEffect(() => {
     if (!companySalary) {
       return null;
     } else {
-      const { success } = companySalary;
-      setData(success);
+      const { salaryData } = companySalary;
+      setData(salaryData);
     }
   }, [companySalary]);
 
@@ -87,8 +80,7 @@ const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
 
 const mapStateToProps = (state) => {
   return {
-    companySalary: state.DashboardReducer.companySalary.data,
-    companySalaryErr: state.DashboardReducer.companySalaryErr,
+    companySalary: state.FetchSalaryHistory
   };
 };
 

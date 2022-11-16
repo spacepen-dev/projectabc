@@ -560,7 +560,7 @@ otp div:last-child {
 }
 .sidebar-container {
   height: 100vh;
-  height: fit-content;
+  /* height: fit-content; */
   width: 14rem;
   padding-bottom: 2.5rem;
   padding-top: 1rem;

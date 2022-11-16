@@ -1,5 +1,5 @@
 const initalValues = {
-    isLoading: true,
+    isLoading: false,
     success: false,
     error: false,
     message: '',

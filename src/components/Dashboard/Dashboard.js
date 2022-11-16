@@ -1,38 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route,  } from "react-router-dom";
 import SideBar from "./SideBar";
-import Overview from "./Overview";
 import AddEmployee from "./AddEmployee";
 import ViewEmployee from "./ViewEmployee";
 import ViewSalaryHistory from "./ViewSalaryHistory";
 import ViewTaxHistory from "./ViewTaxHistory";
-import ViewAccountHistory from "./ViewAccountHistory";
 import EmployeeSalariesPage from "./EmployeeSalariesPage";
 import CompanyWalletPage from "./CompanyWalletPage";
 import CompanyProfile from "./CompanyProfile";
 import SignOut from "./Signout";
+import Overview from "./overview";
+import ViewAccountHistory from "./Account-history/ViewAccountHistory";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const [user] = useState(() => {
-    return {
-      token: localStorage.getItem("aminien_token"),
-      email: localStorage.getItem("aminien_email"),
-    };
-  });
+  // const { bizToken } = useBusinessToken();
 
-  useEffect(() => {
-    if (!user.email || !user.token) {
-      navigate("/");
-    }
-    // console.log(user);
-  }, [user, navigate]);
+
+  // useEffect(() => {
+  //   console.log(bizToken)
+  //   if (!bizToken) {
+  //     navigate("/");
+  //   }
+  // }, [bizToken,navigate]);
 
   return (
     <Container fluid>
-      <Row className='row'>
+      <Row className='row '>
         <Navbar bg='light' className='nav-bar' expand={false}>
           <Container fluid>
             <Navbar.Toggle aria-controls='offcanvasNavbar' />

@@ -2,21 +2,12 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Badge } from "react-bootstrap";
 import DashboardTable from "./DashboardTable";
+import useBadge from "../../hooks/useBadge";
 
 function Badges({ row }) {
-  function check() {
-    var bg = "";
-    if (row === "pending") {
-      return (bg = "warning");
-    } else if (row === "decline") {
-      return (bg = "danger");
-    } else {
-      return (bg = "success");
-    }
-  }
-
+  const { bg } = useBadge(row);
   return (
-    <Badge bg={check()} className='py-2'>
+    <Badge bg={bg} className='py-2'>
       {row}
     </Badge>
   );
@@ -59,6 +50,7 @@ const AccountHistory = ({ companyWallet }) => {
 
   useEffect(() => {
     if (!companyWallet) {
+      console.log(companyWallet)
       return null;
     } else {
       const { success } = companyWallet;
@@ -83,7 +75,7 @@ const AccountHistory = ({ companyWallet }) => {
 
 const mapStateToProps = (state) => {
   return {
-    companyWallet: state.DashboardReducer.companyWallet.data,
+    companyWallet: state.FetchWalletHistory,
   };
 };
 

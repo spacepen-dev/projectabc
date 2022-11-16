@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Input } from "../ui";
 import { useFormik } from "formik";
 import { EmailLoginSchema } from "../yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 
@@ -59,11 +59,11 @@ const EmailLogin = ({ EmailLogicRequest, login }) => {
                         {(formik.errors.email_phone && formik.touched.email_phone) && <Error error={formik.errors.email_phone} />}
                     </div>
 
-                    <a href="/" className="login-forgot" target="_blank">Forgot Email?</a>
+                    <Link to="/" className="login-forgot" target="_blank">Forgot Email?</Link>
                     <ButtonLoader type='submit' styles='login-btn' name='LOG IN' request={loading} />
                 </form>
                 <aside className="sign-up">
-                    Don't have an account? <a href="signUp.html" target="_blank">Sign Up</a>
+                    Don't have an account? <Link to="/sign-up" target="_blank">Sign Up</Link>
                 </aside>
             </article>
 

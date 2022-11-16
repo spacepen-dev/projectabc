@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
-import Datatable from "./Datatable";
+import Datatable from "../Datatable";
 import { Form } from "react-bootstrap";
-import { FetchWalletHistory } from "../../Actions";
+import { FetchWalletHistory } from "../../../Actions";
 import { Badge } from "react-bootstrap";
+import useBusinessToken from "../../../hooks/useBusinessToken";
+import useToken from "../../../hooks/useToken";
+import useBadge from "../../../hooks/useBadge";
 
 let Months = new Set([
   new Date().getMonth(),
@@ -60,19 +63,9 @@ const currentDate = {
 };
 
 function Badges({ row }) {
-  function check() {
-    if (row === "pending") {
-      var bg = "";
-      return (bg = "warning");
-    } else if (row === "decline") {
-      return (bg = "danger");
-    } else {
-      return (bg = "success");
-    }
-  }
-
+  const { bg } = useBadge(row);
   return (
-    <Badge bg={check()} className='py-2'>
+    <Badge bg={bg} className='py-2'>
       {row}
     </Badge>
   );
@@ -81,6 +74,8 @@ function Badges({ row }) {
 const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
   const [walletData, setwalletData] = useState([]);
   const [selectedDate, setSelectedDate] = useState(currentDate);
+  const { bizToken } = useBusinessToken;
+  const {token} = useToken()
 
   const heading = [
     { name: "DATE", selector: (row) => row.date },
@@ -122,10 +117,8 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
   );
 
   const CallFetchWalletAction = useCallback(() => {
-    const email = localStorage.getItem("aminien_email");
-    const companyToken = localStorage.getItem("aminien_token");
-    WalletHistoryAction(email, companyToken);
-  }, [WalletHistoryAction]);
+    WalletHistoryAction({ userToken: token, businessToken: bizToken });
+  }, [WalletHistoryAction, bizToken, token]);
 
   //FETCH DATA FROM FETCH WALLET ACTION CREATOR
   useEffect(() => {

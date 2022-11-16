@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getBusinessToken } from "../lib/sharedfuntions";
 
 export default function useBusinessToken() {
+
     const [bizToken, setToken] = useState('');
     const savedToken = getBusinessToken();
     

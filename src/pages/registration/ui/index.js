@@ -120,4 +120,46 @@ export function Select({elem, name, onChange}) {
         <option>Choose from Options</option>
                 {elem()}
     </select>
+};
+
+
+export function FullScreenLoader (){
+    return (
+      <div
+        className=''
+        style={{
+          position: "fixed",
+          top: 0,
+          left: "0",
+          right: 0,
+          zIndex: 1,
+          backgroundColor: "rgba(0, 0, 0, 0.4)",
+          height: "100vh",
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          // justifyContent: "center",
+        }}>
+        <div
+          className='px-4 py-3 bg-white rounded mx-auto'
+          >
+          <Spinner
+            as='span'
+            className='p-4 spinner z-10'
+            animation='border'
+            size='lg'
+            style={{ color: "#4836C8", zIndex: "100" }}
+          />
+        </div>
+      </div>
+    );
+  };
+  
+
+
+export function BusinessOffice() {
+      return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+    </svg>
+    
 }
