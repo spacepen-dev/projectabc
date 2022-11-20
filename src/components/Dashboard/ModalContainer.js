@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Container } from "react-bootstrap";
-import EditEmployee from "./EditEmployee";
+import EditEmployee from "./Edit-employee";
 
 const ModalContainer = ({ closeModal, buttonText, initialValue }) => {
   const close = () => {

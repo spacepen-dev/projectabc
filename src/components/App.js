@@ -1,6 +1,8 @@
 import React, {lazy, Suspense} from "react";
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import BusinessOverview from "../pages/business-registration/business-overview";
+const CompleteRegistration = lazy(() => import("../pages/business-registration/finish/Complete"));
 const Dashboard = lazy(() => import("./Dashboard/Dashboard"));
 const SalariesPage = lazy(() => import("./Dashboard/EmployeeSalariesPage"));
 const NoPage = lazy(() => import("./NoPage"));
@@ -15,6 +17,7 @@ const EmailLogin = lazy(() => import("../pages/registration/emailLogin"));
 const UploadImage = lazy(() => import("../pages/business-registration/image-upload"));
 const AddDepartment = lazy(() => import("../pages/business-registration/add-department"));
 
+<CompleteRegistration/>
 
 
 // import { NotificationProvider } from "./Dashboard/Notification/NotificationContainer";
@@ -42,7 +45,11 @@ const App = () => {
             <Route path='/user-verification' element={<Verification />}></Route>
             <Route path='registration/business' element={<RegistraionFormController />}></Route>
             <Route path='registration/business/upload-image' element={<UploadImage />}></Route>
+            <Route path='registration/business/complete' element={<CompleteRegistration />}></Route>
             <Route path='registration/business/add-department' element={<AddDepartment />}></Route>
+            <Route path='registration/business/add-department' element={<AddDepartment />}></Route>
+            <Route path='registration/business/overview' element={<BusinessOverview />}></Route>
+            
             <Route path='Dashboard/*' element={<Dashboard />}></Route>
             <Route path='*' element={<NoPage />}></Route>
             <Route

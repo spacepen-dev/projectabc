@@ -3,7 +3,7 @@ export const COMPANY_DETAILS_INIT = {
     companyErrorRes: false,
     companyNetworkErrorRes: false,
     companyMessage: '',
-    Data: [],
+    Data: {},
     
 }
 
@@ -27,7 +27,7 @@ export const SALARY_INIT = {
     salaryError: false,
     salaryNetworkError: false,
     salaryMessage: '',
-    Data: []
+    Data:[]
 }
 
 export const ACCOUNT_INIT = {
@@ -35,5 +35,13 @@ export const ACCOUNT_INIT = {
     accountError: false,
     accountNetworkError: false,
     accountMessage: '',
+    Data: []
+}
+
+export const TAX_INIT = {
+    taxSuccess: false,
+    taxError: false,
+    taxNetworkError: false,
+    taxMessage: '',
     Data: []
 }

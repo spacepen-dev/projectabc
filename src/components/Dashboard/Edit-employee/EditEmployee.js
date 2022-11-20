@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import EmployeeRegistration from "./EmployeeRegistration";
+import EmployeeRegistration from "../employee-component/EmployeeRegistration";
 import { connect } from "react-redux";
-import { UpdateEmployee } from "../../Actions";
+import { UpdateEmployee } from "../../../Actions";
 
 const EditEmployee = ({
   initialValue,

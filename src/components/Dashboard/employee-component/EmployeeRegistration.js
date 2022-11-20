@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import EmployeeAccountDetails from "./EmployeeAccountDetails";
-import EmployeeSalaryInfo from "./EmployeeSalaryInfo";
-import EmployeeProfile from "./EmployeeProfile";
+import EmployeeAccountDetails from "../EmployeeAccountDetails";
+import EmployeeSalaryInfo from "../EmployeeSalaryInfo";
+import EmployeeProfile from "../EmployeeProfile";
 // import { Warning } from "./svg/SVG";
 // import VerificationModal from "./VerificationModal";
-import EmployeePension from "./EmployeePension";
+import EmployeePension from "../EmployeePension";
 import AddEmployeeForm from "./AddEmployeeForm";
 
 const EmployeeRegistration = ({

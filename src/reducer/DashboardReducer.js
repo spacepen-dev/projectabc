@@ -1,4 +1,4 @@
-import {COMPANY_DETAILS_INIT, DEPARTMENT_INIT, SALARY_INIT, WALLET_INIT } from "./reducer-init-value";
+import {COMPANY_DETAILS_INIT, DEPARTMENT_INIT, SALARY_INIT, TAX_INIT, WALLET_INIT } from "./reducer-init-value";
 
 let InitialState = {
   dashboardDetails: {},
@@ -40,10 +40,10 @@ export const CompanyDetailsReducers = (state=COMPANY_DETAILS_INIT , action) => {
     case 'COMPANY_DETAILS_SUCCESS':
       return { ...state, companySuccessRes: true, Data: action.payLoad, companyErrorRes: false, companyNetworkErrorRes: false, companyMessage: '' };
     case 'COMPANY_DETAILS_ERROR':
-      return { ...state, companySuccessRes: false, Data: [], companyErrorRes: true, companyNetworkErrorRes: false, companyMessage: action.payLoad };
+      return { ...state, companySuccessRes: false, Data: {}, companyErrorRes: true, companyNetworkErrorRes: false, companyMessage: action.payLoad };
     
     case 'COMPANY_DETAILS_ERR_MESSAGE':
-      return { ...state, companySuccessRes: false, Data: [], companyErrorRes: false, companyNetworkErrorRes: true, companyMessage: action.payLoad };
+      return { ...state, companySuccessRes: false, Data: {}, companyErrorRes: false, companyNetworkErrorRes: true, companyMessage: action.payLoad };
     
     default: return state;
   
@@ -74,23 +74,23 @@ export const FetchWalletHistory = (state=WALLET_INIT, action) => {
 
 /**********************FETCH BUSINESS DEPARTMENT REDUCERS******************************/
 
-export const FetchBusinessDepartment = (state=DEPARTMENT_INIT, action) => {
+export const FetchBusinessDepartment = (state = DEPARTMENT_INIT, action) => {
   switch (action.type) {
-    case "FETCH_DEPARTMENT_HISTORY":
+    case "FETCH_DEPARTMENT":
       return { ...state, Data: action.payLoad };
-    case "FETCH_DEPARTMENT_HISTORY_SUCCESS":
-      return { ...state, departmentSuccess: true, departmentError:false, departmentNetworkError:false, departmentMessage:'', Data: action.payLoad };
+    case "FETCH_DEPARTMENT_SUCCESS":
+      return { ...state, departmentSuccess: true, departmentError: false, departmentNetworkError: false, departmentMessage: '', Data: action.payLoad };
       
-    case "FETCH_DEPARTMENT_HISTORY_ERROR":
-      return { ...state, departmentSuccess: false, departmentError:true, departmentNetworkError:false, departmentMessage:action.payLoad, Data: [] };
+    case "FETCH_DEPARTMENT_ERROR":
+      return { ...state, departmentSuccess: false, departmentError: true, departmentNetworkError: false, departmentMessage: action.payLoad, Data: [] };
       
-    case "FETCH_DEPARTMENT_HISTORY_ERR_MESSAGE":
-      return { ...state, departmentSuccess: false, departmentError:false, departmentNetworkError:true, departmentMessage:action.payLoad, Data: [] };
+    case "FETCH_DEPARTMENT_ERR_MESSAGE":
+      return { ...state, departmentSuccess: false, departmentError: false, departmentNetworkError: true, departmentMessage: action.payLoad, Data:[] };
   
     default:
       return state;
-  }
-}
+  };
+};
 
 /**********************FETCH SALARY HISTORY REDUCERS******************************/
 
@@ -114,7 +114,23 @@ export const FetchSalaryHistory = (state=SALARY_INIT, action) => {
 
 /**********************FETCH ACCOUNT HISTORY REDUCERS******************************/
 
-
+export const FetchTaxHistory = (state=TAX_INIT, action) => {
+  switch (action.type) {
+    case "FETCH_TAX_HISTORY":
+      return { ...state, };
+    case "FETCH_TAX_HISTORY_SUCCESS":
+      return { ...state, taxSuccess: true, taxError:false, taxNetworkError:false, taxMessage:'', Data: action.payLoad };
+      
+    case "FETCH_TAX_HISTORY_ERROR":
+      return { ...state, taxSuccess: false, taxError:true, taxNetworkError:false, taxMessage:action.payLoad, Data: [] };
+      
+    case "FETCH_TAX_HISTORY_ERR_MESSAGE":
+      return { ...state, taxSuccess: false, taxError:false, taxNetworkError:true, taxMessage:action.payLoad, Data: [] };
+  
+    default:
+      return state;
+  }
+}
 
 
 const DashboardReducer = (state = InitialState, action) => {

@@ -12,7 +12,7 @@ export const SubmitDepartment =
   (values) => async (dispatch) => {
     try {
       const data = await BasedURL.post("/registerDepartment.php", {...values});
-      dispatch({ type: "ADD_DEPARTMENT", payLoad: data });
+      dispatch({ type: "ADD_DEPARTMENT"});
       if (data) {
         const { error, success } = data.data;
         if (error) {
@@ -31,15 +31,15 @@ export const SubmitDepartment =
 export const CompanyDetails = (values) => async (dispatch) => {
   try {
     const data = await BasedURL.post("/fetchUserSingleBusiness.php", { ...values });
-    dispatch({ type: "COMPANY_DETAILS", payLoad: data });
+    dispatch({ type: "COMPANY_DETAILS" });
     if (data) {
       const { error, success } = data.data;
       if (error) {
-        dispatch({ type: "COMPANY_DETAILS_ERROR", payLoad: data });
+        dispatch({ type: "COMPANY_DETAILS_ERROR", payLoad: error });
+      } else if (success) {
+        console.log(success)
         
-      } else if (success.length > 0) {
-        
-        dispatch({ type: "COMPANY_DETAILS_SUCCESS", payLoad: data });
+        dispatch({ type: "COMPANY_DETAILS_SUCCESS", payLoad: success });
       }
       
     }
@@ -53,44 +53,27 @@ export const CompanyDetails = (values) => async (dispatch) => {
 export const RegisterEmployee =
   (values, token, accountVerified) => async (dispatch) => {
     
-    const {
-      employeeFirstname,
-      employeeLastname,
-      employeeEmail,
-      employeeAnnualGrossSalary,
-      employeeRole,
-      employeeDepartment,
-      employeeRelives,
-      employeeTin,
-      employeePhoneNumber,
-      employeeState,
+    // const {
+    //   employeeFirstname,
+    //   employeeLastname,
+    //   employeeEmail,
+    //   employeeAnnualGrossSalary,
+    //   employeeRole,
+    //   employeeDepartment,
+    //   employeeRelives,
+    //   employeeTin,
+    //   employeePhoneNumber,
+    //   employeeState,
 
-      // accountName,
-      // accountNumber,
-      employeeAccountNumber,
-      // employeeAccountName,
-      bankcode,
-      filterBank,
-    } = values;
+    //   // accountName,
+    //   // accountNumber,
+    //   employeeAccountNumber,
+    //   // employeeAccountName,
+    //   bankcode,
+    //   filterBank,
+    // } = values;
     try {
-      const data = await BasedURL.post("/registerEmployee.php", {
-        employeeFirstname,
-        employeeLastname,
-        employee_email: employeeEmail,
-        employeeRole,
-        employeeDepartment,
-        employeeRelieves: employeeRelives,
-        employeeTin,
-        employeeState,
-        token,
-        employeeAccountName: accountVerified,
-        employeePhoneNumber: employeePhoneNumber,
-        employeeAccountNumber,
-        employeeBankName: filterBank,
-        employeeBankCode: bankcode,
-        employeeAgs: employeeAnnualGrossSalary,
-        employeeMgs: employeeAnnualGrossSalary / "12",
-      });
+      const data = await BasedURL.post("/registerEmployee.php", {...values});
       dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
     } catch (error) {
       dispatch({ type: "REGISTER_EMPLOYEE_ERR_MESSAGE", payLoad: error });
@@ -168,16 +151,17 @@ export const DeleteEmployeeAction = (token, values) => async (dispatch) => {
 export const FetchDepartment = (values) => async (dispatch) => {
   try {
     const data = await BasedURL.post("/fetchRoleDepartment.php", { ...values });
-    dispatch({ type: "FETCH_DEPARTMENT", payLoad: data });
+
+    dispatch({ type: "FETCH_DEPARTMENT"});
+
     if (data) {
       const { error, success } = data.data;
-
+      
       if (error) {
-        dispatch({ type: "FETCH_DEPARTMENT_ERROR", payLoad: data });
+        dispatch({ type: "FETCH_DEPARTMENT_ERROR", payLoad: error });
         
-      } else if (success.length > 0) {
-
-        dispatch({ type: "FETCH_DEPARTMENT_SUCCESSS", payLoad: data });
+      } else if (success) {
+        dispatch({ type: "FETCH_DEPARTMENT_SUCCESS", payLoad: success });
         
       }
     }
@@ -341,13 +325,20 @@ export const UpdateCompanyDetails = (data) => async (dispatch) => {
 
 // TAX HISTORY ACTION CREATOR
 
-export const FetchTaxHistory = (email, token) => async (dispatch) => {
+export const FetchTaxHistory = (values) => async (dispatch) => {
   try {
-    const data = await BasedURL.post("/fetchTaxHistory.php", {
-      companyEmail: email,
-      companyToken: token,
-    });
+    const data = await BasedURL.post("/fetchTaxHistory.php", {...values});
     dispatch({ type: "FETCH_TAX_HISTORY", payLoad: data });
+    if (data) {
+      const { success, error } = data.data;
+      if (error) {
+        dispatch({ type: "FETCH_TAX_HISTORY_ERROR", payLoad: success });
+        
+      } else if (success.length > 0) {
+        
+        dispatch({ type: "FETCH_TAX_HISTORY_SUCCESS", payLoad: error });
+      }
+    }
   } catch (error) {
     dispatch({ type: "FETCH_TAX_HISTORY_ERR_MESSAGE", payLoad: error });
   }

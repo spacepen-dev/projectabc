@@ -20,12 +20,11 @@ function BankDetails({ businessAccountNumber, handleChange, getbankcode, getacco
     const { token } = useToken();
     const [ bank ] = useBankList();
     const { page } = useContext(RegistrationContext);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
 
      const [data, setData] = useState({ value: '', show: false });
-     
-
+    
 
     useEffect(() => {
         if (!businessDetails) return null;
@@ -33,8 +32,8 @@ function BankDetails({ businessAccountNumber, handleChange, getbankcode, getacco
         if (error) {
             swal("Error!", message);
         } else if (success) {
-            navigate('upload-image', { replace: true });
-            SavedBusinessToken(message)
+            navigate('registration/business/complete', { replace: true });
+            SavedBusinessToken(message);
         } else if (networkError) {
             swal("Error!", message);
              
@@ -64,6 +63,7 @@ function BankDetails({ businessAccountNumber, handleChange, getbankcode, getacco
         return filterBankName;
       };
 
+      
     const accountNumberprops = {
         type: "text",
         styles: 'form-control py-2',
@@ -110,11 +110,10 @@ function BankDetails({ businessAccountNumber, handleChange, getbankcode, getacco
                 <Label name='Choose Bank Name' styles='mb-3' />
                 <input
                     type='text'
-                    
                     onChange={(e) => {
-                        setData((state) => {
-                            return { ...state, value: e.target.value, show: true }
-                        });
+                    setData((state) => {
+                    return { ...state, value: e.target.value, show: true }
+                    });
                     }}
                     value={data.value}
                     className='form-control py-2 '

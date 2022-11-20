@@ -35,10 +35,11 @@ const AddDepartment = ({ SubmitDepartment, businessDepartment }) => {
     if (!businessDepartment) return null;
     setLoading(false)
     const { success, error, networkError, message } = businessDepartment;
+    console.log(success);
     if (error) {
         swal("Error!", message);
     } else if (success) {
-        navigate('/registered-business', { replace: true });
+        navigate('/registration/business/overview', { replace: true });
     } else if (networkError) {
         swal("Error!", message);
          

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import DashboardTable from "../DashboardTable";
 import { FetchSalaryHistory } from "../../../Actions";
 import { connect } from "react-redux";
@@ -6,6 +6,7 @@ import { Badge } from "react-bootstrap";
 import useBusinessToken from "../../../hooks/useBusinessToken";
 import useToken from "../../../hooks/useToken";
 import useBadge from "../../../hooks/useBadge";
+import useHandleResponse from "../../../hooks/useHandleResponse";
 
 function Badges({ row }) {
   const { bg } = useBadge(row);
@@ -20,8 +21,7 @@ function Badges({ row }) {
 const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
   const { bizToken } = useBusinessToken();
   const { token } = useToken();
-  const [data, setData] = useState([]);
-
+  const [Data] = useHandleResponse(companySalary)
 
   const heading = [
     { name: "DATE", selector: (row) => row.date },
@@ -62,18 +62,18 @@ const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
   }, [FetchSalaryHistory, bizToken, token]);
 
 
-  useEffect(() => {
-    if (!companySalary) {
-      return null;
-    } else {
-      const { salaryData } = companySalary;
-      setData(salaryData);
-    }
-  }, [companySalary]);
+  // useEffect(() => {
+  //   if (!companySalary) {
+  //     return null;
+  //   } else {
+  //     const { Data } = companySalary;
+  //     setData(Data);
+  //   }
+  // }, [companySalary]);
 
   return (
     <>
-      <DashboardTable heading={heading} data={data} />
+      <DashboardTable heading={heading} data={Data} />
     </>
   );
 };

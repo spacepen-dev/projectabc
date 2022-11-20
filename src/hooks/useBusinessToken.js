@@ -4,8 +4,8 @@ import { getBusinessToken } from "../lib/sharedfuntions";
 
 export default function useBusinessToken() {
 
-    const [bizToken, setToken] = useState('');
     const savedToken = getBusinessToken();
+    const [bizToken] = useState(savedToken);
     
     const navigate = useNavigate();
 
@@ -14,7 +14,6 @@ export default function useBusinessToken() {
             // GO BACK TO HOME PAGE
             navigate('/', { replace: true })
         }
-        setToken(savedToken);
     }, [bizToken, savedToken, navigate]);
     
     

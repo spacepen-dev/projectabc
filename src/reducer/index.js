@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import DashboardReducer, {CompanyDetailsReducers, FetchWalletHistory, FetchBusinessDepartment, FetchSalaryHistory} from "./DashboardReducer";
+import DashboardReducer, {CompanyDetailsReducers, FetchWalletHistory, FetchBusinessDepartment, FetchSalaryHistory, FetchTaxHistory} from "./DashboardReducer";
 import UserRegistration from './UserRegistration'
 import BusinessRegistration, {FetchRegisteredBusinessList} from "./RegisterBusiness";
 import AddDepartment from "./AddDepartment";
@@ -17,7 +17,8 @@ export default combineReducers({
   CompanyDetailsReducers,
   FetchBusinessDepartment,
   FetchWalletHistory,
-  FetchSalaryHistory
+  FetchSalaryHistory,
+  FetchTaxHistoryReducer: FetchTaxHistory
   // AppReducers,
   // form: formReducer,
 });

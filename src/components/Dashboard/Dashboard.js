@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
 import { Routes, Route,  } from "react-router-dom";
 import SideBar from "./SideBar";
-import AddEmployee from "./AddEmployee";
 import ViewEmployee from "./ViewEmployee";
 import ViewSalaryHistory from "./ViewSalaryHistory";
 import ViewTaxHistory from "./ViewTaxHistory";
 import EmployeeSalariesPage from "./EmployeeSalariesPage";
 import CompanyWalletPage from "./CompanyWalletPage";
-import CompanyProfile from "./CompanyProfile";
+// import CompanyProfile from "./company-profile";
+import Profile from "./company-profile/Profile";
 import SignOut from "./Signout";
 import Overview from "./overview";
 import ViewAccountHistory from "./Account-history/ViewAccountHistory";
+import AddEmployee from "./Add-employee";
 
 const Dashboard = () => {
   // const navigate = useNavigate();
@@ -75,7 +76,7 @@ const Dashboard = () => {
               element={<EmployeeSalariesPage />}
             />
 
-            <Route path='/company/profile' element={<CompanyProfile />} />
+            <Route path='/company/profile' element={<Profile />} />
             <Route path='/top/up' element={<CompanyWalletPage />} />
             <Route path='/signout' element={<SignOut />} />
           </Routes>

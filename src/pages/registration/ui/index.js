@@ -80,35 +80,15 @@ export function Checkicon({ name }) {
 };
 
 
-export function FormIndicator({pageName}) {
-    const profile = pageName === 'Profile' ? 'pp_link_active' : '';
-    const contact = pageName === 'Contact' ? 'pp_link_active' : '';
-    const funds = pageName === 'Funds' ? 'pp_link_active' : '';
-    const validation = pageName === 'Validation' ? 'pp_link_active' : '';
-    const upload = pageName === 'upload' ? 'pp_link_active' : '';
-    const department = pageName === 'Department' ? 'pp_link_active' : '';
-
-
+export function FormIndicator({ pageName }) {
+ 
     return <div className="col-3 d-none d-lg-flex justify-content-center align-items-center">
         <nav className="nav flex-column justify-content-center  pp_right_section">
-        <span className={`nav-link d-flex mb-4 align-items-center pp_links ${profile}`}>
-                <Checkicon name={profile} /> <span className="d-inline-block ms-2">Profile</span>
-        </span>
-        <span className={`nav-link d-flex mb-4 align-items-center pp_links ${contact}`}>
-                <Checkicon name={contact} /> <span className="d-inline-block ms-2">Contact</span>
-        </span>
-        <span className={`nav-link d-flex mb-4 align-items-center pp_links ${funds}`}>
-        <Checkicon name={funds}/><span className="d-inline-block ms-2">Funds</span>
-        </span>
-        <span className={`nav-link d-flex mb-4 align-items-center pp_links ${validation}`}>
-        <Checkicon  name={validation}/><span className="d-inline-block ms-2">Account validation</span>
-            </span>
-            <span className={`nav-link d-flex mb-4 align-items-center pp_links ${upload}`}>
-        <Checkicon  name={upload}/><span className="d-inline-block ms-2">Logo Upload</span>
-        </span>
-            <span className={`nav-link d-flex mb-4 align-items-center pp_links ${department}`}>
-        <Checkicon  name={department}/><span className="d-inline-block ms-2">Add department</span>
-        </span>
+            {['Profile', 'Contact', 'Funds', 'Validation', 'Logo', 'Department', 'Finish'].map((name, index) => {
+                return <span key={index} className={`nav-link d-flex mb-4 align-items-center pp_links ${pageName === name ?'pp_link_active': ''}`}>
+                    <Checkicon name={pageName === name ?'pp_link_active': ''} /> <span className="d-inline-block ms-2">{name}</span>
+                </span>
+            })}
     </nav>
 </div>
     
@@ -118,7 +98,7 @@ export function FormIndicator({pageName}) {
 export function Select({elem, name, onChange}) {
     return <select onChange={onChange} id={name} className="form-control" name={name}>
         <option>Choose from Options</option>
-                {elem()}
+        {elem()}
     </select>
 };
 
@@ -162,4 +142,12 @@ export function BusinessOffice() {
       <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
     </svg>
     
+}
+
+
+export function CopyIcon() {
+   return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+</svg>
+
 }

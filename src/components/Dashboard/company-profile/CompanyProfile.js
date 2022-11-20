@@ -1,16 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import FullScreenLoader from "./FullScreenLoader";
+import FullScreenLoader from "../FullScreenLoader";
 import { Router } from "react-router";
 
 import {
   CompanyDetails,
   FetchCompanyEmployee,
   FetchDepartment,
-} from "../../Actions";
-import EditCompanyInfo from "./EditCompanyInfo";
-import EditCompanyDepartment from "./EditCompanyDepartment";
-import VerificationModal from "./VerificationModal";
+} from "../../../Actions";
+import EditCompanyInfo from "../EditCompanyInfo";
+import EditCompanyDepartment from "../EditCompanyDepartment";
+import VerificationModal from "../VerificationModal";
 // import NetWorkErrors from "../NetWorkErrors";
 
 // const navigate = useNavigate();
@@ -39,7 +39,7 @@ class CompanyProfile extends React.Component {
       if (CompanyDetails.error) {
         this.setState({
           request: false,
-          // errMessage: this.props.companyRegistrationDetails.data,
+          // errMessage: this.props.companyInfo.data,
         });
       }
       // console.log(this.state.companyEmail + "and" + this.state.companyToken);
@@ -50,7 +50,7 @@ class CompanyProfile extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log(this.props.companyRegistrationDetails);
+    // console.log(this.props.companyInfo);
     if (this.props.companyDetailsErr !== prevProps.companyDetailsErr) {
       this.setState({
         errMessage: this.props.companyDetailsErr.messge,
@@ -58,26 +58,26 @@ class CompanyProfile extends React.Component {
       });
     }
     if (
-      this.props.companyRegistrationDetails !==
-        prevProps.companyRegistrationDetails ||
+      this.props.companyInfo !==
+        prevProps.companyInfo ||
       this.props.companyDepartment !== prevProps.companyDepartment
     ) {
       this.setState({
         request: false,
-        // errMessage: this.props.companyRegistrationDetails.data,
+        // errMessage: this.props.companyInfo.data,
       });
 
       // COMPANY DETAILS
-      if (!this.props.companyRegistrationDetails) {
+      if (!this.props.companyInfo) {
         return null;
-      } else if (this.props.companyRegistrationDetails.error) {
+      } else if (this.props.companyInfo.error) {
         this.setState({
           // request: false,
-          errMessage: this.props.companyRegistrationDetails.error,
+          errMessage: this.props.companyInfo.error,
         });
       } else {
         this.setState({
-          companyData: this.props.companyRegistrationDetails.success,
+          companyData: this.props.companyInfo.Data,
           // roles: this.props.employeeRoles.data.success,
         });
       }
@@ -101,16 +101,16 @@ class CompanyProfile extends React.Component {
 
       // ROLE
 
-      if (!this.props.employeeRoles) {
-        return null;
-      } else if (this.props.employeeRoles.error) {
-        this.setState({ errMessage: this.props.employeeRoles.error });
-      } else {
-        this.setState({ roles: this.props.employeeRoles.success });
-      }
+      // if (!this.props.employeeRoles) {
+      //   return null;
+      // } else if (this.props.employeeRoles.error) {
+      //   this.setState({ errMessage: this.props.employeeRoles.error });
+      // } else {
+      //   this.setState({ roles: this.props.employeeRoles.success });
+      // }
     } else if (
       !this.props.companyDepartment ||
-      !this.companyRegistrationDetails
+      !this.companyInfo
     ) {
       return null;
     } else {
@@ -319,10 +319,10 @@ class CompanyProfile extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    companyRegistrationDetails: state.DashboardReducer.companyDetails.data,
-    companyDetailsErr: state.RegistrationReducer.detailsErr,
-    companyDepartment: state.DashboardReducer.fetchDepartment.data,
-    employeeRoles: state.DashboardReducer.companyEmployee.data,
+    companyInfo: state.CompanyDetails,
+    // companyDetailsErr: state.RegistrationReducer.detailsErr,
+    companyDepartment: state.FetchBusinessDepartment,
+    // employeeRoles: state.DashboardReducer.companyEmployee.data,
   };
 };
 

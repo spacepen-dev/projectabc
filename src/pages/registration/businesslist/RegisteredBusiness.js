@@ -14,11 +14,10 @@ import swal from "sweetalert";
 
 
 
- const RegisteredBusiness=({GetRegisteredBusiness, registeredBusinessList}) => {
+const RegisteredBusiness = ({ GetRegisteredBusiness, registeredBusinessList }) => {
+     
      const { token } = useToken();
-     useEffect(() => {
-        // GetRegisteredBusiness({ emailAddress: "oviahonprosperpman32@gmail.com", userToken:"86531c20fefbd813da17282a89bd130e54130ad7" });
-         
+     useEffect(() => {  
         GetRegisteredBusiness({ emailAddress: "ejembithomas61@gmail.com", userToken:token });
      }, [GetRegisteredBusiness, token]);
 

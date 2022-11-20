@@ -2,20 +2,24 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import DetailsCard from "../DetailsCard";
 import { EyeSVG, EyeSlash, WhiteWallet, ProfileWhite } from "../svg/SVG";
-import AccountHistory from "../AccountHistory";
-import TaxHistory from "../TaxHistory";
-import Slider from "../Slider";
-import TableSpinner from "../TableSpinner";
 import {
   FetchWalletHistory,
   FetchDepartment,
   CompanyDetails,
 } from "../../../Actions";
+import DetailsCard from "../DetailsCard";
+import AccountHistory from "../AccountHistory";
+import TaxHistory from "../tax-history";
+import Slider from "../Slider";
+import TableSpinner from "../TableSpinner";
 import useBusinessToken from "../../../hooks/useBusinessToken";
 import useToken from "../../../hooks/useToken";
 import SalariesHistory from "../salary-history";
+
+export const value =  { companyToken: '56609c0e67aafd1d294d2d0d17fb3c6286531c20fefbd813da17282a89bd130e54130ad7f9b4e9e98219dd6adb9a406add95d85d', companyEmail: 'oviahonprosperpman32@gmail.com' }
+
+
 
 const Overview = ({
   getPageId,
@@ -23,8 +27,8 @@ const Overview = ({
   companyEmployee,
   companyAmount,
   companyWallet,
-  FetchDepartment,
   CompanyDetails,
+  FetchDepartment,
   departmentRes,
 }) => {
   const { bizToken } = useBusinessToken();
@@ -41,13 +45,10 @@ const Overview = ({
   });
 
   const values = useMemo(() => {
-    return { businessToken:bizToken, userToken:token, emailAddress: 'oviahonprosperpman32@gmail.com' }
+    return { businessToken:bizToken, userToken:token, emailAddress: 'ejembithomas61@gmail.com' }
   }, [bizToken, token]);
   
 
-  const value = useMemo(() => {
-    return { companyToken: bizToken, companyEmail: 'oviahonprosperpman32@gmail.com' }
-  },[bizToken]);
 
   const getId = (e) => {
     setId(Number(e.target.id));
@@ -56,30 +57,42 @@ const Overview = ({
   // USE EFFECT TO ADD THE LOADER WHEN FETCH DATA FROM THE DATABASE
   useEffect(() => {
     setRequest(true);
-    setTimeout(() => {
+   let id =  setTimeout(() => {
       setRequest(false);
-    }, 3000);
+   }, 3000);
+    return () => {
+      clearTimeout(id)
+    }
   }, [pageId]);
 
   // GETTING THE TAB ON THE OVERVIEW PAGE THAT WAS SELECTED
   // AND MAKE REQUEST BASED ON THE TAB SELECTED
 
   const FetchOverviewData = useCallback(() => {
-    FetchWalletHistory(value);
-    FetchDepartment(value);
-  }, [FetchWalletHistory, FetchDepartment, value]);
 
-  // const FetchOverviewData = useCallback(() => {
-  //   CompanyDetails(value);
-  //   FetchWalletHistory(value);
-  //   FetchDepartment(value);
-  // }, [FetchWalletHistory, FetchDepartment, CompanyDetails, value]);
+    FetchWalletHistory(values);
+  }, [FetchWalletHistory, values]);
+
+  const FetchCompanyDetails = useCallback(() => {
+
+    CompanyDetails(values);
+  }, [CompanyDetails, values]);
+  
+  const FetchDepartments = useCallback(() => {
+
+    FetchDepartment(values)
+  }, [FetchDepartment, values]);
 
   //FETCH DATA FROM FETCH WALLET ACTION CREATOR
 
   useEffect(() => {
-    CompanyDetails(values);
-  }, [values, CompanyDetails]);
+    FetchCompanyDetails(values);
+  }, [values, FetchCompanyDetails]);
+
+  useEffect(() => {
+    FetchDepartments(values)
+  }, [values, FetchDepartments]);
+
 
   // USE EFFECT TO CHANGE THE LINK ON THE SIDE BAR
   useEffect(() => {
@@ -98,44 +111,24 @@ const Overview = ({
     if (!companyEmployee) {
       return null;
     } else {
-      // setCardDetails((state) => {
-      //   return {
-      //     ...state,
-      //     totalEmployee: companyEmployee.success.totalEmployees,
-      //     totalAmount: companyEmployee.success.balance,
-      //     // totalAmount: companyWallet.data.success.length,
-      //   };
-      // });
+      setCardDetails((state) => {
+        return {
+          ...state,
+          totalEmployee: companyEmployee.totalEmployees,
+          totalAmount: companyEmployee.balance,
+          // totalAmount: companyWallet.data.success.length,
+        };
+      });
     }
   }, [companyEmployee]);
 
-  /**
- * useEffect(() => {
-    // ADD FETCH DEPARTMENT ACTION CREATOR
-    let timeOut = setTimeout(() => {
-      const email = localStorage.getItem("email");
-      const token = localStorage.getItem("token");
-
-      FetchDepartment(email, token);
-    }, 3000);
-
-    return () => {
-      clearTimeout(timeOut);
-    };
-    /**
-     * ON ERROR SHOW WARNING MODAL AND RELOAD
-     *
-     * ON SUCCESS PUSH TO LOCAL STORAGE
-     * */
-  // }, [email, token]);
-
-  // COMPANY TRANCTIONAL FUNCTION
+  // COMPANY WALLET/ACCOUNT HISTORY FUNCTION
   const companyAccountFunct = useCallback(() => {
     if (!companyWallet) {
       return null;
     } else {
       const { Data } = companyWallet.Data;
-      if (Data > 1) {
+      if (Data > 0) {
         setCardDetails((state) => {
           return {
             ...state,
@@ -147,21 +140,6 @@ const Overview = ({
   }, [companyWallet]);
 
   //  COMPANY WALLET FUNCTION
-
-  const companyTransactionFunct = useCallback(() => {
-    if (!departmentRes) {
-      return null;
-    } else {
-      localStorage.setItem("department", JSON.stringify(departmentRes.success));
-    }
-  }, [departmentRes]);
-
-  useEffect(() => {
-
-    // companyAccountFunct();
-    companyTransactionFunct();
-    // companyEmployeeFunct();
-  }, [companyTransactionFunct]);
 
   // USE EFFECT TO FETCH THE DATA FOR THE TOTAL EMPLOYEE
   useEffect(() => {

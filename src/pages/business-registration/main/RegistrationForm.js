@@ -72,7 +72,6 @@ export const RegistrationContext = createContext();
             values.businessBankAccountName = bankDetails.owner
             values.businessBankCode = bankDetails.code
             values.businessCategory = name
-            console.log(values)
             RegisterBusiness({...values, user_token:token})
 
         }
