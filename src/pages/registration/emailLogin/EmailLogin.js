@@ -1,6 +1,6 @@
 import { ButtonLoader, Error, NewBackground } from "../ui";
 import Logo from '../../../assets/img/logo.svg';
-import { EmailLogicRequest } from "../../../Actions";
+import { bankList, EmailLogicRequest } from "../../../Actions";
 import { connect } from "react-redux";
 
 import { Input } from "../ui";
@@ -21,8 +21,20 @@ const EmailLogin = ({ EmailLogicRequest, login }) => {
         validationSchema: EmailLoginSchema,
         onSubmit: (values) => {
             
+            bankList((res) => {
+                if (res) {
+                    localStorage.setItem('BankList', JSON.stringify(res.data.success));
+                  
+                    if (res.status !== 200) {
+                        return;
+                    }
+                    localStorage.setItem('BankList', JSON.stringify(res.data.success));
+                }
+        
+            });
             EmailLogicRequest(values);
-            setLoading(true)
+            setLoading(true);
+
         }
     });
 
