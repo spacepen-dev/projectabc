@@ -31,11 +31,12 @@ const EmailLogin = ({ EmailLogicRequest, login }) => {
         const { loginSuccess, loginError, loginNetworkError, loginMessage } = login;
         setLoading(false)
         if (loginError) {
-            swal("Error!", loginMessage);
+            swal("Error!", loginMessage, "error");
         } else if (loginSuccess) {
             navigate('/user-login-password', { state: loginMessage });
         } else if (loginNetworkError) {
-            swal("Error!", loginMessage);
+            console.log(loginMessage)
+            swal("Error!", `${loginMessage}! Please, try again later.`,"error");
              
         }
     }, [login, navigate]);

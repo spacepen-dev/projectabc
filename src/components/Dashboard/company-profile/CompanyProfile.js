@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import FullScreenLoader from "../FullScreenLoader";
-import { Router } from "react-router";
 
 import {
   CompanyDetails,

@@ -36,7 +36,7 @@ let InitialState = {
 export const CompanyDetailsReducers = (state=COMPANY_DETAILS_INIT , action) => {
   switch (action.type) {
     case 'COMPANY_DETAILS':
-      return { ...state, Data: action.payLoad };
+      return { ...state };
     case 'COMPANY_DETAILS_SUCCESS':
       return { ...state, companySuccessRes: true, Data: action.payLoad, companyErrorRes: false, companyNetworkErrorRes: false, companyMessage: '' };
     case 'COMPANY_DETAILS_ERROR':
@@ -58,13 +58,13 @@ export const FetchWalletHistory = (state=WALLET_INIT, action) => {
     case "FETCH_WALLET_HISTORY":
       return { ...state, Data: action.payLoad };
     case "FETCH_WALLET_HISTORY_SUCCESS":
-      return { ...state, walletSuccess: true, walletError:false, walletNetworkError:false, walletMessage:'', Data: action.payLoad };
+      return { ...state, success: true, error:false, networkError:false, message:'', Data: action.payLoad };
       
     case "FETCH_WALLET_HISTORY_ERROR":
-      return { ...state, walletSuccess: false, walletError:true, walletNetworkError:false, walletMessage:action.payLoad, Data: [] };
+      return { ...state, success: false, error:true, networkError:false, walletMessage:action.payLoad, Data: [] };
       
     case "FETCH_WALLET_HISTORY_ERR_MESSAGE":
-      return { ...state, walletSuccess: false, walletError:false, walletNetworkError:true, walletMessage:action.payLoad, Data: [] };
+      return { ...state, success: false, error:false, networkError:true, message:action.payLoad, Data: [] };
   
     default:
       return state;
@@ -99,13 +99,13 @@ export const FetchSalaryHistory = (state=SALARY_INIT, action) => {
     case "FETCH_SALARY_HISTORY":
       return { ...state };
     case "FETCH_SALARY_HISTORY_SUCCESS":
-      return { ...state, salarySuccess: true, salaryError:false, salaryNetworkError:false, salaryMessage:'', Data: action.payLoad };
+      return { ...state, success: true,error:false, networkError:false, message:'', Data: action.payLoad };
       
     case "FETCH_SALARY_HISTORY_ERROR":
-      return { ...state, salarySuccess: false, salaryError:true, salaryNetworkError:false, salaryMessage:action.payLoad, Data: [] };
+      return { ...state, success: false, error:true, networkError:false, message:action.payLoad, Data: [] };
       
     case "FETCH_SALARY_HISTORY_ERR_MESSAGE":
-      return { ...state, salarySuccess: false, salaryError:false, salaryNetworkError:true, salaryMessage:action.payLoad, Data: [] };
+      return { ...state, success: false, error:false, networkError:true, message:action.payLoad, Data: [] };
   
     default:
       return state;
@@ -119,13 +119,13 @@ export const FetchTaxHistory = (state=TAX_INIT, action) => {
     case "FETCH_TAX_HISTORY":
       return { ...state, };
     case "FETCH_TAX_HISTORY_SUCCESS":
-      return { ...state, taxSuccess: true, taxError:false, taxNetworkError:false, taxMessage:'', Data: action.payLoad };
+      return { ...state, success: true, error:false, networkError:false, message:'', Data: action.payLoad };
       
     case "FETCH_TAX_HISTORY_ERROR":
-      return { ...state, taxSuccess: false, taxError:true, taxNetworkError:false, taxMessage:action.payLoad, Data: [] };
+      return { ...state, success: false, error:true, networkError:false, message:action.payLoad, Data: [] };
       
     case "FETCH_TAX_HISTORY_ERR_MESSAGE":
-      return { ...state, taxSuccess: false, taxError:false, taxNetworkError:true, taxMessage:action.payLoad, Data: [] };
+      return { ...state, success: false, error:false, networkError:true, message:action.payLoad, Data: [] };
   
     default:
       return state;

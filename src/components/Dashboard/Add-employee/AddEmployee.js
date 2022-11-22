@@ -5,8 +5,7 @@ import EmployeeRegistration from "../employee-component";
 
 const AddEmployee = ({
   RegisterEmployee,
-  registerEmployeeErr,
-  registerEmployeeSuccess,
+  registerEmployee
 }) => {
   const [employeeData, setEmployeData] = useState({
     employeeFirstname: "",
@@ -40,8 +39,7 @@ const AddEmployee = ({
         onHandleChange={onHandleChange}
         employeeData={employeeData}
         registerEmployeeAction={RegisterEmployee}
-        addEmployeeErr={registerEmployeeErr}
-        addEmployeeSuccess={registerEmployeeSuccess}
+        addEmployeeSuccess={registerEmployee}
         addEmployeeLink='addEmployee'
       />
     </div>
@@ -50,8 +48,7 @@ const AddEmployee = ({
 
 const mapStateToProps = (state) => {
   return {
-    registerEmployeeErr: state.DashboardReducer.registerEmployeeErr,
-    registerEmployeeSuccess: state.DashboardReducer.registerEmployees,
+    registerEmployee: state.RegisterEmployeeReducer
   };
 };
 export default connect(mapStateToProps, { RegisterEmployee })(AddEmployee);

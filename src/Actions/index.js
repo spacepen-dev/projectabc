@@ -36,9 +36,7 @@ export const CompanyDetails = (values) => async (dispatch) => {
       const { error, success } = data.data;
       if (error) {
         dispatch({ type: "COMPANY_DETAILS_ERROR", payLoad: error });
-      } else if (success) {
-        console.log(success)
-        
+      } else if (success) {        
         dispatch({ type: "COMPANY_DETAILS_SUCCESS", payLoad: success });
       }
       
@@ -74,7 +72,18 @@ export const RegisterEmployee =
     // } = values;
     try {
       const data = await BasedURL.post("/registerEmployee.php", {...values});
-      dispatch({ type: "REGISTER_EMPLOYEE", payLoad: data });
+      dispatch({ type: "REGISTER_EMPLOYEE", });
+      if (data) {
+        const { error, success } = data.data;
+        if (error) {
+          dispatch({ type: "REGISTER_EMPLOYEE_ERROR",payLoad:error });
+          
+        } else if (success) {
+          dispatch({ type: "REGISTER_EMPLOYEE_SUCCESS",payLoad:success });
+          
+        }
+        
+      }
     } catch (error) {
       dispatch({ type: "REGISTER_EMPLOYEE_ERR_MESSAGE", payLoad: error });
     }
@@ -83,43 +92,35 @@ export const RegisterEmployee =
 // UPDATE EMPLOYEE DETAIL ACTION
 export const UpdateEmployee =
   (values, token, accountVerified) => async (dispatch) => {
-    const {
-      employeeFirstname,
-      employeeLastname,
-      employeeEmail,
-      employeeRole,
-      employeeDepartment,
-      employeeRelives,
-      employeeTin,
-      employeeAnnualGrossSalary,
-      employeeAccountNumber,
-      filterBank,
-      bankcode,
-      employeePhoneNumber,
-      employeeToken,
-      employeeState
-    } = values;
+    // const {
+    //   employeeFirstname,
+    //   employeeLastname,
+    //   employeeEmail,
+    //   employeeRole,
+    //   employeeDepartment,
+    //   employeeRelives,
+    //   employeeTin,
+    //   employeeAnnualGrossSalary,
+    //   employeeAccountNumber,
+    //   filterBank,
+    //   bankcode,
+    //   employeePhoneNumber,
+    //   employeeToken,
+    //   employeeState
+    // } = values;
     try {
-      const data = await BasedURL.post("/updateEmployee.php", {
-        employeeFirstname,
-        employeeLastname,
-        employee_email: employeeEmail,
-        employeeRole,
-        employeeDepartment,
-        employeeRelieves: employeeRelives,
-        employeeTin,
-        employeeState,
-        employeeAccountName: accountVerified,
-        employeeAccountNumber,
-        employeeBankName: filterBank,
-        employeeAgs: employeeAnnualGrossSalary,
-        employeeMgs: employeeAnnualGrossSalary / "12",
-        companyToken: token,
-        employeePhoneNumber,
-        employeeToken: employeeToken,
-        employeeBankCode: bankcode,
-      });
+      const data = await BasedURL.post("/updateEmployee.php", { ...values });
       dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
+      if (data) {
+        const { error, success } = data.data;
+        if (error) {
+          
+          dispatch({ type: "UPDATE_EMPLOYEE_ERROR", payLoad: error });
+        } else if (success) {
+          
+          dispatch({ type: "UPDATE_EMPLOYEE_SUCCESS", payLoad: success });
+        }
+      }
     } catch (error) {
       dispatch({ type: "UPDATE_EMPLOYEE_ERR_MESSAGE", payLoad: error });
     }
@@ -171,19 +172,6 @@ export const FetchDepartment = (values) => async (dispatch) => {
   }
 };
 
-export const EditDepartment =
-  (token, departments, email) => async (dispatch) => {
-    try {
-      const data = await BasedURL.post("/registerDepartment.php	", {
-        token: token,
-        departments,
-        companyEmail: email,
-      });
-      dispatch({ type: "EDIT_DEPARTMENT", payLoad: data });
-    } catch (error) {
-      dispatch({ type: "EDIT_DEPARTMENT_ERR_MESSAGE", payLoad: error });
-    }
-  };
 
 // RESEND REGISTRATION OTP ACTION
 export const ResendOTP = (email) => async (dispatch) => {
@@ -236,12 +224,18 @@ export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
 
 // FETCH COMPANY DATA
 
-export const FetchCompanyEmployee = (token) => async (dispatch) => {
+export const FetchCompanyEmployee = (values) => async (dispatch) => {
   try {
-    const data = await BasedURL.post("/fetchCompanyEmployee.php", {
-      companyToken: token,
-    });
+    const data = await BasedURL.post("/fetchCompanyEmployee.php", {...values});
     dispatch({ type: "FETCH_COMPANY_EMPLOYEE", payLoad: data });
+    if (data) {
+      const { error, success } = data;
+      if (error) {
+        dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERROR", payLoad: error });
+      } else if (success) {
+        dispatch({ type: "FETCH_COMPANY_EMPLOYEE_SUCCESS", payLoad: success });
+      }
+    }
   } catch (error) {
     dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERR_MESSAGE", payLoad: error });
   }
@@ -288,40 +282,7 @@ export const bankList = async (funct=(res)=> {}) => {
 }
 // FETCH ACCOUNT DETAILS
 
-export const UpdateCompanyDetails = (data) => async (dispatch) => {
-  const {
-    CompanyName,
-    companyEmail,
-    companyToken,
-    regNo,
-    about,
-    address,
-    state,
-    website,
-    maximumEmployeeSalary,
-    tin,
-    phoneNumber,
-  } = data;
-  try {
-    const data = await BasedURL.post("/updateCompanyAccount.php", {
-      companyName: CompanyName,
-      companyEmail,
-      companyToken,
-      companyRegNo: regNo,
-      about,
-      companyAddress: address,
-      companyState: state,
-      companyWebsite: website,
-      companyCategory: "School",
-      maximumEmployeeSalary,
-      companyTin: tin,
-      phoneNumber,
-    });
-    dispatch({ type: "UPDATE_COMPANY_DETAILS", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "UPDATE_COMPANY_DETAILS_ERR_MESSAGE", payLoad: error });
-  }
-};
+
 
 // TAX HISTORY ACTION CREATOR
 
@@ -355,11 +316,10 @@ export const FetchSalaryHistory = (value) => async (dispatch) => {
       const { success, error } = data.data;
       if (error) {
         dispatch({ type: "FETCH_SALARY_HISTORY_ERROR", payLoad: error });
-      } else if (success.length > 0) {
+      } else if (success) {
         dispatch({ type: "FETCH_SALARY_HISTORY_SUCCESS", payLoad: success });
         
-      }
-      
+      };
     }
   } catch (error) {
     dispatch({ type: "FETCH_SALARY_HISTORY_ERR_MESSAGE", payLoad: error });
@@ -479,12 +439,11 @@ export const EmailLogicRequest = (values, callback = (res) => { }) => async (dis
     }
 
   } catch (error) {
-    dispatch({ type: "EMAIL_LOGIN_ERR_MESSAGE", payLoad: error });
+    dispatch({ type: "EMAIL_LOGIN_ERR_MESSAGE", payLoad: error.message });
   }
 }
 
 export const PasswordLogicRequest = (values) => async (dispatch) => {  
-  console.log(values)
   try {
     const data = await BasedURL.post("userPasswordLogin.php", {...values});
 
@@ -499,7 +458,7 @@ export const PasswordLogicRequest = (values) => async (dispatch) => {
       }
     }
   } catch (error) {
-    dispatch({ type: "PASSWORD_LOGIN_ERR_MESSAGE", payLoad: error });
+    dispatch({ type: "PASSWORD_LOGIN_ERR_MESSAGE", payLoad: error.message });
   }
 };
 

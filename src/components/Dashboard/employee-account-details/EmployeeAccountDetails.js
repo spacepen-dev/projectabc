@@ -4,13 +4,15 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
-import DashBoardText from "./DashBoardText";
-import Input from "../Registration/Input";
-import LoaderButton from "../LoaderButton";
-import NetWorkErrors from "../NetWorkErrors";
-import AccountNameVerification from "./AccountNameVerification";
+import DashBoardText from "../DashBoardText";
+import Input from "../../Registration/Input";
+import LoaderButton from "../../LoaderButton";
+import NetWorkErrors from "../../NetWorkErrors";
+import AccountNameVerification from "../AccountNameVerification";
 
-import SuccessRequestModal from "./SuccessRequestModal";
+import SuccessRequestModal from "../SuccessRequestModal";
+import useBankList from "../../../hooks/useBankList";
+import useBusinessToken from "../../../hooks/useBusinessToken";
 
 const EmployeeAccountDetails = ({
   bankListRes,
@@ -39,18 +41,11 @@ const EmployeeAccountDetails = ({
   const [bankcode, setBankCode] = useState(employeeData.employeeBankCode);
   const [validation, setValidation] = useState({});
   const [request, setRequest] = useState(false);
-  const [errorMessage, setMessage] = useState("");
-  const [error, setError] = useState("");
-  const [showModal, setShow] = useState(false);
-  const [success, setSuccess] = useState("");
-  const [receivedToken, setRecievedToken] = useState("");
   const [employeeAccountName, setAccountName] = useState(employeeData.employeeAccountName);
-  const [bankCodeList] = useState(() =>
-    JSON.parse(localStorage.getItem("bankList"))
-  );
+  const [bankCodeList] = useBankList();
+  const { bizToken } = useBusinessToken();
 
   const navigate = useNavigate();
-console.log(employeeData);
   // ACCOUNT NAME ON CHANGE
  
 
@@ -74,130 +69,7 @@ console.log(employeeData);
   }, [accountName]);
 
 
-  useEffect(() => {
-    if (!accountNameErr) return;
-    else {
-      setAccountName(accountNameErr.message);
-    }
-  }, [accountNameErr]);
-
-  useEffect(() => {
-    if (!bankListRes) return null;
-    if (bankListRes.error) return null;
-    localStorage.setItem("bankList", JSON.stringify(bankListRes.success));
- 
-  }, [bankListRes]);
-  // FETCH THE TOKEN FROM THE LOCAL STORAGE
-
-  useEffect(() => {
-    if (!localStorage.getItem("aminien_token")) {
-      setRecievedToken("");
-    } else {
-      setRecievedToken(localStorage.getItem("aminien_token"));
-    }
-  }, []);
-
-  // USEEFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL FOR ADD EMPLOYEE
-
-  useEffect(() => {
-    if (!addEmployeeSuccess) {
-      return;
-    } else {
-      setRequest(false);
-      const { error, success } = addEmployeeSuccess.data;
-
-      if (error) {
-        setShow(true);
-        setError(error);
-        const removeTimeOut = setTimeout(() => {
-          setShow(false);
-        }, 4000);
-        return () => {
-          clearTimeout(removeTimeOut);
-        };
-      } else if (success) {
-        setSuccess(success);
-        const removeTimeOut = setTimeout(() => {
-          setSuccess("");
-          window.location.reload();
-        }, 4000);
-        return () => {
-          clearTimeout(removeTimeOut);
-        };
-      }
-    }
-  }, [addEmployeeSuccess, navigate]);
-
-  // USEEFFECT TO FETCH SUCCESS MESSAGE WHEN THE REQUEST IS SUCCESSFUL FOR EDIT EMPLOYEE
-  useEffect(() => {
-    if (!editEmployeeSuccess) {
-      return;
-    } else {
-      setRequest(false);
-      const { error, success } = editEmployeeSuccess.data;
-      if (error) {
-        setShow(true);
-        setError(error);
-        const removeTimeOut = setTimeout(() => {
-          setShow(false);
-          // window.location.reload();
-          // navigate("overview");
-        }, 4000);
-        return () => {
-          clearTimeout(removeTimeOut);
-        };
-      } else if (success) {
-        setSuccess(success);
-        const removeTimeOut = setTimeout(() => {
-          setSuccess("");
-          close();
-          window.location.reload();
-        }, 4000);
-        return () => {
-          clearTimeout(removeTimeOut);
-        };
-      }
-    }
-  }, [editEmployeeSuccess, close]);
-
-  // USEEFFECT TO FETCH NETWORK ERROR FOR ADD EMPLOYEE
-  useEffect(() => {
-    if (!addEmployeeErr) {
-      return;
-    } else {
-      setRequest(false);
-      setShow(true);
-      setMessage(addEmployeeErr.message);
-
-      const removeTimeOut = setTimeout(() => {
-        setShow(false);
-        setMessage(null);
-        window.location.reload();
-      }, 4000);
-      return () => {
-        clearTimeout(removeTimeOut);
-        window.location.reload();
-      };
-    }
-  }, [addEmployeeErr]);
-
-  // USEEFFECT TO FETCH NETWORK ERROR FOR EDIT EMPLOYEE
-  useEffect(() => {
-    if (!editEmployeeErr) {
-      return;
-    } else {
-      setRequest(false);
-      setShow(true);
-      setMessage(editEmployeeErr.message);
-      const removeTimeOut = setTimeout(() => {
-        setShow(false);
-        window.location.reload();
-      }, 4000);
-      return () => {
-        clearTimeout(removeTimeOut);
-      };
-    }
-  }, [editEmployeeErr]);
+  
 
   const BankList = () => {
     const filterBankName = bankCodeList
@@ -240,18 +112,18 @@ console.log(employeeData);
       setRequest(true);
       if (editEmployeeLink) {
         // REGISTRATION EMPLOYEE ACTION CREATOR
-        editEmployeeAction(
-          { ...employeeData, filterBank, bankcode, accountName, accountNumber },
-          receivedToken,
-          employeeAccountName
-        );
+        // editEmployeeAction(
+        //   { ...employeeData, filterBank, bankcode, accountName, accountNumber },
+        //   receivedToken,
+        //   employeeAccountName
+        // );
       } else if (addEmployeeLink) {
         // EDIT EMPLOYEE ACTIONs
-        registerEmployeeAction(
-          { ...employeeData, filterBank, bankcode },
-          receivedToken,
-          employeeAccountName
-        );
+        // registerEmployeeAction(
+        //   { ...employeeData, filterBank, bankcode },
+        //   receivedToken,
+        //   employeeAccountName
+        // );
       }
     }
   };
@@ -328,8 +200,9 @@ console.log(employeeData);
           
         </Form.Group>
         <div className='flex align-items-center justify-content-end'>
-          <AccountNameVerification
-            data={{ receivedToken, bankcode, accountNumber }}
+          {console.log(bizToken)}
+             <AccountNameVerification
+            data={{ receivedToken:bizToken, bankcode, accountNumber }}
           />
         </div>
       </Row>
@@ -344,14 +217,7 @@ console.log(employeeData);
 
         <LoaderButton btnName='Finish' btnStyle='ms-4' request={request} />
       </div>
-      {showModal && (
-        <NetWorkErrors
-          errMessage={errorMessage}
-          serverErr={error}
-          removeLoader={() => setRequest(false)}
-        />
-      )}
-      {success && <SuccessRequestModal message={success} />}
+     
     </Form>
   );
 };

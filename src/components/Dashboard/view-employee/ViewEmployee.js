@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import DataTable from "react-data-table-component";
 // import TableSpinner from "./TableSpinner";
-import EditCompanyEmployee from "./EditCompanyEmployee";
-import { FetchCompanyEmployee, DeleteEmployeeAction } from "../../Actions";
-import DeleteEmployee from "./OptionsModal";
+import EditCompanyEmployee from "../EditCompanyEmployee";
+import { FetchCompanyEmployee, DeleteEmployeeAction } from "../../../Actions";
+import DeleteEmployee from "../OptionsModal";
+import useBusinessToken from "../../../hooks/useBusinessToken";
+import useToken from "../../../hooks/useToken";
 // import { EmployeeIcon } from "./svg/SVG";
 
 const ViewEmployee = ({
@@ -15,16 +17,15 @@ const ViewEmployee = ({
   const [employeeData, setEmployeeData] = useState([]);
   const [filterValue, setFilterValue] = useState("");
   const [pending, setPending] = useState(false);
+  const { bizToken } = useBusinessToken();
+  const { token } = useToken();
 
   // FETCH ALL COMPANY EMPLOYEE DATA AND FETCH TOKEN FROM CACHE
   useEffect(() => {
-    if (!localStorage.getItem("aminien_token")) {
-      // SESSION TIME OUT MODAL
-      console.log("no token");
-    }
     setPending(true);
-    FetchCompanyEmployee(localStorage.getItem("aminien_token"));
-  }, [FetchCompanyEmployee]);
+    FetchCompanyEmployee({ businessToken: bizToken, userToken:token });
+
+  }, [FetchCompanyEmployee,bizToken, token]);
 
   // GET EMPLOYEE DATA
 
@@ -133,7 +134,7 @@ const ViewEmployee = ({
 
 const mapStateToProps = (state) => {
   return {
-    companyEmployee: state.DashboardReducer.companyEmployee.data,
+    companyEmployee: state.CompanyEmployee,
     removeEmployeeRes: state.DashboardReducer.removeEmployee,
   };
 };

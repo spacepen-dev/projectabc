@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import DashBoardText from "./DashBoardText";
-import Input from "../Registration/Input";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { FetchBankList } from "../../Actions";
+import { FetchBankList } from "../../../Actions";
+import Input from "../../Registration/Input";
+import DashBoardText from "../DashBoardText";
+import useHandleResponse from "../../../hooks/useHandleResponse";
 
 const EmployeeProfile = ({
   employeeEmail,
@@ -19,14 +20,15 @@ const EmployeeProfile = ({
   nextQuestion,
   onHandleChange,
   FetchBankList,
-  departmentRes,
+  department,
 }) => {
   const [validation, setValidation] = useState({});
+  const [dep] = useHandleResponse(department);
 
 
-  const [departmentData] = useState(() =>
-    JSON.parse(localStorage.getItem("department"))
-  );
+  // const [departmentData] = useState(() =>
+  //   JSON.parse(localStorage.getItem("department"))
+  // );
 
   const states = [
     "--- SELECT STATE ---",
@@ -220,7 +222,7 @@ const EmployeeProfile = ({
       <Row>
         <Form.Group as={Col}>
           <DashBoardText name='Department' label='Select employee department' />
-          {departmentData && <select
+          {dep && <select
             name='employeeDepartment'
             className='select mt-2'
             onChange={onHandleChange}>
@@ -229,7 +231,7 @@ const EmployeeProfile = ({
             ) : (
               <option>{employeeDepartment}</option>
             )}
-            {departmentData.map(({ companyDepartment }) => {
+            {dep.map(({ companyDepartment }) => {
               return (
                 <option key={companyDepartment} value={companyDepartment}>
                   {companyDepartment}
@@ -275,10 +277,10 @@ const EmployeeProfile = ({
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     departmentRes: state.DashboardReducer.fetchDepartment.data,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    department: state.FetchBusinessDepartment,
+  };
+};
 
-export default connect(null, { FetchBankList })(EmployeeProfile);
+export default connect(mapStateToProps, { FetchBankList })(EmployeeProfile);

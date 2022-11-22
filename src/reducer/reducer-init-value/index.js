@@ -8,10 +8,10 @@ export const COMPANY_DETAILS_INIT = {
 }
 
 export const WALLET_INIT = {
-    walletSuccess: false,
-    walletError: false,
-    walletNetworkError: false,
-    walletMessage: '',
+    success: false,
+    error: false,
+    networkError: false,
+    message: '',
     Data: []
 }
 // 
@@ -23,25 +23,58 @@ export const DEPARTMENT_INIT = {
     Data: []
 }
 export const SALARY_INIT = {
-    salarySuccess: false,
-    salaryError: false,
-    salaryNetworkError: false,
-    salaryMessage: '',
+    success: false,
+    error: false,
+    networkError: false,
+    message: '',
     Data:[]
 }
 
 export const ACCOUNT_INIT = {
-    accountSuccess: false,
-    accountError: false,
-    accountNetworkError: false,
-    accountMessage: '',
+    success: false,
+    error: false,
+    networkError: false,
+    message: '',
     Data: []
 }
 
 export const TAX_INIT = {
-    taxSuccess: false,
-    taxError: false,
-    taxNetworkError: false,
-    taxMessage: '',
+    success: false,
+    error: false,
+    networkError: false,
+    message: '',
     Data: []
 }
+
+export const ADD_EMPLOYEE_REDUCER = {
+    registerEmployeeError: false,
+    registerEmployeeSuccess: false,
+    registerEmployeeNetworkError: false,
+    registerEmployeeMessage: '',
+    
+}
+export const EDIT_EMPLOYEE_REDUCER = {
+    editEmployeeError: false,
+    editEmployeeSuccess: false,
+    editEmployeeNetworkError: false,
+    editEmployeeMessage: '',
+    
+}
+
+export const LOGIN_INIT = {
+    isLoading:false,
+    loginError: false,
+    loginSuccess: false,
+    LoginMessage: '',
+    LoginNetworkerror:false
+}
+
+export const PASSWORD_INIT = {
+    passwordError: false,
+    passwordSuccess: false,
+    passwordNetworkError: false,
+    passwordMessage: '',
+    
+}
+
+

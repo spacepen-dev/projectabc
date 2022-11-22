@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import EmployeeAccountDetails from "../EmployeeAccountDetails";
-import EmployeeSalaryInfo from "../EmployeeSalaryInfo";
-import EmployeeProfile from "../EmployeeProfile";
-// import { Warning } from "./svg/SVG";
-// import VerificationModal from "./VerificationModal";
-import EmployeePension from "../EmployeePension";
-import AddEmployeeForm from "./AddEmployeeForm";
+import AddEmployeeForm from "../AddEmployeeForm";
+import useToken from "../../../hooks/useToken";
+import useBusinessToken from "../../../hooks/useBusinessToken";
+import EmployeeProfile from "../employee-profile";
+import EmployeeSalaryInfo from "../Employee-salary";
+import EmployeePension from "../Employee-pension";
+import EmployeeAccountDetails from "../employee-account-details";
 
 const EmployeeRegistration = ({
   err,
@@ -24,20 +23,12 @@ const EmployeeRegistration = ({
   getEmployeeData,
   close,
 }) => {
-  const [index, setIndex] = useState(3);
-  const [token, setToken] = useState("");
+  const [index, setIndex] = useState(1);
   const navigate = useNavigate();
+  const { token } = useToken();
+  const {bizToken} = useBusinessToken();
 
-  // GET THE TOKEN FROM LOCAL STORAGE
-  useEffect(() => {
-    if (!localStorage.getItem("aminien_token")) {
-      // SET THE SESSTION TIME OUR MODAL TO TRUE
-      navigate("/");
-      // setRecievedToken("");
-    } else {
-      setToken(localStorage.getItem("aminien_token"));
-    }
-  }, [navigate]);
+
 
   //  ALL INPUT VARIFICATION
 
@@ -53,9 +44,6 @@ const EmployeeRegistration = ({
     });
   };
 
-  // const HomePage = () => {
-  //   navigate("/");
-  // };
 
   return (
     <div>
@@ -101,7 +89,6 @@ const EmployeeRegistration = ({
             employeeRole={employeeData["employeeRole"]}
             employeeDepartment={employeeData.employeeDepartment}
             employeestate={employeeData.employeestate}
-            
             employeePhoneNumber={employeeData["employeePhoneNumber"]}
             index={index}
             err={err}

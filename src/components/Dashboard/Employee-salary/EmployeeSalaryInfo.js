@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 
-import DashBoardText from "./DashBoardText";
-import Input from "../Registration/Input";
-import { payTax } from "../../components/Dashboard/utils/personalIncomeTax";
-import { Tax } from "./utils/NewTaxCalculation";
+import DashBoardText from "../DashBoardText";
+import Input from "../../Registration/Input";
+import { payTax } from "../utils/personalIncomeTax";
+import { Tax } from "../utils/NewTaxCalculation";
 
 const EmployeeSalaryInfo = ({
   index,

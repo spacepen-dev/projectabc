@@ -35,7 +35,6 @@ const AddDepartment = ({ SubmitDepartment, businessDepartment }) => {
     if (!businessDepartment) return null;
     setLoading(false)
     const { success, error, networkError, message } = businessDepartment;
-    console.log(success);
     if (error) {
         swal("Error!", message);
     } else if (success) {

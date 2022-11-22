@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { connect } from 'react-redux';
 import { CompanyDetails } from "../../../Actions";
 import useBusinessToken from "../../../hooks/useBusinessToken";
@@ -6,36 +6,33 @@ import useHandleResponse from "../../../hooks/useHandleResponse";
 import useHandleResponseObject from "../../../hooks/useHandleResponseObject";
 import useToken from "../../../hooks/useToken";
 import { BusinessOffice } from "../../../pages/registration/ui";
+import EditCompanyDepartment from "../Edit-department";
+import EditCompanyInfo from "../Edit-company-profile/EditCompanyInfo";
 
 const Profile = ({ companyInfo, departments, CompanyDetails }) => {
 
+  const [page, setPage] = useState(1);
   const { data } = useHandleResponseObject(companyInfo);
   const [dep] = useHandleResponse(departments);
   const { token } = useToken();
  const { bizToken } = useBusinessToken();
-
+console.log(page)
   const values = useMemo(() => {
     return { businessToken:bizToken, userToken:token, emailAddress: 'ejembithomas61@gmail.com' }
   }, [bizToken, token]);
 
-// const FetchCompanyDetails = useCallback(() => {
-
-//     CompanyDetails(values);
-//   }, [CompanyDetails, values]);
+  // useEffect(() => {
+  //     CompanyDetails(values);
+  // }, [values, CompanyDetails]);
   
-//   const FetchDepartments = useCallback(() => {
-
-//     FetchDepartment(values)
-//   }, [FetchDepartment, values]);
-  // FETCH 
-
   useEffect(() => {
-    if (!data) {
-      CompanyDetails(values);
+    if (!companyInfo) {
+      return;
     }
-    return;
+    // console.log(comp)
     
-  },[values,data ,CompanyDetails]);
+  }, [companyInfo]);
+
 
   const displayRoles = () => {
     return data?.map((cur, index) => {
@@ -56,15 +53,28 @@ const Profile = ({ companyInfo, departments, CompanyDetails }) => {
       );
     });
   };
+
+  if (page === 2) {
+    return <EditCompanyDepartment
+      data={dep}
+      goBack={(value) => setPage(value)}
+    />
+  } else if (page === 3) {
+    return <EditCompanyInfo
+    data={data}
+    goBack={(value) => setPage(value)}
+  />
+    }
+  
     
-  return <div>
-    <div>
+return <div>
+  <div>
       <h4 className='entire-page-headers'>COMPANY DETAILS </h4>
-    </div>
+  </div>
     <div className='profile-info'>
       <div className='company-logo-div'>
         <div id='displayCompanyLogo'>
-          {data?.companyLogo ? <img src={data.companyLogo} alt='company logo' width={100} height={100} className='company-logo' /> : <BusinessOffice />}
+          {data?.companyLogo ? <img src={data?.companyLogo} alt='company logo' width={100} height={100} className='company-logo' /> : <BusinessOffice />}
          
         </div>
         <div className='logo-svg-div'>
@@ -103,7 +113,7 @@ const Profile = ({ companyInfo, departments, CompanyDetails }) => {
           employees: {data?.totalEmployees}
         </div>
       </div>
-      <p className='freewill-address'>{data.address}</p>
+      <p className='freewill-address'>{data?.address}</p>
     </div>
     {/* <p className='freewill-address'></p> */}
 
@@ -113,7 +123,7 @@ const Profile = ({ companyInfo, departments, CompanyDetails }) => {
         <div className='about-svg-div'>
           <svg
             // onClick={() => ProfileEdit()}
-            onClick={() => this.setState({ page: this.state.page + 1 })}
+            onClick={() => setPage((prev)=> prev + 2)}
             xmlns='http://www.w3.org/2000/svg'
             width='16'
             height='16'
@@ -125,7 +135,6 @@ const Profile = ({ companyInfo, departments, CompanyDetails }) => {
           </svg>
         </div>
       </div>
-
       <p className='freewill-about company-about'>
         {data?.about}
       </p>
@@ -138,7 +147,7 @@ const Profile = ({ companyInfo, departments, CompanyDetails }) => {
           <div className='about-svg-div'>
             <svg
               // onClick={() => ProfileEdit()}
-              onClick={() => this.setState({ page: this.state.page + 2 })}
+              onClick={() => setPage((prev)=> prev + 1)}
               xmlns='http://www.w3.org/2000/svg'
               width='16'
               height='16'
@@ -185,14 +194,8 @@ const Profile = ({ companyInfo, departments, CompanyDetails }) => {
         </p>
       </div>
 
-      {/* {this.state.errMessage && (
-        <VerificationModal
-          message={`Sorry we can not fetch all your company details at this time.`}
-          close={closeModal}
-        />
-      )} */}
+     
     </div>
-    {/* {this.state.request && <FullScreenLoader />} */}
   </div>
 }
 

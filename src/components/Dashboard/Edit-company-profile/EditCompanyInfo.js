@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Button, Col, Form, Row, FormControl } from "react-bootstrap";
 import { connect } from "react-redux";
-import { UpdateCompanyDetails } from "../../Actions";
-
-import Input from "../Registration/Input";
-import DashBoardText from "./DashBoardText";
-import LoaderButton from "../LoaderButton";
-import NetWorkErrors from "../NetWorkErrors";
-import SuccessRequestModal from "../Dashboard/SuccessRequestModal";
+import { UpdateCompanyDetails } from "./EditProfileReducer";
+import Input from "../../Registration/Input";
+import DashBoardText from "../DashBoardText";
+import LoaderButton from "../../LoaderButton";
 
 class EditCompanyInfo extends Component {
   constructor(props) {
@@ -15,22 +12,19 @@ class EditCompanyInfo extends Component {
 
     this.state = {
       state: this.props.data.state,
+      lga: this.props.data.lga,
+      emailAddress: this.props.data.emailAddress,
+      businessCategory: this.props.data.businessCategory,
+      phoneNumber: this.props.data.phoneNumber,
+      
       regNo: this.props.data.registration_number,
-      CompanyName: this.props.data.CompanyName,
-      address: this.props.data.address,
+      businessName: this.props.data.businessName,
+      tradingName: this.props.data.tradingName,
+      officeAddress: this.props.data.officeAddress,
       website: this.props.data.website,
       about: this.props.data.about,
       companySize: this.props.data.companySize,
-      tin: "",
-      phoneNumber: "",
-      maximumEmployeeSalary: this.props.data.maximumEmployeeSalary,
       request: false,
-      networkErr: "",
-      errorMessage: "",
-      successMessage: "",
-      showNetworkErrModal: false,
-      companyToken: localStorage.getItem("aminien_token"),
-      companyEmail: localStorage.getItem("aminien_email"),
       validation: {},
     };
   }
@@ -145,13 +139,13 @@ class EditCompanyInfo extends Component {
         onSubmit={this.onSubmit}>
         <Row>
           <Form.Group as={Col} controlId='formGrid'>
-            <DashBoardText name='Company Name' label='Enter Company Name' />
+            <DashBoardText name='Business Name' label='Edit Business Name' />
             <Input
-              inputName='CompanyName'
+              inputName='BusinessName'
               type='text'
               handleChange={this.handleChange}
-              value={this.state.CompanyName}
-              err={this.state.validation["companyNameErr"]}
+              value={this.state.businessName}
+              err={this.state.validation["businessNameErr"]}
               onFocus={() =>
                 this.setState({ validation: { companyNameErr: "" } })
               }
@@ -159,8 +153,8 @@ class EditCompanyInfo extends Component {
           </Form.Group>
           <Form.Group as={Col} controlId='formGrid'>
             <DashBoardText
-              name='Company website'
-              label='Enter company website '
+              name='Business website'
+              label='Edit Business Website '
             />
             <Input
               inputName='website'
@@ -179,15 +173,15 @@ class EditCompanyInfo extends Component {
         <Row>
           <Form.Group as={Col} controlId='formGrid'>
             <DashBoardText
-              name='Tax Identification number'
-              label='Enter Tax Identification number'
+              name='Buiness Category'
+              label='Edit Business Category'
             />
             <Input
               inputName='tin'
               type='text'
               handleChange={this.handleChange}
-              value={this.state.tin}
-              err={this.state.validation["tin"]}
+              value={this.state.businessCategory}
+              err={this.state.validation["businessCategory"]}
               onPress={() =>
                 this.setState({
                   validation: { tinErr: "" },
@@ -217,18 +211,36 @@ class EditCompanyInfo extends Component {
         <Row>
           <Form.Group as={Col} controlId='formGrid'>
             <DashBoardText
-              name='Company address'
-              label='Enter company Address'
+              name='Business address'
+              label='Enter Business Address'
             />
             <Input
               inputName='address'
               type='text'
               handleChange={this.handleChange}
               value={this.state.address}
-              err={this.state.validation["addressErr"]}
+              err={this.state.validation["businessAddress"]}
               onPress={() =>
                 this.setState({
                   validation: { addressErr: "" },
+                })
+              }
+            />
+          </Form.Group>
+          <Form.Group as={Col} controlId='formGrid'>
+            <DashBoardText
+              name='Business Email Address'
+              label='Enter Business Address'
+            />
+            <Input
+              inputName='address'
+              type='text'
+              handleChange={this.handleChange}
+              value={this.state.emailAddress}
+              err={this.state.validation["emailAddress"]}
+              onPress={() =>
+                this.setState({
+                  validation: { emailAddress: "" },
                 })
               }
             />
@@ -296,15 +308,7 @@ class EditCompanyInfo extends Component {
             request={this.state.request}
           />
         </div>
-        {this.state.successMessage && (
-          <SuccessRequestModal message={this.state.successMessage} />
-        )}
-        {this.state.showNetworkErrModal && (
-          <NetWorkErrors
-            serverErr={this.state.errorMessage}
-            errMessage={this.state.networkErr}
-          />
-        )}
+      
       </Form>
     );
   }

@@ -34,14 +34,13 @@ function LoginPassword({PasswordLogicRequest, passwordLogin}) {
       const { passwordSuccess, passwordError, passwordNetworkError, passwordMessage } = passwordLogin;
       // setLoading(false)
       if (passwordError) {
-          swal("Error!", passwordMessage);
+          swal("Error!", passwordMessage,"error");
       } else if (passwordSuccess) {
         SaveToken(passwordMessage)
         navigate('/registered-business', { replace: true, state:'' })
       } else if (passwordNetworkError) {
-          swal("Error!", passwordMessage);
-           
-      }
+        swal("Error!", `${passwordMessage}! Please, try again later!`, "error");
+    };
   }, [passwordLogin, navigate]);
   
   

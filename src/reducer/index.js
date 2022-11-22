@@ -3,7 +3,7 @@ import DashboardReducer, {CompanyDetailsReducers, FetchWalletHistory, FetchBusin
 import UserRegistration from './UserRegistration'
 import BusinessRegistration, {FetchRegisteredBusinessList} from "./RegisterBusiness";
 import AddDepartment from "./AddDepartment";
-import { LoginReducers, PasswordLoginReducers } from "./LoginReducers";
+import { LoginReducers, PasswordLoginReducers, AddEmployeeReducer, UpdateEmployeeReducer } from "./LoginReducers";
 // import AppReducers from "./AppReducers";
 
 export default combineReducers({
@@ -18,7 +18,9 @@ export default combineReducers({
   FetchBusinessDepartment,
   FetchWalletHistory,
   FetchSalaryHistory,
-  FetchTaxHistoryReducer: FetchTaxHistory
+  FetchTaxHistoryReducer: FetchTaxHistory,
+  AddEmployeeReducer,
+  UpdateEmployeeReducer
   // AppReducers,
   // form: formReducer,
 });
