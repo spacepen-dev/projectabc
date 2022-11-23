@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import useBusinessToken from "../../../hooks/useBusinessToken";
 import useHandleResponseObject from "../../../hooks/useHandleResponseObject";
 import { useNavigate } from "react-router-dom";
+import { getUserEmail } from "../../../lib/sharedfuntions";
 
 const BusinessOverview = ({ CompanyDetails, business }) => {
     const navigate = useNavigate();
@@ -15,7 +16,11 @@ const BusinessOverview = ({ CompanyDetails, business }) => {
     const { data } = useHandleResponseObject(business);
     
     const values = useMemo(() => {
-        return { businessToken:bizToken, userToken:token, emailAddress: 'ejembithomas61@gmail.com' }
+        return {
+					businessToken: bizToken,
+					userToken: token,
+					emailAddress: getUserEmail(),
+				};
       }, [bizToken, token]);
 
      useEffect(() => {  

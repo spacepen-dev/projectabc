@@ -44,33 +44,36 @@ export default function ImageUpload() {
       ref.current?.removeFile(file.id);
     }
   };
-  return <FormContainer name='Logo upload' pageName='upload' desc='Upload company business logo'>
-    {/* <!-- Left Section --> */}
+  return (
+		<FormContainer
+			name="Logo upload"
+			pageName="upload"
+			desc="Upload company business logo">
+			{/* <!-- Left Section --> */}
 
-    {/* <!-- Form --> */}
-    <form className="px-3 mt-5 pp_form">
-      <div className="form-group">
-        
-        <Label name='Business Logo' styles='mb-3' />
-        <div className="p-5  mb-4 d-flex w-100 flex-column align-items-center justify-content-center text-center drag_area">
-          {/* <div className="mb-2 drag_photo">
+			{/* <!-- Form --> */}
+			<form className="px-3 mt-5 pp_form">
+				<div className="form-group">
+					<Label name="Business Logo" styles="mb-3" />
+					<div className="p-5  mb-4 d-flex w-100 flex-column align-items-center justify-content-center text-center drag_area">
+						{/* <div className="mb-2 drag_photo">
                 <img src="img/dragphoto.svg" alt=""/>
               </div>
               <small className="drag_text">Drag file here to <br/> upload or <span>choose file</span> </small> */}
-          <FilePond
-            ref={ref}
-            files={files}
-            instantUpload={false}
-            onprocessfile={handleUploaded}
-            acceptedFileTypes={["image/png", "image/jpeg"]}
-            onupdatefiles={setFiles}
-            allowMultiple={false}
-            server={serverConfig}
-            name="image" //sets the file input name, it's filepond by default 
-         //labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-            />
-          
-          {/* <FilePond
+						<FilePond
+							ref={ref}
+							files={files}
+							instantUpload={false}
+							onprocessfile={handleUploaded}
+							acceptedFileTypes={["image/png", "image/jpeg"]}
+							onupdatefiles={setFiles}
+							allowMultiple={false}
+							server={serverConfig}
+							name="image" //sets the file input name, it's filepond by default
+							//labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+						/>
+
+						{/* <FilePond
           ref={ref}
           instantUpload={false}
           // acceptedFileTypes={["image/png", "image/jpeg"]}
@@ -88,15 +91,18 @@ export default function ImageUpload() {
             return error.body === "" ? "Upload error" : error.body;
           }}
         /> */}
-          
-        </div>
-      </div>
-      {console.log(files)}
-      
-      <div className="mb-5 d-flex button_container justify-content-center">
-              
-        <Link to='/registration/business/add-department' type='button' className='d-block btn text-white p-3 category_btn'>NEXT</Link>
-      </div>
-    </form>
-  </FormContainer>
+					</div>
+				</div>
+
+				<div className="mb-5 d-flex button_container justify-content-center">
+					<Link
+						to="/registration/business/add-department"
+						type="button"
+						className="d-block btn text-white p-3 category_btn">
+						NEXT
+					</Link>
+				</div>
+			</form>
+		</FormContainer>
+	);
 }
