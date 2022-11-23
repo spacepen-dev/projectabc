@@ -3,7 +3,9 @@ import DashboardReducer, {CompanyDetailsReducers, FetchWalletHistory, FetchBusin
 import UserRegistration from './UserRegistration'
 import BusinessRegistration, {FetchRegisteredBusinessList} from "./RegisterBusiness";
 import AddDepartment from "./AddDepartment";
-import { LoginReducers, PasswordLoginReducers, AddEmployeeReducer, UpdateEmployeeReducer } from "./LoginReducers";
+import { AddEmployeeReducer, UpdateEmployeeReducer } from "./LoginReducers";
+import { PasswordLoginReducers } from "../pages/registration/loginpassword/LoginAction";
+import { LoginReducers } from "../pages/registration/emailLogin/LoginAction";
 // import AppReducers from "./AppReducers";
 
 export default combineReducers({

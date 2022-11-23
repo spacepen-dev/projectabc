@@ -418,49 +418,8 @@ export const ResendSignupOtp = async (email, callback = (res) => { }) => {
   }
 }
 
-export const EmailLogicRequest = (values, callback = (res) => { }) => async (dispatch) => {
-  const { email_phone } = values;
-  
-  try {
-    const data = await BasedURL.post("userEmailLogin.php", {
-      email_phone
-    
-    });
 
-    dispatch({ type: "EMAIL_LOGIN" });
-    if (data) {
-      const { success, error, email_address } = data.data;
-      console.log(data)
-      if (error) {
-        dispatch({ type: "LOGIN_ERROR_RESPONSE", payLoad: error });
-      } else if (success) {
-        dispatch({ type: "LOGIN_SUCCESS_RESPONSE", payLoad: email_address });
-      }
-    }
 
-  } catch (error) {
-    dispatch({ type: "EMAIL_LOGIN_ERR_MESSAGE", payLoad: error.message });
-  }
-}
-
-export const PasswordLogicRequest = (values) => async (dispatch) => {  
-  try {
-    const data = await BasedURL.post("userPasswordLogin.php", {...values});
-
-    dispatch({ type: "PASSWORD_LOGIN" });
-    if (data) {
-      const { success, error, user_token } = data.data;
-      if (error) {
-        dispatch({ type: "PASSWORD_ERROR_RESPONSE", payLoad: error });
-      } else if (success) {
-        
-        dispatch({ type: "PASSWORD_SUCCESS_RESPONSE", payLoad: user_token });
-      }
-    }
-  } catch (error) {
-    dispatch({ type: "PASSWORD_LOGIN_ERR_MESSAGE", payLoad: error.message });
-  }
-};
 
 
 
