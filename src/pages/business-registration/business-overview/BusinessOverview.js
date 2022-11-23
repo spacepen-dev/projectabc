@@ -12,7 +12,7 @@ const BusinessOverview = ({ CompanyDetails, business }) => {
     const navigate = useNavigate();
     const { token } = useToken();
     const { bizToken } = useBusinessToken();
-    const {data} = useHandleResponseObject(business)
+    const { data } = useHandleResponseObject(business);
     
     const values = useMemo(() => {
         return { businessToken:bizToken, userToken:token, emailAddress: 'ejembithomas61@gmail.com' }

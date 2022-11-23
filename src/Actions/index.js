@@ -8,24 +8,6 @@ import BasedURL from "./BasedURL";
 
 
 // SUBMIT DEPARTMENT ACTION
-export const SubmitDepartment =
-  (values) => async (dispatch) => {
-    try {
-      const data = await BasedURL.post("/registerDepartment.php", {...values});
-      dispatch({ type: "ADD_DEPARTMENT"});
-      if (data) {
-        const { error, success } = data.data;
-        if (error) {
-          dispatch({ type: "ADD_DEPARTMENT_ERROR", payLoad: error});
-        } else if (success) {
-          dispatch({ type: "ADD_DEPARTMENT_SUCCESS", payLoad: success});
-        }
-      } 
-      return;
-    } catch (error) {
-      dispatch({ type: "ADD_DEPARTMENT_ERR_MESSAGE", payLoad: error });
-    }
-  };
 
 // COMPANY DETAILS ACTION
 export const CompanyDetails = (values) => async (dispatch) => {

@@ -32,7 +32,7 @@ function BankDetails({ businessAccountNumber, handleChange, getbankcode, getacco
         if (error) {
             swal("Error!", message);
         } else if (success) {
-            navigate('registration/business/complete', { replace: true });
+            navigate("/registration/business/complete", { replace: true });
             SavedBusinessToken(message);
         } else if (networkError) {
             swal("Error!", message);
