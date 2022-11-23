@@ -2,22 +2,27 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import useHandleResponse from "../../../hooks/useHandleResponse";
 import DashboardTable from "../DashboardTable";
-import { FetchTaxHistory } from "../../../Actions";
-// import useBusinessToken from "../../../hooks/useBusinessToken";
-// import useToken from "../../../hooks/useToken";
-import { value } from "../overview/Overview";
+import { FetchTaxHistory } from "./TaxAction";
+import useToken from "../../../hooks/useToken";
+import useBusinessToken from "../../../hooks/useBusinessToken";
+import { getUserEmail } from "../../../lib/sharedfuntions";
 
 const TaxHistory = ({ FetchTaxHistory, taxHistory }) => {
-  const [Data] = useHandleResponse(taxHistory);
-  // const { bizTok } = useBusinessToken();
-  // const {token} = useToken()
+	const [Data] = useHandleResponse(taxHistory);
+	const { bizToken } = useBusinessToken();
+	const { token } = useToken();
 
+	console.log(Data);
 
-  useEffect(() => {
-    FetchTaxHistory(value);
-  }, [FetchTaxHistory]);
-  
-  const heading = [
+	useEffect(() => {
+		FetchTaxHistory({
+			businessToken: bizToken,
+			userToken: token,
+			emailAddress: getUserEmail(),
+		});
+	}, [FetchTaxHistory, bizToken, token]);
+
+	const heading = [
 		{ name: "DATE", selector: (row) => row.date },
 		{ name: "FIRST NAME", selector: (row) => row.employeeFirstname },
 		{ name: "LAST NAME", selector: (row) => row.employeeLastname },
@@ -50,7 +55,7 @@ const TaxHistory = ({ FetchTaxHistory, taxHistory }) => {
 		},
 	];
 
-  return (
+	return (
 		<>
 			<DashboardTable heading={heading} data={Data} display="none" />
 		</>

@@ -35,10 +35,6 @@ const AccountHistory = ({ companyWallet }) => {
 			name: "NARRATION",
 			selector: (row) => row.narration,
 		},
-		{
-			name: "TRANSACTION STATUS",
-			// selector: (row) => <Badges row={row.transactionStatus} />,
-		},
 		// {
 		//   name: "TAXES",
 		//   selector: (row) =>

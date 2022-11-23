@@ -226,22 +226,19 @@ export const FetchCompanyEmployee = (values) => async (dispatch) => {
 // FETCH ACCOUNT DETAILS
 export const FetchWalletHistory = (values) => async (dispatch) => {
   try {
-    const data = await BasedURL.post("/fetchWalletTransactions.php", { ...values });
-    
-    dispatch({ type: "FETCH_WALLET_HISTORY", payLoad: data });
+		const data = await BasedURL.post("/fetchWalletTransactions.php", {
+			...values,
+		});
 
-    if (data) {
-      const { success, error } = data.data;
-      if (error) {
-        
-        dispatch({ type: "FETCH_WALLET_HISTORY_ERROR", payLoad: error });
-      
-      } else if (success.length > 0) {
-        dispatch({ type: "FETCH_WALLET_HISTORY_SUCCESS", payLoad: success });
-      }
-    }
-
-    } catch (error) {
+		if (data) {
+			const { success, error } = data.data;
+			if (error) {
+				dispatch({ type: "FETCH_WALLET_HISTORY_ERROR", payLoad: error });
+			} else if (success.length > 0) {
+				dispatch({ type: "FETCH_WALLET_HISTORY_SUCCESS", payLoad: success });
+			}
+		}
+	} catch (error) {
       dispatch({ type: "FETCH_WALLET_HISTORY_ERR_MESSAGE", payLoad: error });
     }
 };
@@ -268,24 +265,7 @@ export const bankList = async (funct=(res)=> {}) => {
 
 // TAX HISTORY ACTION CREATOR
 
-export const FetchTaxHistory = (values) => async (dispatch) => {
-  try {
-    const data = await BasedURL.post("/fetchTaxHistory.php", {...values});
-    dispatch({ type: "FETCH_TAX_HISTORY", payLoad: data });
-    if (data) {
-      const { success, error } = data.data;
-      if (error) {
-        dispatch({ type: "FETCH_TAX_HISTORY_ERROR", payLoad: success });
-        
-      } else if (success.length > 0) {
-        
-        dispatch({ type: "FETCH_TAX_HISTORY_SUCCESS", payLoad: error });
-      }
-    }
-  } catch (error) {
-    dispatch({ type: "FETCH_TAX_HISTORY_ERR_MESSAGE", payLoad: error });
-  }
-};
+
 
 // SALARY HISTORY ACTION CREATOR
 export const FetchSalaryHistory = (value) => async (dispatch) => {

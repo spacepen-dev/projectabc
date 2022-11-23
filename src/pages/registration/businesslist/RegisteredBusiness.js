@@ -10,6 +10,7 @@ import { FullScreenLoader } from "../ui";
 import Logo from "../../../assets/img/logo.svg";
 import { useEffect } from "react";
 import swal from "sweetalert";
+import { getUserEmail } from "../../../lib/sharedfuntions";
 
 const RegisteredBusiness = ({
 	GetRegisteredBusiness,
@@ -19,7 +20,10 @@ const RegisteredBusiness = ({
 
 	const { token } = useToken();
 	useEffect(() => {
-		GetRegisteredBusiness({ emailAddress: email.state, userToken: token });
+		GetRegisteredBusiness({
+			emailAddress: email.state || getUserEmail(),
+			userToken: token,
+		});
 	}, [GetRegisteredBusiness, token, email]);
 
 	useEffect(() => {

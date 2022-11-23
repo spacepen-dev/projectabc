@@ -2137,7 +2137,7 @@ background-color:#4836C8
 }
 
 .pp_links:hover {
-  color: var(--spacepenBlackVariant2);
+  color: var(--button);
 }
 
 .pp_link_active {

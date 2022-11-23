@@ -18,10 +18,6 @@ import useToken from "../../../hooks/useToken";
 import SalariesHistory from "../salary-history";
 import { getUserEmail } from "../../../lib/sharedfuntions";
 
-export const value =  { companyToken: '56609c0e67aafd1d294d2d0d17fb3c6286531c20fefbd813da17282a89bd130e54130ad7f9b4e9e98219dd6adb9a406add95d85d', companyEmail: 'oviahonprosperpman32@gmail.com' }
-
-
-
 const Overview = ({
   getPageId,
   FetchWalletHistory,
@@ -46,13 +42,12 @@ const Overview = ({
   });
 
   const values = useMemo(() => {
-    return {
+		return {
 			businessToken: bizToken,
 			userToken: token,
 			emailAddress: getUserEmail(),
 		};
-  }, [bizToken, token]);
-  console.log(getUserEmail());
+	}, [bizToken, token]);
   
 
 

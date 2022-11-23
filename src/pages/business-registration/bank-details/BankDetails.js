@@ -23,6 +23,8 @@ function BankDetails({
 	prevPage,
 	RegisterBusiness,
 	formValue,
+	loader,
+	removeLoader,
 	businessDetails,
 }) {
 	const navigate = useNavigate();
@@ -37,7 +39,7 @@ function BankDetails({
 	useEffect(() => {
 		if (!businessDetails) return null;
 		const { success, message } = businessDetails;
-
+		removeLoader(false);
 		if (success) {
 			navigate("/registration/business/complete", { replace: true });
 			SavedBusinessToken(message);
@@ -176,7 +178,7 @@ function BankDetails({
 						disabled={!bankDetails.owner ? true : false}
 						styles="btn text-white p-3 category_btn"
 						name="FINISH"
-						request={businessDetails.isLoading}
+						request={loader}
 					/>
 				</div>
 			</form>

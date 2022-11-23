@@ -15,8 +15,7 @@ export const RegisterBusiness = (values) => async (dispatch) => {
 		const data = await BaseURL.post("registerBusiness.php", { ...values });
 
 		if (data) {
-			const { success, error, businessToken, businessEmailAddress } = data.data;
-			SaveUserEmail(businessEmailAddress);
+			const { success, error, businessToken } = data.data;
 			if (error) {
 				swal(error, error, "error");
 				dispatch({ type: "REGISTER_BUSINESS_ERROR_RESPONSE", payLoad: error });

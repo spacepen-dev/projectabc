@@ -27,7 +27,8 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
       const { error, success } = accountDetails;
       if (error) {
       } else {
-        const { CompanyName, accountNumber, balance, bankName } = success;
+        const { CompanyName, accountNumber, balance, bankName } =
+					accountDetails;
         setAccoutDetails(() => {
           return {
             accountName: CompanyName,
@@ -161,7 +162,7 @@ const CompanyWalletPage = ({ CompanyDetails, accountDetails }) => {
 
 const mapStateToProps = (state) => {
   return {
-    accountDetails: state.DashboardReducer.companyDetails.data,
-  };
+		accountDetails: state.CompanyDetailsReducers,
+	};
 };
 export default connect(mapStateToProps, { CompanyDetails })(CompanyWalletPage);

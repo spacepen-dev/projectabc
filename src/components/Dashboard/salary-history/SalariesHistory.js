@@ -27,7 +27,6 @@ const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
 		{ name: "DATE", selector: (row) => row.date },
 		{ name: "FIRST NAME", selector: (row) => row.employeeFirstname },
 		{ name: "LAST NAME", selector: (row) => row.employeeLastname },
-		{ name: "EMAIL", selector: (row) => row.email },
 		{ name: "ACCOUNT NAME", selector: (row) => row.accountName },
 		{ name: "ACCOUNT NUMBER", selector: (row) => row.accountNumber },
 		{
@@ -56,20 +55,10 @@ const SalariesHistory = ({ FetchSalaryHistory, companySalary }) => {
 		},
 	];
 
+	useEffect(() => {
+		FetchSalaryHistory({ businessToken: bizToken, userToken: token });
+	}, [FetchSalaryHistory, bizToken, token]);
 
-  useEffect(() => {
-    FetchSalaryHistory({ businessToken: bizToken, userToken: token });
-  }, [FetchSalaryHistory, bizToken, token]);
-
-
-  // useEffect(() => {
-  //   if (!companySalary) {
-  //     return null;
-  //   } else {
-  //     const { Data } = companySalary;
-  //     setData(Data);
-  //   }
-  // }, [companySalary]);
 
   return (
     <>

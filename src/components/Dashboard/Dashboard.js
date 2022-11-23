@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
 import { Routes, Route,  } from "react-router-dom";
 import SideBar from "./SideBar";
-import ViewTaxHistory from "./ViewTaxHistory";
-import EmployeeSalariesPage from "./EmployeeSalariesPage";
 import CompanyWalletPage from "./CompanyWalletPage";
 // import CompanyProfile from "./company-profile";
 import Profile from "./company-profile/Profile";
 import Overview from "./overview";
-import ViewAccountHistory from "./Account-history/ViewAccountHistory";
+import ViewAccountHistory from "./view-account-history/ViewAccountHistory";
 import AddEmployee from "./Add-employee";
 import ViewEmployee from "./view-employee/ViewEmployee";
 import ViewSalaryHistory from "./view-salary-history";
 import SignOut from "./Sign-out";
+import ViewTaxHistory from "./view-tax-history";
+import EmployeeSalariesPage from "./pay-employee";
 
 const Dashboard = () => {
   // const navigate = useNavigate();

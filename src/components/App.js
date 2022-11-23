@@ -4,7 +4,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BusinessOverview from "../pages/business-registration/business-overview";
 const CompleteRegistration = lazy(() => import("../pages/business-registration/finish/Complete"));
 const Dashboard = lazy(() => import("./Dashboard/Dashboard"));
-const SalariesPage = lazy(() => import("./Dashboard/EmployeeSalariesPage"));
+const SalariesPage = lazy(() =>
+	import("./Dashboard/pay-employee/EmployeeSalariesPage")
+);
 const NoPage = lazy(() => import("./NoPage"));
 const Signup = lazy(() => import("../pages/registration/signup"));
 const Welcome = lazy(() => import("../pages/registration/welcome"));

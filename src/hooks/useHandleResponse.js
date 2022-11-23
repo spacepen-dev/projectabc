@@ -10,6 +10,7 @@ export default function useHandleResponse(state) {
       return null;
     } else {
       const { Data } = state;
+      console.log(Data);
           setData(Data);
   
         }
@@ -25,7 +26,7 @@ export function useHandleResponseArray(state) {
     if (!state) {
       return null;
     } else {
-      const { Data,networkError } = state;
+      const { Data, networkError } = state;
       if (networkError) {
         swal("Error!", networkError.message, 'error');
       }
