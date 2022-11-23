@@ -198,7 +198,3 @@ function Verification({ SignupVerification }) {
 
 
  export default connect(null, {SignupVerification})(Verification)
-
-
-
-
