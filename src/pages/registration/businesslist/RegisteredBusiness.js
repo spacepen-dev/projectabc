@@ -3,14 +3,13 @@ import Library from '../../../assets/img/library.svg';
 import Add from '../../../assets/img/add.svg';
 import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-import { GetRegisteredBusiness } from "../../../Actions";
 import BusinessList from "./BusinessListComp";
 import useToken from "../../../hooks/useToken";
 import { FullScreenLoader } from "../ui";
 import Logo from "../../../assets/img/logo.svg";
 import { useEffect } from "react";
-import swal from "sweetalert";
 import { getUserEmail } from "../../../lib/sharedfuntions";
+import { GetRegisteredBusiness } from "./BusinessListAction";
 
 const RegisteredBusiness = ({
 	GetRegisteredBusiness,
@@ -29,14 +28,14 @@ const RegisteredBusiness = ({
 	useEffect(() => {
 		if (!registeredBusinessList) return null;
 
-		const { registeredError, registeredNetworkError, registeredMessage } =
-			registeredBusinessList;
+		// const { registeredError, registeredNetworkError, registeredMessage } =
+		// registeredBusinessList;
 		//  console.log(registeredSuccess)
-		if (registeredError) {
-			swal("Error!", registeredMessage);
-		} else if (registeredNetworkError) {
-			swal("Error!", `${registeredMessage.message} please try again later`);
-		}
+		// if (registeredError) {
+		// 	swal("Error!", registeredMessage);
+		// } else if (registeredNetworkError) {
+		// 	swal("Error!", `${registeredMessage.message} please try again later`);
+		// }
 	}, [registeredBusinessList]);
 
 	return (
