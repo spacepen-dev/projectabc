@@ -13,11 +13,19 @@ export const EmailLogicRequest = (values) => async (dispatch) => {
 		dispatch({ type: "EMAIL_LOGIN" });
 		if (data) {
 			const { success, error, email_address } = data.data;
-			if (error) {
-				swal(error, error, "error");
-			} else if (success) {
-				dispatch({ type: "LOGIN_SUCCESS_RESPONSE", payLoad: email_address });
-			}
+            if (error) {
+							dispatch({
+								type: "LOGIN_ERROR_RESPONSE",
+								payLoad: email_address,
+							});
+
+							swal(error, error, "error");
+						} else if (success) {
+							dispatch({
+								type: "LOGIN_SUCCESS_RESPONSE",
+								payLoad: email_address,
+							});
+						}
 		}
 	} catch (error) {
 		swal(error, error.message, "error");
