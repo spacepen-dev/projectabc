@@ -57,7 +57,7 @@ const AddDepartment = ({ SubmitDepartment, businessDepartment }) => {
 					<div className="button-container w-100 d-flex justify-content-end">
 						<ButtonLoader
 							type="submit"
-							styles="btn text-white p-3 category_btn"
+							styles="login-btn"
 							name="SUBMIT"
 							request={isLoading}
 						/>

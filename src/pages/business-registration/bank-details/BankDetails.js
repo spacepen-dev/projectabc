@@ -176,7 +176,7 @@ function BankDetails({
 					<ButtonLoader
 						type="submit"
 						disabled={!bankDetails.owner ? true : false}
-						styles="btn text-white p-3 category_btn"
+						styles=" text-white p-3 category_btn"
 						name="FINISH"
 						request={loader}
 					/>
