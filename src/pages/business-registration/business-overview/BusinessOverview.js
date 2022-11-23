@@ -68,7 +68,7 @@ const BusinessOverview = ({ CompanyDetails, business }) => {
 						<p>
 							This account is specifically for you and connected to Aimienpay.
 							For security reasons, you can only fund this account from any bank
-							account that has the account name. Spacepen Technologies
+							account that has the account name {data?.vAccount_name}
 						</p>
 						<p>
 							You can setup your business and add your employees. Click on
