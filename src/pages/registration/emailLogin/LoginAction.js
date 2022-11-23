@@ -10,32 +10,33 @@ export const EmailLogicRequest = (values) => async (dispatch) => {
 			email_phone,
 		});
 
-		dispatch({ type: "EMAIL_LOGIN" });
 		if (data) {
 			const { success, error, email_address } = data.data;
-            if (error) {
-							dispatch({
-								type: "LOGIN_ERROR_RESPONSE",
-								payLoad: email_address,
-							});
+			if (error) {
+				dispatch({
+					type: "LOGIN_ERROR_RESPONSE",
+					payLoad: error,
+				});
 
-							swal(error, error, "error");
-						} else if (success) {
-							dispatch({
-								type: "LOGIN_SUCCESS_RESPONSE",
-								payLoad: email_address,
-							});
-						}
+				swal(error, error, "error");
+			} else if (success) {
+				dispatch({
+					type: "LOGIN_SUCCESS_RESPONSE",
+					payLoad: email_address,
+				});
+			}
 		}
-	} catch (error) {
-		swal(error, error.message, "error");
+	} catch (err) {
+		swal("Oops!", err.message, "error");
+		dispatch({
+			type: "EMAIL_LOGIN_ERR_MESSAGE",
+			payLoad: err.message,
+		});
 	}
 };
 
 export const LoginReducers = (state = LOGIN_INIT, action) => {
 	switch (action.type) {
-		case "EMAIL_LOGIN":
-			return { ...state, isLoading: true };
 		case "LOGIN_SUCCESS_RESPONSE":
 			return {
 				...state,

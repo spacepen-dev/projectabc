@@ -9,6 +9,7 @@ import { EmailLoginSchema } from "../yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { EmailLogicRequest } from "./LoginAction";
+import { SaveUserEmail } from "../../../lib/sharedfuntions";
 
 const EmailLogin = ({ EmailLogicRequest, login }) => {
 	const navigate = useNavigate();
@@ -41,6 +42,7 @@ const EmailLogin = ({ EmailLogicRequest, login }) => {
 		setLoading(false);
 		if (loginSuccess) {
 			navigate("/user-login-password", { state: loginMessage });
+			SaveUserEmail(loginMessage);
 		}
 		return;
 	}, [login, navigate]);

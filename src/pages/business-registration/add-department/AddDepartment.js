@@ -32,7 +32,6 @@ const AddDepartment = ({ SubmitDepartment, businessDepartment }) => {
 
 	useEffect(() => {
 		if (!businessDepartment) return null;
-		console.log(businessDepartment);
 		const { success } = businessDepartment;
 		setLoading(false);
 

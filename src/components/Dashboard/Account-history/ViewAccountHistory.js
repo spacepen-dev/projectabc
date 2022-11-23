@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import Datatable from "../Datatable";
 import { Form } from "react-bootstrap";
 import { FetchWalletHistory } from "../../../Actions";
-import { Badge } from "react-bootstrap";
+// import { Badge } from "react-bootstrap";
 import useBusinessToken from "../../../hooks/useBusinessToken";
 import useToken from "../../../hooks/useToken";
-import useBadge from "../../../hooks/useBadge";
+// import useBadge from "../../../hooks/useBadge";
 
 let Months = new Set([
   new Date().getMonth(),
@@ -62,14 +62,14 @@ const currentDate = {
   year: new Date().getFullYear(),
 };
 
-function Badges({ row }) {
-  const { bg } = useBadge(row);
-  return (
-    <Badge bg={bg} className='py-2'>
-      {row}
-    </Badge>
-  );
-}
+// function Badges({ row }) {
+//   const { bg } = useBadge(row);
+//   return (
+//     <Badge bg={bg} className='py-2'>
+//       {row}
+//     </Badge>
+//   );
+// }
 
 const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
   const [walletData, setwalletData] = useState([]);
@@ -78,36 +78,36 @@ const ViewAccountHistory = ({ FetchWalletHistory, companyWallet }) => {
   const {token} = useToken()
 
   const heading = [
-    { name: "DATE", selector: (row) => row.date },
-    // { name: "MONTH", selector: (row) => row.month },
-    // { name: "YEAR", selector: (row) => row.year },
-    { name: "TRANSACTION ID", selector: (row) => row.transactionId },
-    {
-      name: "TOTAL AMOUNT",
-      selector: (row) =>
-        new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "NGN",
-        }).format(row.amount),
-    },
-    {
-      name: "Narration",
-      selector: (row) => row.narration,
-    },
-    {
-      name: "TRANSACTION STATUS",
-      selector: (row) => <Badges row={row.transactionStatus} />,
-    },
-    // {
-    //   name: "TAXES",
-    //   selector: (row) =>
-    //     new Intl.NumberFormat("en-US", {
-    //       style: "currency",
-    //       currency: "NGN",
-    //     }).format(row.taxes),
-    // },
-    // { name: "TRANSACTION NOTE", selector: (row) => row.narration },
-  ];
+		{ name: "DATE", selector: (row) => row.date },
+		// { name: "MONTH", selector: (row) => row.month },
+		// { name: "YEAR", selector: (row) => row.year },
+		{ name: "TRANSACTION ID", selector: (row) => row.transactionId },
+		{
+			name: "TOTAL AMOUNT",
+			selector: (row) =>
+				new Intl.NumberFormat("en-US", {
+					style: "currency",
+					currency: "NGN",
+				}).format(row.amount),
+		},
+		{
+			name: "Narration",
+			selector: (row) => row.narration,
+		},
+		{
+			name: "TRANSACTION STATUS",
+			// selector: (row) => <Badges row={row.transactionStatus} />,
+		},
+		// {
+		//   name: "TAXES",
+		//   selector: (row) =>
+		//     new Intl.NumberFormat("en-US", {
+		//       style: "currency",
+		//       currency: "NGN",
+		//     }).format(row.taxes),
+		// },
+		// { name: "TRANSACTION NOTE", selector: (row) => row.narration },
+	];
 
   const WalletHistoryAction = useCallback(
     (email, token) => {

@@ -6,6 +6,13 @@ export function SavedBusinessToken(data) {
 localStorage.setItem('aimienpay_business_token', JSON.stringify(data));
 }
 
+export function SaveUserEmail(data) {
+	localStorage.setItem("aimienPay_email", JSON.stringify(data));
+}
+
+export function getUserEmail() {
+	return JSON.parse(localStorage.getItem("aimienPay_email"));
+}
 
 
 export function Token() {

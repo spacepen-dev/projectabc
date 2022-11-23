@@ -10,9 +10,9 @@ import FirstProfilePage from "../profile/FirstProfilePage";
 import SecondProfilePage from "../profile/SecondProfilePage";
 
 import BusinessCategory from '../catergory';
-import BankDetails from '../bank-details';
-import { RegisterBusiness } from '../../../Actions';
-import useToken from '../../../hooks/useToken';
+import BankDetails from "../bank-details";
+import useToken from "../../../hooks/useToken";
+import { RegisterBusiness } from "../bank-details/DetailsAction";
 // import CompleteRegistration from '../finish';
 
 
@@ -72,7 +72,7 @@ export const RegistrationContext = createContext();
             values.businessBankAccountName = bankDetails.owner
             values.businessBankCode = bankDetails.code
             values.businessCategory = name
-            RegisterBusiness({...values, user_token:token})
+            RegisterBusiness({ ...values, user_token: token });
 
         }
     })
