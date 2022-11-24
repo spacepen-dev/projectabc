@@ -26,63 +26,63 @@ const reducer = (action, state) => {
 };
 
 const AccountNameVerification = ({
-  VerifyAccountName,
-  accountNameValue,
-  accountNameErr,
-  data: { receivedToken, bankcode, accountNumber,employeeData },
+	VerifyAccountName,
+	accountNameValue,
+	accountNameErr,
+	data: { businessToken, bankcode, accountNumber, userToken },
 }) => {
-  const [state, dispatch] = useReducer(reducer, Initial);
+	const [state, dispatch] = useReducer(reducer, Initial);
 
-  useEffect(() => {
-    if (!accountNameValue) return;
-    else {
-      const { success, error } = accountNameValue;
-      if (error) {
-        dispatch({ type: "ERROR_RESPONSE", request: false, error: error });
-      } else {
-        dispatch({
-          type: "SUCCESS_RESPONSE",
-          request: false,
-          success: success,
-        });
-      }
-    }
-  }, [accountNameValue]);
+	useEffect(() => {
+		if (!accountNameValue) return;
+		else {
+			const { success, error } = accountNameValue;
+			if (error) {
+				dispatch({ type: "ERROR_RESPONSE", request: false, error: error });
+			} else {
+				dispatch({
+					type: "SUCCESS_RESPONSE",
+					request: false,
+					success: success,
+				});
+			}
+		}
+	}, [accountNameValue]);
 
-  useEffect(() => {
-    if (!accountNameErr) return;
-    else {
-      dispatch({
-        type: "NETWORK_ERROR",
-        request: false,
-        network: accountNameErr.message,
-      });
-    }
-  }, [accountNameErr]);
+	useEffect(() => {
+		if (!accountNameErr) return;
+		else {
+			dispatch({
+				type: "NETWORK_ERROR",
+				request: false,
+				network: accountNameErr.message,
+			});
+		}
+	}, [accountNameErr]);
 
-  function onClick() {
-    VerifyAccountName(receivedToken, bankcode, accountNumber);
-    dispatch({ type: "REQUEST", request: true });
-  }
-  return (
-    <>
-      <Button
-        type='button'
-        className='w-25 py-2 ms-2'
-        style={{ fontSize: "13px" }}
-        // disabled={request ? true : false}
-        onClick={onClick}>
-        {state.request ? (
-          <Spinner as='span' animation='border' size='sm' />
-        ) : (
-          " Get account name"
-        )}
-      </Button>
-      {/* {state.success && <input type='text' value={!state.success ? employeeData.employeeAccountName:state.success} readOnly />} */}
-   
-    {/* {state.error && <span>{state.error}</span>} */}
-    </>
-  );
+	function onClick() {
+		VerifyAccountName(businessToken, bankcode, accountNumber, userToken);
+		dispatch({ type: "REQUEST", request: true });
+	}
+	return (
+		<>
+			<Button
+				type="button"
+				className="w-25 py-2 ms-2"
+				style={{ fontSize: "13px" }}
+				// disabled={request ? true : false}
+				onClick={onClick}>
+				{state.request ? (
+					<Spinner as="span" animation="border" size="sm" />
+				) : (
+					" Get account name"
+				)}
+			</Button>
+			{/* {state.success && <input type='text' value={!state.success ? employeeData.employeeAccountName:state.success} readOnly />} */}
+
+			{/* {state.error && <span>{state.error}</span>} */}
+		</>
+	);
 };
 
 const mapStateToProps = (state) => {

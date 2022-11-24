@@ -30,46 +30,7 @@ export const CompanyDetails = (values) => async (dispatch) => {
 };
 
 // REGISTER EMPLOYEE ACTION
-export const RegisterEmployee =
-  (values, token, accountVerified) => async (dispatch) => {
-    
-    // const {
-    //   employeeFirstname,
-    //   employeeLastname,
-    //   employeeEmail,
-    //   employeeAnnualGrossSalary,
-    //   employeeRole,
-    //   employeeDepartment,
-    //   employeeRelives,
-    //   employeeTin,
-    //   employeePhoneNumber,
-    //   employeeState,
 
-    //   // accountName,
-    //   // accountNumber,
-    //   employeeAccountNumber,
-    //   // employeeAccountName,
-    //   bankcode,
-    //   filterBank,
-    // } = values;
-    try {
-      const data = await BasedURL.post("/registerEmployee.php", {...values});
-      dispatch({ type: "REGISTER_EMPLOYEE", });
-      if (data) {
-        const { error, success } = data.data;
-        if (error) {
-          dispatch({ type: "REGISTER_EMPLOYEE_ERROR",payLoad:error });
-          
-        } else if (success) {
-          dispatch({ type: "REGISTER_EMPLOYEE_SUCCESS",payLoad:success });
-          
-        }
-        
-      }
-    } catch (error) {
-      dispatch({ type: "REGISTER_EMPLOYEE_ERR_MESSAGE", payLoad: error });
-    }
-  };
 
 // UPDATE EMPLOYEE DETAIL ACTION
 export const UpdateEmployee =
@@ -207,20 +168,22 @@ export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
 // FETCH COMPANY DATA
 
 export const FetchCompanyEmployee = (values) => async (dispatch) => {
-  try {
-    const data = await BasedURL.post("/fetchCompanyEmployee.php", {...values});
-    dispatch({ type: "FETCH_COMPANY_EMPLOYEE", payLoad: data });
-    if (data) {
-      const { error, success } = data;
-      if (error) {
-        dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERROR", payLoad: error });
-      } else if (success) {
-        dispatch({ type: "FETCH_COMPANY_EMPLOYEE_SUCCESS", payLoad: success });
-      }
-    }
-  } catch (error) {
-    dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERR_MESSAGE", payLoad: error });
-  }
+	try {
+		const data = await BasedURL.post("/fetchBusinessEmployee.php", {
+			...values,
+		});
+		dispatch({ type: "FETCH_COMPANY_EMPLOYEE", payLoad: data });
+		if (data) {
+			const { error, success } = data;
+			if (error) {
+				dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERROR", payLoad: error });
+			} else if (success) {
+				dispatch({ type: "FETCH_COMPANY_EMPLOYEE_SUCCESS", payLoad: success });
+			}
+		}
+	} catch (error) {
+		dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERR_MESSAGE", payLoad: error });
+	}
 };
 
 // FETCH ACCOUNT DETAILS
@@ -297,12 +260,13 @@ export const PayEmployeeSalary =
 	};
 
 export const VerifyAccountName =
-	(companyToken, bankCode, accountNumber) => async (dispatch) => {
+	(businessToken, bankCode, accountNumber, userToken) => async (dispatch) => {
 		try {
 			const data = await BasedURL.post("verifyBankAccount.php", {
-				companyToken,
+				businessToken,
 				bankCode,
 				accountNumber,
+				userToken,
 			});
 			dispatch({ type: "VERIFY_ACCOUNT_NUMBER", payLoad: data });
 		} catch (error) {
