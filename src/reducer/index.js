@@ -14,7 +14,10 @@ import { PasswordLoginReducers } from "../pages/registration/loginpassword/Login
 import { LoginReducers } from "../pages/registration/emailLogin/LoginAction";
 import { FetchTaxHistoryReducer } from "../components/Dashboard/tax-history/TaxAction";
 import { PayEmployeeReducer } from "../components/Dashboard/pay-employee/PayEmployeeAction";
-import { FetchEmployeeReducer } from "../components/Dashboard/view-employee/EmployeeAction";
+import {
+	FetchEmployeeReducer,
+	DeleteEmployeeReducer,
+} from "../components/Dashboard/view-employee/EmployeeAction";
 // import AppReducers from "./AppReducers";
 
 export default combineReducers({
@@ -34,6 +37,7 @@ export default combineReducers({
 	UpdateEmployeeReducer,
 	PayEmployeeReducer,
 	FetchEmployeeReducer,
+	DeleteEmployeeReducer,
 	// AppReducers,
 	// form: formReducer,
 });

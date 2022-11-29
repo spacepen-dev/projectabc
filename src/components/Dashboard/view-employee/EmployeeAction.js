@@ -80,21 +80,9 @@ export const FetchEmployeeReducer = (state = FETCH_EMPLOYEE_INIT, action) => {
 
 /************DELETE EMPLOYEE DATA******************/
 
-export const DeleteEmployeeAction = (token, values) => async (dispatch) => {
-	const {
-		employee_firstname,
-		employee_lastname,
-		employee_email,
-		employee_token,
-	} = values;
+export const DeleteEmployeeAction = (values) => async (dispatch) => {
 	try {
-		const data = await BaseURL.post("/deleteEmployee.php", {
-			companyToken: token,
-			employeeToken: employee_token,
-			employeeFirstname: employee_firstname,
-			employeeLastname: employee_lastname,
-			employeeEmail: employee_email,
-		});
+		const data = await BaseURL.post("/deleteEmployee.php", { ...values });
 		if (data) {
 			const { error, success } = data.data;
 			if (error) {

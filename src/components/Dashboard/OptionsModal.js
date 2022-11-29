@@ -16,6 +16,7 @@ const DeleteConfirmationModal = ({
 	data,
 	removeLoader,
 	request,
+	remove,
 }) => {
 	const { token } = useToken();
 	const { bizToken } = useBusinessToken();
@@ -25,19 +26,20 @@ const DeleteConfirmationModal = ({
 		removeLoader(false);
 	};
 	useEffect(() => {
-		const timeOut = setTimeout(() => {
+		if (!remove) {
+			return null;
+		} else {
+			// closeModal();
 			removeLoader(false);
-		}, 3000);
-		return () => {
-			clearTimeout(timeOut);
-		};
-	}, [removeLoader]);
+		}
+	}, [remove, removeLoader, closeModal]);
 
 	const OnConfirmation = (e) => {
 		e.preventDefault();
 		removeLoader(true);
 
-		// deleteAction({businessToken:bizToken,userToken:token, data);
+		// console.log({ businessToken: bizToken, userToken: token, ...data });
+		deleteAction({ businessToken: bizToken, userToken: token, ...data });
 	};
 
 	return ReactDOM.createPortal(
@@ -60,7 +62,7 @@ const DeleteConfirmationModal = ({
 						Are you sure you want to remove {data.employee_firstname} {}
 						{data.employee_lastname}?
 					</div>
-					<Form
+					<form
 						className="d-flex justify-content-center align-items-center "
 						style={{ height: "4rem" }}
 						onSubmit={OnConfirmation}>
@@ -75,7 +77,7 @@ const DeleteConfirmationModal = ({
 							onClick={DeleteModal}>
 							Cancel
 						</Button>
-					</Form>
+					</form>
 				</div>
 			</div>
 		</div>,
@@ -108,22 +110,17 @@ const DeleteEmployee = ({ data, DeleteEmployeeAction, removeEmployeeRes }) => {
 					request={request}
 					deleteAction={DeleteEmployeeAction}
 					removeLoader={(value) => setRequest(value)}
+					remove={removeEmployeeRes}
 				/>
-			)}
-			{message.successMessage && (
-				<SuccessRequestModal message={message.successMessage} />
-			)}
-			{message.errorMessage && (
-				<NetWorkErrors errMessage={message.errorMessage} />
 			)}
 		</>
 	);
 };
 
 const mapStateToProps = (state) => {
-  return {
-    removeEmployeeRes: state.DashboardReducer.removeEmployee,
-  };
+	return {
+		removeEmployeeRes: state.DeleteEmployeeReducer,
+	};
 };
 
 export default connect(mapStateToProps, {
