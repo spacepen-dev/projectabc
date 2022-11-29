@@ -1,9 +1,13 @@
+import swal from "sweetalert";
 import BaseURL from "../../../Actions/BasedURL";
 
 const Types = {
 	SUCCESS: "FETCH_COMPANY_EMPLOYEE_SUCCESS",
 	ERROR: "FETCH_COMPANY_EMPLOYEE_ERROR",
 	NETWORK: "FETCH_COMPANY_EMPLOYEE_ERR_MESSAGE",
+	DELETE_SUCCESS: "DELETE_EMPLOYEE_SUCCESS",
+	DELETE_ERROR: "DELETE_EMPLOYEE_ERROR",
+	DELETE_NETWORK: "DELETE_EMPLOYEE_ERR_MESSAGE",
 };
 
 const FETCH_EMPLOYEE_INIT = {
@@ -11,6 +15,13 @@ const FETCH_EMPLOYEE_INIT = {
 	error: false,
 	message: "",
 	Data: [],
+	networkError: false,
+};
+
+const DELETE_EMPLOYEE_INIT = {
+	success: false,
+	error: false,
+	message: "",
 	networkError: false,
 };
 
@@ -60,6 +71,74 @@ export const FetchEmployeeReducer = (state = FETCH_EMPLOYEE_INIT, action) => {
 				networkError: true,
 				message: action.payLoad,
 				Data: [],
+			};
+
+		default:
+			return state;
+	}
+};
+
+/************DELETE EMPLOYEE DATA******************/
+
+export const DeleteEmployeeAction = (token, values) => async (dispatch) => {
+	const {
+		employee_firstname,
+		employee_lastname,
+		employee_email,
+		employee_token,
+	} = values;
+	try {
+		const data = await BaseURL.post("/deleteEmployee.php", {
+			companyToken: token,
+			employeeToken: employee_token,
+			employeeFirstname: employee_firstname,
+			employeeLastname: employee_lastname,
+			employeeEmail: employee_email,
+		});
+		if (data) {
+			const { error, success } = data.data;
+			if (error) {
+				swal(error, error, "error");
+
+				dispatch({ type: Types.DELETE_ERROR, payLoad: error });
+			} else if (success) {
+				swal(success, success, "success");
+				dispatch({ type: Types.DELETE_SUCCESS, payLoad: error });
+			}
+		}
+	} catch (err) {
+		swal(err, err.message, "error");
+
+		dispatch({ type: Types.NETWORK, payLoad: err.message });
+	}
+};
+
+export const DeleteEmployeeReducer = (state = DELETE_EMPLOYEE_INIT, action) => {
+	switch (action.type) {
+		case Types.DELETE_SUCCESS:
+			return {
+				...state,
+				success: true,
+				error: false,
+				networkError: false,
+				Data: action.payLoad,
+				message: action.payLoad,
+			};
+		case Types.DELETE_ERROR:
+			return {
+				...state,
+				success: false,
+				error: true,
+				networkError: false,
+				message: action.payLoad,
+			};
+		case Types.DELETE_NETWORK:
+			return {
+				...state,
+				success: false,
+				error: false,
+				networkError: true,
+				message: action.payLoad,
 			};
 
 		default:

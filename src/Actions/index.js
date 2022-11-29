@@ -70,26 +70,7 @@ export const UpdateEmployee =
   };
 
 // DELETE EMPLOYEE ACTION
-export const DeleteEmployeeAction = (token, values) => async (dispatch) => {
-  const {
-    employee_firstname,
-    employee_lastname,
-    employee_email,
-    employee_token,
-  } = values;
-  try {
-    const data = await BasedURL.post("/deleteEmployee.php", {
-      companyToken: token,
-      employeeToken: employee_token,
-      employeeFirstname: employee_firstname,
-      employeeLastname: employee_lastname,
-      employeeEmail: employee_email,
-    });
-    dispatch({ type: "DELETE_EMPLOYEE", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "DELETE_EMPLOYEE_ERR_MESSAGE", payLoad: error });
-  }
-};
+
 
 // FETCH DEPARTMENT ACTION
 export const FetchDepartment = (values) => async (dispatch) => {

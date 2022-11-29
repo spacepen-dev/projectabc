@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Navbar, Container, Col, Row, Offcanvas } from "react-bootstrap";
 import { Routes, Route,  } from "react-router-dom";
 import SideBar from "./SideBar";
-import CompanyWalletPage from "./CompanyWalletPage";
 // import CompanyProfile from "./company-profile";
 import Profile from "./company-profile/Profile";
 import Overview from "./overview";
@@ -13,6 +12,7 @@ import ViewSalaryHistory from "./view-salary-history";
 import SignOut from "./Sign-out";
 import ViewTaxHistory from "./view-tax-history";
 import EmployeeSalariesPage from "./pay-employee";
+import CompanyWalletPage from "./companywallet";
 
 const Dashboard = () => {
   // const navigate = useNavigate();

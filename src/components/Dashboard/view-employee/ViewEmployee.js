@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import DataTable from "react-data-table-component";
 // import TableSpinner from "./TableSpinner";
 import EditCompanyEmployee from "../EditCompanyEmployee";
-import { DeleteEmployeeAction } from "../../../Actions";
+import { DeleteEmployeeAction } from "./EmployeeAction";
 import { FetchCompanyEmployee } from "./EmployeeAction";
 import DeleteEmployee from "../OptionsModal";
 import useBusinessToken from "../../../hooks/useBusinessToken";
@@ -100,14 +100,6 @@ const ViewEmployee = ({
 
 		return;
 	}, [companyEmployee]);
-
-	// useEffect(() => {
-	// 	if (!companyEmployee) {
-	// 		return null;
-	// 	}
-	// 	setPending(false);
-	// 	setEmployeeData(companyEmployee.success);
-	// }, [companyEmployee]);
 
 	const filteredItems = Data?.filter((item) => {
 		return String(Object.values(item))

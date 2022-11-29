@@ -29,8 +29,8 @@ export const PayEmployeeSalary = (values) => async (dispatch) => {
 			}
 		}
 	} catch (err) {
-		swal(err, err, "error");
-		dispatch({ type: Types.NETWORK, payLoad: err });
+		swal(err, err.message, "error");
+		dispatch({ type: Types.NETWORK, payLoad: err.message });
 	}
 };
 
