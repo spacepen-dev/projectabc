@@ -10,7 +10,6 @@ export default function useHandleResponse(state) {
       return null;
     } else {
       const { Data } = state;
-      console.log(Data);
           setData(Data);
   
         }

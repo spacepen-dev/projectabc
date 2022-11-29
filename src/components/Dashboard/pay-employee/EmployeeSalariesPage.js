@@ -7,8 +7,12 @@ import VerificationModal from "../VerificationModal";
 import { Form, Button } from "react-bootstrap";
 import Loaderbutton from "../../LoaderButton";
 import { connect } from "react-redux";
-import { FetchCompanyEmployee, PayEmployeeSalary } from "../../../Actions";
+import { FetchCompanyEmployee } from "../view-employee/EmployeeAction";
+import { PayEmployeeSalary } from "./PayEmployeeAction";
 import NetWorkErrors from "../../NetWorkErrors";
+import useBusinessToken from "../../../hooks/useBusinessToken";
+import useToken from "../../../hooks/useToken";
+import useHandleResponse from "../../../hooks/useHandleResponse";
 
 const initial = {
 	request: false,
@@ -48,9 +52,11 @@ const EmployeeSalariesPage = ({
 	FetchCompanyEmployee,
 	PayEmployeeSalary,
 	paySalaryRes,
-	paySalaryErr,
 }) => {
 	const navigate = useNavigate();
+	const { bizToken } = useBusinessToken();
+	const { token } = useToken();
+	const [Data] = useHandleResponse(companyEmployee);
 
 	let Months = new Set([
 		new Date().getMonth(),
@@ -91,7 +97,6 @@ const EmployeeSalariesPage = ({
 		month: GetMonth[new Date().getMonth()],
 		year: new Date().getFullYear(),
 	};
-	const [tableData, setTableData] = useState([]);
 	const [modalState, setmodalState] = useState({
 		modal: false,
 		disabled: true,
@@ -109,35 +114,15 @@ const EmployeeSalariesPage = ({
 		setValue([...val, { [name]: value }]);
 	};
 
-	const [CompanyDetails] = useState({
-		token: localStorage.getItem("aminien_token"),
-		email: localStorage.getItem("aminien_email"),
-	});
-
 	const [state, dispatch] = useReducer(reducer, initial);
 
 	// MAKE REQUEST TO FETCH EMPLOYEE DATA
 
 	useEffect(() => {
-		if (!CompanyDetails.token || !CompanyDetails.email) {
-			// SESSION TIME OUT MODAL
-			console.log("no token");
-		}
-		FetchCompanyEmployee(
-			// localStorage.getItem("aminien_token"),
-			CompanyDetails.token,
-			CompanyDetails.email
-			// localStorage.getItem("aminien_email")
-		);
-	}, [FetchCompanyEmployee, CompanyDetails]);
+		FetchCompanyEmployee({ businessToken: bizToken, userToken: token });
+	}, [FetchCompanyEmployee, bizToken, token]);
 
-	// FETCH DATA FROM THE REDUX STORE
-	useEffect(() => {
-		if (!companyEmployee) {
-			return null;
-		}
-		setTableData(companyEmployee);
-	}, [companyEmployee]);
+	// FETCH DATA FROM THE REDUX STORE;
 
 	const columns = [
 		{ name: "FIRST NAME", selector: (row) => row.employeeFirstname },
@@ -286,46 +271,8 @@ const EmployeeSalariesPage = ({
 		else {
 			onRequest(false);
 			closeModal();
-			const { success, error } = paySalaryRes;
-			if (error) {
-				// Show an error modal
-				onError(error);
-				var errorId = setTimeout(() => {
-					// window.location.reload();
-					dispatch({ type: "ERROR_RESPONSE", errorMessage: false });
-					window.location.reload();
-				}, 4000);
-			} else {
-				// dispatch({ type: "SUCCESS_RESPONSE", response: });
-				var id = setTimeout(() => {
-					// window.location.reload();
-					onSuccess(success);
-				}, 4000);
-				// show a modal to tell the user that the payment is been processed
-				//and confirmation wouls be sent to the email
-			}
 		}
-
-		return () => {
-			clearTimeout(id);
-			clearTimeout(errorId);
-		};
 	}, [paySalaryRes, onError, onSuccess, onRequest]);
-
-	useEffect(() => {
-		if (!paySalaryErr) {
-			return null;
-		} else {
-			dispatch({ type: "NETWORK_ERROR", netWorkError: paySalaryErr.message });
-			var id = setTimeout(() => {
-				dispatch({ type: "NETWORK_ERROR", netWorkError: "" });
-				window.location.reload();
-			}, 3000);
-		}
-		return () => {
-			clearTimeout(id);
-		};
-	}, [paySalaryErr]);
 
 	return (
 		<div>
@@ -388,7 +335,7 @@ const EmployeeSalariesPage = ({
 				<DataTable
 					columns={columns}
 					selectableRows
-					data={tableData}
+					data={Data}
 					pagination
 					onSelectedRowsChange={checkedEmployeeData}
 				/>
@@ -406,7 +353,8 @@ const EmployeeSalariesPage = ({
 					date={selectedDate}
 					payment={payment}
 					data={selectedData}
-					details={CompanyDetails}
+					userToken={token}
+					businessToken={bizToken}
 					onCloseModal={closeModal}
 					state={state}
 					onRequestClick={(value) => onRequest(value)}
@@ -415,7 +363,7 @@ const EmployeeSalariesPage = ({
 			)}
 		</div>
 	);
-};
+};;
 
 const ModalPayEmployee = ({
 	date,
@@ -425,14 +373,15 @@ const ModalPayEmployee = ({
 	state,
 	onRequestClick,
 	payEmployee,
-	details: { token, email },
+	userToken,
+	businessToken,
 }) => {
 	const { month } = payment;
 
 	const onConfirm = (e) => {
 		e.preventDefault();
 		onRequestClick(true);
-		payEmployee(token, email, data);
+		payEmployee({ userToken, businessToken, employees: data });
 		// console.log(data);
 	};
 
@@ -489,9 +438,9 @@ const ModalPayEmployee = ({
 
 const mapStateToProps = (state) => {
 	return {
-		companyEmployee: state.CompanyDetailsReducer,
-		paySalaryRes: state.DashboardReducer.payEmployee.data,
-		paySalaryErr: state.DashboardReducer.payEmployeeErr,
+		companyEmployee: state.FetchEmployeeReducer,
+		paySalaryRes: state.PayEmployeeReducer,
+		// paySalaryErr: state.DashboardReducer.payEmployeeErr,
 	};
 };
 

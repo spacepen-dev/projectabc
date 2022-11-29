@@ -190,10 +190,6 @@ const DashboardReducer = (state = InitialState, action) => {
       return { ...state, editDepartment: action.payLoad };
     case "EDIT_DEPARTMENT_ERR_MESSAGE":
       return { ...state, editDepartmentErr: action.payLoad };
-    case "PAY_EMPLOYEE_SALARY":
-      return { ...state, payEmployee: action.payLoad };
-    case "PAY_EMPLOYEE_SALARY_ERR_MESSAGE":
-      return { ...state, payEmployeeErr: action.payLoad };
     case "VERIFY_ACCOUNT_NUMBER":
       return { ...state, verifyNumber: action.payLoad };
     case "VERIFY_ACCOUNT_NUMBER_ERR_MESSAGE":

@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import DataTable from "react-data-table-component";
 // import TableSpinner from "./TableSpinner";
 import EditCompanyEmployee from "../EditCompanyEmployee";
-import { FetchCompanyEmployee, DeleteEmployeeAction } from "../../../Actions";
+import { DeleteEmployeeAction } from "../../../Actions";
+import { FetchCompanyEmployee } from "./EmployeeAction";
 import DeleteEmployee from "../OptionsModal";
 import useBusinessToken from "../../../hooks/useBusinessToken";
 import useToken from "../../../hooks/useToken";
+import useHandleResponse from "../../../hooks/useHandleResponse";
 // import { EmployeeIcon } from "./svg/SVG";
 
 const ViewEmployee = ({
@@ -14,11 +16,11 @@ const ViewEmployee = ({
 	companyEmployee,
 	DeleteEmployeeAction,
 }) => {
-	const [employeeData, setEmployeeData] = useState([]);
 	const [filterValue, setFilterValue] = useState("");
 	const [pending, setPending] = useState(false);
 	const { bizToken } = useBusinessToken();
 	const { token } = useToken();
+	const [Data] = useHandleResponse(companyEmployee);
 
 	// FETCH ALL COMPANY EMPLOYEE DATA AND FETCH TOKEN FROM CACHE
 	useEffect(() => {
@@ -95,9 +97,7 @@ const ViewEmployee = ({
 			return null;
 		}
 		setPending(false);
-		if (companyEmployee.data) {
-			setEmployeeData(companyEmployee.data.success);
-		}
+
 		return;
 	}, [companyEmployee]);
 
@@ -109,7 +109,7 @@ const ViewEmployee = ({
 	// 	setEmployeeData(companyEmployee.success);
 	// }, [companyEmployee]);
 
-	const filteredItems = employeeData?.filter((item) => {
+	const filteredItems = Data?.filter((item) => {
 		return String(Object.values(item))
 			.toLowerCase()
 			.includes(filterValue.toLowerCase());
@@ -144,7 +144,7 @@ const ViewEmployee = ({
 
 const mapStateToProps = (state) => {
 	return {
-		companyEmployee: state.DashboardReducer.companyEmployee,
+		companyEmployee: state.FetchEmployeeReducer,
 		removeEmployeeRes: state.DashboardReducer.removeEmployee,
 	};
 };

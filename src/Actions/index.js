@@ -167,24 +167,7 @@ export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
 
 // FETCH COMPANY DATA
 
-export const FetchCompanyEmployee = (values) => async (dispatch) => {
-	try {
-		const data = await BasedURL.post("/fetchBusinessEmployee.php", {
-			...values,
-		});
-		dispatch({ type: "FETCH_COMPANY_EMPLOYEE", payLoad: data });
-		if (data) {
-			const { error, success } = data;
-			if (error) {
-				dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERROR", payLoad: error });
-			} else if (success) {
-				dispatch({ type: "FETCH_COMPANY_EMPLOYEE_SUCCESS", payLoad: success });
-			}
-		}
-	} catch (error) {
-		dispatch({ type: "FETCH_COMPANY_EMPLOYEE_ERR_MESSAGE", payLoad: error });
-	}
-};
+
 
 // FETCH ACCOUNT DETAILS
 export const FetchWalletHistory = (values) => async (dispatch) => {
@@ -244,20 +227,7 @@ export const FetchSalaryHistory = (value) => async (dispatch) => {
 	}
 };
 
-// PAY SALARY ACTION CREATOR
-export const PayEmployeeSalary =
-	(token, email, employeesData) => async (dispatch) => {
-		try {
-			const data = await BasedURL.post("bulkSalaryPayment.php", {
-				companyToken: token,
-				companyEmail: email,
-				employees: employeesData,
-			});
-			dispatch({ type: "PAY_EMPLOYEE_SALARY", payLoad: data });
-		} catch (error) {
-			dispatch({ type: "PAY_EMPLOYEE_SALARY_ERR_MESSAGE", payLoad: error });
-		}
-	};
+
 
 export const VerifyAccountName =
 	(businessToken, bankCode, accountNumber, userToken) => async (dispatch) => {
