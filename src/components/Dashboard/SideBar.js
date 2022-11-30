@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Goback from "../../assets/img/back.svg";
 import useHandleResponse from "../../hooks/useHandleResponse";
 
 import Logo from "../Logo";
@@ -24,7 +25,10 @@ const SideBar = ({ pageId, page, companyInfo }) => {
 					<h1 style={{ fontSize: "1.5rem" }}>
 						{!Data.businessName ? "Loading..." : Data?.businessName}
 					</h1>
-					<Link to="/registered-business">Go back</Link>
+					<Link className="goback" to="/registered-business">
+						<img src={Goback} alt="" />
+						Switch business
+					</Link>
 					{/* <Logo /> */}
 				</div>
 

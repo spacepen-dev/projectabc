@@ -2204,6 +2204,15 @@ background-color:#4836C8
   width: 70%;
   margin: 0 auto;
 }
+.goback {
+  text-decoration: none;
+  color: var(--baseColor);
+  font-weight: 600;
+}
+
+.goback img {
+  margin-right: 10px;
+}
 
 @media only screen and (max-width: 768px) {
 
