@@ -44,9 +44,9 @@ const SignOut = () => {
                     type='button'
                     className='button mx-2'
                     onClick={() => {
-                      localStorage.removeItem("aminien_business_token");
-                      navigate("/registered-business");
-                      setActive(false);
+                      localStorage.clear();
+											setActive(false);
+											navigate("/");
                     }}>
                     YES
                   </Button>

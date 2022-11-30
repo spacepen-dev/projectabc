@@ -581,7 +581,8 @@ otp div:last-child {
 }
 
 .sidebar-logo {
-  height: 5.05rem;
+  height: 10.05rem;
+    overflow-x: hidden;
 }
 .sidebar-heading {
   padding: 0.625rem 0;
