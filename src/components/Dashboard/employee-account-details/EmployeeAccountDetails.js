@@ -68,10 +68,18 @@ const EmployeeAccountDetails = ({
 	}, [accountName]);
 
 	useEffect(() => {
-		console.log(addEmployeeRes);
-		if (!addEmployeeRes) return;
+		if (!addEmployeeSuccess) {
+			return null;
+		}
 		setRequest(false);
-	}, [addEmployeeRes]);
+	}, [addEmployeeSuccess]);
+
+	useEffect(() => {
+		if (!editEmployeeSuccess) {
+			return null;
+		}
+		setRequest(false);
+	}, [editEmployeeSuccess]);
 
 	const BankList = () => {
 		const filterBankName = bankCodeList
@@ -113,11 +121,14 @@ const EmployeeAccountDetails = ({
 			setRequest(true);
 			if (editEmployeeLink) {
 				// REGISTRATION EMPLOYEE ACTION CREATOR
-				// editEmployeeAction(
-				//   { ...employeeData, filterBank, bankcode, accountName, accountNumber },
-				//   receivedToken,
-				//   employeeAccountName
-				// );
+				editEmployeeAction({
+					...employeeData,
+					filterBank,
+					bankcode,
+					businessToken: bizToken,
+					userToken: token,
+					employeeAccountName,
+				});
 			} else if (addEmployeeLink) {
 				// EDIT EMPLOYEE ACTIONS
 				registerEmployeeAction({
@@ -202,7 +213,6 @@ const EmployeeAccountDetails = ({
 					/>
 				</Form.Group>
 				<div className="flex align-items-center justify-content-end">
-					{console.log(bizToken)}
 					<AccountNameVerification
 						data={{
 							businessToken: bizToken,
@@ -232,7 +242,6 @@ const mapStateToProps = (state) => {
 	return {
 		accountName: state.DashboardReducer.verifyNumber.data,
 		accountNameErr: state.DashboardReducer.verifyNumberErr,
-		addEmployeeRes: state.AddEmployeeReducer,
 	};
 };
 

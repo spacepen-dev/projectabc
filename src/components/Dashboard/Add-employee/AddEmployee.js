@@ -44,7 +44,7 @@ const AddEmployee = ({ RegisterEmployee, registerEmployee }) => {
 
 const mapStateToProps = (state) => {
 	return {
-		registerEmployee: state.RegisterEmployeeReducer,
+		registerEmployee: state.AddEmployeeReducer,
 	};
 };
 export default connect(mapStateToProps, { RegisterEmployee })(AddEmployee);

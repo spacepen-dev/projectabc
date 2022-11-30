@@ -1,40 +1,40 @@
 import React, { useState } from "react";
 import EmployeeRegistration from "../employee-component/EmployeeRegistration";
 import { connect } from "react-redux";
-import { UpdateEmployee } from "../../../Actions";
+import { UpdateEmployee } from "./EditEmployeeAction";
 
 const EditEmployee = ({
-  initialValue,
-  updateEmployeeErr,
-  updateEmployeeSuccess,
-  UpdateEmployee,
-  registrationToken,
-  close,
+	initialValue,
+	updateEmployeeErr,
+	updateEmployeeSuccess,
+	UpdateEmployee,
+	close,
 }) => {
-  const [employeeData, setEmployeData] = useState(initialValue);
-  const onHandleChange = (e) => {
-    const { name, value } = e.target;
-    setEmployeData({ ...employeeData, [name]: value });
-  };
-  return (
-    <>
-      <EmployeeRegistration
-        onHandleChange={onHandleChange}
-        employeeData={employeeData}
-        editEmployeeAction={UpdateEmployee}
-        editEmployeeErr={updateEmployeeErr}
-        editEmployeeSuccess={updateEmployeeSuccess}
-        editEmployeeLink='editEmployee'
-        close={close}
-      />
-    </>
-  );
+	const [employeeData, setEmployeData] = useState(initialValue);
+
+	const onHandleChange = (e) => {
+		const { name, value } = e.target;
+		setEmployeData({ ...employeeData, [name]: value });
+	};
+
+	return (
+		<>
+			<EmployeeRegistration
+				onHandleChange={onHandleChange}
+				employeeData={employeeData}
+				editEmployeeAction={UpdateEmployee}
+				editEmployeeErr={updateEmployeeErr}
+				editEmployeeSuccess={updateEmployeeSuccess}
+				editEmployeeLink="editEmployee"
+				close={close}
+			/>
+		</>
+	);
 };
 const mapStateToProps = (state) => {
-  return {
-    updateEmployeeErr: state.DashboardReducer.updateEmployeeErr,
-    updateEmployeeSuccess: state.DashboardReducer.updateEmployee,
-  };
+	return {
+		updateEmployeeSuccess: state.UpdateEmployeeReducer,
+	};
 };
 export default connect(mapStateToProps, { UpdateEmployee })(EditEmployee);
 

@@ -32,42 +32,7 @@ export const CompanyDetails = (values) => async (dispatch) => {
 // REGISTER EMPLOYEE ACTION
 
 
-// UPDATE EMPLOYEE DETAIL ACTION
-export const UpdateEmployee =
-  (values, token, accountVerified) => async (dispatch) => {
-    // const {
-    //   employeeFirstname,
-    //   employeeLastname,
-    //   employeeEmail,
-    //   employeeRole,
-    //   employeeDepartment,
-    //   employeeRelives,
-    //   employeeTin,
-    //   employeeAnnualGrossSalary,
-    //   employeeAccountNumber,
-    //   filterBank,
-    //   bankcode,
-    //   employeePhoneNumber,
-    //   employeeToken,
-    //   employeeState
-    // } = values;
-    try {
-      const data = await BasedURL.post("/updateEmployee.php", { ...values });
-      dispatch({ type: "UPDATE_EMPLOYEE", payLoad: data });
-      if (data) {
-        const { error, success } = data.data;
-        if (error) {
-          
-          dispatch({ type: "UPDATE_EMPLOYEE_ERROR", payLoad: error });
-        } else if (success) {
-          
-          dispatch({ type: "UPDATE_EMPLOYEE_SUCCESS", payLoad: success });
-        }
-      }
-    } catch (error) {
-      dispatch({ type: "UPDATE_EMPLOYEE_ERR_MESSAGE", payLoad: error });
-    }
-  };
+
 
 // DELETE EMPLOYEE ACTION
 
