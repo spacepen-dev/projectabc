@@ -41,7 +41,7 @@ const BusinessOverview = ({ CompanyDetails, business }) => {
 							type="text"
 							readOnly
 							className="form-control py-2 "
-							value={data?.vAccount_number}
+							value={data?.business_account_number}
 						/>
 					</div>
 					<div class="form-group mb-4">
@@ -51,7 +51,7 @@ const BusinessOverview = ({ CompanyDetails, business }) => {
 							type="text"
 							readOnly
 							className="form-control py-2 "
-							value={data?.vAccount_name}
+							value={data?.business_bank_account_name}
 						/>
 					</div>
 					<div class="form-group mb-4">
@@ -61,7 +61,7 @@ const BusinessOverview = ({ CompanyDetails, business }) => {
 							type="text"
 							readOnly
 							className="form-control py-2 "
-							value={data?.vBank_name}
+							value={data?.business_bank_name}
 						/>
 					</div>
 					<div className="w-100 text-center">

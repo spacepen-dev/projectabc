@@ -75,10 +75,7 @@ const RegisteredBusiness = ({
 					</div>
 				</article>
 				<aside class="sign-up forgot-footer">
-					<a href="index.html">SIGN IN&emsp; </a> <span>or</span>{" "}
-					<a href="signUp.html" target="_blank">
-						&emsp;SIGN UP
-					</a>
+					<Link to="/">SIGN OUT</Link>
 				</aside>
 			</main>
 		</NewBackground>
