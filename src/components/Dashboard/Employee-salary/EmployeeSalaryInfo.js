@@ -1,0 +1,215 @@
+import React, { useMemo, useState } from "react";
+import { Form, Row, Col, Button } from "react-bootstrap";
+
+import DashBoardText from "../DashBoardText";
+import Input from "../../Registration/Input";
+import { payTax } from "../utils/personalIncomeTax";
+import { Tax } from "../utils/NewTaxCalculation";
+
+const EmployeeSalaryInfo = ({
+  index,
+  err,
+  nextQuestion,
+  prevQuestion,
+  annualSalary,
+  annualReliefs,
+  onHandleChange,
+}) => {
+  const [validation, setValidation] = useState({});
+  /*
+   * console.log(num.toFixed(2))
+   * function currencyFormat(num) {
+   return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+console.log(currencyFormat(2665))
+   */
+  // function currencyFormat(num = 200000000) {
+  //   let numb = num.toFixed(2);
+  //   return "NGN" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  // }
+  // GETTING MONTHLY SALARY FROM ANNUAL SALARY / 12
+  const getMonthlySalary = useMemo(() => {
+    const employeeMonthlySalary = annualSalary / 12;
+
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "NGN",
+    });
+    return formatter.format(employeeMonthlySalary);
+  }, [annualSalary]);
+
+  // GETTING MONTHLY Reliefs FROM ANNUAL Reliefs / 12
+  const getMonthlyReliefs = useMemo(() => {
+    const employeeMonthlyReliefs = Number(annualReliefs) / 12;
+
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "NGN",
+    });
+    return formatter.format(employeeMonthlyReliefs);
+  }, [annualReliefs]);
+
+  //  ANNUAL TAX DEDUCTION
+  const getAnnualTax = useMemo(() => {
+    const calcualatedTax = payTax(annualSalary);
+    console.log(calcualatedTax);
+    // let MonthlyTax = Number(annualSalary) + Number(annualReliefs) / 12;
+
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "NGN",
+    });
+    return formatter.format(Number(calcualatedTax));
+  }, [annualSalary]);
+
+  //MONTHLY GROSS PAY
+
+  const getMonthlyTax = useMemo(() => {
+    const calculatedTax = payTax(annualSalary) / 12;
+
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "NGN",
+    });
+    return formatter.format(calculatedTax);
+  }, [annualSalary]);
+
+  const Validation = () => {
+    if (!annualSalary) {
+      setValidation({
+        employeeAnnualSalary: "Employee's annual salary is required!",
+      });
+    } else {
+      nextQuestion();
+    }
+  };
+
+  if (index !== 2) {
+    return null;
+  }
+  return (
+    <div className='d-flex flex-column'>
+      <Row>
+        <Form.Group as={Col} controlId='formGrid'>
+          <DashBoardText
+            name='Annual Gross Salary'
+            label='Enter annual gross salary'
+          />
+          {/* {currencyFormat()} */}
+          <Input
+            inputName='employeeAnnualGrossSalary'
+            type='number'
+            handleChange={onHandleChange}
+            value={annualSalary}
+            err={validation.employeeAnnualSalary}
+            onPress={() =>
+              setValidation({
+                employeeAnnualSalary: "",
+              })
+            }
+          />
+        </Form.Group>
+        <Form.Group as={Col} controlId='formGrid'>
+          <DashBoardText
+            name='Monthly Gross Salary'
+            label='Enter employee monthly salary'
+          />
+          <input
+            readOnly
+            name='monthly'
+            value={getMonthlySalary}
+            className='w-100 border-1
+          registration-input rounded-1 px-2 border-1 fs-4 employer-input'
+          />
+        </Form.Group>
+      </Row>
+      <Row>
+        <Form.Group as={Col} controlId='formGrid'>
+          <DashBoardText
+            name='Annual Reliefs/Allowance'
+            label='Enter employee annual reliefs/allowance'
+          />
+          <Input
+            inputName='employeeRelives'
+            type='number'
+            handleChange={onHandleChange}
+            value={annualReliefs}
+            err={validation.employeeReliefs}
+            onPress={() =>
+              setValidation({
+                employeeReliefs: "",
+              })
+            }
+          />
+        </Form.Group>
+        <Form.Group as={Col} controlId='formGrid'>
+          <DashBoardText
+            name='Monthly Reliefs/Allowance'
+            label='Employee monthly reliefs/allowance'
+          />
+          <input
+            readOnly
+            name='monthly'
+            value={getMonthlyReliefs}
+            className='w-100 border-1
+          registration-input rounded-1 px-2 border-1 fs-4 employer-input'
+          />
+        </Form.Group>
+        {/* {Tax(600000)} */}
+      </Row>
+      <Row>
+        <Form.Group as={Col} controlId='formGrid'>
+          <DashBoardText
+            name='Annual tax deduction '
+            label='Annual tax deduction'
+          />
+          <input
+            readOnly
+            name='annualTax'
+            value={getAnnualTax}
+            className='w-100 border-1
+          registration-input rounded-1 px-2 border-1 fs-4 employer-input'
+          />
+        </Form.Group>
+        <Form.Group as={Col} controlId='formGrid'>
+          <DashBoardText
+            name='Monthly Tax Deduction'
+            label='Employee monthly tax deduction'
+          />
+          <input
+            readOnly
+            name='monthlyTax'
+            value={getMonthlyTax}
+            className='w-100 border-1
+          registration-input rounded-1 px-2 border-1 fs-4 employer-input'
+          />
+        </Form.Group>
+      </Row>
+      {/* <Button
+          type='button'
+          className='button ms-auto '
+          onClick={prevQuestion}>
+          Back
+        </Button> */}
+      <div className='mt-4 ms-auto double-btns '>
+        <Button type='button' className='button' onClick={prevQuestion}>
+          Back
+        </Button>
+        <Button
+          type='button'
+          className='button ms-4'
+          onClick={() => {
+            Validation();
+          }}>
+          Continue
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default EmployeeSalaryInfo;
+
+/**
+ *
+ */

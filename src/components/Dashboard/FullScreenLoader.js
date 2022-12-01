@@ -7,7 +7,7 @@ const FullScreenLoader = () => {
       style={{
         position: "fixed",
         top: 0,
-        left: "21%",
+        left: "0",
         right: 0,
         zIndex: 1,
         backgroundColor: "rgba(0, 0, 0, 0.4)",
