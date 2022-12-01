@@ -86,10 +86,7 @@ const EmailLogin = ({ EmailLogicRequest, login }) => {
 						/>
 					</form>
 					<aside className="sign-up">
-						Don't have an account?{" "}
-						<Link to="/sign-up" target="_blank">
-							Sign Up
-						</Link>
+						Don't have an account? <Link to="/sign-up">Sign Up</Link>
 					</aside>
 				</article>
 			</main>
