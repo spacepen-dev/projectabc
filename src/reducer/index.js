@@ -1,4 +1,15 @@
 import { combineReducers } from "redux";
+<<<<<<< HEAD
+import RegistrationReducer from "./RegistrationReducer";
+import DashboardReducer from "./DashboardReducer";
+// import AppReducers from "./AppReducers";
+
+export default combineReducers({
+  RegistrationReducer,
+  DashboardReducer,
+  // AppReducers,
+  // form: formReducer,
+=======
 import DashboardReducer, {
 	CompanyDetailsReducers,
 	FetchWalletHistory,
@@ -41,4 +52,5 @@ export default combineReducers({
 	UpdateEmployeeReducer,
 	// AppReducers,
 	// form: formReducer,
+>>>>>>> development-branch
 });

@@ -87,7 +87,7 @@ const AccountNameVerification = ({
 
 const mapStateToProps = (state) => {
   return {
-    accountNameValue: state.DashboardReducer.verifyNumber.data,
+    accountName: state.DashboardReducer.verifyNumber.data,
     accountNameErr: state.DashboardReducer.verifyNumberErr,
   };
 };

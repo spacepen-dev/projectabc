@@ -37,13 +37,13 @@ const SignIn = ({ signIn, accountEmail, logIN, errMessage }) => {
 
       if (status === "notverified") {
         navigate("verify-email");
-        window.location.reload();
+        // window.location.reload();
       } else if (success && status === "verified") {
         // localStorage.setItem("aminien_token", success.token);
         // const successMessage = success.split(":")[1];
         // setSuccess(successMessage);
         navigate("/login/otp");
-        window.location.reload();
+        // window.location.reload();
       } else if (error) {
         setError({ dataErr: error });
         const removeTimeOut = setTimeout(() => {

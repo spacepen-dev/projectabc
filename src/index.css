@@ -26,19 +26,7 @@ html {
   --accent: #6246D5;
   --button: #4736c8e0;
   --transparent: rgba(101, 156, 240, 0.1);
-  --baseColor: rgba(98, 70, 213, 1);
-    --subText: rgb(173, 173, 173);
-    --subTextVariant: rgba(191, 191, 191, 1);
-    --outlineBlack: rgba(207, 214, 222, 1);
-    --outlineGray: rgba(239, 239, 239, 1);
-    --baseBlur: rgba(98, 70, 213, 0.2);
-    --blackBlur: rgba(0, 0, 0, 0.1);
-    --greenVariant: rgb(46, 204, 113);
-    --white: #ffffff;
-    --black: #151515;
-    --error: red;
 }
-
 
 body {
   min-height: 100vh;
