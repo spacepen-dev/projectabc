@@ -16,7 +16,6 @@ const RegisteredBusiness = ({
 	registeredBusinessList,
 }) => {
 	const email = useLocation();
-
 	const { token } = useToken();
 	useEffect(() => {
 		GetRegisteredBusiness({
