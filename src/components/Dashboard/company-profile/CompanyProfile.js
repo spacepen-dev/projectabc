@@ -304,10 +304,7 @@ class CompanyProfile extends React.Component {
           </div> */}
 
           {this.state.errMessage && (
-            <VerificationModal
-              message={`Sorry we can not fetch all your company details at this time.`}
-              close={closeModal}
-            />
+            
           )}
         </div>
         {this.state.request && <FullScreenLoader />}

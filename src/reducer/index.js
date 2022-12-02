@@ -19,6 +19,7 @@ import {
 	FetchEmployeeReducer,
 	DeleteEmployeeReducer,
 } from "../components/Dashboard/view-employee/EmployeeAction";
+import { UploadImageReducer } from "../components/Dashboard/Logo-upload/UploadAction";
 // import AppReducers from "./AppReducers";
 
 export default combineReducers({
@@ -39,6 +40,7 @@ export default combineReducers({
 	FetchEmployeeReducer,
 	DeleteEmployeeReducer,
 	UpdateEmployeeReducer,
+	UploadImageReducer,
 	// AppReducers,
 	// form: formReducer,
 });
