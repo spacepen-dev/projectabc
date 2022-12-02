@@ -9,7 +9,6 @@ import {
 } from "../../../Actions";
 import EditCompanyInfo from "../EditCompanyInfo";
 import EditCompanyDepartment from "../EditCompanyDepartment";
-import VerificationModal from "../Logo-upload/UploadModal";
 // import NetWorkErrors from "../NetWorkErrors";
 
 // const navigate = useNavigate();
