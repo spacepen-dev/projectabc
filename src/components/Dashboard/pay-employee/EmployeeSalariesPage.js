@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import DataTable from "react-data-table-component";
-import VerificationModal from "../VerificationModal";
+import VerificationModal from "../Logo-upload/UploadModal";
 
 import { Form, Button } from "react-bootstrap";
 import Loaderbutton from "../../LoaderButton";

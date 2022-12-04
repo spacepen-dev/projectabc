@@ -32,5 +32,4 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
         PROJECT_PATH: projectabc
         DEPLOY_PATH: main
-        REPO_URL: https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }}
-
+        REPO_URL: https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }} main

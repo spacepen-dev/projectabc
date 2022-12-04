@@ -904,6 +904,7 @@ td {
 .Overlay-alert .alert {
   max-width: 50rem;
   margin-left: auto;
+  background-color: red;
 }
 .alert .alert-heading {
   text-align: center;
@@ -1009,14 +1010,13 @@ FORM Validate
 
 .Modal {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   display: block;
   width: 100%;
   max-width: 50.06rem;
-  height: fit-content;
+  height: 100rem;
   padding: 2rem;
-  background-color: #fff;
   border-radius: 3.13rem;
   transform: translate(-50%, -50%);
   outline: transparent;
@@ -1029,10 +1029,14 @@ FORM Validate
   background-color: #4836C8;
 }
 .verify-modal {
-  height: 15rem;
-  width: 80%;
+  height: 30rem;
+    background: #fff;
+    width: 30rem;
   max-width: fit-content;
   border-radius: 1rem;
+}
+.verify-modal img {
+  object-fit: contain;
 }
 .verify-modal h3 {
   font-size: 1rem;
