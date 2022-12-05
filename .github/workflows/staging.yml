@@ -23,7 +23,7 @@ jobs:
         script: |
           cd $PROJECT_PATH
           git stash push --include-untracked
-          git stash drop
+          git stash drop --quiet
           git pull $REPO_URL
           yarn install
           yarn run build
