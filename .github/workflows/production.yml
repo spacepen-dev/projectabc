@@ -2,7 +2,7 @@ name: Deploy to Production
 
 on:
   push:
-    branches: main
+    branches: master
 
 permissions:
   contents: write
@@ -26,10 +26,9 @@ jobs:
           yarn install
           yarn run build
           cp -r build/. $DEPLOY_PATH
-          echo "$SUDO_PASSWORD" | sudo -S systemctl restart apache2
       env:
         SUDO_PASSWORD: ${{ secrets.PASSWORD }}
         GITHUB_TOKEN: ${{ github.token }}
         PROJECT_PATH: projectabc
         DEPLOY_PATH: main
-        REPO_URL: https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }} main
+        REPO_URL: https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }} master
