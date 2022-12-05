@@ -90,10 +90,15 @@ function BankDetails({
 		setLoading(true);
 		AccountName(values, (res, error) => {
 			// console.log(res) sss
+			console.log(res);
 			if (res) {
 				setLoading(false);
-
-				getaccountname(res.data.success);
+				const { success, error } = res.data;
+				if (success) {
+					getaccountname(res.data.success);
+				} else if (error) {
+					swal(error, res.data.error);
+				}
 			} else {
 				swal(
 					error,

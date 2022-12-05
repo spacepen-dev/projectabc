@@ -202,7 +202,6 @@ export const AccountName = async (
 		});
 		funct(data, false);
 	} catch (error) {
-		console.log(error);
 		funct(error, true);
 	}
 };
