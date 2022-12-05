@@ -28,6 +28,7 @@ jobs:
           yarn install
           yarn run build
           cp -r build/. $DEPLOY_PATH
+          sudo systemctl restart apache2
       env:
         SUDO_PASSWORD: ${{ secrets.PASSWORD }}
         GITHUB_TOKEN: ${{ github.token }}
