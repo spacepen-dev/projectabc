@@ -22,6 +22,8 @@ jobs:
         envs: PROJECT_PATH,REPO_URL,SUDO_PASSWORD,DEPLOY_PATH
         script: |
           cd $PROJECT_PATH
+          git add .
+          git commit -m "Deploy to Production, ignore this commit"
           git pull $REPO_URL
           yarn install
           yarn run build
