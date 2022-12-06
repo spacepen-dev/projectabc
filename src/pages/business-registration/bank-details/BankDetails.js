@@ -89,9 +89,7 @@ function BankDetails({
 		};
 		setLoading(true);
 		AccountName(values, (res, error) => {
-			// console.log(res) sss
-			console.log(res);
-			if (res) {
+			if (res && !error) {
 				setLoading(false);
 				const { success, error } = res.data;
 				if (success) {
