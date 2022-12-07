@@ -25,7 +25,10 @@ export default function ImageUpload() {
 	const modalProps = {
 		file: file,
 		open: upload,
-		close: () => setUpload(false),
+		closeModal: () => {
+			setUpload(false);
+			setFile(null);
+		},
 	};
 
 	return (
@@ -66,7 +69,7 @@ export default function ImageUpload() {
 					</Link>
 				</div>
 			</form>
-			{file && <UploadModal {...modalProps} />}
+			{upload && file && <UploadModal {...modalProps} />}
 		</FormContainer>
 	);
 }
