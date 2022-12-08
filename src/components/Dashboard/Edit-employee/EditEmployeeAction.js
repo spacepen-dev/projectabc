@@ -16,6 +16,7 @@ const UPDATE_INIT = {
 };
 
 export const UpdateEmployee = (values) => async (dispatch) => {
+	
 	const {
 		employeeFirstname,
 		employeeLastname,
@@ -35,7 +36,9 @@ export const UpdateEmployee = (values) => async (dispatch) => {
 		employeeAccountName,
 		bankcode,
 		filterBank,
+		employeeToken,
 	} = values;
+	console.log(values);
 	try {
 		const data = await BaseURL.post("/updateEmployee.php", {
 			employeeFirstname,
@@ -60,6 +63,7 @@ export const UpdateEmployee = (values) => async (dispatch) => {
 			employeeNsitfCode: "",
 			employeeHealthCode: "",
 			employeeCoopCode: "",
+			employeeToken,
 		});
 		if (data) {
 			const { error, success } = data.data;

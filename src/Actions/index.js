@@ -12,8 +12,9 @@ import BasedURL from "./BasedURL";
 // COMPANY DETAILS ACTION
 export const CompanyDetails = (values) => async (dispatch) => {
   try {
-    const data = await BasedURL.post("/fetchUserSingleBusiness.php", { ...values });
-    dispatch({ type: "COMPANY_DETAILS" });
+    const data = await BasedURL.post("/fetchUserSingleBusiness.php", {
+			...values,
+		});
     if (data) {
       const { error, success } = data.data;
       if (error) {
