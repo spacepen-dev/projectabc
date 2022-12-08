@@ -20,6 +20,7 @@ const SideBar = ({ pageId, page, companyInfo }) => {
 	const [Data] = useHandleResponse(companyInfo);
 	return (
 		<section className="sidebar-container">
+			{console.log(Data.businessName)}
 			<div className="side-bar h-100 ">
 				<div className="sidebar-logo w-100 d-flex flex-column align-items-center justify-content-center pb-3">
 					<h1 style={{ fontSize: "1.5rem" }}>
@@ -163,7 +164,6 @@ const SideBar = ({ pageId, page, companyInfo }) => {
 					page={page}
 				/>
 			</div>
-			{console.log(page)}
 		</section>
 	);
 };
