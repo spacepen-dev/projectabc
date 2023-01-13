@@ -20,7 +20,7 @@ export const UploadImage = (values) => async (dispatch) => {
 	console.log(values);
 	try {
 		const data = await BaseURL.post(
-			"https://haypex.com.ng/dev/ABC/aimienpay_temp/uploadBusinessLogo.php",
+			"https://haypex.com.ng/dev/ABC/aimienpay_live/uploadBusinessLogo.php",
 			{
 				...values,
 			}

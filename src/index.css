@@ -899,6 +899,33 @@ td {
   max-height: fit-content;
 }
 
+.edit-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.edit-modal {
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 100%;
+  max-width: 50.06rem;
+  /* height: 100rem; */
+  padding: 2rem;
+  border-radius: 3.13rem;
+  transform: translate(-50%, -50%);
+  outline: transparent;
+}
 .Overlay,
 .Overlay-alert {
   position: fixed;
@@ -907,7 +934,6 @@ td {
   bottom: 0;
   left: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.4);
 }
 .Overlay {
   background-color: rgba(0, 0, 0, 0.4);

@@ -52,7 +52,7 @@ const Profile = ({ companyInfo, departments, CompanyDetails }) => {
 	const modalProps = {
 		file: selectedFile,
 		open: upload,
-		close: () => setUpload(false),
+		closeModal: () => setUpload(false),
 	};
 
 	const displayDepartment = () => {

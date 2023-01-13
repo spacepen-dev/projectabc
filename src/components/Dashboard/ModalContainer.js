@@ -9,16 +9,16 @@ const ModalContainer = ({ closeModal, buttonText, initialValue }) => {
   };
 
   return ReactDOM.createPortal(
-    <div className='Overlay' onClick={close}>
-      <Container className='Modal' onClick={(e) => e.stopPropagation()}>
-        <EditEmployee
-          buttonText={buttonText}
-          close={close}
-          initialValue={initialValue}
-        />
-      </Container>
-    </div>,
-    document.querySelector("#modal")
-  );
+		<div className="edit-overlay" onClick={close}>
+			<Container className="edit-modal" onClick={(e) => e.stopPropagation()}>
+				<EditEmployee
+					buttonText={buttonText}
+					close={close}
+					initialValue={initialValue}
+				/>
+			</Container>
+		</div>,
+		document.querySelector("#modal")
+	);
 };
 export default ModalContainer;

@@ -6,7 +6,7 @@ import useBusinessToken from "../../../hooks/useBusinessToken";
 import { UploadImage } from "./UploadAction";
 import { connect } from "react-redux";
 
-const UploadModal = ({ close, file, UploadImage, response }) => {
+const UploadModal = ({ closeModal, file, UploadImage, response }) => {
 	const [previewImage, setPreviewImage] = useState();
 
 	const [request, setRequest] = useState(false);
@@ -45,7 +45,7 @@ const UploadModal = ({ close, file, UploadImage, response }) => {
 	}, [response]);
 
 	return ReactDOM.createPortal(
-		<div className="Overlay-alert" onClick={close}>
+		<div className="Overlay-alert" onClick={closeModal}>
 			<form
 				className="Modal verify-modal d-flex flex-column align-items-center justify-content-between"
 				onClick={(e) => e.stopPropagation()}
@@ -70,6 +70,31 @@ const UploadModal = ({ close, file, UploadImage, response }) => {
 				/>
 				{/* </div> */}
 			</form>
+			<div className=" d-flex justify-content-center align-items-center mt-3">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					strokeWidth={1.5}
+					stroke="currentColor"
+					className="h-2 text-white rounded-circle"
+					style={{
+						position: "absolute",
+						bottom: "8rem",
+						right: "50%",
+						left: "50%",
+						// fontSize: "0.1rem",
+						width: "3rem",
+						cursor: "pointer",
+					}}
+					onClick={closeModal}>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M6 18L18 6M6 6l12 12"
+					/>
+				</svg>
+			</div>
 		</div>,
 		document.querySelector("#verified")
 	);
