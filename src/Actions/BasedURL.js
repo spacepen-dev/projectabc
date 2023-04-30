@@ -6,7 +6,6 @@ const BaseURL = axios.create({
 	// baseURL: "https://staging.apws.spacepen.tech/",
 });
 
-
 export default BaseURL;
 
 export const ImageBaseUrl =

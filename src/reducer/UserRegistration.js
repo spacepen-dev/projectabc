@@ -1,9 +1,8 @@
 const initalValues = {
-    signupRes: false,
-    signupError: false,
-    message:'',
-}
-
+	signupRes: false,
+	signupError: false,
+	message: "",
+};
 
 const UserRegistration = (state = initalValues, action) => {
 	switch (action.type) {

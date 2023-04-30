@@ -3,118 +3,102 @@ import BasedURL from "./BasedURL";
 
 /**********************NON ASYNC ACTION CREATOR*********************************/
 
-
-
-
-
 // SUBMIT DEPARTMENT ACTION
 
 // COMPANY DETAILS ACTION
 export const CompanyDetails = (values) => async (dispatch) => {
-  try {
-    const data = await BasedURL.post("/fetchUserSingleBusiness.php", {
+	try {
+		const data = await BasedURL.post("/fetchUserSingleBusiness.php", {
 			...values,
 		});
-    if (data) {
-      const { error, success } = data.data;
-      if (error) {
-        dispatch({ type: "COMPANY_DETAILS_ERROR", payLoad: error });
-      } else if (success) {        
-        dispatch({ type: "COMPANY_DETAILS_SUCCESS", payLoad: success });
-      }
-      
-    }
-
-  } catch (error) {
-    dispatch({ type: "COMPANY_DETAILS_ERR_MESSAGE", payLoad: error });
-  };
+		if (data) {
+			const { error, success } = data.data;
+			if (error) {
+				dispatch({ type: "COMPANY_DETAILS_ERROR", payLoad: error });
+			} else if (success) {
+				dispatch({ type: "COMPANY_DETAILS_SUCCESS", payLoad: success });
+			}
+		}
+	} catch (error) {
+		dispatch({ type: "COMPANY_DETAILS_ERR_MESSAGE", payLoad: error });
+	}
 };
 
 // REGISTER EMPLOYEE ACTION
 
-
-
-
 // DELETE EMPLOYEE ACTION
-
 
 // FETCH DEPARTMENT ACTION
 export const FetchDepartment = (values) => async (dispatch) => {
-  try {
-    const data = await BasedURL.post("/fetchRoleDepartment.php", { ...values });
+	try {
+		const data = await BasedURL.post("/fetchRoleDepartment.php", { ...values });
 
-    dispatch({ type: "FETCH_DEPARTMENT"});
+		dispatch({ type: "FETCH_DEPARTMENT" });
 
-    if (data) {
-      const { error, success } = data.data;
-      
-      if (error) {
-        dispatch({ type: "FETCH_DEPARTMENT_ERROR", payLoad: error });
-        
-      } else if (success) {
-        dispatch({ type: "FETCH_DEPARTMENT_SUCCESS", payLoad: success });
-        
-      }
-    }
+		if (data) {
+			const { error, success } = data.data;
 
-  } catch (error) {
-    dispatch({ type: "FETCH_DEPARTMENT_ERR_MESSAGE", payLoad: error });
-  }
+			if (error) {
+				dispatch({ type: "FETCH_DEPARTMENT_ERROR", payLoad: error });
+			} else if (success) {
+				dispatch({ type: "FETCH_DEPARTMENT_SUCCESS", payLoad: success });
+			}
+		}
+	} catch (error) {
+		dispatch({ type: "FETCH_DEPARTMENT_ERR_MESSAGE", payLoad: error });
+	}
 };
-
 
 // RESEND REGISTRATION OTP ACTION
 export const ResendOTP = (email) => async (dispatch) => {
-  try {
-    const data = await BasedURL.post("/resendRegistrationOtp.php", {
-      companyEmail: email,
-    });
-    dispatch({ type: "RESEND_OTP", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "RESEND_OTP_ERR_MESSAGE", payLoad: error });
-  }
+	try {
+		const data = await BasedURL.post("/resendRegistrationOtp.php", {
+			companyEmail: email,
+		});
+		dispatch({ type: "RESEND_OTP", payLoad: data });
+	} catch (error) {
+		dispatch({ type: "RESEND_OTP_ERR_MESSAGE", payLoad: error });
+	}
 };
 
 // RESENT LOGIN OTP ACTION
 export const ResendLoginOtp = (email) => async (dispatch) => {
-  try {
-    const data = await BasedURL.post("/accountLogin.php", { email });
-    dispatch({ type: "RESEND_LOGIN_OTP", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "RESEND_LOGIN_OTP_ERR_MESSAGE", payLoad: error });
-  }
+	try {
+		const data = await BasedURL.post("/accountLogin.php", { email });
+		dispatch({ type: "RESEND_LOGIN_OTP", payLoad: data });
+	} catch (error) {
+		dispatch({ type: "RESEND_LOGIN_OTP_ERR_MESSAGE", payLoad: error });
+	}
 };
 
 //COMPANY TOP UP ACCOUNT ACTION
 export const AccountTopUp = (email, token, amount) => async (dispatch) => {
-  try {
-    const data = await BasedURL.post("/accountTopUp.php", {
-      companyEmail: email,
-      companyToken: token,
-      amount,
-    });
-    dispatch({ type: "ACCOUNT_TOP_UP", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "ACCOUNT_TOP_UP_ERR_MESSAGE", payLoad: error });
-  }
+	try {
+		const data = await BasedURL.post("/accountTopUp.php", {
+			companyEmail: email,
+			companyToken: token,
+			amount,
+		});
+		dispatch({ type: "ACCOUNT_TOP_UP", payLoad: data });
+	} catch (error) {
+		dispatch({ type: "ACCOUNT_TOP_UP_ERR_MESSAGE", payLoad: error });
+	}
 };
 
 // VERIFY COMPANY TOP UP
 export const VerifyTopUp = (transactionId, token) => async (dispatch) => {
-  try {
-    const data = await BasedURL.post("/verifyAccountTopUpPayment.php", {
-      reference: transactionId,
-      companyToken: token,
-    });
-    dispatch({ type: "VERIFY_TOP_UP", payLoad: data });
-  } catch (error) {
-    dispatch({ type: "VERIFY_TOP_UP_ERR_MESSAGE", payLoad: error });
-  }
+	try {
+		const data = await BasedURL.post("/verifyAccountTopUpPayment.php", {
+			reference: transactionId,
+			companyToken: token,
+		});
+		dispatch({ type: "VERIFY_TOP_UP", payLoad: data });
+	} catch (error) {
+		dispatch({ type: "VERIFY_TOP_UP_ERR_MESSAGE", payLoad: error });
+	}
 };
 
 // FETCH COMPANY DATA
-
-
 
 // FETCH ACCOUNT DETAILS
 export const FetchWalletHistory = (values) => async (dispatch) => {
@@ -173,8 +157,6 @@ export const FetchSalaryHistory = (value) => async (dispatch) => {
 		dispatch({ type: "FETCH_SALARY_HISTORY_ERR_MESSAGE", payLoad: error });
 	}
 };
-
-
 
 export const VerifyAccountName =
 	(businessToken, bankCode, accountNumber, userToken) => async (dispatch) => {
@@ -275,5 +257,3 @@ export const RegisterBusiness = (values) => async (dispatch) => {
 		dispatch({ type: "REGISTER_BUSINESS_ERR_MESSAGE", payLoad: err });
 	}
 };
-
-
