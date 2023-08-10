@@ -23,6 +23,7 @@ jobs:
           script: |
             cd $PROJECT_PATH
             git pull $REPO_URL
+            echo "$SUDO_PASSWORD" | sudo -S systemctl restart apache2
         env:
           SUDO_PASSWORD: ${{ secrets.PASSWORD }}
           GITHUB_TOKEN: ${{ github.token }}
