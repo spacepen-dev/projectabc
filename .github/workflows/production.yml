@@ -12,26 +12,19 @@ jobs:
     name: Deploy to Production
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy React to Production
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        script_stop: true
-        envs: PROJECT_PATH,REPO_URL,SUDO_PASSWORD,DEPLOY_PATH
-        script: |
-          cd $PROJECT_PATH
-          git stash push --include-untracked
-          git stash drop --quiet || true
-          git pull $REPO_URL
-          yarn install
-          yarn run build
-          cp -r build/. $DEPLOY_PATH
-          echo "$SUDO_PASSWORD" | sudo -S systemctl restart apache2
-      env:
-        SUDO_PASSWORD: ${{ secrets.PASSWORD }}
-        GITHUB_TOKEN: ${{ github.token }}
-        PROJECT_PATH: projectabc
-        DEPLOY_PATH: main
-        REPO_URL: https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }} master
+      - name: Deploy Master Branch to Production
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script_stop: true
+          envs: PROJECT_PATH,REPO_URL,SUDO_PASSWORD
+          script: |
+            cd $PROJECT_PATH
+            git pull $REPO_URL
+        env:
+          SUDO_PASSWORD: ${{ secrets.PASSWORD }}
+          GITHUB_TOKEN: ${{ github.token }}
+          PROJECT_PATH: projectabc
+          REPO_URL: https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }} master
