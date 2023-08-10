@@ -1,0 +1,416 @@
+
+<section>
+    
+    <div class="card mt-5 bg-transparent border-0">
+        
+        <div class="card-body row bg-transparent border-0" style="min-height: 500px;">
+            
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="list-group list-group-flush">
+                    <a href="#" id = "step1Div" class="list-group-item list-group-item-action active rounded-3"><i id="step1DivIcon" class="bi bi-1-square-fill"></i> logo</a>
+                    <a href="#" id = "step2Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step2DivIcon" class="bi bi-2-square-fill"></i> Business socials</a>
+                    <a href="#" id = "step3Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step3DivIcon" class="bi bi-3-square-fill"></i> Business account</a>
+                    <a href="#" id = "step4Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step4DivIcon" class="bi bi-4-square-fill"></i> Departments</a>
+                    <!-- <a href="#" id = "step5Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step5DivIcon" class="bi bi-5-square-fill"></i> Finish</a> -->
+                </div>
+            </div>
+            
+            
+            <div class="col-lg-9 h-100 col-md-12 col-sm-12 px-3">
+                
+                
+                <div class="step1Div w-100">
+                    <div class="rows text-center">
+                        <div class="badge bg-dark mb-4">Process 1 of 4</div>
+                        <h3>Business logo</h3>
+                    </div>
+
+                    <input type="file" name="image" class="image-resize-filepond" id="fileImage">
+                    
+                </div>
+
+                <div class="step2Div d-none">
+                    <div class="rows text-center mb-5">
+                        <div class="badge bg-dark mb-4">Process 2 of 4</div>
+                        <h3>Employees social benefits </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <table class="w-100">
+                                <tr>
+                                    <td>
+                                        Is your business Pension compliant?
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                            
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="my-3">
+                                          <input type="text"
+                                            class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                          
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Is your busines Health Insurance compliant?
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                            
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="my-3">
+                                          <input type="text"
+                                            class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                          
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Is your business Pension compliant?
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                            
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="my-3">
+                                          <input type="text"
+                                            class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                          
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+
+                    </div>
+                </div>
+
+                <div class="step3Div d-none">
+                    <div class="rows text-center mb-5">
+                        <div class="badge bg-dark mb-4">Process 3 of 4</div>
+                        <h3>Business accounts validation</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Bank</label>
+                                <select name="" id="" class="form-control" placeholder="" aria-describedby="helpId"></select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Account number</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted">Please ensure this account belongs to the business or the owner</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Account name</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    
+                </div>
+                
+                <div class="step4Div d-none">
+                    <div class="rows text-center mb-5">
+                        <div class="badge bg-dark mb-4">Process 4 of 4</div>
+                        <h3>Business departments</h3>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="mb-3">
+                          <label for="" class="form-label">Input a custom department</label>
+                          <input type="text"
+                            class="form-control" id="department" aria-describedby="helpId" placeholder="Add a custom department">
+                        </div>
+                        <button onclick="addDepartment()" type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i> Add to list</button>
+                        <div class="my-3 border-top w-100 bg-transparent" id="departmentList">
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Administrative</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Engineering</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Teaching</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Non-Teaching</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Security</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Sales</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Operations</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Marketing</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Revenue</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Medical</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Paramedical</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Finance</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Human resource</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Purchase</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Quality Control</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Academic</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Non Academic</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Production</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department">Transportation</span>
+                        </div>
+                        
+
+                    </div>
+                    
+                </div>
+
+                <div class="step5Div d-none">
+                    <div class="row">
+                        <div class="col-12" style="height: 130px; background-image: url(images/gif.gif); background-size: 100px 100px; background-repeat: no-repeat; background-position: center;"></div>
+                        <div class="col-12 mt-3">
+                            <h3>Congratulation Aimienpay, we have completed your onboarding</h3>
+                        </div>
+                        <div class="col-12">
+                            <p>
+                                To make your funding experience seamless, we have created a virtual account number for you with details below
+                            </p>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Bank</th>
+                                            <th scope="col">Account number</th>
+                                            <th scope="col">Account name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="">
+                                            <td>Providus</td>
+                                            <td>1130165561</td>
+                                            <td>SPacepen</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 mt-4">
+                            <p>
+                                Please note that we will always welcome funds into your virtual account from the bank account(s) below. You can 2 (two) more alternative accounts on your profile page
+                            </p>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Bank</th>
+                                            <th scope="col">Account number</th>
+                                            <th scope="col">Account name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="">
+                                            <td>Providus</td>
+                                            <td>1130165561</td>
+                                            <td>SPacepen</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+
+
+            </div>
+            
+            
+        </div>
+        <div class="card-footer bg-transparent">
+            
+            <div class="step1Div row ">
+                <div class="col-lg-6 col-md-6 col-sm-6"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-50 float-end" id="gotoDiv2">I agree</button>
+                </div>
+            </div>
+            <div class="step2Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo1"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="gotoDiv3">Next <i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+            <div class="step3Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo2"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="gotoDiv4">Next <i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+            <div class="step4Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo3"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="gotoDiv5">Finish <i class="bi bi-check2 float-end"></i></button>
+                </div>
+            </div>
+            <div class="step5Div row d-none">
+                <!-- <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo4"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div> -->
+                <div class="col-lg-6 col-md-6 col-sm-6 mx-auto">
+                    <button class="btn btn-primary btn-lg w-100" onclick="toDashboard()">Okay<i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+               
+            
+        </div>
+    </div>
+</section>
+
+<script>
+
+    function addDepartment(){
+        var department = $('#department').val();
+        if(department == ""){
+            return false;
+        }else{
+            $('#departmentList').prepend('<span class="btn btn-primary mx-2 mt-3 departmentActive">'+department+'</span>');
+            $('#department').val('');
+
+            var len = $('.departmentActive').length;
+           
+            infoMessage(len+' department(s) selected');
+        }
+    }
+
+    function toDashboard(){
+        window.loacation = 'dashboard.html';
+    }
+
+
+    $(function(){
+
+        $('.department').click(function(){
+            $(this).removeClass('btn-outline-primary');
+            $(this).removeClass('department');
+            $(this).addClass('btn-primary');
+            $(this).addClass('departmentActive');
+            var len = $('.departmentActive').length;
+            infoMessage(len+' department(s) selected');
+        });
+
+        $('.departmentActive').click(function(){
+            $(this).removeClass('btn-primary');
+            $(this).removeClass('departmentActive');
+            $(this).addClass('btn-outline-primary');
+            $(this).addClass('department');
+            var len = $('.departmentActive').length;
+            infoMessage(len+' department(s) selected');
+        });
+        
+
+        /*Forward buttons*/
+        
+        $('#gotoDiv2').click(function(){
+            $('#step1Div').removeClass("active");
+            $('#step1DivIcon').addClass("text-success");
+            $('#step2Div').removeClass("disabled");
+            $('#step2Div').addClass("active");
+            $('.step2Div').removeClass("d-none");
+            $('.step1Div').addClass("d-none");
+        });
+
+        $('#gotoDiv3').click(function(){
+            $('#step2Div').removeClass("active");
+            $('#step2DivIcon').addClass("text-success");
+            $('#step3Div').removeClass("disabled");
+            $('#step3Div').addClass("active");
+            $('.step3Div').removeClass("d-none");
+            $('.step2Div').addClass("d-none");
+        });
+
+        $('#gotoDiv4').click(function(){
+            $('#step3Div').removeClass("active");
+            $('#step3DivIcon').addClass("text-success");
+            $('#step4Div').removeClass("disabled");
+            $('#step4Div').addClass("active");
+            $('.step4Div').removeClass("d-none");
+            $('.step3Div').addClass("d-none");
+        });
+
+        $('#gotoDiv5').click(function(){
+            $('#step4Div').removeClass("active");
+            $('#step4DivIcon').addClass("text-success");
+            $('#step5Div').removeClass("disabled");
+            $('#step5Div').addClass("active");
+            $('.step5Div').removeClass("d-none");
+            $('.step4Div').addClass("d-none");
+        });
+
+        
+        /**Backward buttons*/
+        $('#backTo1').click(function(){
+            $('#step1Div').addClass("active");
+            $('#step1DivIcon').removeClass("text-success");
+            $('#step2Div').addClass("disabled");
+            $('#step2Div').removeClass("active");
+            $('.step2Div').addClass("d-none");
+            $('.step1Div').removeClass("d-none");
+        });
+
+        $('#backTo2').click(function(){
+            $('#step2Div').addClass("active");
+            $('#step2DivIcon').removeClass("text-success");
+            $('#step3Div').addClass("disabled");
+            $('#step3Div').removeClass("active");
+            $('.step3Div').addClass("d-none");
+            $('.step2Div').removeClass("d-none");
+        });
+
+        $('#backTo3').click(function(){
+            $('#step3Div').addClass("active");
+            $('#step3DivIcon').removeClass("text-success");
+            $('#step4Div').addClass("disabled");
+            $('#step4Div').removeClass("active");
+            $('.step4Div').addClass("d-none");
+            $('.step3Div').removeClass("d-none");
+        });
+
+        ////
+        $('#backTo4').click(function(){
+            $('#step4Div').addClass("active");
+            $('#step4DivIcon').removeClass("text-success");
+            $('#step5Div').addClass("disabled");
+            $('#step5Div').removeClass("active");
+            $('.step5Div').addClass("d-none");
+            $('.step4Div').removeClass("d-none");
+        });
+
+        $('#backTo5').click(function(){
+            $('#step5Div').addClass("active");
+            $('#step5DivIcon').removeClass("text-success");
+            $('#step6Div').addClass("disabled");
+            $('#step6Div').removeClass("active");
+            $('.step6Div').addClass("d-none");
+            $('.step5Div').removeClass("d-none");
+        });
+
+
+        $('.businessSelector').click(function(){
+            $('.businessSelector').removeClass("active");
+            $(this).addClass("active");
+        })
+        
+
+    });
+</script>

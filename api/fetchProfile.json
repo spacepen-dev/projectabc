@@ -1,0 +1,88 @@
+{
+    "result":"success",
+    "BusinessProfile":[
+        {
+            "businessCategory":"Information and Communication Technology",
+            "tradingName":"Business trading name",
+            "registrationNumber":"RC.1234567",
+            "tin":"11011109",
+            "country":"Nigeria",
+            "state":"Ondo",
+            "lga":"Akoko North-East",
+            "address":"3 Canaan land street, Akure",
+            "email":"xxx@businessName.com",
+            "phone":"07034567789"
+        }
+    ],
+    "Humanresource":[
+        {
+            "employees":"12",
+            "departments":"3",
+            "monthlyPayroll":"30000",
+            "taxAutorities":"Ondo",
+            "pension":"Tangerine pensions, Redux pensions, ABC pension",
+            "healthInsurance":"Songhai Health, NHIS official"
+        }
+    ],
+    "Departmentlist":[
+        {
+            "department":"Kitchen",
+            "departmentCount":"1"
+        },
+        {
+            "department":"Security",
+            "departmentCount":"12"
+        },
+        {
+            "department":"Administrator",
+            "departmentCount":"40"
+        }
+    ],
+    "Walletaccount":[
+        {
+            "accountName":"Business name",
+            "accountNumber":"1130165561",
+            "bank":"Polaris bank"
+        }
+    ],
+    "Fundingaccounts":[
+        {
+            "accountName":"Business name",
+            "accountNumber":"1130165561",
+            "accountStatus":"Active",
+            "bank":"bank 1"
+        },
+        {
+            "accountName":"Business name",
+            "accountNumber":"1130165561",
+            "accountStatus":"Active",
+            "bank":"bank 2"
+        }
+    ],
+    "Administrators":[
+        {
+            "name":"Administrator 1",
+            "email":"administrator1@business.com",
+            "department":"Master admin",
+            "status":"active"
+        },
+        {
+            "name":"Administrator 2",
+            "email":"administrator2@business.com",
+            "department":"Human Resource",
+            "status":"active"
+        }
+    ],
+    "Preferences":[
+        {
+            "state":"Ondo",
+            "tin":"11011109",
+            "payTax":"Yes",
+            "penconsionCompliance":"Yes",
+            "aimienpayServiceCharge":"Employee",
+            "employerCode":"123456789",
+            "pencomCompanies":"Norrengerger, Trust fund",
+            "monthlyPension":"33000"
+        }
+    ]
+}

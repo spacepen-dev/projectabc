@@ -1,0 +1,1135 @@
+<div class="scene_element scene_element--fadeinup">
+    <div class="container border-1">
+        <div class="heading mb-5">
+            <h1 class="fw-bolder text-center">
+                <span url="employees.html" class="link text-decoration-none text-dark float-start">
+                    <i class="bi bi-arrow-left float-lg-start"></i>
+                </span>
+                
+                Edit Employee
+            </h1>
+        </div>
+        
+
+        <section class="addEmployeesSection">
+            <div class="row w-100  mx-auto">
+               
+                <div class="col-lg-12 card">
+                    
+                    <div class="card-body h-75 overflow-auto">
+                        <div class="row">
+                            <ul class="nav nav-tabs nav-justified">
+                                <li class="nav-item">
+                                  <a class="nav-link active" tab-content="employee-profile" href="#">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" tab-content="employee-work" href="#">Work</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" tab-content="employee-pension" href="#">Pension</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" tab-content="employee-insurance" href="#">Insurance</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" tab-content="employee-salary" href="#">Salary</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" tab-content="employee-accounts" href="#">Accounts</a>
+                                </li>
+                                
+                            </ul>
+                            <div class="tab-contents w-100 py-3 overflow-auto">
+                                <div class="row tab-pane" id="employee-profile">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Basic information</div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                        <div style="width: 300px; min-height: 300px;" class="card border-1">
+                                            <div class="card-body bg-secondary" id="imagePreview">
+
+                                            </div>
+                                            <div class="card-footer bg-transparent">
+                                                <button class="btn btn-primary w-100" onclick="selectPicture()">
+                                                    <i class="bi bi-cloud-upload-fill"></i>
+                                                     Upload Image
+                                                </button>
+                                                <input type="file" class="d-none" id="file1" >
+                                            </div>
+                                        </div>
+
+                                        
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Firstname</label>
+                                          <input type="text" name="" id="firstname" class="form-control" placeholder="" aria-describedby="helpId">
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Middlename</label>
+                                            <input type="text" id="middlename" class="form-control" placeholder="" aria-describedby="helpId">
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Lastname</label>
+                                            <input type="text" name="" id="lastname" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Email</label>
+                                            <input type="text" name="" id="email" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Phone</label>
+                                            <input type="text" name="" id="phone" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                                                            
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Gender</label>
+                                          <select id="gender" class="form-control" placeholder="" aria-describedby="helpId">
+                                            <option></option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                          </select>
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Date of birth</label>
+                                            <input type="date" name="" id="dob" class="form-control" placeholder="" aria-describedby="helpId">
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">State of Origin</label>
+                                            <select class="form-control" name="" id="selectState" aria-describedby="helpId" >
+                                                <option>Select State</option>
+                                                <option>Abia</option>
+                                                <option>Adamawa</option>
+                                                <option>Akwa Ibom</option>
+                                                <option>Anambra</option>
+                                                <option>Bauchi</option>
+                                                <option>Bayelsa</option>
+                                                <option>Benue</option>
+                                                <option>Borno</option>
+                                                <option>Cross River</option>
+                                                <option>Delta</option>
+                                                <option>Ebonyi</option>
+                                                <option>Edo</option>
+                                                <option>Ekiti</option>
+                                                <option>Enugu</option>
+                                                <option>Gombe</option>
+                                                <option>Imo</option>
+                                                <option>Jigawa</option>
+                                                <option>Kaduna</option>
+                                                <option>Kano</option>
+                                                <option>Katsina</option>
+                                                <option>Kebbi</option>
+                                                <option>Kogi</option>
+                                                <option>Kwara</option>
+                                                <option>Lagos</option>
+                                                <option>Nasarawa</option>
+                                                <option>Niger</option>
+                                                <option>Ogun</option>
+                                                <option>Ondo</option>
+                                                <option>Osun</option>
+                                                <option>Oyo</option>
+                                                <option>Plateau</option>
+                                                <option>Rivers</option>
+                                                <option>Sokoto</option>
+                                                <option>Taraba</option>
+                                                <option>Yobe</option>
+                                                <option>Zamfara</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Local Government Area of Origin</label>
+                                            <select id="selectLGA" class="form-control"></select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Marital status</label>
+                                            <select id="maritalStatus" class="form-control" placeholder="" aria-describedby="helpId">
+                                                <option></option>
+                                                <option>Single</option>
+                                                <option>Married</option>
+                                                <option>Widow</option>
+                                                <option>Widower</option>
+                                            </select>
+                                        </div>
+                                                                  
+                                    </div>
+                                    <div class="border-top w-100 mt-4 p-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                            </div>
+                                            <div class="col">
+                                                <button class="btn btn-primary w-100 proceed" proceed_to="employee-work">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-work">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Work information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Department</label>
+                                          <select id="department" class="form-control" placeholder="" aria-describedby="helpId">
+
+                                            </select>
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Role</label>
+                                            <input type="text" name="" id="role" class="form-control" placeholder="" aria-describedby="helpId">
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Work Email</label>
+                                            <input type="text" name="" id="workEmail" class="form-control" placeholder="" aria-describedby="helpId">
+        
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Work Phone</label>
+                                            <input type="text" name="" id="workPhone" class="form-control" placeholder="" aria-describedby="helpId">
+                                            
+                                        </div>
+                                                                           
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Employment date</label>
+                                            <input type="date" name="" id="employmentDate" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">State of Assignment</label>
+                                          <select class="form-control" name="" id="state_of_assignment" aria-describedby="helpId" >
+                                            <option>Select State</option>
+                                            <option>Abia</option>
+                                            <option>Adamawa</option>
+                                            <option>Akwa Ibom</option>
+                                            <option>Anambra</option>
+                                            <option>Bauchi</option>
+                                            <option>Bayelsa</option>
+                                            <option>Benue</option>
+                                            <option>Borno</option>
+                                            <option>Cross River</option>
+                                            <option>Delta</option>
+                                            <option>Ebonyi</option>
+                                            <option>Edo</option>
+                                            <option>Ekiti</option>
+                                            <option>Enugu</option>
+                                            <option>Gombe</option>
+                                            <option>Imo</option>
+                                            <option>Jigawa</option>
+                                            <option>Kaduna</option>
+                                            <option>Kano</option>
+                                            <option>Katsina</option>
+                                            <option>Kebbi</option>
+                                            <option>Kogi</option>
+                                            <option>Kwara</option>
+                                            <option>Lagos</option>
+                                            <option>Nasarawa</option>
+                                            <option>Niger</option>
+                                            <option>Ogun</option>
+                                            <option>Ondo</option>
+                                            <option>Osun</option>
+                                            <option>Oyo</option>
+                                            <option>Plateau</option>
+                                            <option>Rivers</option>
+                                            <option>Sokoto</option>
+                                            <option>Taraba</option>
+                                            <option>Yobe</option>
+                                            <option>Zamfara</option>
+                                        </select>
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Employee ID Number</label>
+                                            <input type="text" name="" id="employeeIdNumber" class="form-control" placeholder="" aria-describedby="helpId">
+                                            
+                                        </div>
+        
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Employee Tax Identification Number</label>
+                                            <input type="text" name="" id="employeeTIN" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                                                            
+                                    </div>
+                                    <div class="border-top w-100 mt-4 p-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                            </div>
+                                            <div class="col">
+                                                <button class="btn btn-primary w-100 proceed" proceed_to="employee-pension">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-salary">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Salary information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Gross Salary (Monthly)</label>
+                                          <input type="text" name="" id="grossMonthly" class="form-control" placeholder="" aria-describedby="helpId">
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Net Salary (Monthly)</label>
+                                            <input type="text" name="" id="netMonthly" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Tax Relief (Monthly)</label>
+                                            <input type="text" name="" id="monthlyRelief" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Income Tax (Monthly)</label>
+                                            <input type="text" name="" id="monthlyTax" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Pension (Monthly)</label>
+                                            <input type="text" name="" id="monthlyPension" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Health Insurance (Monthly)</label>
+                                            <input type="text" name="" id="healthMonthly" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+        
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Gross Salary (Annual)</label>
+                                            <input type="text" name="" id="grossAnnual" class="form-control" placeholder="" aria-describedby="helpId">
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Net Salary (Annual)</label>
+                                            <input type="text" name="" id="netAnnual" class="form-control" placeholder="" aria-describedby="helpId">
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Tax Relief (Annual)</label>
+                                            <input type="text" name="" id="annualRelief" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Income Tax (Annual)</label>
+                                            <input type="text" name="" id="annualTax" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Pension (Annual)</label>
+                                            <input type="text" name="" id="annualPension" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Health Insurance (Annual)</label>
+                                            <input type="text" name="" id="healthAnnual" class="form-control" placeholder="" aria-describedby="helpId">
+                                        </div>
+                                
+                                    </div>
+                                    <div class="border-top w-100 mt-4 p-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                            </div>
+                                            <div class="col">
+                                                <button class="btn btn-primary w-100 proceed" proceed_to="employee-accounts">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-pension">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Pension information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <p>
+                                                The contributory pension scheme requires employees and employers to contribute to a retirement fund. It aims to provide a reliable income after retirement by deducting a percentage of an employee's salary and matching contributions from the employer, ensuring long-term financial security.
+                                         
+                                            </p>
+                                            <p>
+                                                You can choose if your employee if on existing pension scheme, no pension scheme at all or you want to enroll your employee for a new pension scheme
+                                            </p>
+                                            
+                                        </div>
+                                        
+                                                                                               
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            
+                                            <div class="row mx-4">
+
+                                                <style>
+                                                    .active{
+                                                        border: 3px solid #000;
+                                                    }
+
+                                                    .tab-content{
+                                                        display:none;
+                                                    }
+
+                                                    .tab-button{
+                                                        text-align: center;
+                                                        cursor: pointer;
+                                                    }
+
+                                                </style>
+                                                
+                                                <div class="row">
+                                                    <div class="tab row mb-4">
+                                                      <div class="tab-button col-lg-6 col-md-6 col-sm-6 bg-transparent border-primary p-2 rounded active" id="clearPension" onclick="changeTab(event, 'tab1')">No pension</div>
+                                                      <div class="tab-button col-lg-6 col-md-6 col-sm-6 bg-transparent border-primary p-2 rounded" id="setPension" onclick="changeTab(event, 'tab2')">Existing pension</div>
+                                                    </div>
+                                                    <div id="tab1" class="tab-content">
+                                                      Employee is not on any pension scheme
+                                                    </div>
+                                                    <div id="tab2" class="tab-content">
+                                                        
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Pension company</label>
+                                                            <select id="pensionCompany" class="form-control" placeholder="" aria-describedby="helpId">
+                                                                <option></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Employee code</label>
+                                                            <input type="text" name="" id="employeePensionCode" class="form-control" placeholder="" aria-describedby="helpId">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Percentage of salary for Pension</label>
+                                                            <input type="text" name="" id="pensionRate" class="form-control" placeholder="" aria-describedby="helpId" value="0">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                                             
+                                            </div>
+                                            
+                                        </div>
+                                                                            
+                                    </div>
+                                    <div class="border-top w-100 mt-4 p-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                            </div>
+                                            <div class="col">
+                                                <button class="btn btn-primary w-100 proceed" proceed_to="employee-insurance">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-insurance">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Insurance information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <p>
+                                                The contributory pension scheme requires employees and employers to contribute to a retirement fund. It aims to provide a reliable income after retirement by deducting a percentage of an employee's salary and matching contributions from the employer, ensuring long-term financial security.
+                                         
+                                            </p>
+                                            <p>
+                                                You can choose if your employee if on existing pension scheme, no pension scheme at all or you want to enroll your employee for a new pension scheme
+                                            </p>
+                                            
+                                        </div>
+                                        
+                                                                                               
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            
+                                            <div class="row mx-4">
+
+                                                
+                                                
+                                                <div class="row">
+                                                    <div class="tab row mb-4">
+                                                      <div class="tab-button col-lg-6 col-md-6 col-sm-6 bg-transparent border-primary p-2 rounded active" id="clearInsurance" onclick="changeTab(event, 'tab3')">No HMO</div>
+                                                      <div class="tab-button col-lg-6 col-md-6 col-sm-6 bg-transparent border-primary p-2 rounded" id="setInsurance" onclick="changeTab(event, 'tab4')">Existing HMO</div>
+                                                    </div>
+                                                    <div id="tab3" class="tab-content">
+                                                      Employee is not on any HMO
+                                                    </div>
+                                                    <div id="tab4" class="tab-content">
+                                                        
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Health Management Organization</label>
+                                                            <select id="hmo" class="form-control">
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Employee code</label>
+                                                            <input type="text" name="" id="employeeHmoCode" class="form-control" placeholder="" aria-describedby="helpId">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Percentage of salary for HMO</label>
+                                                            <input type="text" name="" id="healthRate" class="form-control" placeholder="" aria-describedby="helpId" value="0">
+                                                        </div>
+
+                                                        
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                                             
+                                            </div>
+                                            
+                                        </div>
+                                                                            
+                                    </div>
+                                    <div class="border-top w-100 mt-4 p-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                            </div>
+                                            <div class="col">
+                                                <button class="btn btn-primary w-100 proceed" proceed_to="employee-salary">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-accounts">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Bank information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Bank name</label>
+                                          <input type="text" id="banks" list="bank" class="form-control" placeholder="Search for bank">
+                                            <datalist id="bank">
+                                            
+                                            </datalist>
+                                            <input type="hidden" id="bankCode"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Account number</label>
+                                            <input type="text" name="" id="accountNumber" class="form-control" placeholder="" aria-describedby="helpId">
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Account name</label>
+                                            <input type="text" name="" id="accountName" class="form-control" placeholder="" aria-describedby="helpId">
+                                            
+                                        </div>
+                                                                            
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        
+                                        
+                                                                            
+                                    </div>
+                                    <div class="border-top w-100 mt-4 p-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <!-- <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button> -->
+                                            </div>
+                                            <div class="col">
+                                                <button class="btn btn-primary w-100" onclick="saveEmployeeInformation()">Finish <i class="bi bi-arrow-right float-end"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+
+<script>
+    var obj = JSON.parse(localStorage.getItem("editEmployee"));
+    $('.employeeName').html(obj.employeeFirstname+' '+obj.employeeMiddleName+' '+obj.employeeLastname);
+    $('#file1').attr("idValue2",obj.employeeToken);
+    $('#firstname').val(obj.employeeFirstname);
+    $('#middlename').val(obj.employeeMiddleName);
+    $('#lastname').val(obj.employeeLastname);
+    $('#email').val(obj.employeeEmail);
+    $('#phone').val(obj.employeePhoneNumber);
+    $('#gender').val(obj.employeeGender);
+    $('#dob').val(obj.employeeDOB);
+    $('#selectState').val(obj.employeeState);
+    $('#selectLGA').val(obj.employeeLGA);
+    $('#maritalStatus').html('<option>'+obj.employeeMartialStatus+'</option>');
+    $('#department').html('<option>'+obj.employeeDepartment+'</option>');
+    $('#role').val(obj.employeeRole);
+    $('#workEmail').val(obj.employeeWorkMail);
+    $('#workPhone').val(obj.employeeWorkPhone);
+    $('#employmentDate').val(obj.employmentDate);
+    $('#state_of_assignment').html('<option>'+obj.state_of_assignment+'</option>');
+    $('#employeeIdNumber').val(obj.employee_idNumber);
+    $('#employeeTIN').val(obj.employeeTin);
+    $('#grossMonthly').val(obj.employeeMGS);
+    $('#grossAnnual').val(obj.employeeAGS);
+    // $('#netMonthly').val(obj.);
+    $('#monthlyRelief').val(obj.employeeMonthlyRelief);
+    $('#monthlyTax').val(obj.employeeMonthlyTax);
+    $('#monthlyPension').val(obj.employeeMonthlyPension);
+    $('#healthMonthly').val(obj.employeeHealthMonthly);
+    $('#annualRelief').val(obj.employeeAnnualRelief);
+    $('#annualTax').val(obj.employeeAnnualTax);
+    $('#annualPension').val(obj.employeeAnnualPension);
+    $('#healthAnnual').val(obj.employeeHealthAnnual);
+    $('#pensionCompany').append('<option>'+obj.employeePensionCompany+'</option>');
+    $('#employeePensionCode').val(obj.employeePensionCode);
+    $('#pensionRate').val(obj.employeePensionRate);
+    $('#hmo').append('<option>'+obj.employeeHMO+'</option>');
+    $('#healthRate').val(obj.employeeHealthRate);
+    $('#employeeHmoCode').val(obj.employeeHealthCode);
+    $('#bankCode').val(obj.employeeBankCode);
+    $('#accountName').val(obj.employeeBankAccountName);
+    $('#accountNumber').val(obj.employeeBankAccountNumber);
+    $('#bank').val(obj.employeeBankName);
+    $('#imagePreview').html('<center><img src="'+obj.employeeImage+'" class="img-fluid" ></center>');
+
+
+    // Specify the URL of the image you want to convert to base64
+    var imageUrl = obj.employeeImage;
+
+    // Call the function and get the base64 representation of the image
+    urlToBase64(imageUrl)
+    .then(base64Image => {
+        // Print the base64 string
+        // console.log(base64Image);
+        $('#file1').attr("idValue",base64Image);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+
+    function changeTab(evt, tabName) {
+    // Get all tab content elements
+    var tabContent = document.getElementsByClassName("tab-content");
+
+    // Hide all tab content
+    for (var i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+    }
+
+    // Remove active class from tab buttons
+    var tabButtons = document.getElementsByClassName("tab-button");
+    for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+    }
+
+    // Show the selected tab content and mark the button as active
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+    }
+
+    // Show the default tab on page load
+    document.getElementById("tab1").style.display = "block";
+
+
+    function urlToBase64(url) {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                resolve(reader.result);
+            }
+            reader.onerror = reject;
+            reader.readAsDataURL(xhr.response);
+            };
+            xhr.onerror = reject;
+            xhr.open('GET', url);
+            xhr.responseType = 'blob';
+            xhr.send();
+        });
+    }
+
+
+    function selectPicture(){
+        $('#file1').click();
+    }
+
+    function readImage(file) {
+        var reader = new FileReader();
+        var image = new Image();
+        reader.readAsDataURL(file);  
+        reader.onload = function(_file) {
+            image.src    = _file.target.result;
+            image.onload = function() {
+                var base64data = _file.target.result;
+                // console.log(base64data);
+                // return base64data;
+                $('#file1').attr("idValue",base64data);
+                $('#imagePreview').html('<center><img src="'+base64data+'" class="img-fluid" ></center>');
+                // $('.previewCover').removeClass("d-none");
+                // $('#file1_success').removeClass("d-none");
+                // $('#file1_select').addClass("d-none");
+                // $('.submitDocument').removeClass("disabled");
+                
+                
+            };
+        };
+    }
+    
+
+
+    
+    
+    function saveEmployeeInformation(){
+        var employeeToken = $('#file1').attr("idValue2");
+        var image = $('#file1').attr("idValue");
+        var firstname = $('#firstname').val();
+        var middlename = $('#middlename').val();
+        var lastname = $('#lastname').val();
+        var email = $('#email').val();
+        var phone = $('#phone').val();
+        var gender = $('#gender').val();
+        var dob = $('#dob').val();
+        var selectState = $('#selectState').val();
+        var selectLGA = $('#selectLGA').val();
+        var maritalStatus = $('#maritalStatus').val();
+        var department = $('#department').val();
+        var role = $('#role').val();
+        var workEmail = $('#workEmail').val();
+        var workPhone = $('#workPhone').val();
+        var employmentDate = $('#employmentDate').val();
+        var state_of_assignment = $('#state_of_assignment').val();
+        var employeeIdNumber = $('#employeeIdNumber').val();
+        var employeeTIN = $('#employeeTIN').val();
+        var grossMonthly = $('#grossMonthly').val();
+        var grossAnnual = $('#grossAnnual').val();
+        var netMonthly = $('#netMonthly').val();
+        var netAnnual = $('#netAnnual').val();
+        var monthlyRelief = $('#monthlyRelief').val();
+        var monthlyTax = $('#monthlyTax').val();
+        var monthlyPension = $('#monthlyPension').val();
+        var healthMonthly = $('#healthMonthly').val();
+        var annualRelief = $('#annualRelief').val();
+        var annualTax = $('#annualTax').val();
+        var annualPension = $('#annualPension').val();
+        var healthAnnual = $('#healthAnnual').val();
+        var pensionCompany = $('#pensionCompany').val();
+        var employeePensionCode = $('#employeePensionCode').val();
+        var pensionRate = $('#pensionRate').val();
+        var hmo = $('#hmo').val();
+        var healthRate = $('#healthRate').val();
+        var employeeHmoCode = $('#employeeHmoCode').val();
+        var bankCode = $('#bankCode').val();
+        var accountName = $('#accountName').val();
+        var accountNumber = $('#accountNumber').val();
+        var bankName = $('#bank').val();   
+       
+        var obj = {
+            "employeeToken":employeeToken,
+            "businessToken":localStorage.getItem("businessToken"),
+            "userToken":localStorage.getItem("userToken"),
+            "employeeImage":image,
+            "employeeFirstname":firstname,
+            "employeeMiddleName":middlename,
+            "employeeLastname":lastname,
+            "employee_email":email,
+            "employeePhoneNumber":phone,
+            "employeeGender":gender,
+            "employeeDOB":dob,
+            "employeeState":selectState,
+            "employeeLGA":selectLGA,
+            "employeeMaritalStatus":maritalStatus,
+            "employeeDepartment":department,
+            "employeeRole":role,
+            "workEmail":workEmail,
+            "workPhone":workPhone,
+            "employmentDate":employmentDate,
+            "state_of_assignment":state_of_assignment,
+            "employeeIdNumber":employeeIdNumber,
+            "employeeTin":employeeTIN,
+            "employeeMgs":grossMonthly.replace(/,/g, ''),
+            "employeeAgs": grossAnnual.replace(/,/g, ''),
+            "employeeMonthlyNetSalary":netMonthly.replace(/,/g, ''),
+            "employeeAnnualNetSalary":netMonthly.replace(/,/g, ''),
+            "monthlyRelief":monthlyRelief.replace(/,/g, ''),
+            "monthlyTax":monthlyTax.replace(/,/g, ''),
+            "monthlyPension":monthlyPension.replace(/,/g, ''),
+            "healthMonthly":healthMonthly.replace(/,/g, ''),
+            "annualRelief":annualRelief.replace(/,/g, ''),
+            "annualTax":annualTax.replace(/,/g, ''),
+            "annualPension":annualPension.replace(/,/g, ''),
+            "healthAnnual":healthAnnual.replace(/,/g, ''),
+            "pensionCompany":pensionCompany,
+            "employeePensionCode":employeePensionCode,
+            "pensionRate":pensionRate,
+            "hmo":hmo,
+            "healthRate":healthRate,
+            "employeeHealthCode":employeeHmoCode,
+            "employeeBankCode":bankCode,
+            "employeeAccountNumber":accountNumber,
+            "employeeAccountName":accountName,
+            "employeeBankName":bankName                
+        }
+
+        loadingStart();
+
+        $.ajax({
+            type: "POST",
+            url: "https://staging.apws.spacepen.tech/updateEmployeeAlt.php",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            success: function (response) {  
+                var result = response.success;
+
+                if(response.error == ""){
+                    successMessage("Update successful");
+                    var url = "employees.html";
+                    $('#content').load("pages/"+url);
+                }else{
+                    errorMessage(response.error);
+                }
+                loadingStop();
+            },
+            error: function(data){
+                var result = data.responseText;
+                console.log(result);
+                erroressage("Connection failed, please try again");
+                loadingStop();
+            }
+        });
+
+
+    }
+    
+    function fetchBanks(){
+        loadingStart();
+        $.ajax({
+            type: "GET",
+            url: "https://staging.apws.spacepen.tech/fetchbanks.php",
+            dataType: "json",
+            success: function (response) {  
+                var result = response.success;
+
+                $('#bank').html('');
+                $('#bank').append('<option></option>');
+                for(i in result){
+                    
+                    $('#bank').append('<option value="'+result[i].bankName+'" bankCode="'+result[i].bankCode+'">'+result[i].bankName+'</option>');
+
+                }
+
+                $('#banks').on('change', function() {
+                    var selectedValue = $(this).val();
+                    var selectedOption = $('#bank option[value="' + selectedValue + '"]');
+                    var attributeValue = selectedOption.attr('bankCode');
+                    $('#bankCode').val(attributeValue);
+                });
+
+                loadingStop();
+                
+            },
+            error: function(data){
+                var result = data.responseText;
+                console.log(result);
+                errorMessage("Connection failed, please try again");
+                loadingStop();
+            }
+        });
+    }
+
+    function fetchDepartments(){
+
+        var obj = {
+            "businessToken":localStorage.getItem("businessToken"),
+            "userToken":localStorage.getItem("userToken")
+
+        }
+        loadingStart();
+        $.ajax({
+            type: "POST",
+            url: "https://staging.apws.spacepen.tech/fetchRoleDepartment.php",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            success: function (response) {  
+
+
+                if(response.error == ""){
+                    var result = response.success;
+                    for(i in result){
+                        
+                        $('#department').append('<option>'+result[i].companyDepartment+'</option>');
+
+                    }
+                }
+                loadingStop();
+            },
+            error: function(data){
+                var result = data.responseText;
+                console.log(result);
+                loadingStop();
+            }
+        });
+    }
+
+    function fetchSocialBenefits(){
+
+        loadingStart();
+        $.ajax({
+            type: "GET",
+            url: "api/fetchSocialBenefits.json",
+            dataType: "json",
+            success: function (response) {  
+
+
+                var hmo = response.HMO;
+                var pension = response.PENSION;
+                
+                for(i in hmo){
+                    $('#hmo').append('<option>'+hmo[i].name+'</option>');
+                }
+
+                for(i in pension){
+                    $('#pensionCompany').append('<option>'+pension[i].name+'</option>');
+                }
+                
+                loadingStop();
+            },
+            error: function(data){
+                var result = data.responseText;
+                console.log(result);
+                loadingStop();
+            }
+        });
+    }
+
+    fetchSocialBenefits();
+
+    fetchBanks();
+    fetchDepartments();
+
+
+    function calculateMonthlyTax(monthly){
+
+        var annualSalary = Number(monthly.replace(/[^a-zA-Z0-9 ]/g, '')) * 12;
+        calculateAnnualTax(annualSalary);
+    }
+
+
+    function calculateAnnualTax(annualSalary1) {
+       
+        var annualSalary = Number(annualSalary1);
+
+        if(annualSalary/12 <= 30000){
+
+            var pensionRate = $('#pensionRate').val();
+            var pension = Number(annualSalary * (Number(pensionRate)/100));
+            var healthRate = $('#healthRate').val();
+            var health= Number(annualSalary * (Number(healthRate)/100));
+            
+            var totalRelief = Number(health + pension);
+            var annualNet = annualSalary - totalRelief;
+
+            var annualTax = 0;
+            var monthlyTax = 0;
+            
+            $('#grossMonthly').val(Math.round(annualSalary/12).toLocaleString());
+            $('#netMonthly').val(Math.round(annualNet/12).toLocaleString());
+            $('#monthlyRelief').val(Math.round(totalRelief/12).toLocaleString());
+            $('#monthlyTax').val(Math.round(monthlyTax).toLocaleString());
+            $('#monthlyPension').val(Math.round(monthlyPension).toLocaleString());
+            $('#grossAnnual').val(Math.round(annualSalary).toLocaleString());
+            $('#netAnnual').val(Math.round(annualNet).toLocaleString());
+            $('#annualRelief').val(Math.round(totalRelief).toLocaleString());
+            $('#annualPension').val(Math.round(pension).toLocaleString());
+            $('#annualTax').val(Math.round(annualTax).toLocaleString());
+            $('#healthAnnual').val(Math.round(health).toLocaleString());
+            $('#healthMonthly').val(Math.round(health/12).toLocaleString());
+
+        }else{
+            var relief = Number(200000 + (annualSalary * 0.2));
+            var pensionRate = $('#pensionRate').val();
+            var pension = Number(annualSalary * (Number(pensionRate)/100));
+            var healthRate = $('#healthRate').val();
+            var health= Number(annualSalary * (Number(healthRate)/100));
+            
+            var totalRelief = Number(health + pension + relief);
+
+            const taxBrackets = [
+                { min: 0, max: 300000, rate: 7 },
+                { min: 300000, max: 600000, rate: 11 },
+                { min: 600000, max: 1100000, rate: 15 },
+                { min: 1100000, max: 1600000, rate: 19 },
+                { min: 1600000, max: 3200000, rate: 21 },
+                { min: 3200000, max: Infinity, rate: 24 }
+            ];
+
+
+
+            let taxableIncome = annualSalary - totalRelief;
+            let totalTax = 0;
+
+            for (let i = 0; i < taxBrackets.length; i++) {
+                const { min, max, rate } = taxBrackets[i];
+                if (taxableIncome <= 0) {
+                break;
+                }
+
+                const taxableAmount = Math.min(taxableIncome, max - min);
+                const taxAmount = (taxableAmount * rate) / 100;
+                totalTax += taxAmount;
+                taxableIncome -= taxableAmount;
+            }
+
+            var monthlyTax = totalTax / 12; // Monthly tax payable
+            var annualTax = totalTax; // Annual tax payable
+            var monthlyPension = pension / 12;
+            var monthlyHealth = health / 12;
+            var annualNet = annualSalary - totalRelief - annualTax + relief;
+            
+
+            $('#grossMonthly').val(Math.round(annualSalary/12).toLocaleString());
+            $('#netMonthly').val(Math.round(annualNet/12).toLocaleString());
+            $('#monthlyRelief').val(Math.round(totalRelief/12).toLocaleString());
+            $('#monthlyTax').val(Math.round(monthlyTax).toLocaleString());
+            $('#monthlyPension').val(Math.round(monthlyPension).toLocaleString());
+            $('#grossAnnual').val(Math.round(annualSalary).toLocaleString());
+            $('#netAnnual').val(Math.round(annualNet).toLocaleString());
+            $('#annualRelief').val(Math.round(totalRelief).toLocaleString());
+            $('#annualPension').val(Math.round(pension).toLocaleString());
+            $('#annualTax').val(Math.round(annualTax).toLocaleString());
+            $('#healthAnnual').val(Math.round(health).toLocaleString());
+            $('#healthMonthly').val(Math.round(health/12).toLocaleString());
+        }
+        
+    }     
+
+   
+    function accountValidation(){
+        var accountNumber = $('#accountNumber').val();
+        var bankCode = $('#bankCode').val();
+        var bankName = $('#banks').val();
+        var user_token = localStorage.getItem("userToken");
+
+        var obj = {
+            "accountNumber":accountNumber,
+            "bankCode":bankCode,
+            "userToken":user_token
+        }
+
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(obj),
+            url: "https://staging.apws.spacepen.tech/verifyBankAccount.php",
+            dataType: "json",
+            success: function (response) {  
+
+                if(response.error == ""){
+                    $('#accountName').val(response.success);
+                    $('#finish').removeClass("disabled");
+                }else{
+                    errorMessage(response.error);
+                }
+
+                
+            },
+            error: function(data){
+                var result = data.responseText;
+                errorMessage(result);
+            }
+        });
+
+    }
+    
+    
+    $('#file1').on('change', function() {
+        var file1 =  readImage($('#file1')[0].files[0]); 
+        
+    });
+
+    $(function(){
+
+        $('#accountNumber').keyup(function(){
+            var accountNumber = $(this).val();
+        
+            if(accountNumber.length == 10){
+                accountValidation();
+            }
+        });
+
+
+        $('#grossMonthly').keyup(function(){
+            var a = $(this).val();
+            calculateMonthlyTax(a);
+        });
+
+        $('#grossAnnual').keyup(function(){
+            var a = $(this).val();
+            calculateAnnualTax(a);
+        });
+        
+        $('.proceed').click(function(){
+            var nextPhase = $(this).attr("proceed_to");
+        
+            
+            $('.nav-link').removeClass("active");
+
+            $('[tab-content = '+nextPhase+']').addClass("active");             
+           
+            $('.tab-pane').addClass("d-none");
+            $('#'+nextPhase).removeClass("d-none");
+            $(this).addClass("active");
+        });
+        
+         
+        $('.link').click(function(){
+            var url = $(this).attr("url");
+            $('#content').load("pages/"+url);
+        }) ;
+
+
+        $('#selectState').change(function(){
+            var state = $('#selectState').val();
+
+            $.ajax({
+                type: "GET",
+                url: "../api/lga.json",
+                dataType: "json",
+                success: function (response) {  
+                    var result = response.Result;
+
+                    $('#selectLGA').html('');
+                    for(i in result){
+                        if(state == result[i].state){
+                            $('#selectLGA').append('<option>'+result[i].lga+'</option>');
+                        }
+                    }
+                    
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    console.log(result);
+                }
+            });
+        });
+
+        $('#setInsurance').click(function(){
+            $('#healthRate').val(0);
+        });
+
+        $('#clearInsurance').click(function(){
+            $('#healthRate').val(0);
+        });
+
+        $('#setPension').click(function(){
+            $('#pensionRate').val(18);
+        });
+
+        $('#clearPension').click(function(){
+            $('#pensionRate').val(0);
+        });
+        
+        $('.nav-link').click(function(){
+          var navTab = $(this).attr("tab-content");
+          $('.nav-link').removeClass("active");
+          $('.nav-link').removeClass("active");
+          $('.tab-pane').addClass("d-none");
+          $('#'+navTab).removeClass("d-none");
+          $(this).addClass("active");
+        });
+    
+    });
+</script>

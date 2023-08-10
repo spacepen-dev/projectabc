@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/keyframes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pageTransitions.css">
+    <link rel="stylesheet" href="css/bs5.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="js/bs5.js"></script>
+    <script src="js/jq.js"></script>
+</head>
+
+
+
+
+<body class="index m-scene">
+    <section class="alert d-none row top-0 position-fixed w-100 p-3 text-center text-dark fw-bold mx-auto output" style="z-index: +5000"></section>
+
+    <section class="loadingDiv top-0 bottom-0 w-100 position-fixed text-center d-none" style="background: rgba(255,255,255,0.5); z-index: +1000; backdrop-filter: blur(5px);">
+        <div class="justify-content-center align-items-center top-50 position-absolute mx-auto w-100 text-center">
+    
+        </div>
+    </section>
+    <section class="container my-5 scene_element scene_element--fadeinright" id="div1">
+        <div class="row mt-3">
+            <center>
+                <img src="images/logo.svg">
+                <h2 class="mt-4">
+                    <a href="accounts.html"><i class="float-start bi bi-arrow-left"></i></a>
+                    Register your Business
+                </h2>
+                 
+            </center>
+        </div>
+        <div class="card border-0 bg-light mt-4">
+            
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="text-center my-4 fw-bolder">Process 1 of 2</div>
+
+                    <div class="col-lg-2 col-md-4 col-sm-12">
+                        <div class="card bg-transparent border-0">
+                            
+                            <div class="card-header bg-transparent fw-bold border-0">
+                                <!-- Business logo -->
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    
+                                    <div class="rounded border-primary text-center text-primary d-flex flex-column align-items-center" id="selectImage" style="cursor:pointer; height: 180px; width: 180px; border: 2px solid #000;">
+                                        <span class="m-auto">Click to upload logo</span>
+                                    </div>
+                                    <input type="file" name="image" class="d-none" accept="image/*" id="image-input">
+                                    <input type="hidden" id="businessLogo"/>
+                                </div>
+                                                                  
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-d col-sm-12">
+                        <div class="card bg-transparent border-0">
+                            
+                            <div class="card-header bg-transparent fw-bold border-0">
+                                <!-- Business details -->
+                            </div>
+                            <div class="card-body">
+
+                                <div class="mb-3 row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <label for="" class="form-label">Business name</label>
+                                        <input type="text" class="form-control" name="" id="businessName" aria-describedby="helpId" placeholder="">
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <label for="" class="form-label">Business Reg. Number</label>
+                                        <input type="text" class="form-control" name="" id="businessRegNumber" aria-describedby="helpId" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Trading name</label>
+                                    <input type="text" class="form-control" name="" id="tradingName" aria-describedby="helpId" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Business category</label>
+                                    <input type="text" class="form-control" name="" id="businesscategory" aria-describedby="helpId" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">About your business</label>
+                                    <input type="text" class="form-control" name="" id="aboutBusiness" aria-describedby="helpId" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Business website (optional)</label>
+                                    <input type="text" class="form-control" name="" id="businessWebsite" aria-describedby="helpId" placeholder="">
+                                </div>
+                                  
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-d col-sm-12">
+                        <div class="card bg-transparent border-0">
+                            
+                            <div class="card-header bg-transparent fw-bold border-0">
+                                <!-- Contact details -->
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Address</label>
+                                    <input type="text" class="form-control" name="" id="businessAddress" aria-describedby="helpId" placeholder="">
+                               
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col-6">
+                                        <label for="" class="form-label">State</label>
+                                        <select class="form-control" name="" id="selectState" aria-describedby="helpId" >
+                                            <option>Select State</option>
+                                            <option>Abia</option>
+                                            <option>Adamawa</option>
+                                            <option>Akwa Ibom</option>
+                                            <option>Anambra</option>
+                                            <option>Bauchi</option>
+                                            <option>Bayelsa</option>
+                                            <option>Benue</option>
+                                            <option>Borno</option>
+                                            <option>Cross River</option>
+                                            <option>Delta</option>
+                                            <option>Ebonyi</option>
+                                            <option>Edo</option>
+                                            <option>Ekiti</option>
+                                            <option>Enugu</option>
+                                            <option>Gombe</option>
+                                            <option>Imo</option>
+                                            <option>Jigawa</option>
+                                            <option>Kaduna</option>
+                                            <option>Kano</option>
+                                            <option>Katsina</option>
+                                            <option>Kebbi</option>
+                                            <option>Kogi</option>
+                                            <option>Kwara</option>
+                                            <option>Lagos</option>
+                                            <option>Nasarawa</option>
+                                            <option>Niger</option>
+                                            <option>Ogun</option>
+                                            <option>Ondo</option>
+                                            <option>Osun</option>
+                                            <option>Oyo</option>
+                                            <option>Plateau</option>
+                                            <option>Rivers</option>
+                                            <option>Sokoto</option>
+                                            <option>Taraba</option>
+                                            <option>Yobe</option>
+                                            <option>Zamfara</option>
+                                        </select>
+                                        
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="" class="form-label">Local Govt. Area</label>
+                                        
+                                        <select class="form-control" name="" id="selectLGA" aria-describedby="helpId" >
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Phone number</label>
+                                    <input type="text" class="form-control" name="" id="businessPhoneNumber" aria-describedby="helpId" placeholder="">
+                                </div>
+                                <div class="mb-5">
+                                    <label for="" class="form-label">Email</label>
+                                    <input type="text" class="form-control" name="" id="businessEmail" aria-describedby="helpId" placeholder="">
+                                </div>
+
+                                <div class="mb-3">    
+                                    <button class="btn btn-primary btn-lg" style="width:100%" type="submit" id="proceed">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="container my-5 scene_element scene_element--fadeinright d-none" id="div2">
+        <div class="card shadow-sm border-1">
+            <div class="card-header fs-1 fw-bolder bg-transparent text-center">
+                <a href="#" id="backToDiv1"><i class="float-start bi bi-arrow-left"></i></a>
+                Register your Business
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="alert alert-info text-center">Process 2 of 2</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="card bg-transparent border-0">
+                            
+                            <div class="card-header bg-transparent fw-bold border-0">
+                                Business compliance
+                            </div>
+                            <div class="card-body overflow-auto">
+                                <table class="table table-responsive">
+                                    <tr>
+                                        <td>
+                                            Is your business Tax compliant?
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" id="taxCompliance" type="checkbox" >
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="my-0">
+                                              <input type="text"
+                                                class="form-control disabled" name="" id="tinNumber" aria-describedby="helpId" placeholder="Input TIN number">
+                                              
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Is your busines Health Insurance compliant?
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" id="insuranceCompliance" type="checkbox">
+                                                
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="my-0">
+                                              <input type="text"
+                                                class="form-control disabled" name="" id="NHISCode" aria-describedby="helpId" placeholder="NHIS code">
+                                              
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Is your business Pension compliant?
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" id="pensionCompliance" type="checkbox">
+                                                
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="my-0">
+                                              <input type="text"
+                                                class="form-control disabled" name="" id="pensionCode" aria-describedby="helpId" placeholder="Pencom code">
+                                              
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Is your business NSITF compliant?
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="NSITFCompliance">
+                                                
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="my-0">
+                                              <input type="text"
+                                                class="form-control disabled" name="" id="NSITFCode" aria-describedby="helpId" placeholder="NSITF code">
+                                              
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                  
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="card bg-transparent border-0">
+                            
+                            <div class="card-header bg-transparent fw-bold border-0">
+                                <!-- Banking Information -->
+                            </div>
+                            <div class="card-body">
+
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Bank</label>
+                                    <input type="text" id="banks" list="bank" class="form-control" placeholder="Search for bank">
+                                    <datalist id="bank">
+                                    
+                                    </datalist>
+                                    <input type="hidden" id="bankCode"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Account number</label>
+                                    <input type="text" name="" id="accountNumber" class="form-control" placeholder="" aria-describedby="helpId">
+                                    <small id="helpId" class="text-muted">Please ensure this account belongs to the business or the owner</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Account name</label>
+                                    <input type="text" name="" id="accountName" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                </div>
+
+                                <div class="mb-3">
+                                    
+                                    <button class="btn btn-primary btn-lg disabled" id="finish" onclick="finish()" style="width:100%" type="submit">Finish <i class="bi bi-check float-end"></i></button>
+                                </div>
+                                                                  
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+
+
+        function loadingStart(){
+            $('.loadingDiv').removeClass('d-none');
+        }
+
+        function loadingStop(){
+            $('.loadingDiv').addClass('d-none');
+        }
+
+        function successMessage(e){
+            $('.output').html('');
+            $('.output').addClass('alert-success');
+            $('.output').html('<center><i class="bi bi-check2-circle"></i> '+e+'</center>');
+            $('.output').removeClass("d-none");
+            setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-success"); }, 2000);
+            return false;
+        }
+
+        function errorMessage(e){
+            $('.output').html('');
+            $('.output').addClass('alert-danger');
+            $('.output').html('<center><i class="bi bi-x-circle"></i> '+e+'</center>');
+            $('.output').removeClass("d-none");
+            setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-danger"); }, 2000);
+            return false;
+        }
+
+        function infoMessage(e){
+            $('.output').html('');
+            $('.output').addClass('alert-primary');
+            $('.output').html('<center><i class="bi bi-info-circle"></i> '+e+'</center>');
+            $('.output').removeClass("d-none");
+            setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-primary"); }, 5000);
+            return false;
+        }
+
+        function fetchBanks(){
+            
+            $.ajax({
+                type: "GET",
+                url: "https://staging.apws.spacepen.tech/fetchbanks.php",
+                dataType: "json",
+                success: function (response) {  
+                    var result = response.success;
+
+                    $('#bank').html('');
+                    $('#bank').append('<option></option>');
+                    for(i in result){
+                        
+                        $('#bank').append('<option value="'+result[i].bankName+'" bankCode="'+result[i].bankCode+'">'+result[i].bankName+'</option>');
+                        
+
+                        
+
+                    }
+
+                    $('#banks').on('change', function() {
+                        var selectedValue = $(this).val();
+                        var selectedOption = $('#bank option[value="' + selectedValue + '"]');
+                        var attributeValue = selectedOption.attr('bankCode');
+                        $('#bankCode').val(attributeValue);
+                    });
+                    
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    console.log(result);
+                }
+            });
+        }
+
+        function finish(){
+            var businessLogo = $('#businessLogo').val();
+            var businessRegNumber = $('#businessRegNumber').val();
+            var businessName = $('#businessName').val();
+            var tradingName = $('#tradingName').val();
+            var businesscategory = $('#businesscategory').val();
+            var aboutBusiness = $('#aboutBusiness').val();
+            var businessWebsite = $('#businessWebsite').val();
+            var businessAddress = $('#businessAddress').val();
+            var selectState = $('#selectState').val();
+            var selectLGA = $('#selectLGA').val();
+            var businessPhoneNumber = $('#businessPhoneNumber').val();
+            var businessEmail = $('#businessEmail').val();
+            var tinNumber = $('#tinNumber').val();
+            var pensionCode = $('#pensionCode').val();
+            var NSITFCode = $('#NSITFCode').val();
+            var NHISCode = $('#NHISCode').val();
+            var accountNumber = $('#accountNumber').val();
+            var bankCode = $('#bankCode').val();
+            var bankName = $('#banks').val();
+            var user_token = localStorage.getItem("userToken");
+            var accountName = $('#accountName').val();
+
+            if(businessName == ""){
+                errorMessage("Business name is required");
+                return false;
+            }
+
+            if(businessRegNumber == ""){
+                errorMessage("Business registration number is required");
+                return false;
+            }
+
+            if(tradingName == ""){
+                errorMessage("Business trading name is required");
+                return false;
+            }
+            if(businesscategory == ""){
+                errorMessage("Business category is required");
+                return false;
+            }
+            if(aboutBusiness == ""){
+                errorMessage("A short bio about your business is required");
+                return false;
+            }
+            if(businessAddress == ""){
+                errorMessage("Business address is required");
+                return false;
+            }
+            if(selectState == ""){
+                errorMessage("State of business residence is required");
+                return false;
+            }
+            if(selectLGA == ""){
+                errorMessage("Local Government Area of business residence is required");
+                return false;
+            }
+            if(businessPhoneNumber == ""){
+                errorMessage("Business phone number is required");
+                return false;
+            }
+            if(businessEmail == ""){
+                errorMessage("Business email is required");
+                return false;
+            }
+
+
+
+            var obj = {
+                "agreementSigned": "YES",
+                "user_token": user_token,
+                "businessRegistrationType": "A",
+                "businessName": businessName,
+                "tradingName": tradingName,
+                "registrationNumber": "12345",
+                "companyLogo": "",
+                "about": aboutBusiness,
+                "state": selectState,
+                "lga": selectLGA,
+                "stateTin": tinNumber,
+                "officeAddress": businessAddress,
+                "emailAddress": businessEmail,
+                "phoneNumber": businessPhoneNumber,
+                "website": businessWebsite,
+                "businessCategory": businesscategory,
+                "pensionCompliance": "YES",
+                "pensionCode": pensionCode,
+                "healthInsuranceCompliance": "YES",
+                "healthInsuranceCode": NHISCode,
+                "nsitfCompliance": "YES",
+                "nsitfCode": NSITFCode,
+                "businessBankName": bankName,
+                "businessBankAccountName": accountName,
+                "businessAccountNumber": accountNumber,
+                "businessBankCode": bankCode
+            }
+
+
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(obj),
+                url: "https://staging.apws.spacepen.tech/registerBusiness.php",
+                dataType: "json",
+                success: function (response) {  
+
+                    if(response.error == ""){
+                        successMessage("Business registration is successful");
+                        localStorage.setItem("newBusinessName",businessName);
+                        localStorage.setItem("newBusinessLogo", businessLogo);
+                        window.location = 'welcome.html';
+                    }else{
+                        errorMessage(response.error);
+                    }
+
+                    
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    errorMessage(result);
+                }
+            });
+
+
+
+        }
+
+        fetchBanks();
+        
+        $(function(){
+            $('#selectState').change(function(){
+                var state = $('#selectState').val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "api/lga.json",
+                    dataType: "json",
+                    success: function (response) {  
+                        var result = response.Result;
+
+                        $('#selectLGA').html('');
+                        for(i in result){
+                            if(state == result[i].state){
+                                $('#selectLGA').append('<option>'+result[i].lga+'</option>');
+                            }
+                        }
+                        
+                    },
+                    error: function(data){
+                        var result = data.responseText;
+                        console.log(result);
+                    }
+                });
+            });
+
+
+            $('#selectImage').click(function(){
+                $('#image-input').click();
+            });
+
+
+            $('#image-input').on('change', function() {
+                var file = $(this).prop('files')[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                var base64 = e.target.result;
+                // console.log('Base64 Image:', base64);
+
+                $('#selectImage').html('<img src="'+base64+'" class="img-fluid mx-auto my-auto w-100" style="max-height: 150px">');
+                $('#businessLogo').val(base64);
+                // Perform further operations with the Base64 image
+                // Example: Display the image on the web page, send it to a server, etc.
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+
+
+            $('#proceed').click(function(){
+
+                var businessName = $('#businessName').val();
+                var businessRegNumber = $('#businessRegNumber').val();
+                var tradingName = $('#tradingName').val();
+                var businesscategory = $('#businesscategory').val();
+                var aboutBusiness = $('#aboutBusiness').val();
+                var businessWebsite = $('#businessWebsite').val();
+                var businessAddress = $('#businessAddress').val();
+                var selectState = $('#selectState').val();
+                var selectLGA = $('#selectLGA').val();
+                var businessPhoneNumber = $('#businessPhoneNumber').val();
+                var businessEmail = $('#businessEmail').val();
+
+                if(businessName == ""){
+                    errorMessage("Business name is required");
+                    return false;
+                }
+
+                if(businessRegNumber == ""){
+                    errorMessage("Business registration number is required");
+                    return false;
+                }
+
+                if(tradingName == ""){
+                    errorMessage("Business trading name is required");
+                    return false;
+                }
+                if(businesscategory == ""){
+                    errorMessage("Business category is required");
+                    return false;
+                }
+                if(aboutBusiness == ""){
+                    errorMessage("A short bio about your business is required");
+                    return false;
+                }
+                if(businessAddress == ""){
+                    errorMessage("Business address is required");
+                    return false;
+                }
+                if(selectState == ""){
+                    errorMessage("State of business residence is required");
+                    return false;
+                }
+                if(selectLGA == ""){
+                    errorMessage("Local Government Area of business residence is required");
+                    return false;
+                }
+                if(businessPhoneNumber == ""){
+                    errorMessage("Business phone number is required");
+                    return false;
+                }
+                if(businessEmail == ""){
+                    errorMessage("Business email is required");
+                    return false;
+                }
+                
+                $('#div1').addClass("d-none");
+                $('#div2').removeClass("d-none");
+            });
+
+            $('#backToDiv1').click(function(){
+                $('#div1').removeClass("d-none");
+                $('#div2').addClass("d-none");
+
+            });
+
+            $('#accountNumber').keyup(function(){
+                var accountNumber = $(this).val();
+            
+                if(accountNumber.length == 10){
+                    accountValidation();
+                }
+            });
+
+
+
+            function accountValidation(){
+                var accountNumber = $('#accountNumber').val();
+                var bankCode = $('#bankCode').val();
+                var bankName = $('#banks').val();
+                var user_token = localStorage.getItem("userToken");
+
+                var obj = {
+                    "accountNumber":accountNumber,
+                    "bankCode":bankCode,
+                    "userToken":user_token
+                }
+
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(obj),
+                    url: "https://staging.apws.spacepen.tech/verifyBankAccount.php",
+                    dataType: "json",
+                    success: function (response) {  
+
+                        if(response.error == ""){
+                            $('#accountName').val(response.success);
+                            $('#finish').removeClass("disabled");
+                        }else{
+                            errorMessage(response.error);
+                        }
+
+                        
+                    },
+                    error: function(data){
+                        var result = data.responseText;
+                        errorMessage(result);
+                    }
+                });
+
+            }
+
+            
+
+        });
+    </script>
+    <script src="js/jquery.smoothState.min.js"></script>
+    <script src="js/main.js"></script>
+    
+</body>
+</html>

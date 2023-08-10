@@ -1,0 +1,479 @@
+
+        <div class="scene_element scene_element--fadeinright">
+            <div class="container border-1">
+                <div class="heading mb-5">
+                    <h1 class="fw-bolder text-center">
+                        <span url="salaries.html" class="link text-decoration-none text-dark float-start">
+                            <i class="bi bi-arrow-left float-lg-start"></i>
+                        </span>
+                        
+                        Employees commission income
+                    </h1>
+                </div>
+
+                
+
+                <section class="payEmployeesSection ">
+                    <div class="row w-100 mx-auto">
+                        <!-- <div class="col-lg-2 col-md-2 col-sm-12 payEmployeeRecordOutside"></div> -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 card">
+                            <div class="card-header bg-transparent fs-2 fw-bolder">
+                                <div class="row mb-3">
+                                    <div class="col-lg-2 col-md-6 col-sm-12">
+                                        <label for="" class="form-label fs-6">Month</label>
+                                        <select class="form-control" id="month">
+                                            
+                                            <option>January</option>
+                                            <option>February</option>
+                                            <option>March</option>
+                                            <option>April</option>
+                                            <option>May</option>
+                                            <option>June</option>
+                                            <option>July</option>
+                                            <option>August</option>
+                                            <option>September</option>
+                                            <option>October</option>
+                                            <option>November</option>
+                                            <option>December</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 col-sm-12">
+                                        <label for="" class="form-label fs-6">Year</label>
+                                        <select class="form-control" id="year">
+                                            <option>2023</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="" class="form-label fs-6">percentage</label>
+                                        <input type="number" id="commission_percentage" value = "0" class="form-control" placeholder="" aria-describedby="helpId">
+                                    </div> 
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <label for="" class="form-label fs-6">Search table</label>
+                                        <input type="text" class="form-control w-100 searchSalariesTable" placeholder="Search table">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="row">
+                                    <table id="table2" class="table table-hover datatable" ata-toggle="table" data-height="500">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Department</th>
+                                                <th>Role</th>
+                                                <th>Total income</th>
+                                                <th>Commission</th>
+                                                <th>Comment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                                                                                                                   
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="w-100 btn btn-secondary">Bonus</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="w-100 btn btn-primary" onclick="paySalaries()">Pay now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+        </div>
+ 
+        
+    
+
+
+    <section class="paySalariesConfirmation d-none">
+        <div class="row position-fixed top-0 bottom-0 mx-auto" style="z-index: +5; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); right:0; left:0;">
+    
+            <div class="col-lg-3 col-md-2 col-sm-0  d-lg-block "></div>
+            <div class="card col-lg-6 col-md-8 col-sm-12 p-4 mt-5 bottom-0 h-100 mx-auto">
+             
+              <div class="card-header bg-transparent fs-3 fw-bolder text-center">
+                <i class="bi bi-arrow-left float-start" onclick="closePaymentConfirmation()"></i> Payment confirmation
+               
+              </div>
+              <div class="card-body" id="notificationList">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Payment type</td>
+                        <td  class="fs-5">Salary</td>
+                    </tr>
+                    <tr>
+                        <td>Month/Year</td>
+                        <td  class="fs-5" id="month_year"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Wallet Balance</td>
+                        <td id="walletBalance" class="fs-5">500000</td>
+                    </tr>
+                    <tr>
+                        <td>No. of Employees</td>
+                        <td id="noOfEmployees" class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Salary on Payroll</td>
+                        <td id="totalSalaryOnPayroll" class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Tax</td>
+                        <td id="totalTaxOnPayroll" class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Pension</td>
+                        <td id="totalPensionOnPayroll"  class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Service charge</td>
+                        <td id="serviceCHarge" class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Grand total</td>
+                        <td id="grandTotal" class="fs-3 fw-bolder"></td>
+                    </tr>
+                   
+            
+                </table>
+                <center>
+                    <button class="btn btn-success btn-lg w-50 mt-5">Pay now</button>
+                </center>
+                
+                
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-2 col-sm-0  d-lg-block "></div>
+        </div>
+    </section>
+
+    <section class="editPayroll d-none">
+        <div class="row  position-absolute top-0 bottom-0 mx-auto" style="z-index: +5; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); right:0; left:0;">
+    
+            <div class="col-lg-7 col-md-12 col-sm-12  d-lg-block  outsideEditPayroll"></div>
+            <div class="card col-lg-5 p-4">
+             
+              <div class="card-header bg-transparent fs-3 fw-bolder text-center">
+                <i class="bi bi-arrow-left float-start outsideEditPayroll"></i> Bonus
+               
+              </div>
+              <div class="card-body" id="notificationList"> 
+                <table class="table table-striped">
+                    <tr>
+                        <td>Name</td>
+                        <td id="nameToEdit"></td>
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                        <td id="departmentToEdit"></td>
+                    </tr>
+                    <tr>
+                        <td>Role</td>
+                        <td id="roleToEdit"></td>
+                    </tr>
+                    
+                </table>
+                <div class="mt-5 row text-danger p-3 fw-bold bg-secondary">
+                    Please note that this edit only has effect on this payout and if you want to make a permanent change to employee's payroll, kindly click on <a href="./employees.html">Edit employees</a>
+                </div>
+                <div class="mt-5 row">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="mb-3">
+                          <label for="" class="form-label">Total Payout</label>
+                          <input type="text" class="form-control" id="payoutOld" aria-describedby="helpId" placeholder="" readonly/>
+                        </div>
+                       
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="mb-3">
+                          <label for="" class="form-label">Bonus</label>
+                          <input type="number" class="form-control" id="bonusNew" aria-describedby="helpId" placeholder="" autofocus/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Comment</label>
+                            <input type="text" class="form-control" id="commentOld" aria-describedby="helpId" placeholder="Comment"/>
+                        </div>
+                        <input type="hidden" class="form-control" id="employeeTableId" value="" payoutOld="" aria-describedby="helpId" placeholder="Comment"/>
+                        <button onclick="addBonus()" class="btn btn-primary w-100" href="#" role="button">Add Bonus</button>
+                    </div>
+                    
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+   
+    <script>
+    
+        // const numberWords = [
+        //       "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+        //       "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
+        //     ];
+            
+        //     const tensWords = [
+        //       "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
+        //     ];
+            
+        //     const scaleWords = [
+        //       "", "thousand", "million"
+        //     ];
+            
+        //     function convertTwoDigitNumberToWords(number) {
+        //       if (number < 20) {
+        //         return numberWords[number];
+        //       } else {
+        //         const tensDigit = Math.floor(number / 10);
+        //         const onesDigit = number % 10;
+        //         return tensWords[tensDigit] + (onesDigit !== 0 ? " " + numberWords[onesDigit] : "");
+        //       }
+        //     }
+            
+        //     function convertThreeDigitNumberToWords(number) {
+        //       const hundredsDigit = Math.floor(number / 100);
+        //       const remainingDigits = number % 100;
+        //       let words = numberWords[hundredsDigit] + " hundred";
+        //       if (remainingDigits > 0) {
+        //         words += " and " + convertTwoDigitNumberToWords(remainingDigits);
+        //       }
+        //       return words;
+        //     }
+            
+        //     function convertNumberToWords(number) {
+        //       if (number === 0) {
+        //         return "zero";
+        //       } else if (number < 0 || number >= 100000000) {
+        //         return "Number out of range";
+        //       }
+            
+        //       const numStr = String(number);
+        //       const numChunks = [];
+            
+        //       // Split the number into chunks of three digits
+        //       for (let i = numStr.length; i > 0; i -= 3) {
+        //         const chunk = numStr.slice(Math.max(0, i - 3), i);
+        //         numChunks.unshift(parseInt(chunk, 10));
+        //       }
+            
+        //       let words = "";
+        //       const numChunksLength = numChunks.length;
+            
+        //       for (let i = 0; i < numChunksLength; i++) {
+        //         const chunk = numChunks[i];
+            
+        //         if (chunk === 0) {
+        //           continue;
+        //         }
+            
+        //         const chunkWords = convertThreeDigitNumberToWords(chunk);
+            
+        //         if (i > 0) {
+        //           words = chunkWords + " " + scaleWords[i] + " " + words;
+        //         } else {
+        //           words = chunkWords;
+        //         }
+        //       }
+            
+        //       return words.trim();
+        //     }
+            
+        //     // Example usage
+        //     console.log(convertNumberToWords(0)); // zero
+        //     console.log(convertNumberToWords(25)); // twenty five
+        //     console.log(convertNumberToWords(123)); // one hundred and twenty three
+        //     console.log(convertNumberToWords(1000)); // one thousand
+        //     console.log(convertNumberToWords(56789)); // fifty six thousand seven hundred and eighty nine
+        //     console.log(convertNumberToWords(1000000)); // one million
+        //     console.log(convertNumberToWords(123456789)); // one hundred and twenty three million four hundred and fifty six thousand seven hundred and eighty nine
+
+
+    
+
+        function paySalaries(){
+
+            var month = $('#month').val();
+            var year = $('#year').val();            
+            var len = $('#table2 tbody tr.selected').length;
+            var serviceCHarge = (len * 150);
+
+            // Collect payout values in array column
+            var payOutArray = [];
+            $('table tr.selected td:nth-child(13)').each(function() {
+                payOutArray.push($(this).text());
+            });
+
+            // sum payout values
+            var payoutSum = 0
+            for (let i = 0; i < payOutArray.length; i++) {
+                payoutSum += Number(payOutArray[i].replace(/,/g, ''));
+            }
+
+             // Collect Tax values in array column
+             var taxArray = [];
+            $('table tr.selected td:nth-child(7)').each(function() {
+                taxArray.push($(this).text());
+            });
+
+            // sum payout values
+            var taxSum = 0
+            for (let i = 0; i < taxArray.length; i++) {
+                taxSum += Number(taxArray[i].replace(/,/g, ''));
+            }
+
+
+             // Collect Pension values in array column
+             var pensionArray = [];
+            $('table tr.selected td:nth-child(7)').each(function() {
+                pensionArray.push($(this).text());
+            });
+
+            // sum payout values
+            var pensionSum = 0
+            for (let i = 0; i < pensionArray.length; i++) {
+                pensionSum += Number(pensionArray[i].replace(/,/g, ''));
+            }
+
+
+            $('#grandTotal').text('NGN '+((Number(payoutSum))+(Number(serviceCHarge))).toLocaleString());
+            
+            $('#totalPensionOnPayroll').text('NGN '+Number(pensionSum).toLocaleString());
+            $('#totalTaxOnPayroll').text('NGN '+Number(taxSum).toLocaleString());
+            $('#totalSalaryOnPayroll').text('NGN '+Number(payoutSum).toLocaleString());
+            $('#serviceCHarge').text('NGN '+Number(serviceCHarge).toLocaleString());
+            $('#month_year').text(month+', '+year);
+            $('#noOfEmployees').text(len);
+            $('.paySalariesConfirmation').removeClass("d-none");
+        }
+
+        function closePaymentConfirmation(){
+            $('.paySalariesConfirmation').addClass("d-none");
+        }
+
+        
+       
+
+        function fetchEmployees(){
+
+            var businessToken = localStorage.getItem("businessToken");
+            var obj = {
+                "businessToken":businessToken
+            }
+
+            $.ajax({
+                type: "GET",
+                url: "api/fetchPayroll.json",
+                data: obj,
+                dataType: "json",
+                success: function (data2) {
+                
+                    var data = data2.Result;
+
+                    if(data !=""){
+                        // $('#table2 tbody').html('');
+                        for(i in data){
+                            var obj = toString(data[i]);
+                            var num = Number(i)+(1);
+                            var bonus = 0;
+                            var totalPayout = Number(data[i].monthlyGross);
+                            var result = '<tr>';
+                                        
+                                        result += '<td id="editNum_'+num+'">'+num+'</td>';
+                                        result += '<td id="editName_'+num+'">'+data[i].name+'</td>';
+                                        result += '<td id="editDepartment_'+num+'">'+data[i].department+'</td>';
+                                        result += '<td id="editRole_'+num+'">'+data[i].role+'</td>';
+                                        result += '<td id="editIncome_'+num+'"><input type="number" id="editIncomeInput_'+num+'" employeeId="'+num+'" sn="'+num+'" class="form-control" placeholder="Income" aria-describedby="helpId"></td>';
+                                        // result += '<td id="editIncomeInWords_'+num+'"></td>';
+                                        result += '<td id="editCommission_'+num+'"><input type="number" id="editCommissionInput_'+num+'" class="form-control" placeholder="Commission" aria-describedby="helpId" readonly></td>';
+                                        // result += '<td id="editCommissionInWords_'+num+'"></td>';
+                                        result += '<td id="editComment_'+num+'"><input type="text" id="editCommentInput_'+num+'" class="form-control" placeholder="" aria-describedby="helpId"></td>';
+                                    result += '</tr>';
+
+                            $('#table2 tbody').append(result);
+                            
+                            $('#editIncomeInput_'+num).keyup(function(){
+                                console.log("okay");
+                                var income = $(this).val();
+                                var employeeId = $(this).attr("employeeId");
+                                var sn = $(this).attr("sn");
+                                var commission_percentage = $('#commission_percentage').val();
+                                
+                                var commission = ((Number(commission_percentage)/100) * Number(income)).toLocaleString();
+                                
+                                
+                                
+                                // $('#editIncomeInWords_'+sn).html(IncomeInWords+' naira only');
+                                // $('#editCommissionInWords_'+sn).html(commissionInWords+' naira only');
+                                $('#editCommissionInput_'+sn).val(commission);
+                            });
+
+                        }
+
+                    }
+
+                    // var $table = $('#table2');
+                    // $table.bootstrapTable();
+                    
+                   
+
+                },
+                error: function(data){
+                    
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Connection failed, please try again");
+                }
+            });
+
+        }
+
+        fetchEmployees();
+
+
+        $(function(){
+            
+            
+            
+        
+          
+          
+            $('.searchSalariesTable').keyup(function(){
+                var value = $(this).val().toLowerCase(); 
+                $("#table2 tbody tr").filter(function() { 
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1) 
+                });
+            });
+
+            $('.payEmployeesHanger').click(function(){
+                $('.payEmployeesSection').removeClass("d-none");
+            });
+
+            $('.payEmployeeRecordOutside').click(function(){
+                $('.payEmployeesSection').addClass("d-none");
+            });
+
+            $('.bonus').click(function(){
+                var parent = $('tr > td > span > .bonus');
+                console.log(parent);
+            });
+
+            $('.link').click(function(){
+                var url = $(this).attr("url");
+                $('#content').load("pages/"+url);
+            }) ;
+            
+
+        });
+    </script>
+    

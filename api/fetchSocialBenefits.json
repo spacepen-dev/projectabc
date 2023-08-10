@@ -1,0 +1,127 @@
+{
+    "PENSION":[
+        {
+            "name": "Apt Pension Fund Managers Limited",
+            "address": "Plot 266B, Kofo Abayomi Street, Victoria Island, Lagos",
+            "phone": "+234 (0) 1 904 4180"
+        },
+        {
+            "name": "Radix Pension Managers Limited",
+            "address": "Plot 450, Mabushi, VIO District, Abuja",
+            "phone": "+234 (0) 808 544 2773"
+        },
+        {
+            "name": "CrusaderSterling Pensions Limited",
+            "address": "Plot 2552, Cadastral Zone, A6 Maitama Sule Street, Asokoro, Abuja",
+            "phone": "+234 (0) 803 311 5979"
+        },
+        {
+            "name": "IEI-Anchor Pension Managers Limited",
+            "address": "Plot 171A, Moshood Olugbani Street, Victoria Island, Lagos",
+            "phone": "+234 (0) 1 271 5898"
+        },
+        {
+            "name": "Legacy Pension Managers Limited",
+            "address": "Oshunkeye Plaza, 17/19 Allen Avenue, Ikeja, Lagos",
+            "phone": "+234 (0) 908 723 0000"
+        },
+        {
+            "name": "Nigerian University Pension Management Company (NUPEMCO)",
+            "address": "No. 10, Otunba Ayodeji Osilo Street, Lekki Phase 1, Lagos",
+            "phone": "+234 (0) 1 295 6229"
+        },
+        {
+            "name": "Trustfund Pensions Plc",
+            "address": "Plot 821, Ralph Shodeinde Street, Central Business District, Abuja",
+            "phone": "+234 (0) 708 066 7998"
+        },
+        {
+            "name": "Veritas Glanvills Pensions Limited",
+            "address": "32A Gana Street, Maitama, Abuja",
+            "phone": "+234 (0) 909 355 6000"
+        },
+        {
+            "name": "Stanbic IBTC Pension Managers Limited",
+            "address": "I.B.T.C. Place, Walter Carrington Crescent, Victoria Island, Lagos",
+            "phone": "+234 (0) 1270 7400"
+        },
+        {
+            "name": "AXA Mansard Pensions Limited",
+            "address": "Mansard Place, 928A, Bishop Aboyade Cole Street, Victoria Island, Lagos",
+            "phone": "+234 (0) 700 626 7273"
+        },
+        {
+            "name": "ARM Pension Managers (PFA) Limited",
+            "address": "The ARM Tower, Plot 17, Ligali Ayorinde Street, Victoria Island, Lagos",
+            "phone": "+234 (0) 803 455 2542"
+        },
+        {
+            "name": "Leadway Pensure PFA Limited",
+            "address": "121/123 Funso Williams Avenue, Iponri, Surulere, Lagos",
+            "phone": "+234 (0) 1 2800 700"
+        },
+        {
+            "name": "Premium Pension Limited",
+            "address": "Premium Place, 12B Ladipo Oluwole Street, Off Adeniyi Jones Avenue, Ikeja, Lagos",
+            "phone": "+234 (0) 1270 0700"
+        },
+        {
+            "name": "NLPC Pension Fund Administrators Limited",
+            "address": "Plot 5A, 3rd Floor, Elf Bus Stop, Lekki-Epe Expressway, Lagos",
+            "phone": "+234 (0) 1271 1011"
+        },
+        {
+            "name": "Sigma Pensions Limited",
+            "address": "56A Isaac John Street, GRA, Ikeja, Lagos",
+            "phone": "+234 (0) 809 044 2222"
+        },
+        {
+            "name": "First Guarantee Pension Limited",
+            "address": "3C, Alhaji Adejumo Avenue, Ilupeju, Lagos",
+            "phone": "+234 (0) 906 000 1916"
+        }
+    ],
+    "HMO":[
+        
+        {
+            "name": "Total Health Trust Limited (THT/HMO)",
+            "address": "2 Marconi Road, Palmgrove Estate, Lagos",
+            "phone": "+234 (0) 1 460 2400"
+        },
+        {
+            "name": "Hygeia HMO Limited",
+            "address": "21, Mobolaji Bank Anthony Way, Ikeja, Lagos",
+            "phone": "+234 (0) 1 271 0600"
+        },
+        {
+            "name": "Clearline International Limited (Medexia)",
+            "address": "7A, Oju Olobun Close, Victoria Island, Lagos",
+            "phone": "+234 (0) 702 850 9000"
+        },
+        {
+            "name": "MetroHealth HMO Limited",
+            "address": "Plot 582B, Suite 206A, Obafemi Awolowo Way, Jabi, Abuja",
+            "phone": "+234 (0) 803 311 5979"
+        },
+        {
+            "name": "Mediplan Healthcare Limited",
+            "address": "133, Ahmadu Bello Way, Victoria Island, Lagos",
+            "phone": "+234 (0) 1 903 6530"
+        },
+        {
+            "name": "AIICO Multishield Limited (Healthcare International Limited)",
+            "address": "Plot PC 12, Churchgate Street, Victoria Island, Lagos",
+            "phone": "+234 (0) 1 262 5620"
+        },
+        {
+            "name": "Ronsberger Nigeria Limited (Redcare HMO)",
+            "address": "14th Floor, Bookshop House, 50/52 Broad Street, Lagos Island, Lagos",
+            "phone": "+234 (0) 803 300 8888"
+        },
+        {
+            "name": "Defense Health Maintenance Limited (DHML)",
+            "address": "235, Samuel Ademulegun Street, Central Business District, Abuja",
+            "phone": "+234 (0) 803 311 5979"
+        }
+    ]
+}

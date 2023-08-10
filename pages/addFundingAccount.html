@@ -1,0 +1,208 @@
+
+<div class="scene_element scene_element--fadeinup">
+    <div class="container border-1">
+        <div class="heading mb-5">
+            <h1 class="fw-bolder text-center">
+                <a href="#" url="profile.html" class="link text-decoration-none text-dark float-start">
+                    <i class="bi bi-arrow-left float-lg-start"></i>
+                </a>
+                
+                Add business funding accounts
+            </h1>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12 mx-auto">
+                <div class="mb-3">
+                    <label for="" class="form-label">Bank</label>
+                    <input type="text" id="banks" list="bank" class="form-control" placeholder="Search for bank">
+                    <datalist id="bank">
+                    
+                    </datalist>
+                    <input type="hidden" id="bankCode"/>
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Account Number</label>
+                    <input type="text"
+                        class="form-control" name="" id="accountNumber" aria-describedby="helpId" placeholder="">
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Account name</label>
+                    <input type="text" class="form-control disabled" name="" id="accountName" aria-describedby="helpId" placeholder="" readonly>
+                </div>
+                <!-- <div class="mb-3">
+                    <label for="" class="form-label">How to best describe this account</label>
+                    <select class="form-control disabled" name="" id="">
+                        <option>Business account</option>
+                        <option>Business owner account</option>
+                    </select>
+                </div> -->
+                <div class="mt-4">
+                    <button class="btn btn-primary w-100 btn-lg" onclick="addAccount()"> Add account </button>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+</div>
+<script>
+
+
+    function addAccount(){
+        var accountName = $('#accountName').val();
+        var accountNumber = $('#accountNumber').val();
+        var bankCode = $('#bankCode').val();
+        var bankName = $('#banks').val();
+
+        if(accountName == ""){
+            errorMessage("Kindly input account name");
+            return false
+        }
+
+        if(accountNumber == ""){
+            errorMessage("Kindly input account number");
+            return false
+        }
+
+        if(bankCode == ""){
+            errorMessage("Kindly select a bank");
+            return false
+        }
+
+        var obj = {
+            "userToken":localStorage.getItem("userToken"),
+            "businessToken":localStorage.getItem("businessToken"),
+            "businessBankName":bankName,
+            "businessBankAccountName":accountNumber,
+            "businessBankCode":bankCode,
+            "businessAccountNumber":accountNumber
+        }
+
+        loadingStart();
+        $.ajax({
+            type: "POST",
+            url: "https://staging.apws.spacepen.tech/registerBusinessBankingInfo.php",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            success: function (response) {  
+
+                var result = response.error;
+
+                if(result == ""){
+                    successMessage("Business account number is registered successfully");
+                    var url = 'profile.html';
+                    $('#content').load("pages/"+url);
+                }else{
+                    errorMessage(result);
+                }
+
+
+
+                loadingStop();
+                
+            },
+            error: function(data){
+                var result = data.responseText;
+                console.log(result);
+                errorMessage("Connection failed, please try again");
+                loadingStop();
+            }
+        });
+
+    }
+
+    function accountValidation(){
+        var accountNumber = $('#accountNumber').val();
+        var bankCode = $('#bankCode').val();
+        var bankName = $('#banks').val();
+        var user_token = localStorage.getItem("userToken");
+
+        var obj = {
+            "accountNumber":accountNumber,
+            "bankCode":bankCode,
+            "userToken":user_token
+        }
+
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(obj),
+            url: "https://staging.apws.spacepen.tech/verifyBankAccount.php",
+            dataType: "json",
+            success: function (response) {  
+
+                if(response.error == ""){
+                    $('#accountName').val(response.success);
+                    $('#finish').removeClass("disabled");
+                }else{
+                    errorMessage(response.error);
+                }
+
+                
+            },
+            error: function(data){
+                var result = data.responseText;
+                errorMessage(result);
+            }
+        });
+
+    }
+
+    function fetchBanks(){
+        loadingStart();
+        $.ajax({
+            type: "GET",
+            url: "https://staging.apws.spacepen.tech/fetchbanks.php",
+            dataType: "json",
+            success: function (response) {  
+                var result = response.success;
+
+                $('#bank').html('');
+                $('#bank').append('<option></option>');
+                for(i in result){
+                    
+                    $('#bank').append('<option value="'+result[i].bankName+'" bankCode="'+result[i].bankCode+'">'+result[i].bankName+'</option>');
+
+                }
+
+                $('#banks').on('change', function() {
+                    var selectedValue = $(this).val();
+                    var selectedOption = $('#bank option[value="' + selectedValue + '"]');
+                    var attributeValue = selectedOption.attr('bankCode');
+                    $('#bankCode').val(attributeValue);
+                });
+
+                loadingStop();
+                
+            },
+            error: function(data){
+                var result = data.responseText;
+                console.log(result);
+                errorMessage("Connection failed, please try again");
+                loadingStop();
+            }
+        });
+    }
+
+    fetchBanks();
+    $(function(){
+
+
+        $('#accountNumber').keyup(function(){
+            var accountNumber = $(this).val();
+        
+            if(accountNumber.length == 10){
+                accountValidation();
+            }
+        });
+
+
+        $('.link').click(function(){
+            var url = $(this).attr("url");
+            $('#content').load("pages/"+url);
+        }) ;
+    });
+</script>

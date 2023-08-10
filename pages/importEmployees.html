@@ -1,0 +1,891 @@
+
+        <style>
+            .table-container {
+                height: 500px;
+                overflow-y: auto;
+            }
+            
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            
+            th,
+            td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            
+            th {
+                position: sticky;
+                top: 0;
+                background: #eae6fa;
+                color: #000;
+            }
+        </style>
+        
+        <div class="scene_element scene_element--fadeinup">
+            <div class="container border-1">
+                <div class="heading mb-5">
+                    <h1 class="fw-bolder text-center">
+                        <span url="employees.html" class="link text-decoration-none text-dark float-start">
+                            <i class="bi bi-arrow-left float-lg-start"></i>
+                        </span>
+                        
+                        Import employee data
+                    </h1>
+                </div>
+                
+
+                <section class="addEmployeesSection">
+                    <div class="row w-100  mx-auto">
+                       <a class="btn btn-outline-primary col-lg-3 col-md-3 col-sm-12 mx-auto"><i class="bi bi-download"></i> Download template</a>
+                        <div class="col-lg-12 card border-0 bg-transparent">
+                            <input type="file" class="d-none" id="file1"/>
+                            <div class="card-body h-75" onclick="selectPicture()">
+                                <div class="row">
+                                    <div class="progress progress-bar bg-transparent" style="width:0%;">
+                                    
+                                    </div>
+                                   <div class="bg-secondary col-12 p-4 border-primary mx-auto my-auto text-center fs-3">
+                                        <i class="bi bi-upload"></i> Click to chose file
+                                   </div>
+                                   
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-5 d-none employeeResult">
+                    <div class="row w-100  mx-auto">
+                        
+                             
+                    
+                        <div class="row">
+                            <div class="col-12 p-4 border-primary mx-auto my-auto text-center overflow-auto" style="height: 500px;">
+                                <table id="datatable" class="table-container">
+                                    <thead style="background: #eae6fa;">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Employee code</th>
+                                            <th>Firstname</th>
+                                            <th>Lastname</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Gender</th>
+                                            <th>Date of birth</th>
+                                            <th>State of origin</th>
+                                            <th>LGA</th>
+                                            <th>State of assignment</th>
+                                            <th>Yearly Gross salary</th>
+                                            <th>Yearly Net salary</th>
+                                            <th>Yearly Tax</th>
+                                            <th>Monthly Gross</th>
+                                            <th>Monthly Net</th>
+                                            <th>Monthly Tax</th>
+                                            <th>Pension</th>
+                                            <th>Pension code</th>
+                                            <th>Annual Pension amount</th>
+                                            <th>Monthly pension</th>
+                                            <th>Housing</th>
+                                            <th>Housing fund amount</th>
+                                            <th>Health Insurance</th>
+                                            <th>Bank</th>
+                                            <th>Account number</th>
+                                            <th>Account name</th>
+                                            <th>Status</th>
+                                            <th>Process</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-danger btn-lg w-100" onclick="clearTable()"><i class="bi bi-x-circle"></i> Clear table</button>
+                            </div>
+                            <div class="col-6">
+                                <button class="col-6 btn btn-success btn-lg w-100"><i class="bi bi-cloud-upload-fill"></i> Upload Data</button>
+                            </div>
+                            
+                        </div>
+                            
+                            
+                        
+                     </div>
+                </section>
+
+                
+
+
+            </div>
+        </div>
+    
+
+    <section class="d-none row position-fixed w-100 top-0 bottom-0 mx-auto editBeforeUploadCover" style="left:0; right:0; z-index: +20; min-height: 100%; background: rgba(0,0,0,0.5); ">
+        <div class="card col-lg-9 col-md-12 col-sm-12">
+            <div class="card-header fs-1 bg-transparent">
+                <i class="bi bi-person-fill float-start"></i> 
+                <span class="employeeName fw-bolder"></span>
+                <i class="bi bi-x float-end closeEditBeforeUploadCover"></i> 
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="nav-item">
+                          <a class="nav-link active" tab-content="employee-profile" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" tab-content="employee-work" href="#">Work</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" tab-content="employee-salary" href="#">Salary</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" tab-content="employee-pension" href="#">Pension</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" tab-content="employee-insurance" href="#">Insurance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" tab-content="employee-accounts" href="#">Accounts</a>
+                        </li>
+                        
+                    </ul>
+                    <div class="tab-contents w-100 py-3 overflow-auto">
+                        <div class="row tab-pane" id="employee-profile">
+                            <div class="col-12 my-3 fs-5 fw-bold">Basic information</div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                <div style="width: 300px; min-height: 300px;" class="card border-1">
+                                    <div class="card-body bg-secondary" id="imagePreview">
+
+                                    </div>
+                                    <div class="card-footer bg-transparent">
+                                        <button class="btn btn-primary w-100" onclick="selectPicture2()">
+                                            <i class="bi bi-cloud-upload-fill"></i>
+                                             Upload Image
+                                        </button>
+                                        <input type="file" class="d-none" id="file2">
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                  <label for="" class="form-label">Firstname</label>
+                                  <input type="text" name="" id="employeeFirstnameEdit" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Lastname</label>
+                                    <input type="text" name="" id="employeeLastnameEdit" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Email</label>
+                                    <input type="text" name="" id="employeeEmailEdit" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Phone</label>
+                                    <input type="text" name="" id="employeePhoneEdit" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                                                    
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                  <label for="" class="form-label">Gender</label>
+                                  <select id="employeeGenderEdit" class="form-control" placeholder="" aria-describedby="helpId">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                  </select>
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Date of birth</label>
+                                    <input type="date" name="" id="employeeDobEdit" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">State of Origin</label>
+                                    <select id="employeeStateEdit" class="form-control" placeholder="" aria-describedby="helpId">
+
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Local Government Area of Origin</label>
+                                    <select id="employeeLgaEdit" class="form-control" placeholder="" aria-describedby="helpId">
+
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Marital status</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                                                    
+                            </div>
+                            <div class="border-top w-100 mt-4 p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary w-100 proceed" proceed_to="employee-work">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row tab-pane d-none" id="employee-work">
+                            <div class="col-12 my-3 fs-5 fw-bold">Work information</div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                  <label for="" class="form-label">Department</label>
+                                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Role</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Work Email</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Work Phone</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                                                   
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Employment date</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                <div class="mb-3">
+                                  <label for="" class="form-label">State of Assignment</label>
+                                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Employee ID Number</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Employee Tax Identification Number</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                                                    
+                            </div>
+                            <div class="border-top w-100 mt-4 p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary w-100 proceed" proceed_to="employee-salary">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row tab-pane d-none" id="employee-salary">
+                            <div class="col-12 my-3 fs-5 fw-bold">Salary information</div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                  <label for="" class="form-label">Gross Monthly Salary</label>
+                                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Net Monthly salary</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Monthly Relief</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Monthly Tax</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Monthly Pension</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Gross Annual Salary</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Net Annual salary</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Annual Relief</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Annual Pension</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                        
+                            </div>
+                            <div class="border-top w-100 mt-4 p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary w-100 proceed" proceed_to="employee-pension">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row tab-pane d-none" id="employee-pension">
+                            <div class="col-12 my-3 fs-5 fw-bold">Pension information</div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                  <label for="" class="form-label">Employer code</label>
+                                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Employee pension code</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                </div>
+                                                                                                    
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="mb-3">
+                                  <label for="" class="form-label">Name</label>
+                                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div> -->
+                                                                    
+                            </div>
+                            <div class="border-top w-100 mt-4 p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary w-100 proceed" proceed_to="employee-insurance">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row tab-pane d-none" id="employee-insurance">
+                            <div class="col-12 my-3 fs-5 fw-bold">Insurance information</div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="mb-3">
+                                  <label for="" class="form-label">Name</label>
+                                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div> -->
+                                                                    
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="mb-3">
+                                  <label for="" class="form-label">Name</label>
+                                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div> -->
+                                                                    
+                            </div>
+                            <div class="border-top w-100 mt-4 p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary w-100 proceed" proceed_to="employee-accounts">Proceed <i class="bi bi-arrow-right float-end"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row tab-pane d-none" id="employee-accounts">
+                            <div class="col-12 my-3 fs-5 fw-bold">Bank information</div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                  <label for="" class="form-label">Bank name</label>
+                                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Account number</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Account name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                                                    
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="mb-3">
+                                  <label for="" class="form-label">Name</label>
+                                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                  
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    
+                                </div> -->
+                                                                    
+                            </div>
+                            <div class="border-top w-100 mt-4 p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- <button class="btn btn-secondary w-100 text-dark" onclick="saveEmployee()"><i class="bi bi-save float-start"></i>Save and continue later</button> -->
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary w-100" >Finish <i class="bi bi-arrow-right float-end"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 closeEditBeforeUploadCover">
+            
+        </div>
+    </section>
+
+    <script>
+
+        function selectPicture2(){
+            $('#file2').click();
+        }
+
+        function readImage(file) {
+            var reader = new FileReader();
+            var image = new Image();
+            reader.readAsDataURL(file);  
+            reader.onload = function(_file) {
+                image.src    = _file.target.result;
+                image.onload = function() {
+                    var base64data = _file.target.result;
+                    // console.log(base64data);
+                    // return base64data;
+                    $('#file2').attr("idValue",base64data);
+                    $('#imagePreview').html('<center><img src="'+base64data+'" class="img-fluid" ></center>');                  
+                    
+                };
+            };
+        }
+        
+        
+       
+        
+        
+        $('#file2').on('change', function() {
+            var file1 =  readImage($('#file2')[0].files[0]); 
+            
+        });
+
+        $(function(){
+            $('.dynamic').load("menu.html");
+            $('.proceed').click(function(){
+                var nextPhase = $(this).attr("proceed_to");
+                $('.nav-link').removeClass("active");
+
+                $('[tab-content = '+nextPhase+']').addClass("active");             
+               
+                $('.tab-pane').addClass("d-none");
+                $('#'+nextPhase).removeClass("d-none");
+                $(this).addClass("active");
+            });
+
+            $('.closeEditBeforeUploadCover').click(function(){
+                $('.editBeforeUploadCover').addClass("d-none");
+            });
+
+        })
+    </script>
+   
+    <script>
+
+        var db;
+        function init(){
+            
+            db = openDatabase('APV', '1.0', 'ap_data', 5*1024*1024);
+
+            db.transaction(function (t2) {
+                var paymentTable = 'create table if not exists offlineEmployees';
+                paymentTable += '(id integer primary key autoincrement,';
+                paymentTable += 'employeeCode text,';
+                paymentTable += 'firstname text,';
+                paymentTable += 'lastname text,';
+                paymentTable += 'email text,';
+                paymentTable += 'phone text,';
+                paymentTable += 'gender text,';
+                paymentTable += 'dob text,';
+                paymentTable += 'state text,';
+                paymentTable += 'lga text,';
+                paymentTable += 'stateOfAssignment text,';
+                paymentTable += 'yearlyGross text,';
+                paymentTable += 'yearlyNet text,';
+                paymentTable += 'yearlyTax text,';
+                paymentTable += 'monthlyGross text,';
+                paymentTable += 'monthlyNet text,';
+                paymentTable += 'monthlyTax text,';
+                paymentTable += 'pension text,';
+                paymentTable += 'pensionCode text,';
+                paymentTable += 'annualPension text,';
+                paymentTable += 'monthlyPension text,';
+                paymentTable += 'housing text,';
+                paymentTable += 'bank text,';
+                paymentTable += 'housingAmount text,';
+                paymentTable += 'healthInsurance text,';
+                paymentTable += 'healthAmount text,';
+                paymentTable += 'accountNumber text,';
+                paymentTable += 'accountName text,';
+                paymentTable += 'status text)';
+
+                t2.executeSql(paymentTable);
+
+            });
+            
+        }
+
+        init();
+
+        function selectPicture(){
+            $('#file1').click();
+        }              
+        
+        function getAsText(file){
+            var reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = loadHandler;
+            reader.onerror = errorHandler;
+        }
+
+        function loadHandler(event){
+            var csv = event.target.result;
+            processData(csv);
+        }
+
+        function errorHandler(evt){
+            if(evt.target.error.name == "NotReadableError"){
+                errormessage("File could not be read please check the file again");
+            }
+        }
+
+        function clearTable(){
+            db.transaction(function(tx){
+                var query = "Delete from offlineEmployees";
+                tx.executeSql(query, []);
+            });
+            var url = "pages/importEmployees.html";
+                $('#content').load("pages/"+url);
+        }
+
+
+        function processData(allText) {
+            
+            var allTextLines = allText.split(/\r\n|\n/);
+            var headers = allTextLines[0].split(',');
+            var lines = [];
+            for (var i=1; i<allTextLines.length; i++) {
+                var data = allTextLines[i].split(',');
+                if (data.length == headers.length) {
+                    var tarr = [];
+                    for (var j=0; j<headers.length; j++) {
+                        tarr.push(data[j]);
+                    }
+                    lines.push(tarr);
+                }else{
+                    errorMessage('Row and column doesnt match');
+                    
+                }
+            }
+                    
+            var result = lines;
+            
+            db.transaction(function(tx){
+                var query = "DELETE from offlineEmployees";
+                tx.executeSql(query, []);
+            });
+            
+            
+            db.transaction(function(tx){
+                for(i in lines){
+                    var num = Number(i) + 1;
+                    var query = "INSERT INTO offlineEmployees (employeeCode, firstname, lastname, email, phone, gender, dob, state, lga, stateOfAssignment, yearlyGross, yearlyNet, yearlyTax, monthlyGross, monthlyNet, monthlyTax, pension, pensionCode, annualPension, monthlyPension, housing, housingAmount, healthInsurance, healthAmount, bank, accountNumber, accountName, status)";
+                    query += "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+                    var employeeCode = result[i][0];
+                    var firstname = result[i][1];
+                    var lastname = result[i][2];
+                    var email = result[i][3];
+                    var phone = result[i][4];
+                    var gender = result[i][5];
+                    var dob = result[i][6];
+                    var state = result[i][7];
+                    var lga = result[i][8];
+                    var stateOfAssignment = result[i][9];
+                    var yearlyGross = result[i][10];
+                    var yearlyNet = result[i][0];
+                    var yearlyTax = result[i][0];
+                    var monthlyGross = Number(yearlyGross)/12
+                    var monthlyNet = result[i][0];
+                    var monthlyTax = result[i][0];
+                    var pension = result[i][0];
+                    var pensionCode = result[i][0];
+                    var annualPension = (Number(yearlyGross) * 0.18);
+                    var monthlyPension = Number(annualPension)/12
+                    var housing = result[i][0];
+                    var housingAmount = result[i][0];
+                    var healthInsurance = result[i][0];
+                    var healthAmount = result[i][0];
+                    var accountNumber = result[i][14];
+                    var accountName = result[i][0];
+                    var status = result[i][0];
+                    var bank = result[i][13];
+                    
+                    tx.executeSql(query, [employeeCode, firstname, lastname, email, phone, gender, dob, state, lga, stateOfAssignment, yearlyGross, yearlyNet, yearlyTax, monthlyGross, monthlyNet, monthlyTax, pension, pensionCode, annualPension, monthlyPension, housing, housingAmount, healthInsurance, healthAmount, bank, accountNumber, accountName, status],successHandler,errorHandler);
+ 
+                    function errorHandler(transaction, error) {
+                        console.log("Error : " + error.message + " in " + query);
+                    }
+
+                    function successHandler(transaction, error){
+                        console.log("Error : " + error.message + " in " + query);
+                    }
+
+                    var percentage = (num/lines.length)*100;
+                    $('.progress').removeClass("bg-transparent");
+                    $('.progress').addClass("bg-primary");
+                    $('.progress').html(percentage+'%');
+                    $('.progress').css({"width": percentage+'%' });
+                   
+        
+                }
+                
+                
+                var url = "pages/importEmployees.html";
+                $('#content').load("pages/"+url);
+
+
+                
+            });
+                   
+            
+        }
+
+        //create webSQL code for Payment upload
+        
+        function fetchPaymentData(){
+    
+            
+            var tableBody = $('table#datatable tbody');
+            
+            
+            db.transaction(function (t1) {
+                t1.executeSql('select * from offlineEmployees', [], function (t1, results) {
+                    var n = results.rows.length;
+                    for (var i = 0; i < n; i++) {
+                        var output = results.rows.item(i);
+                        var id = output.id;
+                        var employeeCode = output.employeeCode;
+                        var firstname = output.firstname;
+                        var lastname = output.lastname;
+                        var email = output.email;
+                        var phone = output.phone;
+                        var gender = output.gender;
+                        var dob = output.dob;
+                        var state = output.state;
+                        var lga = output.lga;
+                        var stateOfAssignment = output.stateOfAssignment;
+                        var yearlyGross = output.yearlyGross;
+                        var yearlyNet = output.yearlyNet;
+                        var yearlyTax = output.yearlyTax;
+                        var monthlyGross = output.monthlyGross;
+                        var monthlyNet = output.monthlyNet;
+                        var monthlyTax = output.monthlyTax;
+                        var pension = output.pension;
+                        var pensionCode = output.pensionCode;
+                        var annualPension = output.annualPension;
+                        var monthlyPension = output.monthlyPension;
+                        var housing = output.housing;
+                        var housingAmount = output.housingAmount;
+                        var healthInsurance = output.healthInsurance;
+                        var healthAmount = output.healthAmount;
+                        var accountNumber = output.accountNumber;
+                        var accountName = output.accountName;
+                        var status = output.status;
+                        var bank = output.bank;
+
+                        var num = Number(i) + 1;
+                                                
+                        var rolling = '<tr>';
+                            rolling +='<td id="pickId_'+id+'" class="bg-secondary">'+num+'</td>';
+                            rolling +='<td id="pickEmployeeCode_'+id+'">'+employeeCode+'</td>';
+                            rolling +='<td id="pickFirstname_'+id+'">'+firstname+'</td>';
+                            rolling +='<td id="pickLastname_'+id+'">'+lastname+'</td>';
+                            rolling +='<td id="pickEmail_'+id+'">'+email+'</td>';
+                            rolling +='<td id="pickPhone_'+id+'">'+phone+'</td>';
+                            rolling +='<td id="pickGender_'+id+'">'+gender+'</td>';
+                            rolling +='<td id="pickDob_'+id+'">'+dob+'</td>';
+                            rolling +='<td id="pickState_'+id+'">'+state+'</td>';
+                            rolling +='<td id="pickLga_'+id+'">'+lga+'</td>';
+                            rolling +='<td id="pickStateOfAssignment_'+id+'">'+stateOfAssignment+'</td>';
+                            rolling +='<td id="pickYearlyGross_'+id+'">'+yearlyGross+'</td>';
+                            rolling +='<td id="pickYearlyNet_'+id+'">'+yearlyNet+'</td>';
+                            rolling +='<td id="pickYearlyTax_'+id+'">'+yearlyTax+'</td>';
+                            rolling +='<td id="pickMonthlyGross_'+id+'">'+monthlyGross+'</td>';
+                            rolling +='<td id="pickMonthlyNet_'+id+'">'+monthlyNet+'</td>';
+                            rolling +='<td id="pickMonthlyTax_'+id+'">'+monthlyTax+'</td>';
+                            rolling +='<td id="pickPension_'+id+'">'+pension+'</td>';
+                            rolling +='<td id="pickPensionCode_'+id+'">'+pensionCode+'</td>';
+                            rolling +='<td id="pickAnnualPension_'+id+'">'+annualPension+'</td>';
+                            rolling +='<td id="pickMonthlyPension_'+id+'">'+monthlyPension+'</td>';
+                            rolling +='<td id="pickHousing_'+id+'">'+housing+'</td>';
+                            rolling +='<td id="pickHousingAmount_'+id+'">'+housingAmount+'</td>';
+                            rolling +='<td id="pickHealthInsurance_'+id+'">'+healthInsurance+'</td>';
+                            rolling +='<td id="pickBank_'+id+'">'+bank+'</td>';
+                            rolling +='<td id="pickAccountNumber_'+id+'">'+accountNumber+'</td>';
+                            rolling +='<td id="pickAccountName_'+id+'">'+accountName+'</td>';
+                            rolling +='<td id="pickStatus_'+id+'">'+status+'</td>';
+                            rolling +='<td class="bg-secondary"><span class="badge bg-info pickEmployeeRow" id="'+id+'" >Edit</span></td>';
+                            rolling +='</tr>';
+                        
+                        tableBody.append(rolling);
+                        
+                    }
+
+                    
+                    $('.pickEmployeeRow').click(function(){
+                        var id = $(this).attr("id");
+                        var employeeCode = $('#pickEmployeeCode_'+id).html();
+                        var firstname = $('#pickFirstname_'+id).html();
+                        var lastname = $('#pickLastname_'+id).html();
+                        var email = $('#pickEmail_'+id).html();
+                        var phone = $('#pickPhone_'+id).html();
+                        var gender = $('#pickGender_'+id).html();
+                        var dob = $('#pickDob_'+id).html();
+                        var state = $('#pickState_'+id).html();
+                        var lga = $('#pickLga_'+id).html();
+                        var stateOfAssignment = $('#pickStateOfAssignment_'+id).html();
+                        var yearlyGross = $('#pickYearlyGross_'+id).html();
+                        var yearlyNet = $('#pickYearlyNet_'+id).html();
+                        var yearlyTax = $('#pickYearlyTax_'+id).html();
+                        var monthlyGross = $('#pickMonthlyGross_'+id).html();
+                        var monthlyNet = $('#pickMonthlyNet_'+id).html();
+                        var monthlyTax = $('#pickMonthlyTax_'+id).html();
+                        var pension = $('#pickPension_'+id).html();
+                        var pensionCode = $('#pickPensionCode_'+id).html();
+                        var annualPension = $('#pickAnnualPension_'+id).html();
+                        var monthlyPension = $('#pickMonthlyPension_'+id).html();
+                        var housing = $('#pickHousing_'+id).html();
+                        var housingAmount = $('#pickHousingAmount_'+id).html();
+                        var healthInsurance = $('#pickHealthInsurance_'+id).html();
+                        var bank = $('#pickBank_'+id).html();
+                        var accountNumber = $('#pickAccountNumber_'+id).html();
+                        var accountName = $('#pickAccountName_'+id).html();
+                        var status = $('#pickStatus_'+id).html();
+                        
+
+                        $('.editBeforeUploadCover').removeClass("d-none");
+
+                        $('.employeeName').html(firstname+' '+lastname);
+
+
+                        
+                    });
+                    
+                    // $('#datatable').DataTable({
+                    //     scrollY: "300px",
+                    //     scrollX: true,
+                    //     scrollCollapse: true,
+                    //     paging: false,
+                    //     fixedColumns:{
+                    //         right: 1
+                    //     }
+                    // });
+                        
+                    $('.employeeResult').removeClass("d-none");
+
+                });
+            
+            });
+            
+            
+        }
+
+
+        $('#file1').on('change', function() {
+            var file1 =  $('#file1')[0].files[0];
+            
+            if(window.FileReader){
+                getAsText(file1);
+                processData(file1.name);
+            }else{
+                errorMessage('File reader is not supported in this browser'); return false;
+            }
+            
+        });
+
+
+
+        fetchPaymentData();
+    </script>
+ 

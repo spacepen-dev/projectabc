@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/keyframes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pageTransitions.css">
+    <link rel="stylesheet" href="css/bs5.css">
+    <link rel="stylesheet" href="css/bsicon.css">
+    <script src="js/bs5.js"></script>
+    <script src="js/jq.js"></script>
+    <script src="sw.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(function(registration) {
+                console.log('Service worker registered successfully');
+            })
+            .catch(function(error) {
+            console.error('Error registering service worker:', error);
+            });
+        }
+
+    </script>
+</head>
+<body class="bg-secondary index m-scene " id="main">
+
+    <section class="w-100 h-100 mx-auto position-absolute scene_element scene_element--fadeinup">        
+        <center>
+            <div class="w-50" style="margin-top: 300px;">
+                <img src="images/logo.svg" style="height:50px; margin-top: -20px;"><br><br>
+                <div class="progress-bar progress progress-bar-animated border-1" id="progress-bar"></div>
+            </div>
+        </center>
+    </section>    
+    
+    
+    <script src="js/jquery.smoothState.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+
+        function redirectToSignin(){
+            window.location = 'signin.html';
+        }
+         setTimeout(redirectToSignin, 5000);
+        // Get the progress bar element
+        var progressBar = document.getElementById("progress-bar");
+
+        // Set the total duration of the progress bar animation
+        var duration = 2000; // 5 seconds
+
+        // Set the time interval for updating the progress bar
+        var interval = 10; // 10 milliseconds
+
+        // Calculate the amount of progress to make with each time interval
+        var increment = interval / duration;
+
+        // Set the initial progress to 0%
+        var progress = 0;
+
+        // Create an interval to update the progress bar
+        var intervalId = setInterval(function() {
+        // Increase the progress by the increment amount
+        progress += increment;
+
+        // Update the progress bar width
+        progressBar.style.width = (progress * 100) + "%";
+
+        // Check if the progress has reached 100%
+        if (progress >= 1) {
+            // Stop the interval
+            clearInterval(intervalId);
+        }
+        }, interval);
+
+    </script>
+    
+</body>
+</html>

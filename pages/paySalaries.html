@@ -1,0 +1,728 @@
+
+        <div class="scene_element scene_element--fadeinright">
+            <div class="container border-1">
+                <div class="heading mb-5">
+                    <h1 class="fw-bolder text-center">
+                        <span url="salaries.html" class="link text-decoration-none text-dark float-start">
+                            <i class="bi bi-arrow-left float-lg-start"></i>
+                        </span>
+                        
+                        Pay employees salaries
+                    </h1>
+                </div>
+
+                
+
+                <section class="payEmployeesSection ">
+                    <div class="row w-100 mx-auto">
+                        <!-- <div class="col-lg-2 col-md-2 col-sm-12 payEmployeeRecordOutside"></div> -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 card">
+                            <div class="card-header bg-transparent fs-2 fw-bolder">
+                                <div class="row mb-3">
+                                    <div class="col-lg-2 col-md-6 col-sm-12">
+                                        <select class="form-control" id="month">
+                                            <option>January</option>
+                                            <option>February</option>
+                                            <option>March</option>
+                                            <option>April</option>
+                                            <option>May</option>
+                                            <option>June</option>
+                                            <option>July</option>
+                                            <option>August</option>
+                                            <option>September</option>
+                                            <option>October</option>
+                                            <option>November</option>
+                                            <option>December</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 col-sm-12">
+                                        <select class="form-control" id="year">
+                                            <option>2023</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <input type="text" class="form-control w-100 searchSalariesTable" placeholder="Search table">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="row">
+                                    <table id="table2" class="table table-hover datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input type="checkbox" id="selectAll" class="form-check-input">
+                                                    
+                                                </th>
+                                                <th>#</th>
+                                                <th>Firstname</th>
+                                                <th>Firstname</th>
+                                                <th>Department</th>
+                                                <th>Role</th>
+                                                <th>Gross salary</th>
+                                                <th>Tax</th>
+                                                <th>Insurance</th>
+                                                <th>Relief</th>
+                                                <th>Net salary</th>
+                                                <th>Pension</th>
+                                                <th>Account name</th>
+                                                <th>Account number</th>
+                                                <th>Bank</th>
+                                                <th>Bonus <span contenteditable="true">0.00</span></th>
+                                                <th>Total payout</th>
+                                                <th>Comment</th>
+                                                <th>Process</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                                                                                                                   
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <div class="row">
+                                    
+                                    <div class="col-6 mx-auto">
+                                        <button class="w-100 btn btn-primary btn-lg" onclick="paySalaries()">Start processing <i class="bi bi-arrow-right float-end"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+        </div>
+ 
+
+    
+
+
+    <section class="paySalariesConfirmation d-none">
+        <div class="row position-fixed top-0 bottom-0 mx-auto" style="z-index: +5; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); right:0; left:0;">
+    
+            <div class="col-lg-3 col-md-2 col-sm-0  d-lg-block "></div>
+            <div class="card col-lg-6 col-md-8 col-sm-12 p-4 mt-5 bottom-0 h-100 mx-auto">
+             
+              <div class="card-header bg-transparent body1 fs-3 fw-bolder text-center">
+                <i class="bi bi-arrow-left float-start" onclick="closePaymentConfirmation()"></i> Payment confirmation
+               
+              </div>
+              <div class="card-body body1" id="notificationList">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Payment type</td>
+                        <td  class="fs-5">Salary</td>
+                    </tr>
+                    <tr>
+                        <td>Month/Year</td>
+                        <td  class="fs-5" id="month_year"></td>
+                    </tr>
+                    <!-- <tr>
+                        <td>Total Wallet Balance</td>
+                        <td id="walletBalance" class="fs-5">500000</td>
+                    </tr> -->
+                    <tr>
+                        <td>No. of Employees</td>
+                        <td id="noOfEmployees" class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Salary on Payroll</td>
+                        <td id="totalSalaryOnPayroll" class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Tax</td>
+                        <td id="totalTaxOnPayroll" class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Pension</td>
+                        <td id="totalPensionOnPayroll"  class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Service charge</td>
+                        <td id="serviceCHarge" class="fs-5"></td>
+                    </tr>
+                    <tr>
+                        <td>Grand total</td>
+                        <td id="grandTotal" class="fs-3 fw-bolder"></td>
+                    </tr>
+                   
+            
+                </table>
+                <center>
+                    <button class="btn btn-success btn-lg w-50 mt-5" onclick="gotoOtp()">Pay now</button>
+                </center>
+                
+                
+              </div>
+              <div class="card-header bg-transparent body2 d-none fs-3 fw-bolder text-center">
+                <i class="bi bi-arrow-left body2 float-start" onclick="closeOTPConfirmation()"></i> OTP Confirmation
+               
+              </div>
+              <div class="card-body body2 d-none">
+
+                <h4 class="text-center">Kindly input the OTP sent to <span id="businessEmail"></span></h4>
+                <div class="row mt-5 mb-5 col-lg-6 col-md-6 col-sm-12 mx-auto">
+
+                    <div class="col-2">
+                        <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                    </div>
+                    
+                </div>
+                
+                <center>
+                    <div id="timer" class="mt-3 mb-3 text-primary"></div>
+                    <button type="button" class="btn btn-success btn-lg w-50 mt-5" onclick="confirmOtp()">Confirm payment <i class="bi bi-check2 float-end"></i></button>
+                </center>
+                
+                
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-2 col-sm-0  d-lg-block "></div>
+        </div>
+    </section>
+
+    <section class="editPayroll d-none">
+        <div class="row  position-absolute top-0 bottom-0 mx-auto" style="z-index: +5; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); right:0; left:0;">
+    
+            <div class="col-lg-7 col-md-12 col-sm-12  d-lg-block  outsideEditPayroll"></div>
+            <div class="card col-lg-5 p-4">
+             
+              <div class="card-header bg-transparent fs-3 fw-bolder text-center">
+                <i class="bi bi-arrow-left float-start outsideEditPayroll"></i> Bonus
+               
+              </div>
+              <div class="card-body" id="notificationList"> 
+                <table class="table table-striped">
+                    <tr>
+                        <td>Name</td>
+                        <td id="nameToEdit"></td>
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                        <td id="departmentToEdit"></td>
+                    </tr>
+                    <tr>
+                        <td>Role</td>
+                        <td id="roleToEdit"></td>
+                    </tr>
+                    
+                </table>
+                <div class="mt-5 row text-danger p-3 fw-bold bg-secondary">
+                    Please note that this edit only has effect on this payout and if you want to make a permanent change to employee's payroll, kindly click on <a href="./employees.html">Edit employees</a>
+                </div>
+                <div class="mt-5 row">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="mb-3">
+                          <label for="" class="form-label">Total Payout</label>
+                          <input type="text" class="form-control" id="payoutOld" aria-describedby="helpId" placeholder="" readonly/>
+                        </div>
+                       
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="mb-3">
+                          <label for="" class="form-label">Bonus</label>
+                          <input type="number" class="form-control" id="bonusNew" aria-describedby="helpId" placeholder="" autofocus/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Comment</label>
+                            <input type="text" class="form-control" id="commentOld" aria-describedby="helpId" placeholder="Comment"/>
+                        </div>
+                        <input type="hidden" class="form-control" id="employeeTableId" value="" payoutOld="" aria-describedby="helpId" placeholder="Comment"/>
+                        <button onclick="addBonus()" class="btn btn-primary w-100" href="#" role="button">Add Bonus</button>
+                    </div>
+                    
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+   
+    <script>
+
+        $('#bonusNew').keyup(function(){
+            var bonus = $('#bonusNew').val();
+            var payout = $('#employeeTableId').attr("payoutOld");
+            var newPayout = Number(bonus) + Number(payout);
+            
+            $('#payoutOld').val(newPayout);
+        });
+
+        function gotoOtp(){
+            var businessToken = localStorage.getItem("businessToken");
+            var userToken = localStorage.getItem("userToken");
+            var businessEmail = localStorage.getItem("businessEmail");
+
+            var obj = {
+                "businessToken":businessToken,
+                "userToken":userToken,
+                "businessEmail":businessEmail
+            }
+
+            loadingStart();
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/generateTransactionOTP.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                success: function (response) {
+                    if(response.error == ""){
+                        $('.body2').removeClass("d-none");
+                        $('.body1').addClass("d-none");
+                        successMessage("OTP Email sent to "+businessEmail);
+
+                        countdown();
+
+                        $('#businessEmail').html(businessEmail);
+                    }else{
+                        errorMessage("Error generating OTP, please click to try again");
+                    }
+                    loadingStop();
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Error occured, please try again");
+                    loadingStop();
+                }
+            });
+        }
+
+
+        function countdown() {
+            var timeLeft = 5 * 60; // 5 minutes in seconds
+
+            var countdownInterval = setInterval(function() {
+                var minutes = Math.floor(timeLeft / 60);
+                var seconds = timeLeft % 60;
+
+                // Add leading zero if necessary
+                var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+                var formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+
+                $('#timer').html(formattedMinutes + ":" + formattedSeconds); // Replace with your own logic to display the countdown
+
+                if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                    $('#timer').html('<button class="btn btn-outline-primary" onclick="gotoOtp()">Resend</button>'); // Replace with your own logic for what should happen when the countdown finishes
+                }
+
+                timeLeft--;
+            }, 1000); // Update every second (1000 milliseconds)
+        }
+
+            
+
+
+        function closeOTPConfirmation(){
+            $('.body1').removeClass("d-none");
+            $('.body2').addClass("d-none");
+        }
+
+        function addBonus(){
+            var num = $('#employeeTableId').val();
+            var bonus = $('#bonusNew').val();
+            var comment = $('#commentOld').val();
+            var payout = $('#employeeTableId').attr("payoutOld");
+            var newPayout = Number(bonus) + Number(payout);
+            $("#editBonus_"+num).text(bonus);
+            $("#editPayout_"+num).text(newPayout);
+            $("#commentRow_"+num).text(comment);
+            $('.editPayroll').addClass("d-none");
+        }
+
+
+        function concatOTP() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            let otpValue = '';
+
+            otpInputs.forEach(input => {
+                otpValue += input.value;
+            });
+
+            return otpValue;
+        }
+
+
+        function confirmOtp(){
+            var month = $('#month').val();
+            var year = $('#year').val();            
+            var len = $('#table2 tbody tr.selected').length;
+            var serviceCHarge = (len * 150);
+
+            var tableElements = [];
+            
+
+            // Assuming your table has an ID "myTable"
+            $('#table2 tbody tr.selected').each(function() {
+                var rowData = {};
+                var employeeToken = $(this).attr("employeeToken");
+                var employeeBankCode = $(this).attr("employeeBankCode");
+                // rowData.push(employeeId);
+                rowData['employeeToken'] = employeeToken;
+                rowData['employeeBankCode'] = employeeBankCode;
+
+                $(this).find('td').each(function(index) {
+                    var columnKey = 'column' + (index + 1);
+                    var customColumnIndices = ['column1','sn','employeeFirstname', 'employeeLastname','department', 'role', 'employeeGrossSalary', 'employeeTax','employeeInsurance','employeeRelief','employeeNetSalary1','employeePension','employeeAccountName','employeeAccountNumber','bank','employeeBonus','employeeNetSalary','comment'];
+
+                    if (index < customColumnIndices.length) {
+                        rowData[customColumnIndices[index]] = $(this).text();
+                    }                   
+
+                });
+
+                tableElements.push(rowData);
+
+    
+            });
+
+            
+           
+            var otp = concatOTP();
+            var obj = {
+                "userToken": localStorage.getItem("userToken"),
+                "businessToken": localStorage.getItem("businessToken"),
+                "otp": otp,
+                "paymentMonth": $('#month').val(),
+                "paymentYear": $('#year').val(),
+                "employees": tableElements
+            }
+
+            // console.log(tableElements);
+            // console.log(obj);
+
+            loadingStart();
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/bulkSalaryPayment.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                success: function (response) {
+                    if(response.error == ""){
+                        $('.body2').removeClass("d-none");
+                        $('.body1').addClass("d-none");
+
+                        var businessEmail = localStorage.getItem("businessEmail");
+                        successMessage("Payment successful, Recept have been sent to your email "+businessEmail);
+
+                        var url = "dashboard.html";
+                        $('#content').load("pages/"+url);
+
+                        $('#businessEmail').html(businessEmail);
+                    }else{
+                        errorMessage(response.error);
+                    }
+                    loadingStop();
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Error occured, please try again");
+                    loadingStop();
+                }
+            });
+
+
+        }
+
+        function paySalaries(){
+
+            var month = $('#month').val();
+            var year = $('#year').val();            
+            var len = $('#table2 tbody tr.selected').length;
+            var serviceCHarge = (len * 150);
+
+            // Collect payout values in array column
+            var payOutArray = [];
+            $('table tr.selected td:nth-child(17)').each(function() {
+                payOutArray.push($(this).text());
+            });
+
+            // sum payout values
+            var payoutSum = 0
+            for (let i = 0; i < payOutArray.length; i++) {
+                payoutSum += Number(payOutArray[i].replace(/,/g, ''));
+            }
+
+             // Collect Tax values in array column
+             var taxArray = [];
+            $('table tr.selected td:nth-child(8)').each(function() {
+                taxArray.push($(this).text());
+            });
+
+            // sum payout values
+            var taxSum = 0
+            for (let i = 0; i < taxArray.length; i++) {
+                taxSum += Number(taxArray[i].replace(/,/g, ''));
+            }
+
+
+             // Collect Pension values in array column
+             var pensionArray = [];
+            $('table tr.selected td:nth-child(12)').each(function() {
+                pensionArray.push($(this).text());
+            });
+
+            // sum payout values
+            var pensionSum = 0
+            for (let i = 0; i < pensionArray.length; i++) {
+                pensionSum += Number(pensionArray[i].replace(/,/g, ''));
+            }
+
+
+            $('#grandTotal').text('NGN '+((Number(payoutSum))+(Number(serviceCHarge))).toLocaleString());
+            
+            $('#totalPensionOnPayroll').text('NGN '+Number(pensionSum).toLocaleString());
+            $('#totalTaxOnPayroll').text('NGN '+Number(taxSum).toLocaleString());
+            $('#totalSalaryOnPayroll').text('NGN '+Number(payoutSum).toLocaleString());
+            $('#serviceCHarge').text('NGN '+Number(serviceCHarge).toLocaleString());
+            $('#month_year').text(month+', '+year);
+            $('#noOfEmployees').text(len);
+            $('.paySalariesConfirmation').removeClass("d-none");
+        }
+
+        function closePaymentConfirmation(){
+            $('.paySalariesConfirmation').addClass("d-none");
+        }
+
+        
+       
+
+        function fetchEmployees(){
+
+            var businessToken = localStorage.getItem("businessToken");
+            var userToken = localStorage.getItem("userToken");
+            var obj = {
+                "businessToken":businessToken,
+                "userToken": userToken
+            }
+
+            loadingStart();
+
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/fetchBusinessEmployee.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                success: function (data2) {
+                
+                    var data1 = data2.error;
+                    var data = data2.success;
+                    
+                    if(data1 ==""){
+                        // $('#table2 tbody').html('');
+                        for(i in data){
+                            var obj = toString(data[i]);
+                            var num = Number(i)+(1);
+                            var bonus = 0;
+                            var totalPayout = Number(data[i].employeeMGS);
+                            var result = '<tr employeeToken="'+data[i].employeeToken+'" employeeBankCode="'+data[i].employeeBankCode+'">';
+                                        result += '<td><input type="checkbox" class="form-check-input"></td>';
+                                        // result += '<td><input type="checkbox" class="form-check-input"></td>';
+                                        result += '<td id="editNum_'+num+'">'+num+'</td>';
+                                        result += '<td id="editName_'+num+'">'+data[i].employeeFirstname+' '+data[i].employeeMiddleName+'</td>';
+                                        result += '<td id="editName2_'+num+'">'+data[i].employeeLastname+'</td>';
+                                        
+                                        result += '<td id="editDepartment_'+num+'">'+data[i].employeeDepartment+'</td>';
+                                        result += '<td id="editRole_'+num+'">'+data[i].employeeRole+'</td>';
+                                        result += '<td id="editMonthlyGross_'+num+'">'+Number(data[i].employeeMGS).toLocaleString()+'</td>';
+                                        result += '<td id="editTax_'+num+'">'+Number(data[i].employeeMonthlyTax).toLocaleString()+'</td>';
+                                        result += '<td id="editInsurance_'+num+'">'+Number(data[i].employeeHealthMonthly).toLocaleString()+'</td>';
+                                        result += '<td id="editRelief_'+num+'">'+Number(data[i].employeeMonthlyRelief).toLocaleString()+'</td>';
+                                        result += '<td id="editPension_'+num+'">'+Number(data[i].employeeMGS).toLocaleString()+'</td>';
+                                        result += '<td id="editMonthlyNet_'+num+'">'+Number(data[i].employeeMonthlyPension).toLocaleString()+'</td>';
+                                        // sure
+                                        result += '<td id="acctName_'+num+'">'+data[i].employeeBankAccountName+'</td>';
+                                        result += '<td id="acctNo_'+num+'">'+data[i].employeeBankAccountNumber+'</td>';
+                                        result += '<td id="bank_'+num+'">'+data[i].employeeBankName+'</td>';
+                                        // sure
+                                        result += '<td id="editBonus_'+num+'">'+Number(bonus).toLocaleString()+'</td>';
+                                        result += '<td id="editPayout_'+num+'" amount="'+totalPayout+'">'+Number(totalPayout).toLocaleString()+'</td>';
+                                        result += '<td class="comment" id="commentRow_'+num+'"></td>';
+                                        result += '<td><span class="badge bg-success editRow" id="'+num+'"><i class="bi bi-plus"></i> Add Bonus</span></td>';
+                                    result += '</tr>';
+
+                            $('#table2 tbody').append(result);
+
+                        }
+
+                        $('#table2 tbody tr').click(function(){
+                            // && ($(this).attr("class").includes("d-none") == false) 
+                            if ($(this).attr("class") == "odd" || "even") {
+                                $(this).addClass('selected');
+                                $(this).find('input[type=checkbox]').prop("checked", true);
+                            }else{
+                                $(this).removeClass('selected');
+                                $(this).find('input[type=checkbox]').prop("checked", true);
+                            }
+                            
+                            var len = $('#table2 tbody tr.selected').length;     
+                            // infoMessage(len+' rows selected');
+                        });
+
+                        $('.editRow').click(function(){
+                            var num = $(this).attr("id");
+
+                            var name = $("#editName_"+num).text();
+                            var department = $("#editDepartment_"+num).text();
+                            var role = $("#editRole_"+num).text();
+                            var minthlyGross = $("#editMonthlyGross_"+num).text();
+                            var tax = $("#editTax_"+num).text();
+                            var insurance = $("#editInsurance_"+num).text();
+                            var relief = $("#editRelief_"+num).text();
+                            var pension = $("#editPension_"+num).text();
+                            var monthlyNet = $("#editMonthlyNet_"+num).text();
+                            var bonus = $("#editBonus_"+num).text();
+                            var payout = Number($("#editPayout_"+num).attr("amount"));
+                            var comment = $("#commentRow_"+num).text();
+
+                        
+
+                            $('#nameToEdit').text(name);
+                            $('#departmentToEdit').text(department);
+                            $('#roleToEdit').text(role);
+                            $('#payoutOld').val(Number(payout));
+                            $('#commentOld').val(comment);
+                            $('#bonusNew').val(bonus);
+                            $('#employeeTableId').val(num);
+                            $('#employeeTableId').attr("payoutOld",Number(payout));
+
+                            $('.editPayroll').removeClass("d-none");
+                        
+                            
+                        });
+
+                                
+                    }
+
+                    $('#table2').DataTable({
+                        scrollX:true,
+                        paging: false,
+                        prcessing: true,
+                        searching: false,
+                        scrollY: 500
+                        
+                    });
+
+                    // var $table = $('#table2');
+                    // $table.bootstrapTable();
+
+                    loadingStop();
+
+                },
+                error: function(data){
+                    
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Connection failed, please try again");
+                    loadingStop();
+                }
+            });
+
+        }
+
+        fetchEmployees();
+
+
+        $(function(){
+            $('.dynamic').load("menu.html");
+            
+
+            $('.outsideEditPayroll').click(function(){
+                $('.editPayroll').addClass("d-none");
+            })
+
+            $("#selectAll").on( "click", function(e) {
+                // var  DT1 = $('#table2').DataTable();
+                if ($(this).is( ":checked")) {
+                    // DT1.rows(  ).select();
+                    $('#table2 tbody tr').addClass("selected")
+                    $('#table2 tbody tr td input[type=checkbox]').prop("checked", true);
+                } else {
+                    // DT1.rows(  ).deselect(); 
+                    $('#table2 tbody tr td input[type=checkbox]').prop("checked", false);
+                    $('#table2 tbody tr').removeClass("selected")
+                }
+                var len = $('#table2 tbody tr.selected').length;     
+                infoMessage(len+' rows selected');
+            });
+
+            $('.searchSalariesTable').keyup(function(){
+                var value = $(this).val().toLowerCase(); 
+                $("#table2 tbody tr").filter(function() { 
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1) 
+                });
+            });
+
+            $('.payEmployeesHanger').click(function(){
+                $('.payEmployeesSection').removeClass("d-none");
+            });
+
+            $('.payEmployeeRecordOutside').click(function(){
+                $('.payEmployeesSection').addClass("d-none");
+            });
+
+            $('.bonus').click(function(){
+                var parent = $('tr > td > span > .bonus');
+                console.log(parent);
+            });
+
+            $('.link').click(function(){
+                var url = $(this).attr("url");
+                $('#content').load("pages/"+url);
+            }) ;
+            
+
+        });
+
+        $(document).ready(function() {
+            var inputs = $('.otp-input');
+
+            inputs.on('input', function() {
+                var currentInput = $(this);
+                var currentIndex = inputs.index(currentInput);
+
+                // Move focus to the next input box if the current input is not empty
+                if (currentInput.val() !== '') {
+                    if (currentIndex < inputs.length - 1) {
+                        inputs.eq(currentIndex + 1).focus();
+                    }
+                }
+            });
+
+            inputs.on('keydown', function(event) {
+                var currentInput = $(this);
+                var currentIndex = inputs.index(currentInput);
+
+                // Move focus to the previous input box if the current input is empty and Backspace key is pressed
+                if (event.keyCode === 8 && currentInput.val() === '') {
+                    if (currentIndex > 0) {
+                        inputs.eq(currentIndex - 1).focus();
+                    }
+                }
+            });
+        });
+    </script>
+    

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/keyframes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pageTransitions.css">
+    <link rel="stylesheet" href="css/bs5.css">
+    <link rel="stylesheet" href="css/datatable.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="js/bs5.js"></script>
+    <script src="js/jq.js"></script>
+</head>
+<body class="index m-scene" id="main">
+    <section class="loadingDiv top-0 bottom-0 w-100 position-fixed text-center" style="background: rgba(255,255,255,0.5); z-index: +1000; backdrop-filter: blur(5px);">
+        <div class="justify-content-center align-items-center top-50 position-absolute mx-auto w-100 text-center">
+    
+        </div>
+    </section>
+    <section>
+        <div class="container scene_element scene_element--fadeinright-wide">
+            <div class="row mt-5">
+                
+                <div class="col-lg-6 col-md-6 col-sm-12 mx-auto my-auto mt-5">
+                    <div class="card border-1 p-2 rounded py-5">
+                        <div class="card-header p-4 border-0 bg-transparent" style="background-image: url('images/logo.svg'); background-position: center; background-repeat: no-repeat;"></div>
+                        <div class="card-body text-center">
+                            <h4>Kindly input the OTP sent to <span id="userEmail"></span></h4>
+                            <div class="row mt-5">
+
+                                <div class="col-2">
+                                    <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" class="otp-input form-control text-center fs-2" placeholder="0" maxlength="1">
+                                </div>
+                                
+                            </div>
+
+                            
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <button class="btn btn-primary btn-lg w-100" type="button" onclick="verifyOTP()">Verify</button>
+                        </div>
+                        <div class="mt-3 text-center">
+                          
+                            By verifying your account, you have accepted our <a href="#" class="text-decoration-none">terms of service</a>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+        
+    
+    <script>
+
+        var userEmail = localStorage.getItem("email");
+        $('#userEmail').html(userEmail);
+
+        $(document).ready(function() {
+            var inputs = $('.otp-input');
+
+            inputs.on('input', function() {
+                var currentInput = $(this);
+                var currentIndex = inputs.index(currentInput);
+
+                // Move focus to the next input box if the current input is not empty
+                if (currentInput.val() !== '') {
+                    if (currentIndex < inputs.length - 1) {
+                        inputs.eq(currentIndex + 1).focus();
+                    }
+                }
+            });
+
+            inputs.on('keydown', function(event) {
+                var currentInput = $(this);
+                var currentIndex = inputs.index(currentInput);
+
+                // Move focus to the previous input box if the current input is empty and Backspace key is pressed
+                if (event.keyCode === 8 && currentInput.val() === '') {
+                    if (currentIndex > 0) {
+                        inputs.eq(currentIndex - 1).focus();
+                    }
+                }
+            });
+        });
+
+        function verifyOTP(){
+            var userEmail = localStorage.getItem("email");
+            var inputs = $('.otp-input');
+
+            var otp = '';
+            
+            inputs.each(function() {
+                otp += $(this).val();
+            });
+            
+
+
+            if(otp.length < 6){
+                alert("OTP is 6 characters length");
+                return false;
+            }
+
+            loadingStart();
+            
+            var obj = {
+                "email_phone": userEmail,
+                "verification_code":otp
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/userAccountVerification.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                success: function (response) {
+                    
+                    if(response.error == ""){
+                        localStorage.setItem("userToken", response.user_token);
+                        window.location = 'accounts.html';
+                    }else{
+                        alert(response.error);
+                    }
+                   
+                    loadingStop();
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage(result);
+                    loadingStop();
+                }
+            });
+
+        }
+        
+
+        function loadingStart(){
+            $('.loadingDiv').removeClass('d-none');
+        }
+
+        function loadingStop(){
+            $('.loadingDiv').addClass('d-none');
+        }
+
+        loadingStop();
+    </script>
+    <script src="js/jquery.smoothState.min.js"></script>
+    <script src="js/main.js"></script>
+    
+    
+</body>
+</html>

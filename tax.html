@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calculateTax(annualSalary) {
+            // Tax brackets and rates
+            const taxBrackets = [
+                { min: 0, max: 300000, rate: 7 },
+                { min: 300000, max: 600000, rate: 11 },
+                { min: 600000, max: 1100000, rate: 15 },
+                { min: 1100000, max: 1600000, rate: 19 },
+                { min: 1600000, max: 3200000, rate: 21 },
+                { min: 3200000, max: Infinity, rate: 24 }
+            ];
+
+            let taxableIncome = annualSalary;
+            let totalTax = 0;
+
+            for (let i = 0; i < taxBrackets.length; i++) {
+                const { min, max, rate } = taxBrackets[i];
+                if (taxableIncome <= 0) {
+                break;
+                }
+
+                const taxableAmount = Math.min(taxableIncome, max - min);
+                const taxAmount = (taxableAmount * rate) / 100;
+                totalTax += taxAmount;
+                taxableIncome -= taxableAmount;
+            }
+
+            const monthlyTax = totalTax / 12; // Monthly tax payable
+            const annualTax = totalTax; // Annual tax payable
+
+            return { monthlyTax, annualTax };
+        }
+
+        // Example usage
+        const annualSalary = 1000000;
+        const { monthlyTax, annualTax } = calculateTax(annualSalary);
+        console.log("Monthly Tax Payable:", monthlyTax);
+        console.log("Annual Tax Payable:", annualTax);
+
+
+
+    </script>
+</body>
+</html>

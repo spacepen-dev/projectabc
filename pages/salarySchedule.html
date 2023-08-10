@@ -1,0 +1,195 @@
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.js.map"></script> -->
+
+<div class="scene_element scene_element--fadeinright">
+    <div class="container border-1">
+        <di class="row mb-3">
+            <div class="col-4"></div>
+            <div class="col-4"></div>
+            <div class="col-4">
+                <button class="btn btn-primary float-end" onclick="generatePDF()">Save pdf</button>
+            </div>
+        </di>
+        <div class="heading">
+            <h1 class="fw-bolder text-center">
+                <span class="float-start link" url="salaries.html"><i class="bi bi-arrow-left"></i></span> 
+                <span class="businessName"></span> Salary Schedule
+                
+            </h1>
+            
+        </div>
+        
+        <div id="pdfcontent">
+            <div class="row bg-secondary p-3 fs-5 fw-bold mt-5">
+                Schedule summary
+            </div>
+            <div class="row">
+                <table class="table table-striped">
+                    <tr><td>Transaction Id</td><td id="transactionId"></td></tr>
+                    <tr><td>Transaction date</td><td id="transactionDate"></td></tr>
+                    <tr><td>Transaction status</td><td id="transactionStatus"></td></tr>
+                    <tr><td>Transaction duration</td><td id="transactionDuration"></td></tr>
+                    <tr><td>Total Number of Employees</td><td id="noOfEmployees"></td></tr>
+                    <tr><td>Total Salary Amount</td><td id="totalSalaryAmount"></td></tr>
+                    <tr><td>Total Tax Amount</td><td id="totalTaxAmount"></td></tr>
+                    <tr><td>Total Pension Amount</td><td id="totalPensionAmount"></td></tr>
+                    <tr><td>Total Health Insurance AMount</td><td id="totalHealthInsuranceAmount"></td></tr>
+                    <tr><td>Service Charge</td><td id="serviceCharge"></td></tr>
+                    <tr><td>Grand total</td><td id="grandTotal"></td></tr>
+                </table>
+            </div>
+            <div class="row bg-secondary p-3 fs-5 fw-bold my-3 mt-5">
+                Salary schedule
+            </div>
+            <div class="row overflow-auto">
+                <table class="table table-striped " id="scheduleTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Firstname</th>
+                            <th>Middlename</th>
+                            <th>Lastname</th>
+                            <th>Gross salary</th>
+                            <th>Net Salary</th>
+                            <th>TIN</th>
+                            <th>Tax Authority</th>
+                            <th>Tax</th>
+                            <th>Pension company</th>
+                            <th>Pension rate</th>
+                            <th>Pension amount</th>
+                            <th>HMO</th>
+                            <th>HMO rate</th>
+                            <th>HMO amount</th>
+                            <th>Account number</th>
+                            <th>Bank</th>
+                            <th>Account name</th>
+                            <th>Transaction status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+
+    var businessName = localStorage.getItem("businessName");
+    $('.businessName').html(businessName);
+
+    var obj = JSON.parse(localStorage.getItem("salaryScheduleTransaction"));
+
+    var status = "";
+    if(obj.transaction_status == "Completed"){
+        status = "<span class='badge alert-success'>"+obj.transaction_status+"</span>";
+    }
+    if(obj.transaction_status == "Failed"){
+        status = "<span class='badge alert-danger'>"+obj.transaction_status+"</span>";
+    }
+    if(obj.transaction_status == "Pending"){
+        status = "<span class='badge alert-warning'>"+obj.transaction_status+"</span>";
+    }
+
+    $('#transactionId').html(obj.transaction_id);
+    $('#transactionDate').html(obj.transaction_date);
+    $('#transactionStatus').html(status);
+    $('#transactionDuration').html();
+    $('#noOfEmployees').html(Number(obj.no_of_employee).toLocaleString());
+    $('#totalSalaryAmount').html(Number(obj.total_salary).toLocaleString());
+    $('#totalTaxAmount').html(Number(obj.total_tax_amount).toLocaleString());
+    $('#totalPensionAmount').html();
+    $('#totalHealthInsuranceAmount').html();
+    $('#serviceCharge').html();
+    $('#grandTotal').html();
+
+    var tableItem = obj.salarySchedule;
+    for(i in tableItem){
+
+        var status = "";
+        if(tableItem[i].transactionStatus == "Completed"){
+            status = "<span class='badge alert-success'>"+tableItem[i].transactionStatus+"</span>";
+        }
+        if(tableItem[i].transactionStatus == "Failed"){
+            status = "<span class='badge alert-danger'>"+tableItem[i].transactionStatus+"</span>";
+        }
+        if(tableItem[i].transactionStatus == "Pending"){
+            status = "<span class='badge alert-warning'>"+tableItem[i].transactionStatus+"</span>";
+        }
+
+        var num = Number(i)+(1);
+        var tableConstruct = '<tr>';
+            tableConstruct += '<td>'+num+'</td>';
+            tableConstruct += '<td>'+tableItem[i].employeeFirstname+'</td>';
+            tableConstruct += '<td>'+tableItem[i].employeeLastname+'</td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td>'+Number(tableItem[i].employeeSalary).toLocaleString()+'</td>';
+            tableConstruct += '<td>'+Number(tableItem[i].employeeSalary).toLocaleString()+'</td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td>'+tableItem[i].employeeTax+'</td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td>'+tableItem[i].accountNumber+'</td>';
+            tableConstruct += '<td></td>';
+            tableConstruct += '<td>'+tableItem[i].accountName+'</td>';
+            tableConstruct += '<td>'+status+'</td>';
+            tableConstruct += '</tr>';
+
+            $('#scheduleTable').append(tableConstruct);
+
+    }
+
+    function generatePDF() {
+        const { jsPDF } = window.jspdf;
+ 
+        let doc = new jsPDF('l', 'mm', [1800, 1700]);
+        // let pdfjs = document.querySelector('#pdfcontent');
+
+        // doc.html(pdfjs, {
+        //     callback: function(doc) {
+        //         doc.save("newpdf.pdf");
+        //     },
+        //     x: 12,
+        //     y: 12
+        // });     
+    //   // Create a new jsPDF instance
+    //   var doc = new jsPDF();
+
+        // Get the HTML content to convert
+        var content = document.getElementById("pdfcontent");
+
+        // Generate the PDF from HTML content
+        doc.html(content, {
+            callback: function (doc) {
+                // Save the PDF file
+                doc.save("salaryPayment.pdf");
+            },
+                x: 12,
+                y: 12
+        });
+    }
+
+    
+
+    $(function(){
+        $('.link').click(function(){
+            var url = $(this).attr("url");
+            $('#content').load("pages/"+url);
+        }) ;
+    });
+
+</script>

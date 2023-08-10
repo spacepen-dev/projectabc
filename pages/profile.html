@@ -1,0 +1,500 @@
+
+        <div class="scene_element scene_element--fadeinright">
+            <div class="container border-1">
+                <!-- <div class="heading">
+                    <h1 class="fw-bolder text-center">Business Profile</h1>
+                </div> -->
+
+                <div class="row">
+                    <center>
+                        <div class="rounded-circle bg-light border-2 fs-1 text-dark d-flex align-items-center justify-content-center" style="width:100px; height:100px;">
+                            <i class="bi bi-building-fill"></i>
+                        </div>
+                        <div class="fs-2 mt-2 fw-bold">
+                            <span class="username"></span>
+                        </div>
+                        <div class="fs-4 mt-2">
+                            Manage your information, privacy, security and business administration process
+                        </div>
+                    </center>
+
+                    <div class="row mt-5">
+                        <ul class="nav nav-tabs nav-justified">
+                            <li class="nav-item">
+                              <a class="nav-link active" tab-content="business-profile" href="#">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" tab-content="human-resource" href="#">Human Resource</a>
+                              </li>
+                            <li class="nav-item">
+                              <a class="nav-link" tab-content="bank-accounts" href="#">Accounts</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" tab-content="administrators" href="#">Administrators</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" tab-content="settings" href="#">Preference</a>
+                            </li>
+                        </ul>
+                        <div class="tab-contents w-100 py-3 overflow-auto">
+                            <div class="row tab-pane mt-3" id="business-profile">
+                                <div class="col-12 mb-3">
+                                    <a href="#" class="btn btn-primary float-end">Edit profile</a>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 col-md-12">
+                                    <div class="card">
+                                        <div class="card-header fs-5 fw-bold bg-transparent border-0">
+                                            Profile
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td class="username"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Business category</td>
+                                                    <td class="businessCategory"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Trading name</td>
+                                                    <td class="tradingName"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Registration number</td>
+                                                    <td class="regNumber"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TIN</td>
+                                                    <td class="stateTin"></td>
+                                                </tr>
+                                                
+                                               
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-12 col-md-12">
+                                    <div class="card">
+                                        <div class="card-header fs-5 fw-bold bg-transparent border-0">
+                                            Contact
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <td>Country</td>
+                                                    <td class="country"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>State</td>
+                                                    <td class="state"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Local government</td>
+                                                    <td class="lga"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address</td>
+                                                    <td class="address"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Email</td>
+                                                    <td class="businessEmail"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Phone</td>
+                                                    <td class="businessPhone"></td>
+                                                </tr>
+                                            
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                    
+                                
+                            </div>
+                            <div class="row tab-pane d-none" id="human-resource">
+                                <div class="col-lg-6 col-sm-12 col-md-12">
+                                    <div class="card">
+                                        <div class="card-header fs-5 fw-bold bg-transparent border-0">
+                                            Activities
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <td>Employees</td>
+                                                    <td class="noOfEmployees"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Departments</td>
+                                                    <td class="noOfDepartments"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Monthly Payroll</td>
+                                                    <td class="monthlyParoll"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tax autorities</td>
+                                                    <td class="taxAuthorities"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pension</td>
+                                                    <td class="pensionAffiliates"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Health Insurance</td>
+                                                    <td class="hmoAffiliates"></td>
+                                                </tr>
+                                               
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-12 col-md-12">
+                                    <div class="card">
+                                        <div class="card-header fs-5 fw-bold bg-transparent border-0">
+                                            Departments
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-hover departmentsTable">
+                                                <tr>
+                                                    <th>Department</th>
+                                                    <th>No. of employees</th>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer bg-transparent">
+                                            <a url="addDepartment.html" href="#" class="link btn btn-primary w-100"><i class="bi bi-plus"></i> Add department</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tab-pane d-none" id="bank-accounts">
+                                
+                                <div class="col-lg-6 col-sm-12 col-md-12">
+                                    <div class="card">
+                                        <div class="card-header fs-5 fw-bold bg-transparent border-0">
+                                            Your wallet Account
+                                        </div>
+                                        <div class="card-body">
+                                            This account is connected to your Aimienpay wallet, When you make transfer to this accountd, we fund your wallet
+                                            <table class="table table-hover">
+                                                <tr>
+                                                    <td>Bank</td>
+                                                    <td class="bank"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Account name</td>
+                                                    <td class="accountName"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Account number</td>
+                                                    <td class="accountNumber"></td>
+                                                </tr>
+                                                
+                                            
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-12 col-md-12">
+                                    <div class="card">
+                                        <div class="card-header fs-5 fw-bold bg-transparent border-0">
+                                            Approved funding accounts
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3 mt-3">For security reasons, we will only let you fund your wallet from verified bank accounts which are listed below</div>
+                                            <div class="row">
+                                                <div class="col-12 text-end mb-3">
+                                                    <a class="btn btn-primary link" href="#" url="addFundingAccount.html"><i class="bi bi-plus"></i> Add account</a>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <table class="table table-hover businessFundingAccounts">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Bank</th>
+                                                    <th>Account name</th>
+                                                    <th>Account number</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                                                                            
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row tab-pane d-none" id="administrators">
+                                <div class="col-12 mt-3 mb-3 text-end">
+                                    <a class="btn btn-primary link" href="#" url="addAdministrator.html"><i class="bi bi-plus"></i> Add Administrator</a>
+                                </div>
+                                
+                            </div>
+                            <div class="row tab-pane d-none" id="settings">
+                                <div class="col-lg-4 col-sm-12 col-md-12">
+                                    <div class="card">
+                                        <div class="card-header fs-5 fw-bold bg-transparent border-0">
+                                            Taxes
+                                        </div>
+                                        <div class="card-body">
+                                           
+                                            <table class="table">
+                                                <tr>
+                                                    <td>State</td>
+                                                    <td class="state"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TIN</td>
+                                                    <td class="stateTin"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pay taxex?</td>
+                                                    <td>
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedDisabled" checked disabled>
+                                                            <label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Yes</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                                  
+                                                                                           
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 col-md-12">
+                                    <div class="card">
+                                        <div class="card-header fs-5 fw-bold bg-transparent border-0">
+                                            Pension
+                                        </div>
+                                        <div class="card-body">
+                                           
+                                            <table class="table">
+                                                <tr>
+                                                    <td>Penconsion compliance</td>
+                                                    <td class="pensionCompliance">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Employer code</td>
+                                                    <td class="pensionCode"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pencom companies</td>
+                                                    <td class="pension"></td>
+                                                </tr>
+                                                                  
+                                                <tr>
+                                                    <td>Monthly pension</td>
+                                                    <td class="monthlyPension"></td>
+                                                </tr>                                        
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                
+            </div>
+        </div>
+
+   
+    <script>
+
+        var businessName = localStorage.getItem("businessName");
+        $('.username').html(businessName);
+
+        function fetchProfile(){
+            var obj = {
+                "userToken": localStorage.getItem("userToken"),
+                "businessToken": localStorage.getItem("businessToken")
+            }
+
+            loadingStart();
+
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/fetchUserSingleBusiness.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                success: function (response) {
+
+                    
+
+                        var businessProfile = JSON.stringify(response);
+                        localStorage.setItem("businessProfile",businessProfile);
+
+
+                        var businessProfile = response.success.businessProfile;
+                        var humanResource = response.success.humanResource;
+                        var departmentList = response.success.departmentList;
+                        var walletAccounts = response.success.walletAccount;
+                        var fundingAccounts = response.success.fundingAccounts;
+                        var administrators = response.success.administrators;
+                        var preferences = response.success.Preferences;
+
+                        /** Business profile */
+                        var businessCategory = businessProfile.businessCategory;
+                        var tradingName = businessProfile.tradingName;
+                        var registrationNumber = businessProfile.registrationNumber;
+                        var tin = businessProfile.tin;
+                        var country = businessProfile.country;
+                        var state = businessProfile.state;
+                        var lga = businessProfile.lga;
+                        var address = businessProfile.address;
+                        var email = businessProfile.email;
+                        var phone = businessProfile.phone;
+
+                        /** Human Resource **/
+                        var employees = humanResource.employees;
+                        var departments = humanResource.departments;
+                        var monthlyPayroll = humanResource.monthlyPayroll;
+                        var taxAutorities = humanResource.taxAutorities;
+                        var pension = humanResource.pension;
+                        var healthInsurance = humanResource.healthInsurance;
+
+                        /** Departments list **/
+                        for(i in departmentList){
+                            var department = departmentList[i].department;
+                            var departmentCount = departmentList[i].departmentCount;
+
+                            var tableConstructor = '<tr>';
+                                tableConstructor += '<td>'+department+'</td>';
+                                tableConstructor += '<td>'+departmentCount+'</td>';
+                                tableConstructor += '</tr>';
+                            $('.departmentsTable').append(tableConstructor);
+                        }
+
+                        /** walletAccounts **/
+                        var walletAccountname = walletAccounts.accountName;
+                        var walletBank = walletAccounts.bankName;
+                        var walletAccountNumber = walletAccounts.accountNumber;
+
+                        /** fundingAccounts **/
+                        for(i in fundingAccounts){
+                            var num = Number(i) + 1;
+                            var accountName = fundingAccounts[i].bank_account_name;
+                            var bank = fundingAccounts[i].bank_name;
+                            var accountNumber = fundingAccounts[i].account_number;
+                            var accountStatus = "";
+
+                            var tableConstructor = '<tr>';
+                                tableConstructor += '<td>'+num+'</td>';
+                                tableConstructor += '<td>'+bank+'</td>';
+                                tableConstructor += '<td>'+accountName+'</td>';
+                                tableConstructor += '<td>'+accountNumber+'</td>';
+                                tableConstructor += '<td>'+accountStatus+'</td>';
+                                tableConstructor += '</tr>';
+
+                            $('table.businessFundingAccounts').append(tableConstructor);
+
+                        }
+
+                        /** Administrators **/
+                        for(i in administrators){
+                            var name = administrators[i].name;
+                            var email = administrators[i].email;
+                            var department = administrators[i].department;
+                            var status = administrators[i].status;
+
+                            var administratorDiv = '<div class="col-lg-4 col-sm-12 col-md-12">';
+                                    administratorDiv += '<div class="card">';
+                                        administratorDiv += '<div class="card-header fs-5 fw-bold bg-transparent border-0">';
+                                            administratorDiv += name;
+                                        administratorDiv += '</div>';
+                                        administratorDiv += '<div class="card-body">';
+                                        
+                                            administratorDiv += '<table class="table">';
+                                            
+                                                administratorDiv += '<tr>';
+                                                    administratorDiv += '<td>Email</td>';
+                                                    administratorDiv += '<td>'+email+'</td>';
+                                                administratorDiv += '</tr>';
+                                                administratorDiv += '<tr>';
+                                                    administratorDiv += '<td>Department</td>';
+                                                    administratorDiv += '<td>'+department+'</td>';
+                                                administratorDiv += '</tr>';
+                                                administratorDiv += '<tr>';
+                                                    administratorDiv += '<td>Status</td>';
+                                                    administratorDiv += '<td>'+status+'</td>';
+                                                administratorDiv += '</tr>';
+                                                                                        
+                                            administratorDiv += '</table>';
+                                        administratorDiv += '</div>';
+                                    administratorDiv += '</div>';
+                                administratorDiv += '</div>';
+
+                            $('#administrators').append(administratorDiv);
+                        }
+
+                        /** Preferences **/
+                        var stateTaxes = preferences.state;
+                        var tin = preferences.tin;
+                        var payTax = preferences.payTax;
+                        var penconsionCompliance = preferences.penconsionCompliance;
+                        var aimienpayServiceCharge = preferences.aimienpayServiceCharge;
+                        var employerCode = preferences.employerCode;
+                        var pencomCompanies = preferences.pencomCompanies;
+                        var monthlyPension = preferences.monthlyPension;
+
+                        $('.businessCategory').html(businessCategory);
+                        $('.tradingName').html(tradingName);
+                        $('.regNumber').html(registrationNumber);
+                        $('.stateTin').html(tin);
+                        $('.country').html(country);
+                        $('.state').html(state);
+                        $('.lga').html(lga);
+                        $('.address').html(address);
+                        $('.businessEmail').html(email);
+                        $('.businessPhone').html(phone);
+                        $('.noOfEmployees').html(employees);
+                        $('.noOfDepartments').html(departments);
+                        $('.monthlyParoll').html(Number(monthlyPayroll).toLocaleString());
+                        $('.taxAuthorities').html(taxAutorities);
+                        $('.pensionAffiliates').html(pension);
+                        $('.hmoAffiliates').html(healthInsurance);
+                        $('.bank').html(walletBank);
+                        $('.accountName').html(walletAccountname);
+                        $('.accountNumber').html(walletAccountNumber);                                               
+
+                    
+                    loadingStop();
+
+                },
+                error: function(response){
+                    var result = response.responseText;
+                    console.log(result);
+                    // errorMessage("connection failed, please try again");
+                    loadingStop();
+                }
+            });
+        }
+
+        fetchProfile();
+
+        $('.nav-link').click(function(){
+            var navTab = $(this).attr("tab-content");
+            $('.nav-link').removeClass("active");
+            $('.nav-link').removeClass("active");
+            $('.tab-pane').addClass("d-none");
+            $('#'+navTab).removeClass("d-none");
+            $(this).addClass("active");
+        });
+
+        $('.link').click(function(){
+            var url = $(this).attr("url");
+            $('#content').load("pages/"+url);
+        }) ;
+
+       
+    </script>

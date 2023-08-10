@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>
+    <link rel="manifest" href="manifest.json">
+    
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/keyframes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pageTransitions.css">
+    <link rel="stylesheet" href="css/bs5.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <script src="js/bs5.js"></script>
+    <script src="js/jq.js"></script>
+</head>
+<body class="index m-scene " style="overflow-x:hidden"  id="main">
+
+    <section class="alert d-none row top-0 position-fixed w-100 p-3 text-center text-dark fw-bold mx-auto output" style="z-index: +5000"></section>
+
+    <section class="loadingDiv top-0 bottom-0 w-100 position-fixed text-center" style="background: rgba(255,255,255,0.5); z-index: +1000; backdrop-filter: blur(5px);">
+        <div class="justify-content-center align-items-center top-50 position-absolute mx-auto w-100 text-center">
+    
+        </div>
+    </section>
+    <section class="container">
+        <div class="scene_element scene_element--fadeinright">
+            <div class="row w-100 mt-5 my-auto">
+                
+                <div class="border-1 col-lg-6 my-auto ">
+
+                    <div class="row">
+                        
+                        <div class="card border-0 rounded my-auto mx-auto w-75">
+                            
+                            <div class="card-body">
+
+                                <img src="images/logo.svg" class="img-fluid mb-5">
+                                <h2>Welcome back</h2>
+                                <p>
+                                    Welcome back, Please enter your details.
+                                </p>
+    
+                                <label class="mt-5 fw-bold">Email</label>
+                                <input type="text" class="form-control mb-4 mt-2" id="emailx" placeholder="Email or Phone number"/>
+                                <label class="fw-bold">Password</label>
+                                <input type="password" class="form-control mb-4 mt-2" id="passwordx" placeholder="**********"/>
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-sm-12 text-start">
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="remember">
+                                              <label class="form-check-label" for="remember">
+                                                Remember me for 30 days
+                                              </label>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-lg-4 col-sm-12 text-end">
+                                            <a href="#" class="fw-bold text-decoration-none">
+                                                Forgot password
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+    
+    
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <button id="signin" class="btn btn-primary btn-lg w-100 mb-4" type="button">Signin</button>
+                                <!-- <a href="#" class="btn btn-white btn-lg w-100 border-dark fw-bold" type="button" style="font-size: 14px;"><i class="bi bi-google"></i> Sigin in with Google</a> -->
+                            </div>
+                            <div class="mt-3 text-center">
+                              
+                                Don't have an account? <a href="signup.html" class="fw-bold text-decoration-none">Signup</a>
+                                
+                            </div>
+                    
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="d-lg-block d-md-block d-none col-lg-6 col-md-6 h-100" style="min-height: 800px; background-image: url(images/100.png); background-position:center; background-repeat: no-repeat; background-size: cover; right:0">
+                    <!-- HTML markup for the 5 images -->
+                    <div class="bottom-0 position-absolute p-5 mx-auto" style="width: 48%; min-height: 30%; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(7.5px);">
+                        <div class="mb-4" style="font-weight: 600; font-size: 25px;">
+                            Streamline Your Salary Payments with Confidence and Convenience.
+                        </div> 
+                        <div class="mb-2 fw-bold" style="font-size: 25px;">
+                            Opeoluwa Ogunmodede
+                        </div>
+                        <div class="" style="font-size: 18px;">
+                            CEO, Intershala LTD
+                        </div>
+                    </div>                 
+                </div>
+               
+            </div>
+        </div>
+    </section>
+    <section class="mx-5 fw-bold text-dark mt-5">
+        &copy AimienPay 2023
+    </section>
+    
+    <script src="js/jquery.smoothState.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function loadingStart(){
+            $('.loadingDiv').removeClass('d-none');
+        }
+
+        function loadingStop(){
+            $('.loadingDiv').addClass('d-none');
+        }
+
+        function successMessage(e){
+            $('.output').html('');
+            $('.output').addClass('alert-success');
+            $('.output').html('<center><i class="bi bi-check2-circle"></i> '+e+'</center>');
+            $('.output').removeClass("d-none");
+            setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-success"); }, 2000);
+        }
+
+        function errorMessage(e){
+            $('.output').html('');
+            $('.output').addClass('alert-danger');
+            $('.output').html('<center><i class="bi bi-x-circle"></i> '+e+'</center>');
+            $('.output').removeClass("d-none");
+            setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-danger"); }, 2000);
+        }
+
+        function infoMessage(e){
+            $('.output').html('');
+            $('.output').addClass('alert-primary');
+            $('.output').html('<center><i class="bi bi-info-circle"></i> '+e+'</center>');
+            $('.output').removeClass("d-none");
+            setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-primary"); }, 5000);
+        }
+
+        loadingStop();
+
+        $('#signin').click(function(){
+
+            var email = $('#emailx').val();
+            var password = $('#passwordx').val();
+
+            if(email == ""){
+                errorMessage("Email cannot be empty");
+                return false;
+            }
+
+            if(password == ""){
+                errorMessage("Password cannot be empty");
+                return false;
+            }
+
+            var obj = {
+                "emailAddress":email,
+                "password":password
+            }
+
+            loadingStart();
+            
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/userPasswordLogin.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                success: function (response) {
+
+                    if(response.error == ""){
+                        localStorage.setItem("email",response.emailAddress);
+                        localStorage.setItem("userToken",response.user_token)
+                        successMessage("Successful, logging you in");
+                        window.location = 'accounts.html'
+                    }else{
+                        errorMessage(response.error);
+                    }
+
+                    loadingStop();
+                    
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Connection failed, please try again");
+                    loadingStop();
+                }
+            });
+
+        });
+
+
+    </script>
+
+    
+    
+</body>
+</html>

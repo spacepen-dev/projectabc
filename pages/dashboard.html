@@ -1,0 +1,389 @@
+
+        <div class="scene_element scene_element--fadeinright">
+            <div class="container border-1">
+                <div class="heading">
+                    <h1 class="fw-bolder text-center username"></h1>
+                </div>
+                <div class="row py-5">
+                    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                        <div class="card">
+                            <div class="card-header bg-transparent border-0">
+                                Wallet (NGN)
+                            </div>
+                            <div class="card-body bg-transparent border-0">
+                                <b class="fs-1 walletAmount"></b>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="#" class="text-center bg-secondary text-decoration-none text-dark badge" data-bs-toggle="modal" data-bs-target="#primary">Fund wallet</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                        <div class="card">
+                            <div class="card-header bg-transparent border-0">
+                                Employees
+                            </div>
+                            <div class="card-body bg-transparent border-0">
+                                <b class="fs-1 employeesCount"></b>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="#" url="employees.html" class="link text-center bg-secondary text-decoration-none text-dark badge">View employees</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                        <div class="card">
+                            <div class="card-header bg-transparent border-0">
+                                Transactions
+                            </div>
+                            <div class="card-body bg-transparent border-0">
+                                <b class="fs-1 transactionsCount"></b>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="./transactionHistory.html" class="text-center bg-secondary text-decoration-none text-dark badge">View history</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-none d-lg-block  d-md-block">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="nav-item">
+                          <a class="nav-link active" tab-content="transaction-history" href="#">Transaction history</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" tab-content="salaries-history" href="#">Salaries history</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" tab-content="tax-history" href="#">Tax history</a>
+                        </li>
+                    </ul>
+                    <div class="tab-contents w-100 py-3 overflow-auto">
+                        <div class="row tab-pane" id="transaction-history">
+                            <div class="col-12">
+                                
+                                <table class="table table-hover" id="dataTable1">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Transaction type</th>
+                                            <th>Transaction Amount</th>
+                                            <th>Transaction Reference</th>
+                                            <th>Transaction status</th>
+                                            <th>Transaction Date</th>
+                                            <th>Receipt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="transactionHistory">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row tab-pane d-none" id="salaries-history">
+                            <div class="col-12">
+                                <div class="col-12">
+                                    
+                                    <table class="table table-hover" id="dataTable2">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Refernce</th>
+                                                <th>Date</th>
+                                                <th>Duration</th>
+                                                <th>Amount</th>
+                                                <th>Employees</th>
+                                                <!-- <th>Tax</th>
+                                                <th>Pension</th>                                                 -->
+                                                <th>Status</th>
+                                                <th>Schedule</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="salaryHistory">
+                                            
+                                            
+                                        </tbody>
+                                        
+                                        
+                                        
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row tab-pane d-none" id="tax-history">
+                            <div class="col-12">
+                                
+                                <table class="table table-hover" id="dataTable2">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Refernce</th>
+                                            <th>Date</th>
+                                            <th>Duration</th>
+                                            <th>Amount</th>
+                                            <th>Employees</th>
+                                            <th>State</th>
+                                            <th>Status</th>
+                                            <th>FORM H1</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="taxHistory">
+                                        
+                                        
+                                    </tbody>
+                                    
+                                    
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+
+    <div class="modal fade text-left" id="primary" tabindex="-1" role="dialog" aria-labelledby="myModalLabel160" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-white" id="myModalLabel160">
+                        Fund wallet
+                    </h5>
+                    
+                    <i class="bi bi-x close fs-3 text-white" data-bs-dismiss="modal" aria-label="Close"></i>
+                    
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="row">
+                        <div class="col-12 py-2">
+                            We created a dedicated account number for you with a commercial bank. Kindly find your account details below
+                        </div>
+                        <div class="col-12 py-2">
+                            <table class="table table-hover">
+                                <tr>
+                                    <td>Account name</td>
+                                    <th id="accountName"></th>
+                                </tr>
+                                <tr>
+                                    <td>Account Number</td>
+                                    <th id="accountNumber"></th>
+                                </tr>
+                                <tr>
+                                    <td>Bank</td>
+                                    <th id="bank"></th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-12 py-2">
+                            <span class="badge bg-danger">
+                                Please note
+                            </span><br><br>
+                            We will only take transfers from the accounts below<br>
+                            <div class="col-12 py-2">
+                                <table class="table table-hover fundingAccountTable">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Account name</th>
+                                        <th>Account number</th>
+                                        <th>Bank</th>
+                                    </tr>
+                                    
+                                </table>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            
+            var businessName = localStorage.getItem("businessName");
+            var businessToken = localStorage.getItem("businessToken");
+            var userToken = localStorage.getItem("userToken");
+
+            $('.username').html(businessName);
+
+            var obj = {
+                "businessToken":businessToken,
+                "userToken":userToken
+            }
+
+            loadingStart();
+
+
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/fetchDashboardSummary.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                contentType:"application/json",
+                success: function (response) {
+
+                    console.log(response.success.data);
+
+                    if(response.error === ""){
+
+                        var companyData = response.success.data;
+                        var companyBankingInformation = response.success.businessBankingInformation;
+                        var companyBankingFundingInformation = response.success.businessBankingFundingInformation;
+                        var transactionHistory = response.success.walletTransactionHistory;
+                        var salaryHistory = response.success.salaryHistory;
+                        var taxHistory = response.success.taxHistory;
+
+                        $('.walletAmount').html(Number(companyData.walletAmount).toLocaleString());
+                        $('.employeesCount').html(Number(companyData.employeesCount).toLocaleString());
+                        $('.transactionsCount').html(Number(companyData.transactionsCount).toLocaleString());
+                        $('#accountName').html(companyBankingInformation.accountName);
+                        $('#accountNumber').html(companyBankingInformation.accountNumber);
+                        $('#bank').html(companyBankingInformation.bank);
+
+                        // for(var i in companyBankingFundingInformation){
+                        //     var num = Number(i)+(1);
+                        //     var tableRow = '<tr>';
+                        //         tableRow += '<td>'+num+'</td>';
+                        //         tableRow += '<td>'+companyBankingFundingInformation[i].accountName+'</td>';
+                        //         tableRow += '<td>'+companyBankingFundingInformation[i].accountNumber+'</td>';
+                        //         tableRow += '<td>'+companyBankingFundingInformation[i].bank+'</td>';
+                        //         tableRow += '</tr>';
+                        //     $('.fundingAccountTable').append(tableRow);
+                        // }
+
+                        for(var j in transactionHistory){
+                            var num = Number(j)+(1);
+                            var status = "";
+                            if(transactionHistory[j].transactionStatus == "Completed"){
+                                status = "alert-success";
+                            }
+                            if(transactionHistory[j].transactionStatus == "pending"){
+                                status = "alert-warning";
+                            }
+                            if(transactionHistory[j].transactionStatus == "Failed"){
+                                status = "alert-danger";
+                            }
+                            if(transactionHistory[j].transactionStatus == "invalid"){
+                                status = "alert-dark";
+                            }
+                            var tableRow = '<tr>';
+                                tableRow += '<td>'+num+'</td>';
+                                tableRow += '<td>'+transactionHistory[j].title+'</td>';
+                                tableRow += '<td>'+transactionHistory[j].amount+'</td>';
+                                tableRow += '<td>'+transactionHistory[j].transactionId+'</td>';
+                                tableRow += '<td><span class="badge '+status+'">'+transactionHistory[j].transactionStatus+'</span></td>';
+                                tableRow += '<td>'+transactionHistory[j].date+'</td>';
+                                tableRow += '<td><span class="badge alert-dark  cursor-pointer border-1 border-primary"><i class="bi bi-cloud-arrow-down-fill"></i></span></td>';
+                                tableRow += '</tr>';
+                            $('.transactionHistory').append(tableRow);
+                        }
+
+                        if(typeof salaryHistory != "string") {
+                            for(var k in salaryHistory){
+                                var num = Number(k)+(1);
+                                var status = "";
+                                if(salaryHistory[k].transaction_status == "Completed"){
+                                    status = "alert-success";
+                                }
+                                if(salaryHistory[k].transaction_status == "pending"){
+                                    status = "alert-warning";
+                                }
+                                if(salaryHistory[k].transaction_status == "Failed"){
+                                    status = "alert-danger";
+                                }
+                                if(salaryHistory[k].transaction_status == "invalid"){
+                                    status = "alert-dark";
+                                }
+                                var tableRow = '<tr>';
+                                    tableRow += '<td>'+num+'</td>';
+                                    tableRow += '<td>'+salaryHistory[k].transaction_id+'</td>';
+                                    tableRow += '<td>'+salaryHistory[k].transaction_date+'</td>';
+                                    tableRow += '<td>January, 2023</td>';
+                                    tableRow += '<td>'+salaryHistory[k].total_salary+'</td>';
+                                    tableRow += '<td>'+salaryHistory[k].no_of_employee+'</td>';
+                                    // tableRow += '<td>'+salaryHistory[k].tax+'</td>';
+                                    // tableRow += '<td>'+salaryHistory[k].pension+'</td>';
+                                    tableRow += '<td><span class="badge '+status+'">'+salaryHistory[k].transaction_status+'</span></td>';
+                                    tableRow += '<td><span class="badge alert-dark cursor-pointer">View schedule</span></td>';
+                                    tableRow += '</tr>';
+                                $('.salaryHistory').append(tableRow);
+                            }
+                        }
+
+
+                        if(typeof taxHistory != "string") {
+                            for(var l in taxHistory){
+                                var num = Number(l)+(1);
+                                var status = "";
+                                if(taxHistory[j].transaction_status == "Completed"){
+                                    status = "alert-success";
+                                }
+                                if(taxHistory[j].transaction_status == "pending"){
+                                    status = "alert-warning";
+                                }
+                                if(taxHistory[j].transaction_status == "Failed"){
+                                    status = "alert-danger";
+                                }
+                                if(taxHistory[j].transaction_status == "invalid"){
+                                    status = "alert-dark";
+                                }
+                                var tableRow = '<tr>';
+                                    tableRow += '<td>'+num+'</td>';
+                                    tableRow += '<td>'+taxHistory[l].transaction_id+'</td>';
+                                    tableRow += '<td>'+taxHistory[l].date+'</td>';
+                                    tableRow += '<td>'+taxHistory[l].tax_salary_month+', '+taxHistory[l].tax_salary_year+'</td>';
+                                    tableRow += '<td>'+taxHistory[l].total_tax_amount+'</td>';
+                                    tableRow += '<td>'+taxHistory[l].total_employee+'</td>';
+                                    tableRow += '<td>ONDO</td>';
+                                    tableRow += '<td><span class="badge '+status+'">'+taxHistory[j].transaction_status+'</span></td>';
+                                    tableRow += '<td><span class="badge alert-dark cursor-pointer">View schedule<span></td>';
+                                    tableRow += '</tr>';
+                                $('.taxHistory').append(tableRow);
+                            }
+                        }
+
+                    }
+
+                    loadingStop();
+                    
+                   
+              
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Connection failed, kindly reload page");
+                    loadingStop();
+                  
+                }
+            });
+
+            $('.link').click(function(){
+                var url = $(this).attr("url");
+                $('#content').load("pages/"+url);
+            }) ;
+            
+             /*Dashboard nav-link*/
+          $('.nav-link').click(function(){
+              var navTab = $(this).attr("tab-content");
+              $('.nav-link').removeClass("active");
+              $('.nav-link').removeClass("active");
+              $('.tab-pane').addClass("d-none");
+              $('#'+navTab).removeClass("d-none");
+              $(this).addClass("active");
+          });
+
+        });
+    </script>
+ 

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/bs5.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="js/bs5.js"></script>
+    <script src="js/jq.js"></script>
+</head>
+
+
+
+
+<body class="w-100">
+    
+    <section>
+        <div class="mt-4 py-2 shadow-sm text-center border-1" style="z-index: +2;">
+            <h1>Let's setup your new business on Aimienpay</h1>
+        </div>
+        <div class="container mt-5">
+            
+            <div class="row mt-5">
+                
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="list-group list-group-flush">
+                        <a href="#" id = "step1Div" class="list-group-item list-group-item-action active rounded-3"><i id="step1DivIcon" class="bi bi-1-square-fill"></i> Policy</a>
+                        <a href="#" id = "step2Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step2DivIcon" class="bi bi-2-square-fill"></i> Business Category</a>
+                        <a href="#" id = "step3Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step3DivIcon" class="bi bi-3-square-fill"></i> Business profile</a>
+                        <a href="#" id = "step4Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step4DivIcon" class="bi bi-4-square-fill"></i> Contacts</a>
+                        <a href="#" id = "step5Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step5DivIcon" class="bi bi-5-square-fill"></i> Business bank accounts</a>
+                        <a href="#" id = "step6Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step6DivIcon" class="bi bi-6-square-fill"></i> Logo</a>
+                        <a href="#" id = "step7Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step7DivIcon" class="bi bi-7-square-fill"></i> Setup</a>
+                        <a href="#" id = "step8Div" class="list-group-item list-group-item-action disabled rounded-3 mt-3"><i id="step8DivIcon" class="bi bi-8-square-fill"></i> Finish</a>
+                    </div>
+                </div>
+                
+               
+                <secion class="col-lg-9 h-100 col-md-12 col-sm-12 border-start px-5">
+                    
+                    
+                    <div class="step1Div w-100">
+                        <div class="rows text-center">
+                            <div class="badge bg-dark mb-4">Process 1 of 8</div>
+                            <h3>Terms of use</h3>
+                        </div>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem consequuntur blanditiis velit repudiandae ad eaque voluptatibus mollitia quam, rem non nisi, eius similique voluptatum quisquam impedit. Atque, quam. Perferendis, adipisci.
+                        </p>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem consequuntur blanditiis velit repudiandae ad eaque voluptatibus mollitia quam, rem non nisi, eius similique voluptatum quisquam impedit. Atque, quam. Perferendis, adipisci.
+                        </p>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem consequuntur blanditiis velit repudiandae ad eaque voluptatibus mollitia quam, rem non nisi, eius similique voluptatum quisquam impedit. Atque, quam. Perferendis, adipisci.
+                        </p>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem consequuntur blanditiis velit repudiandae ad eaque voluptatibus mollitia quam, rem non nisi, eius similique voluptatum quisquam impedit. Atque, quam. Perferendis, adipisci.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad eos iste blanditiis velit accusamus porro necessitatibus non dolorem ut maxime, corporis facere quibusdam optio eveniet quis laborum fuga sapiente ducimus.
+                        </p>
+                    </div>
+
+                    <div class="step2Div d-none">
+                        <div class="rows text-center mb-5">
+                            <div class="badge bg-dark mb-4">Process 2 of 8</div>
+                            <h3>Chose your business Category</h3>
+                        </div>
+                        <div class="row">
+                            <div class="card col-lg-4 col-md-4 col-sm-12 text-center border-1 rounded-3  p-4 py-5 border-1 businessSelector">
+                                <i class="bi bi-person-workspace fs-1"></i>
+                                <b>Sole propietorship</b>
+                            </div>
+                            <div class="card col-lg-4 col-md-4 col-sm-12 text-center border-1 rounded-3  p-4 py-5 border-1 businessSelector">
+                                <i class="bi bi-3-square-fill fs-1"></i>
+                                <b>Non-Governmental Organization</b>
+                            </div>
+                            <div class="card col-lg-4 col-md-4 col-sm-12 text-center border-1 rounded-3  p-4 py-5 border-1 businessSelector">
+                                <i class="bi bi-3-square-fill fs-1"></i>
+                                <b>Religious Organization</b>
+                            </div>
+                            <div class="card col-lg-4 col-md-4 col-sm-12 text-center border-1 rounded-3  p-4 py-5 border-1 businessSelector">
+                                <i class="bi bi-building-fill fs-1"></i>
+                                <b>Limited Liability Company</b>
+                            </div>
+                            <div class="card col-lg-4 col-md-4 col-sm-12 text-center border-1 rounded-3  p-4 py-5 border-1 businessSelector">
+                                <i class="bi bi-3-square-fill fs-1"></i>
+                                <b>Government Agency</b>
+                            </div>
+                            <div class="card col-lg-4 col-md-4 col-sm-12 text-center border-1 rounded-3  p-4 py-5 border-1 businessSelector">
+                                <i class="bi bi-3-square-fill fs-1"></i>
+                                <b>Others</b>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="step3Div d-none">
+                        <div class="rows text-center mb-5">
+                            <div class="badge bg-dark mb-4">Process 3 of 8</div>
+                            <h3>Business profile</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Registered business name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    <small id="helpId" class="text-muted">Help text</small>
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="" class="form-label">Business trading name</label>
+                                      <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                      <small id="helpId" class="text-muted">optional</small>
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="" class="form-label">Business Registration number</label>
+                                      <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                      <small id="helpId" class="text-muted">RC or RB Number</small>
+                                  </div>
+      
+                                  <div class="mb-3">
+                                      <label for="" class="form-label">State</label>
+                                      <select name="" id="" class="form-control" placeholder="" aria-describedby="helpId"></select>
+                                      <small id="helpId" class="text-muted">State of operation (Headquaters)</small>
+                                  </div>
+                            </div>
+                            
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Local government area</label>
+                                    <select name="" id="" class="form-control" placeholder="" aria-describedby="helpId"></select>
+                                    <small id="helpId" class="text-muted">Local Government of operation (Headquaters)</small>
+                                </div>
+    
+                                <div class="mb-3">
+                                    <label for="" class="form-label">About business</label>
+                                    <textarea name="" id="" class="form-control" placeholder="" aria-describedby="helpId"></textarea>
+                                    <small id="helpId" class="text-muted">RC or RB Number</small>
+                                </div>
+    
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Business Taxpayers Identification Number (optional) </label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                    <small id="helpId" class="text-muted">We will remmit your taxes with this information</small>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step4Div d-none">
+                        <div class="rows text-center mb-5">
+                            <div class="badge bg-dark mb-4">Process 4 of 8</div>
+                            <h3>Business Contacts</h3>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                              <label for="" class="form-label">Office address</label>
+                              <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                              <small id="helpId" class="text-muted"></small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Email address</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted">optional</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Phone number</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="" class="form-label">Business website (optional)</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="step5Div d-none">
+                        <div class="rows text-center mb-5">
+                            <div class="badge bg-dark mb-4">Process 5 of 8</div>
+                            <h3>Business Contacts</h3>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                              <label for="" class="form-label">Office address</label>
+                              <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                              <small id="helpId" class="text-muted"></small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Email address</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted">optional</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Phone number</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="" class="form-label">Business website (optional)</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="step6Div d-none">
+                        <div class="rows text-center mb-5">
+                            <div class="badge bg-dark mb-4">Process 6 of 8</div>
+                            <h3>Business Contacts</h3>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                              <label for="" class="form-label">Office address</label>
+                              <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                              <small id="helpId" class="text-muted"></small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Email address</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted">optional</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Phone number</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="" class="form-label">Business website (optional)</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="step7Div d-none">
+                        <div class="rows text-center mb-5">
+                            <div class="badge bg-dark mb-4">Process 7 of 8</div>
+                            <h3>Business Contacts</h3>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                              <label for="" class="form-label">Office address</label>
+                              <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                              <small id="helpId" class="text-muted"></small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Email address</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted">optional</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Phone number</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="" class="form-label">Business website (optional)</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="step8Div d-none">
+                        <div class="rows text-center mb-5">
+                            <div class="badge bg-dark mb-4">Process 8 of 8</div>
+                            <h3>Business Contacts</h3>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                              <label for="" class="form-label">Office address</label>
+                              <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                              <small id="helpId" class="text-muted"></small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Email address</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted">optional</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Phone number</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="" class="form-label">Business website (optional)</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                <small id="helpId" class="text-muted"></small>
+                            </div>
+
+
+                        </div>
+                       
+                    </div>
+
+                </section>
+                
+                
+            </div>
+        </div>
+    </section>
+    <section class="row border-2 shadow-sm bg-secondary position-fixed bottom-0 w-100 p-2 mt-5 mx-auto">
+        <div class="container">
+            <div class="step1Div row ">
+                <div class="col-lg-6 col-md-6 col-sm-6"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100 float-end" id="gotoDiv2">I agree</button>
+                </div>
+            </div>
+            <div class="step2Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo1"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="gotoDiv3">Next <i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+            <div class="step3Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo2"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="gotoDiv4">Next <i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+            <div class="step4Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo3"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="gotoDiv5">Next <i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+            <div class="step5Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo4"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="gotoDiv6">Next <i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+            <div class="step6Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo5"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="gotoDiv7">Next <i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+            <div class="step7Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo6"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="gotoDiv8">Next <i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+            <div class="step8Div row d-none">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100" id="backTo7"><i class="bi bi-arrow-left float-start"></i> Previous</button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <button class="btn btn-primary btn-lg w-100">Finish <i class="bi bi-arrow-right float-end"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $(function(){
+
+            /*Forward buttons*/
+           
+            $('#gotoDiv2').click(function(){
+                $('#step1Div').removeClass("active");
+                $('#step1DivIcon').addClass("text-success");
+                $('#step2Div').removeClass("disabled");
+                $('#step2Div').addClass("active");
+                $('.step2Div').removeClass("d-none");
+                $('.step1Div').addClass("d-none");
+            });
+
+            $('#gotoDiv3').click(function(){
+                $('#step2Div').removeClass("active");
+                $('#step2DivIcon').addClass("text-success");
+                $('#step3Div').removeClass("disabled");
+                $('#step3Div').addClass("active");
+                $('.step3Div').removeClass("d-none");
+                $('.step2Div').addClass("d-none");
+            });
+
+            $('#gotoDiv4').click(function(){
+                $('#step3Div').removeClass("active");
+                $('#step3DivIcon').addClass("text-success");
+                $('#step4Div').removeClass("disabled");
+                $('#step4Div').addClass("active");
+                $('.step4Div').removeClass("d-none");
+                $('.step3Div').addClass("d-none");
+            });
+
+            $('#gotoDiv5').click(function(){
+                $('#step4Div').removeClass("active");
+                $('#step4DivIcon').addClass("text-success");
+                $('#step5Div').removeClass("disabled");
+                $('#step5Div').addClass("active");
+                $('.step5Div').removeClass("d-none");
+                $('.step4Div').addClass("d-none");
+            });
+
+            $('#gotoDiv6').click(function(){
+                $('#step5Div').removeClass("active");
+                $('#step5DivIcon').addClass("text-success");
+                $('#step6Div').removeClass("disabled");
+                $('#step6Div').addClass("active");
+                $('.step6Div').removeClass("d-none");
+                $('.step5Div').addClass("d-none");
+            });
+
+            $('#gotoDiv7').click(function(){
+                $('#step6Div').removeClass("active");
+                $('#step6DivIcon').addClass("text-success");
+                $('#step7Div').removeClass("disabled");
+                $('#step7Div').addClass("active");
+                $('.step7Div').removeClass("d-none");
+                $('.step6Div').addClass("d-none");
+            });
+
+            $('#gotoDiv8').click(function(){
+                $('#step7Div').removeClass("active");
+                $('#step7DivIcon').addClass("text-success");
+                $('#step8Div').removeClass("disabled");
+                $('#step8Div').addClass("active");
+                $('.step8Div').removeClass("d-none");
+                $('.step7Div').addClass("d-none");
+            });
+
+
+            /**Backward buttons*/
+            $('#backTo1').click(function(){
+                $('#step1Div').addClass("active");
+                $('#step1DivIcon').removeClass("text-success");
+                $('#step2Div').addClass("disabled");
+                $('#step2Div').removeClass("active");
+                $('.step2Div').addClass("d-none");
+                $('.step1Div').removeClass("d-none");
+            });
+
+            $('#backTo2').click(function(){
+                $('#step2Div').addClass("active");
+                $('#step2DivIcon').removeClass("text-success");
+                $('#step3Div').addClass("disabled");
+                $('#step3Div').removeClass("active");
+                $('.step3Div').addClass("d-none");
+                $('.step2Div').removeClass("d-none");
+            });
+
+            $('#backTo3').click(function(){
+                $('#step3Div').addClass("active");
+                $('#step3DivIcon').removeClass("text-success");
+                $('#step4Div').addClass("disabled");
+                $('#step4Div').removeClass("active");
+                $('.step4Div').addClass("d-none");
+                $('.step3Div').removeClass("d-none");
+            });
+
+            ////
+            $('#backTo4').click(function(){
+                $('#step4Div').addClass("active");
+                $('#step4DivIcon').removeClass("text-success");
+                $('#step5Div').addClass("disabled");
+                $('#step5Div').removeClass("active");
+                $('.step5Div').addClass("d-none");
+                $('.step4Div').removeClass("d-none");
+            });
+
+            $('#backTo5').click(function(){
+                $('#step5Div').addClass("active");
+                $('#step5DivIcon').removeClass("text-success");
+                $('#step6Div').addClass("disabled");
+                $('#step6Div').removeClass("active");
+                $('.step6Div').addClass("d-none");
+                $('.step5Div').removeClass("d-none");
+            });
+
+            $('#backTo6').click(function(){
+                $('#step6Div').addClass("active");
+                $('#step6DivIcon').removeClass("text-success");
+                $('#step7Div').addClass("disabled");
+                $('#step7Div').removeClass("active");
+                $('.step7Div').addClass("d-none");
+                $('.step6Div').removeClass("d-none");
+            });
+
+            $('#backTo7').click(function(){
+                $('#step7Div').addClass("active");
+                $('#step7DivIcon').removeClass("text-success");
+                $('#step8Div').addClass("disabled");
+                $('#step8Div').removeClass("active");
+                $('.step8Div').addClass("d-none");
+                $('.step7Div').removeClass("d-none");
+            });
+
+            $('.businessSelector').click(function(){
+                $('.businessSelector').removeClass("active");
+                $(this).addClass("active");
+            })
+           
+
+        });
+    </script>
+        
+    
+    
+
+    
+    
+</body>
+</html>

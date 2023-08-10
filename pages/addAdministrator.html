@@ -1,0 +1,293 @@
+
+        <div class="scene_element scene_element--fadeinup">
+            <div class="container border-1">
+                <div class="heading mb-5">
+                    <h1 class="fw-bolder text-center">
+                        <a href="#" url="profile.html" class="link text-decoration-none text-dark float-start">
+                            <i class="bi bi-arrow-left float-lg-start"></i>
+                        </a>
+                        
+                        Add new Administrator
+                    </h1>
+                </div>
+                
+                <div class="row">
+                   
+                    <div class="col-lg-12 col-md-12 col-sm-12" >
+                        <table id="datatable" class="table table-hover" data-toggle="table"
+                        data-height="500"
+                        data-show-columns="true"
+                        data-show-columns-toggle-all="true"
+                        data-show-pagination-switch="true"
+                        data-show-toggle="true"
+                        data-search="true"
+                        data-show-columns="true"
+                        data-buttons-align="left"
+                        
+                        data-buttons="buttons">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Process</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                
+
+
+            </div>
+        </div>
+    </section>
+
+    <section class="addAdministrator top-0 bottom-0 w-100 mx-auto position-fixed d-none" style="background: rgba(0,0,0,0.5); z-index: +10; left:0;  right:0;">
+        <div class="row">
+            
+            <div class="col-lg-6 col-md-8 col-sm-12 card mt-5 mx-auto p-5 bottom-0">
+                <div class="card-header fs-3 text-center bg-transparent">
+                    <i class="bi bi-arrow-left float-start closeAddAdministrator"></i>
+                    <span class="employeeName">Name goes here</span>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="" class="form-label">What Administartor right best describes <span class="employeeName"></span></label>
+                        <select class="form-select form-select-lg" name="" id="selectEmployeeRole">
+                            <option selected>Select one</option>
+                            <option value="accountant">Accountant</option>
+                            <option value="human_resource">Human Resource manager</option>
+                            <option value="master_admin">Master administrator</option>
+                        </select>
+                    </div>
+
+
+                    <div class="mb-3 mt-3 rights d-none" id="human_resource">
+                        <h5>Human resource</h5>
+                        <div class="my-3 border-top w-100 bg-transparent">
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="create_employees">Create employees</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 mt-3 rights d-none" id="accountant">
+                        <h5>Accountant</h5>
+                        <div class="my-3 border-top w-100 bg-transparent">
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="pay_salaries">Pay salaries</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="manage_employees_commission">Manage employees commission</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="manage_taxes">Manage taxes</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="manage_pension">Manage pension</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="manage_health_insurance">Manage Health Insurance</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="mortgage_services">Manage mortgae services</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="cooperative_contributions">Manage coperatives contributions</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 mt-3 rights d-none" id="master_admin">
+                        <h5>Master Administrator</h5>
+                        <div class="my-3 border-top w-100 bg-transparent">
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="create_employees">Create employees</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="pay_salaries">Pay salaries</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="manage_employees_commission">Manage employees commission</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="manage_business_profile">Manage business profile</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="manage_taxes">Manage taxes</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="manage_pension">Manage pension</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="manage_health_insurance">Manage Health Insurance</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="mortgage_services">Manage mortgae services</span>
+                            <span class="btn btn-outline-primary mx-2 mt-3 department" menu_duty="cooperative_contributions">Manage coperatives contributions</span>
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="card-footer bg-transparent">
+                    <button class="btn btn-primary w-75 ma-auto btn-lg" onclick="activateEmployee()">Activate</button>
+                </div>
+            </div>
+        
+        </div>
+    </section>
+   
+    <script>
+
+        function activateEmployee(){
+            var employeeId = localStorage.getItem("administratorEmployeeId");
+            
+            var a = [];
+            //fetch all checked items
+            $('.departmentActive').each(function(){
+                var arrayItem = $(this).attr("menu_duty");
+                a.push(arrayItem);
+            });
+
+            var obj = {
+                "employeeId":employeeId,
+                "rights": removeDuplicates(a)
+            }
+            
+            $.ajax({
+                type: "GET",
+                url: "api/addAdministrator.json",
+                data: obj,
+                dataType: "json",
+                success: function (data) {
+
+                    var result = data.result;
+                    if(result == "success"){
+                        $('.addAdministrator').addClass("d-none");
+                    }else{
+                        errorMessage("Connection failed, please try again");
+                    }
+
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Connection failed, please try again");
+                }
+            });
+        }
+
+        function removeDuplicates(arr){
+            return arr.filter((item, index) => arr.indexOf(item) === index);
+        
+        }
+
+        $(function(){
+            $('.dynamic').load("menu.html");
+
+
+            $('.closeAddAdministrator').click(function(){
+                localStorage.setItem("administratorEmployeeId","");
+                $('.addAdministrator').addClass("d-none");
+            });
+            
+
+            function fetchEmployees(){
+
+                var businessToken = localStorage.getItem("businessToken");
+                var userToken = localStorage.getItem("userToken");
+
+                var obj = {
+                    "businessToken":businessToken,
+                    "userToken":userToken
+                }
+            
+                $.ajax({
+                    type: "POST",
+                    url: "https://staging.apws.spacepen.tech/fetchBusinessEmployee.php",
+                    data: JSON.stringify(obj),
+                    dataType: "json",
+                    success: function (data2) {
+                    
+                        var data = data2.success;
+
+                        if(data !=""){
+                            $('#datatable tbody').html('');
+                            for(i in data){
+                                var obj = JSON.stringify(data[i]);
+                                var num = Number(i)+(1);
+                                // var action = "";
+                                // if(data[i].rights == "1"){
+                                //     action = "<span class='badge bg-success'>Admin</span>";
+                                // }else{
+                                //     action = "";
+                                // }
+
+                                var result = '<tr>';
+                                            result += '<td>'+num+'</td>';
+                                            result += '<td id="employeeName_'+num+'">'+data[i].employeeFirstname+' '+data[i].employeeLastname+'</td>';
+                                            result += '<td id="employeeDept_'+num+'">'+data[i].employeeDepartment+'</td>';
+                                            result += '<td id="employeeRole_'+num+'">'+data[i].employeeRole+'</td>';
+                                            // result += '<td id="rights_'+num+'">'+action+'</td>';
+                                            result += '<td id="rights_'+num+'"></td>';
+                                            result += '<td><button id="process_'+num+'" employeeId="'+num+'" num = "'+num+'" class="btn btn-outline-primary openAddAdministrator">Process</button></td>';
+                                        result += '</tr>';
+
+                                $('#datatable tbody').append(result);
+
+                            }
+
+                            var $table = $('#datatable');
+                            $table.bootstrapTable();
+
+                            $('.openAddAdministrator').click(function(){
+                                var id = $(this).attr("num");
+
+                                var employeeName = $('#employeeName_'+id).html();
+                                var employeeDept = $('#employeeDept_'+id).html(); 
+                                var employeeRole = $('#employeeRole_'+id).html();
+                                var employeeId = $(this).attr("employeeId");
+
+                                localStorage.setItem("administratorEmployeeId",employeeId);
+                                $('.employeeName').html(employeeName);
+                                $('.addAdministrator').removeClass("d-none");
+
+                            });
+
+                            
+                                    
+                        }
+
+                        // $('#datatable').DataTable({
+                        //     scrollX:true,
+                        //     paging: false,
+                        //     prcessing: true,
+                        //     searching: false,
+                        //     scrollY: 500
+                        // });
+
+                        
+                        
+                        
+                    },
+                    error: function(data){
+                        
+                        var result = data.responseText;
+                        console.log(result);
+                        errorMessage("Connection failed, please try again");
+                    }
+                });
+
+                }
+
+
+                fetchEmployees();
+
+            
+
+           
+
+            $('#selectEmployeeRole').change(function(){
+                var div = $('#selectEmployeeRole').val();
+                $('.rights').addClass("d-none");
+                $('#'+div).removeClass("d-none");
+            });
+
+            $('.link').click(function(){
+                var url = $(this).attr("url");
+                $('#content').load("pages/"+url);
+            }) ;
+
+            $('.department').click(function(){
+                $(this).removeClass('btn-outline-primary');
+                $(this).removeClass('department');
+                $(this).addClass('btn-primary');
+                $(this).addClass('departmentActive');
+                
+            });
+
+            $('.departmentActive').click(function(){
+                $(this).removeClass('btn-primary');
+                $(this).removeClass('departmentActive');
+                $(this).addClass('btn-outline-primary');
+                $(this).addClass('department');
+                
+            });
+
+
+        });
+    </script>

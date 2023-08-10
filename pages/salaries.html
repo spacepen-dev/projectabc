@@ -1,0 +1,196 @@
+
+
+
+        <div class="scene_element scene_element--fadeinright">
+            <div class="container border-1">
+                <div class="heading">
+                    <h1 class="fw-bolder text-center">Salaries</h1>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <span url="paySalaries.html" class="link btn btn-primary w-100 mb-2 payEmployeesHanger">Pay salaries</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card py-2 col-12">
+                        <div class="card-header bg-transparent">
+                            <b>Salaries history</b>
+                        </div>
+                        <div class="card-body border-0 bg-transparent">
+                            <table id="datatable" class="table table-hover" data-toggle="table"
+                            data-height="500"
+                            data-show-columns="true"
+                            data-show-columns-toggle-all="true"
+                            data-show-pagination-switch="true"
+                            data-show-toggle="true"
+                            data-search="true"
+                            data-show-columns="true"
+                            data-buttons-align="left"
+                            
+                            data-buttons="buttons">
+                                <thead>
+                                    <tr class="rounded-top">
+                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Reference</th>
+                                        <th>Month, Year</th>
+                                        <th>Employees</th>
+                                        <th>Amount</th>
+                                        <!-- <th>Tax</th>
+                                        <th>Pension</th>
+                                        <th>Insurance</th> -->
+                                        <th>Status</th>
+                                        <th>Schedule</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                           
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer border-0 bg-transparent"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+    
+
+    <script>
+
+
+        function formatDateTime(dateString){
+            
+            const dateObj = new Date(dateString);
+
+            // Format the date
+            const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' };
+            const formattedDate = dateObj.toLocaleDateString('en-US', options);
+
+            // Convert the hour to 12-hour format
+            const hour = dateObj.getHours() % 12;
+            const period = dateObj.getHours() >= 12 ? 'pm' : 'am';
+            const formattedTime = `${hour}:${String(dateObj.getMinutes()).padStart(2, '0')}${period}`;
+
+            // Create the final formatted date and time string
+            const finalFormattedDate = `${formattedDate} at ${formattedTime}`;
+
+            return finalFormattedDate; // Output: 15th June, 2023 at 9:29pm
+        }
+        
+        function fetchEmployees(){
+
+            loadingStart();
+
+            var businessToken = localStorage.getItem("businessToken");
+            var userToken = localStorage.getItem("userToken");
+
+            var obj = {
+                "businessToken":businessToken,
+                "userToken":userToken
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/fetchSalarySummary.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                success: function (data2) {
+                
+                    var data = data2.success;
+
+                    if(data !=""){
+                        $('#datatable tbody').html('');
+                        for(i in data){
+                            var obj = JSON.stringify(data[i]);
+                            var num = Number(i)+(1);
+                            var status = "";
+                            if(data[i].transaction_status == "Completed"){
+                                status = "<span class='badge alert-success'>Complete</span>";
+                            }
+
+                            if(data[i].transaction_status == "Pending"){
+                                status = "<span class='badge alert-warning'>Pending</span>";
+                            }
+
+                            if(data[i].transaction_status == "Failed"){
+                                status = "<span class='badge alert-danger'>Failed</span>";
+                            }
+
+                            var result = '<tr>';
+                                        result += '<td>'+num+'</td>';
+                                        result += '<td>'+formatDateTime(data[i].transaction_date)+'</td>';
+                                        result += '<td>'+data[i].transaction_id+'</td>';
+                                        result += '<td>January, 2023</td>';
+                                        result += '<td>'+data[i].no_of_employee+'</td>';
+                                        result += '<td>'+Number(data[i].total_salary).toLocaleString()+'</td>';
+                                        
+                                        // result += '<td id="rights_'+num+'">'+action+'</td>';
+                                        result += '<td>'+status+'</td>';
+                                        result += '<td><span id="process_'+num+'" transactionId="'+data[i].transaction_id+'" obj = "'+btoa(obj)+'" employeeId="'+num+'" num = "'+num+'" class="badge alert-dark openSchedule cursor-pointer">View schedule</span></td>';
+                                    result += '</tr>';
+
+                            $('#datatable tbody').append(result);
+
+                        }
+
+                        var $table = $('#datatable');
+                        $table.bootstrapTable();
+
+                        $('.openSchedule').click(function(){
+                            var transactionId = $(this).attr("transactionId");
+                            var obj = atob($(this).attr("obj"));
+
+                            localStorage.setItem("salaryScheduleTransaction",obj);
+                            
+                            var url = 'salarySchedule.html';
+                            $('#content').load("pages/"+url);
+
+                        });
+
+                        loadingStop();
+                                
+                    }
+
+                    // $('#datatable').DataTable({
+                    //     scrollX:true,
+                    //     paging: false,
+                    //     prcessing: true,
+                    //     searching: false,
+                    //     scrollY: 500
+                    // });
+
+                    
+                    
+                    
+                },
+                error: function(data){
+                    
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Connection failed, please try again");
+                    loadingStop();
+                }
+            });
+
+        }
+
+
+            fetchEmployees();
+
+        
+        $(function(){
+            $('.link').click(function(){
+                var url = $(this).attr("url");
+                $('#content').load("pages/"+url);
+            }) ;
+        });
+        
+        
+    </script>

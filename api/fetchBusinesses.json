@@ -1,0 +1,46 @@
+{
+    "Result":[
+        {
+            "business":"Aimienpay",
+            "employees": "50",
+            "businessStatus":"verified",
+            "businessToken":"ABCDEDGH",
+            "businessEmail":"emmanuel@aimienpay.com",
+            "businessLogo":""
+        },
+        {
+            "business":"Spacepen Technologies",
+            "employees": "17",
+            "businessStatus":"Unverified",
+            "businessToken":"ABCDEDGHIJKL",
+            "businessEmail":"mails@spacepen.com",
+            "businessLogo":""
+        },
+        {
+            "business":"Wisdom Concept Tutors",
+            "employees": "250",
+            "businessStatus":"verified",
+            "businessToken":"ABCDEDGHWXYZ",
+            "businessEmail":"info@wct.com",
+            "businessLogo":""
+        },
+        {
+            "business":"Payunifier",
+            "employees": "230",
+            "businessStatus":"verified",
+            "businessToken":"ABCDEDGHIJ",
+            "businessEmail":"info@payunifier.com",
+            "businessLogo":""
+        },
+        {
+            "business":"Harmonie Labs",
+            "employees": "200",
+            "businessStatus":"verified",
+            "businessToken":"ABCD",
+            "businessEmail":"mails@harmonielabs.xyz",
+            "businessLogo":""
+        }
+
+
+    ]
+}

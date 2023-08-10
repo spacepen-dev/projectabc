@@ -1,0 +1,178 @@
+{
+    "Data":[
+        {
+            "walletAmount":"20000.45",
+            "employeesCount":"320",
+            "transactionsCount":"50"
+        }
+    ],
+
+    "CompanyBankingInformation":[
+        {
+            "accountName":"Business",
+            "accountNumber":"1130165561",
+            "bank":"Providus"
+        }
+    ],
+
+    "CompanyBankingFundingInformation":[
+        {
+            "accountName":"Business name",
+            "accountNumber":"1130165561",
+            "bank":"First bank"
+        },
+        {
+            "accountName":"Business name",
+            "accountNumber":"1130165561",
+            "bank":"Sterling bank"
+        },
+        {
+            "accountName":"Business name",
+            "accountNumber":"1130165561",
+            "bank":"Fidelity"
+        },
+        {
+            "accountName":"Business name",
+            "accountNumber":"1130165561",
+            "bank":"Fidelity"
+        },
+        {
+            "accountName":"Business name",
+            "accountNumber":"1130165561",
+            "bank":"Fidelity"
+        }
+    ],
+
+    "TransactionHistory":[
+        {
+            "transactionType":"Wallet Topup",
+            "transactionAmount":"300000",
+            "transactionReference":"AP_REF_12345",
+            "transactionStatus":"approved",
+            "transactionDate":"12th January 2023"
+        },
+        {
+            "transactionType":"Wallet Topup",
+            "transactionAmount":"300000",
+            "transactionReference":"AP_REF_12346",
+            "transactionStatus":"approved",
+            "transactionDate":"12th January 2023"
+        },
+        {
+            "transactionType":"Wallet Topup",
+            "transactionAmount":"300000",
+            "transactionReference":"AP_REF_12347",
+            "transactionStatus":"approved",
+            "transactionDate":"12th January 2023"
+        },
+        {
+            "transactionType":"Wallet Topup",
+            "transactionAmount":"300000",
+            "transactionReference":"AP_REF_12348",
+            "transactionStatus":"fraud",
+            "transactionDate":"12th January 2023"
+        }
+        
+    ],
+
+    "SalaryHistory":[
+        {
+            "transactionReference":"AP_REF_12349",
+            "transactionDate":"12th January 2023",
+            "durationOfPayment":"January 2023",
+            "transactionAmount":"300000",
+            "numberofEmployees":"300",
+            "tax":"2000",
+            "pension":"20000",
+            "hmo":"200",
+            "transactionStatus":"completed"
+
+        },
+        {
+            "transactionReference":"AP_REF_12350",
+            "transactionDate":"12th January 2023",
+            "durationOfPayment":"January 2023",
+            "transactionAmount":"300000",
+            "numberofEmployees":"300",
+            "tax":"2000",
+            "pension":"20000",
+            "hmo":"200",
+            "transactionStatus":"completed"
+        },
+        {
+            "transactionReference":"AP_REF_12351",
+            "transactionDate":"12th January 2023",
+            "durationOfPayment":"January 2023",
+            "transactionAmount":"300000",
+            "numberofEmployees":"300",
+            "tax":"2000",
+            "pension":"20000",
+            "hmo":"200",
+            "transactionStatus":"Ongoing"
+        },
+        {
+            "transactionReference":"AP_REF_12352",
+            "transactionDate":"12th January 2023",
+            "durationOfPayment":"January 2023",
+            "transactionAmount":"300000",
+            "numberofEmployees":"300",
+            "tax":"2000",
+            "pension":"20000",
+            "hmo":"200",
+            "transactionStatus":"Ongoing"
+        },
+        {
+            "transactionReference":"AP_REF_12353",
+            "transactionDate":"12th January 2023",
+            "durationOfPayment":"January 2023",
+            "transactionAmount":"300000",
+            "numberofEmployees":"300",
+            "tax":"2000",
+            "pension":"20000",
+            "hmo":"200",
+            "transactionStatus":"failed"
+        }
+    ],
+
+    "TaxHistory":[
+        {
+            "transactionReference":"AP_REF_12354",
+            "transactionDate":"12th January 2023",
+            "transactionDuration":"January, 2023",
+            "transactionAmount":"300000",
+            "numberofEmployees":"200",
+            "state":"ONDO",
+            "transactionStatus":"completed"
+        },
+        {
+            "transactionReference":"AP_REF_12355",
+            "transactionDate":"12th January 2023",
+            "transactionDuration":"January, 2023",
+            "transactionAmount":"300000",
+            "numberofEmployees":"200",
+            "state":"ONDO",
+            "transactionStatus":"completed"
+        },
+        {
+            "transactionReference":"AP_REF_12356",
+            "transactionDate":"12th January 2023",
+            "transactionDuration":"January, 2023",
+            "transactionAmount":"300000",
+            "numberofEmployees":"200",
+            "state":"ONDO",
+            "transactionStatus":"completed"
+        },
+        {
+            "transactionReference":"AP_REF_12357",
+            "transactionDate":"12th January 2023",
+            "transactionDuration":"January, 2023",
+            "transactionAmount":"300000",
+            "numberofEmployees":"200",
+            "state":"ONDO",
+            "transactionStatus":"ongoing"
+        }
+
+    ]
+
+    
+}

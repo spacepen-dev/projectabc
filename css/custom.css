@@ -1,0 +1,39 @@
+.businessSelector:hover{
+    background: #eae6fa;
+    cursor: pointer;
+}
+
+.businessSelector.active{
+    background: #eae6fa;
+    cursor: pointer;
+}
+
+thead{
+    background: #eae6fa;
+    white-space:nowrap;
+}
+
+thead th{
+    width: 100px;
+    border-bottom: 1px solid #ddd;
+    text-overflow: ellipsis;
+}
+
+thead tr{
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+}
+
+tbody{
+    white-space:nowrap;
+}
+
+tbody td{
+    width: 100px;
+    border-bottom: 1px solid #ddd;
+    text-overflow: ellipsis;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}

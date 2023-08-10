@@ -1,0 +1,475 @@
+
+<div class="scene_element scene_element--fadeinup">
+    <div class="container border-1">
+        <div class="heading mb-5">
+            <h1 class="fw-bolder text-center">
+                <span url="employees.html" class="link text-decoration-none text-dark float-start">
+                    <i class="bi bi-arrow-left float-lg-start"></i>
+                </span>
+                
+                <span class="employeeName"></span>
+            </h1>
+        </div>
+        
+
+        <section class="addEmployeesSection">
+            <div class="row w-100  mx-auto">
+               
+                <div class="row mb-3">
+                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <a href="#" class="btn btn-primary float-end link" url="edit_eployee.html"><i class="bi bi-pencil"></i> Edit employee</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 card">
+                    
+                    <div class="card-body h-75 overflow-auto">
+                        <div class="row">
+                            
+                            <ul class="nav nav-tabs nav-justified">
+                                <li class="nav-item">
+                                  <a class="nav-link active" tab-content="employee-profile" href="#">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" tab-content="employee-work" href="#">Work</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" tab-content="employee-pension" href="#">Pension</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" tab-content="employee-insurance" href="#">Insurance</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" tab-content="employee-salary" href="#">Salary</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" tab-content="employee-accounts" href="#">Accounts</a>
+                                </li>
+                                
+                            </ul>
+                            <div class="tab-contents w-100 py-3 overflow-auto">
+                                <div class="row tab-pane" id="employee-profile">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Basic information</div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                        <div style="width: 300px; min-height: 300px;" class="card border-1">
+                                            <div class="card-body bg-secondary" id="imagePreview">
+
+                                            </div>
+                                            <input type="file" class="d-none" id="file1">
+                                        </div>
+
+                                        
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Firstname</label>
+                                          <input type="text" name="" id="firstname" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Middlename</label>
+                                            <input type="text" id="middlename" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Lastname</label>
+                                            <input type="text" name="" id="lastname" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Email</label>
+                                            <input type="text" name="" id="email" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Phone</label>
+                                            <input type="text" name="" id="phone" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                                                            
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Gender</label>
+                                          <select id="gender" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                          </select>
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Date of birth</label>
+                                            <input type="date" name="" id="dob" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">State of Origin</label>
+                                            <select class="form-control" name="" id="selectState" aria-describedby="helpId" readonly>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Local Government Area of Origin</label>
+                                            <select id="selectLGA" class="form-control disabled" readonly></select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Marital status</label>
+                                            <select id="maritalStatus" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            </select>
+                                        </div>
+                                                                  
+                                    </div>
+                                    
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-work">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Work information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Department</label>
+                                          <select id="department" class="form-control disabled" placeholder="" aria-describedby="helpId" readonly>
+
+                                            </select>
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Role</label>
+                                            <input type="text" name="" id="role" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Work Email</label>
+                                            <input type="text" name="" id="workEmail" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+        
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Work Phone</label>
+                                            <input type="text" name="" id="workPhone" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            
+                                        </div>
+                                                                           
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Employment date</label>
+                                            <input type="text" name="" id="employmentDate" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">State of Assignment</label>
+                                          <select class="form-control disabled" name="" id="state_of_assignment" aria-describedby="helpId" readonly></select>
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Employee ID Number</label>
+                                            <input type="text" name="" id="employeeIdNumber" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            
+                                        </div>
+        
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Employee Tax Identification Number</label>
+                                            <input type="text" name="" id="employeeTIN" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                                                            
+                                    </div>
+                                    
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-salary">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Salary information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Gross Salary (Monthly)</label>
+                                          <input type="text" name="" id="grossMonthly" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                          
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Net Salary (Monthly)</label>
+                                            <input type="text" name="" id="netMonthly" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Tax Relief (Monthly)</label>
+                                            <input type="text" name="" id="monthlyRelief" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Income Tax (Monthly)</label>
+                                            <input type="text" name="" id="monthlyTax" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Pension (Monthly)</label>
+                                            <input type="text" name="" id="monthlyPension" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Health Insurance (Monthly)</label>
+                                            <input type="text" name="" id="healthMonthly" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+        
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Gross Salary (Annual)</label>
+                                            <input type="text" name="" id="grossAnnual" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Net Salary (Annual)</label>
+                                            <input type="text" name="" id="netAnnual" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Tax Relief (Annual)</label>
+                                            <input type="text" name="" id="annualRelief" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Income Tax (Annual)</label>
+                                            <input type="text" name="" id="annualTax" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Pension (Annual)</label>
+                                            <input type="text" name="" id="annualPension" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Health Insurance (Annual)</label>
+                                            <input type="text" name="" id="healthAnnual" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                        </div>
+                                
+                                    </div>
+                                    
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-pension">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Pension information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <p>
+                                                The contributory pension scheme requires employees and employers to contribute to a retirement fund. It aims to provide a reliable income after retirement by deducting a percentage of an employee's salary and matching contributions from the employer, ensuring long-term financial security.
+                                         
+                                            </p>
+                                            <p>
+                                                You can choose if your employee if on existing pension scheme, no pension scheme at all or you want to enroll your employee for a new pension scheme
+                                            </p>
+                                            
+                                        </div>
+                                        
+                                                                                               
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            
+                                            <div class="row mx-4">
+
+                                                <style>
+                                                    .active{
+                                                        border: 3px solid #000;
+                                                    }
+
+                                                    .tab-content{
+                                                        display:none;
+                                                    }
+
+                                                    .tab-button{
+                                                        text-align: center;
+                                                        cursor: pointer;
+                                                    }
+
+                                                </style>
+                                                
+                                                <div class="row">
+                                                    <div class="tab row mb-4">
+                                                      <div class="tab-button col-lg-6 col-md-6 col-sm-6 bg-transparent border-primary p-2 rounded active" id="clearPension" onclick="changeTab(event, 'tab1')">No pension</div>
+                                                      <div class="tab-button col-lg-6 col-md-6 col-sm-6 bg-transparent border-primary p-2 rounded" id="setPension" onclick="changeTab(event, 'tab2')">Existing pension</div>
+                                                    </div>
+                                                    <div id="tab1" class="tab-content">
+                                                      Employee is not on any pension scheme
+                                                    </div>
+                                                    <div id="tab2" class="tab-content">
+                                                        
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Pension company</label>
+                                                            <select id="pensionCompany" class="form-control disabled" placeholder="" aria-describedby="helpId" readonly>
+                                                               
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Employee code</label>
+                                                            <input type="text" name="" id="employeePensionCode" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Percentage of salary for Pension</label>
+                                                            <input type="text" name="" id="pensionRate" class="form-control" placeholder="" aria-describedby="helpId" value="0" readonly>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                                             
+                                            </div>
+                                            
+                                        </div>
+                                                                            
+                                    </div>
+                                    
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-insurance">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Insurance information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <p>
+                                                The contributory pension scheme requires employees and employers to contribute to a retirement fund. It aims to provide a reliable income after retirement by deducting a percentage of an employee's salary and matching contributions from the employer, ensuring long-term financial security.
+                                         
+                                            </p>
+                                            <p>
+                                                You can choose if your employee if on existing pension scheme, no pension scheme at all or you want to enroll your employee for a new pension scheme
+                                            </p>
+                                            
+                                        </div>
+                                        
+                                                                                               
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            
+                                            <div class="row mx-4">
+
+                                                
+                                                
+                                                <div class="row">
+                                                    <div class="tab row mb-4">
+                                                      <div class="tab-button col-lg-6 col-md-6 col-sm-6 bg-transparent border-primary p-2 rounded active" id="clearInsurance" onclick="changeTab(event, 'tab3')">No HMO</div>
+                                                      <div class="tab-button col-lg-6 col-md-6 col-sm-6 bg-transparent border-primary p-2 rounded" id="setInsurance" onclick="changeTab(event, 'tab4')">Existing HMO</div>
+                                                    </div>
+                                                    <div id="tab3" class="tab-content">
+                                                      Employee is not on any HMO
+                                                    </div>
+                                                    <div id="tab4" class="tab-content">
+                                                        
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Health Management Organization</label>
+                                                            <select id="hmo" class="form-control disabled" readonly>
+                                                                
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Employee code</label>
+                                                            <input type="text" name="" id="employeeHmoCode" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Percentage of salary for HMO</label>
+                                                            <input type="text" name="" id="healthRate" class="form-control" placeholder="" aria-describedby="helpId" value="0" readonly>
+                                                        </div>
+
+                                                        
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                                             
+                                            </div>
+                                            
+                                        </div>
+                                                                            
+                                    </div>
+                                    
+                                </div>
+                                <div class="row tab-pane d-none" id="employee-accounts">
+                                    <div class="col-12 my-3 fs-5 fw-bold">Bank information</div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                          <label for="" class="form-label">Bank name</label>
+                                          <input type="text" id="bank" class="form-control" placeholder="Search for bank" readonly>
+                                            
+                                            <input type="hidden" id="bankCode" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Account number</label>
+                                            <input type="text" name="" id="accountNumber" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Account name</label>
+                                            <input type="text" name="" id="accountName" class="form-control" placeholder="" aria-describedby="helpId" readonly>
+                                            
+                                        </div>
+                                                                            
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        
+                                        
+                                                                            
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+   
+<script>
+
+    // fetch employee details from local storage
+
+    var obj = JSON.parse(localStorage.getItem("editEmployee"));
+    $('.employeeName').html(obj.employeeFirstname+' '+obj.employeeMiddleName+' '+obj.employeeLastname);
+    $('#file1').attr("idValue",obj.employeeToken);
+    $('#firstname').val(obj.employeeFirstname);
+    $('#middlename').val(obj.employeeMiddleName);
+    $('#lastname').val(obj.employeeLastname);
+    $('#email').val(obj.employeeEmail);
+    $('#phone').val(obj.employeePhoneNumber);
+    $('#gender').val(obj.employeeGender);
+    $('#dob').val(obj.employeeDOB);
+    $('#selectState').val(obj.employeeState);
+    $('#selectLGA').val(obj.employeeLGA);
+    $('#maritalStatus').html('<option>'+obj.employeeMartialStatus+'</option>');
+    $('#department').html('<option>'+obj.employeeDepartment+'</option>');
+    $('#role').val(obj.employeeRole);
+    $('#workEmail').val(obj.employeeWorkMail);
+    $('#workPhone').val(obj.employeeWorkPhone);
+    $('#employmentDate').val(obj.employmentDate);
+    $('#state_of_assignment').html('<option>'+obj.state_of_assignment+'</option>');
+    $('#employeeIdNumber').val(obj.employee_idNumber);
+    $('#employeeTIN').val(obj.employeeTin);
+    $('#grossMonthly').val(obj.employeeMGS);
+    $('#grossAnnual').val(obj.employeeAGS);
+    // $('#netMonthly').val(obj.);
+    $('#monthlyRelief').val(obj.employeeMonthlyRelief);
+    $('#monthlyTax').val(obj.employeeMonthlyTax);
+    $('#monthlyPension').val(obj.employeeMonthlyPension);
+    $('#healthMonthly').val(obj.employeeHealthMonthly);
+    $('#annualRelief').val(obj.employeeAnnualRelief);
+    $('#annualTax').val(obj.employeeAnnualTax);
+    $('#annualPension').val(obj.employeeAnnualPension);
+    $('#healthAnnual').val(obj.employeeHealthAnnual);
+    $('#pensionCompany').html('<option>'+obj.employeePensionCompany+'</option>');
+    $('#employeePensionCode').val(obj.employeePensionCode);
+    $('#pensionRate').val(obj.employeePensionRate);
+    $('#hmo').html('<option>'+obj.employeeHMO+'</option>');
+    $('#healthRate').val(obj.employeeHealthRate);
+    $('#employeeHmoCode').val(obj.employeeHealthCode);
+    $('#bankCode').val(obj.employeeBankCode);
+    $('#accountName').val(obj.employeeBankAccountName);
+    $('#accountNumber').val(obj.employeeBankAccountNumber);
+    $('#bank').val(obj.employeeBankName);
+    $('#imagePreview').html('<center><img src="'+obj.employeeImage+'" class="img-fluid" ></center>');
+
+
+    $('.nav-link').click(function(){
+        var navTab = $(this).attr("tab-content");
+        $('.nav-link').removeClass("active");
+        $('.nav-link').removeClass("active");
+        $('.tab-pane').addClass("d-none");
+        $('#'+navTab).removeClass("d-none");
+        $(this).addClass("active");
+    });
+
+    $('.link').click(function(){
+        var url = $(this).attr("url");
+        $('#content').load("pages/"+url);
+    }) ;
+    
+</script>
+
+  

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/keyframes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pageTransitions.css">
+    <link rel="stylesheet" href="css/bs5.css">
+    <link rel="stylesheet" href="css/datatable.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="js/bs5.js"></script>
+    <script src="js/jq.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.10.1/tsparticles.confetti.bundle.min.js"></script>
+</head>
+<body class="index m-scene" id="main">
+    <section class="alert d-none row top-0 position-fixed w-100 p-3 text-center text-dark fw-bold mx-auto output" style="z-index: +5000"></section>
+
+    <section class="d-none loadingDiv top-0 bottom-0 w-100 position-fixed text-center" style="background: rgba(255,255,255,0.5); z-index: +1000; backdrop-filter: blur(5px);">
+        <div class="justify-content-center align-items-center top-50 position-absolute mx-auto w-100 text-center">
+    
+        </div>
+    </section>
+    <section id="div1">
+        <div class="container scene_element scene_element--fadeinright-wide">
+            <div class="row mt-5">
+                
+                <div class="col-lg-6 col-md-6 col-sm-12 mx-auto my-auto mt-5">
+                    <div class="card border-1 p-2 rounded py-5">
+                        <div class="card-header p-4 border-0 bg-transparent row">
+                            <div class="col-4 mx-auto border-rounded">
+                                <center>
+                                    <img src="" id="businessLogo" style="width: 150px;">
+                                </center>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h1>Congratulations!</h1>
+                            <div class="mt-5 fs-4 text-center">
+                                <span id="newBusinessName"></span> is now on Aimienpay.
+
+
+                            </div>
+
+                            
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <button class="btn btn-primary btn-lg w-100" onclick="proceed()" type="button">Proceed</button>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="div2" class="d-none">
+        <div class="container scene_element scene_element--fadeinright-wide">
+            <div class="row mt-5">
+                
+                <div class="col-lg-12 col-md-12 col-sm-12 ">
+                    <div class="card border-1 p-2 rounded py-5">
+                        <div class="card-header p-2 border-0 bg-transparent fs-1 text-center">
+                            Setup departments in your business
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="mb-3 row">
+                                <div class="col-lg-10 col-md-8 col-sm-12">
+                                   
+                                    <input type="text" class="form-control" id="department" aria-describedby="helpId" placeholder="Input a custom department">
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-12">
+                                    <button id="addDepartment" type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i> Add to list</button>
+                                </div>
+                            </div>
+                            
+                            <div class="my-3 border-top w-100 bg-transparent" id="departmentList">
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Administrative</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Engineering</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Teaching</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Non-Teaching</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Security</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Sales</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Operations</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Marketing</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Revenue</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Medical</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Paramedical</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Finance</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Human resource</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Purchase</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Quality Control</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Academic</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Non Academic</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Production</span>
+                                <span class="btn btn-outline-primary mx-2 mt-3 department">Transportation</span>
+                            </div>
+
+                            
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <button class="btn btn-primary btn-lg w-100" onclick="finishSetup()" type="button">Finish Setup</button>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+        var newBizName = localStorage.getItem("newBusinessName");
+        var newBizLogo = localStorage.getItem("newBusinessLogo");
+
+        $('#newBusinessName').html(newBizName);
+
+        if(newBizLogo == ""){
+            var logo = "images/logo.svg";
+        }else{
+            var logo = newBizLogo
+        }
+
+        $('#businessLogo').attr("src", logo);
+
+
+        const duration = 15 * 1000,
+        animationEnd = Date.now() + duration,
+        defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+            return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+
+        // since particles fall down, start a bit higher than random
+        confetti(
+            Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+            })
+        );
+        confetti(
+            Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+            })
+        );
+        }, 250);
+
+
+        function loadingStart(){
+            $('.loadingDiv').removeClass('d-none');
+        }
+
+        function loadingStop(){
+            $('.loadingDiv').addClass('d-none');
+        }
+
+        function successMessage(e){
+            $('.output').html('');
+            $('.output').addClass('alert-success');
+            $('.output').html('<center><i class="bi bi-check2-circle"></i> '+e+'</center>');
+            $('.output').removeClass("d-none");
+            setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-success"); }, 2000);
+        }
+
+        function errorMessage(e){
+            $('.output').html('');
+            $('.output').addClass('alert-danger');
+            $('.output').html('<center><i class="bi bi-x-circle"></i> '+e+'</center>');
+            $('.output').removeClass("d-none");
+            setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-danger"); }, 2000);
+        }
+
+        function infoMessage(e){
+            $('.output').html('');
+            $('.output').addClass('alert-primary');
+            $('.output').html('<center><i class="bi bi-info-circle"></i> '+e+'</center>');
+            $('.output').removeClass("d-none");
+            setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-primary"); }, 5000);
+        }
+
+
+        function proceed(){
+            $('#div1').addClass("d-none");
+            $('#div2').removeClass("d-none");
+        }
+
+        function finishSetup(){
+
+            var bsuinessToken = localStorage.getItem("businessToken");
+            var userToken = localStorage.getItem("userToken");
+
+            var textArray = [];  // Declare an empty array to store the selected texts
+
+            $('span.departmentActive').each(function() {
+            var text = $(this).text();
+            textArray.push(text);  // Push each text content into the array
+            });
+
+            console.log(textArray);  // Output the array containing the selected texts
+
+            var obj = {
+                "businessToken":bsuinessToken,
+                "userToken":userToken,
+                "departments":textArray
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/registerDepartment.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                success: function (response) {
+
+                    if(response.error == ""){
+                        successMessage("Successful, navigating to your dashboard");
+                        window.location = 'home.html';
+                    }else{
+                        errorMessage(response.error);
+                    }
+                    
+                },
+                error: function(data){
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Connection failed, please try again");
+                }
+            });
+
+
+        }
+
+        $(function(){
+            $('.department').click(function(){
+                $(this).removeClass('btn-outline-primary');
+                $(this).removeClass('department');
+                $(this).addClass('btn-primary');
+                $(this).addClass('departmentActive');
+                var len = $('.departmentActive').length;
+                infoMessage(len+' department(s) selected');
+            });
+
+            $('.departmentActive').click(function(){
+                $(this).removeClass('btn-primary');
+                $(this).removeClass('departmentActive');
+                $(this).addClass('btn-outline-primary');
+                $(this).addClass('department');
+                var len = $('.departmentActive').length;
+                infoMessage(len+' department(s) selected');
+            });
+
+            $('.businessSelector').click(function(){
+                $('.businessSelector').removeClass("active");
+                $(this).addClass("active");
+            });
+
+            $('#addDepartment').click(function(){
+                var departmentName = $('#department').val();
+                if(departmentName == ""){
+                    return false;
+                }else{
+                    var departmentNameCounstruct = '<span class="btn btn-primary mx-2 mt-3 departmentActive">'+departmentName+'</span>';
+                    $('#department').val('');
+                    $('#departmentList').prepend(departmentNameCounstruct);
+                }
+            });
+
+
+
+        });
+
+    </script>
+    <script src="js/jquery.smoothState.min.js"></script>
+    <script src="js/main.js"></script>
+    
+    
+</body>
+</html>

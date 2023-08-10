@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add EMployees</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/keyframes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pageTransitions.css">
+    <link rel="stylesheet" href="css/bs5.css">
+     <link rel="stylesheet" href="css/datatable.css"> 
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="js/bs5.js"></script>
+    <script src="js/jq.js"></script>
+     <script src="js/datatable.js"></script> 
+    <link href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.3/js/dataTables.fixedColumns.min.js"></script>
+   
+</head>
+
+<body style="overflow-x: hidden;" class="index m-scene" id="main">
+    
+    
+      <!--All menu and header comes in here-->
+  <section class="row position-fixed  w-100 border-bottom py-2 px-4 d-none d-lg-flex " style="z-index: +4; background: rgba(255,255,255,0.5); backdrop-filter: blur(5px);">
+        <div class="col-6">
+            <a href="dashboard.html">
+                <img src="images/logo.svg"/>
+            </a>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <span class="col">
+                    <span class="text-dark helpMenuHanger">
+                        <i class="bi bi-question-circle-fill fs-5 fw-bold" style="cursor: pointer"></i>
+                    </span>
+                </span>
+                <span class="col">
+                    <span class="text-dark notificationMenuHanger">
+                        <i class="bi bi-bell-fill fs-5 fw-bold" style="cursor: pointer"></i>
+                    </span>
+                </span>
+                <span class="col m-auto alert-success badge fs-6 border-1 profileMenuHanger float-end username" style="cursor: pointer">
+                    
+                </span>      
+            </div>
+        </div>
+        
+    </section>
+    
+    <section class="row position-fixed w-100 border-bottom py-3 px-3 mx-auto  d-lg-none d-md-flex d-sm-flex d-xs-flex" style="z-index: +4; background: rgba(255,255,255,0.5); backdrop-filter: blur(5px);">
+        <div class="col-4">
+            <span>
+                <i class="bi bi-list fs-4 float-start mobileMenuOpen"></i>
+            </span>
+        </div>
+        
+        <div class="col-8">
+            <div class="row">
+                <span class="m-auto col">
+                    <span class="text-dark helpMenuHanger">
+                        <i class="bi bi-question-circle-fill fs-5 fw-bold" style="cursor: pointer"></i>
+                    </span>
+                </span>
+                <span class="m-auto col">
+                    <span href="#" class="text-dark notificationMenuHanger">
+                        <i class="bi bi-bell-fill fs-5 fw-bold" style="cursor: pointer"></i>
+                        
+                    </span>
+                </span>
+                <span class="col m-auto float-end">
+                    <i class="bi bi-person-circle profileMenuHanger fs-3" style="right:0"></i>
+                </span>        
+            </div>
+            
+        </div>
+        
+        
+    </section>
+    
+    
+    <section class="profileMenu  d-none scene_element--fadeinright" style="width: 0%;">
+        <div class="row w-100 position-absolute top-0 bottom-0 mx-auto" style="z-index: +5; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);">
+    
+            <div class="col-lg-9 col-md-12 col-sm-12 d-none d-lg-block outsideProfileMenu"></div>
+            <div class="card col-lg-3 p-4 ">
+                <div class="row w-100 mb-1">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                    <div class="col-2">
+                        <i class="bi bi-x fs-1 mx-2 outsideProfileMenu" style="right:0"></i>
+                    </div>
+                </div>
+                <div class="row mb-4 mt-1">
+                    <div class="col-3 mx-2 fs-1 text-center">
+                      <i class="bi bi-building-fill"></i>
+                    </div>
+                    <div class="col-6">
+                        <h4 class="fs-5 fw-bolder username"></h4>
+                        <a href="profile.html" class="badge bg-secondary text-decoration-none text-dark">View profile</a>
+                    </div>
+                </div>
+                
+                <div class="list-group list-group-flush mt-3 listBusinesses">
+                    
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+    
+    <section class="notificationMenu d-none">
+        <div class="row w-100 position-absolute top-0 bottom-0 mx-auto" style="z-index: +5; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);">
+    
+            <div class="col-lg-7 col-md-12 col-sm-12 d-none d-lg-block  outsideNotificationMenu"></div>
+            <div class="card col-lg-5 p-4 scene_element--fadeinright">
+             
+              <div class="card-header bg-transparent fs-3 fw-bolder">
+                <i class="bi bi-bell-fill"></i> Notification
+                <i class="bi bi-x float-end fs-3 cursor-pointer outsideNotificationMenu"></i>
+              </div>
+              <div class="card-body" id="notificationList">
+               
+              </div>
+            </div>
+        </div>
+    </section>
+     
+    
+    <section class="helpMenu d-none">
+        <div class="row w-100 position-fixed top-0 bottom-0 mx-auto" style="z-index: +5; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);">
+    
+            <div class="col-lg-7 col-md-12 col-sm-12 d-none d-lg-block outsideHelpMenu"></div>
+            <div class="card col-lg-5 p-4 scene_element--fadeinright">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h4 class="fs-3 fw-bolder">
+                           <i class="bi bi-question-circle"></i> Help
+                           <i class="bi bi-x float-end fs-3 cursor-pointer outsideHelpMenu"></i>
+                        </h4>
+                    </div>  
+                </div>
+                
+                <div class="row p-3">
+                    <input type="text" id="searchAccordion" placeholder="Type here for help tutorial" class="form-control"/>
+                </div>
+                <div clas="row overflow-auto" id="helpList">
+                 
+                    
+                  
+                </div>                
+            </div>
+        </div>
+    </section>
+    <section class="d-none loadingDiv top-0 bottom-0 w-100 position-fixed text-center" style="background: rgba(255,255,255,0.5); z-index: +1000; backdrop-filter: blur(5px);">
+      <div class="justify-content-center align-items-center top-50 position-absolute mx-auto w-100 text-center">
+        <!--<img src="images/logo.svg"><br><br>-->
+        <div class="spinner-border text-primary spinner-border-sm"
+          role="status">
+        </div>
+        <!--<span class="text-primary"> Loading...</span>-->
+      </div>
+    </section>
+    
+    <section class="alert d-none row top-0 position-fixed w-100 p-3 text-center text-dark fw-bold mx-auto output" style="z-index: +5000"></section>
+      <!---->
+    <!-- </div> -->
+
+    <section class="mobileMenu mx-auto row d-none position-absolute w-100 top-0 bottom-0 overflow-auto" style="background: rgba(0,0,0,0.5); z-index:+20">
+        <div class="col-9 top-0 bottom-0 card">
+            <a href="#" class="mt-3 card-group py-3">
+                <img src="images/logo.svg"/>
+                <!-- <i class="bi bi-x fs-2 f-end mobileMenuClose"></i> -->
+            </a>
+            
+            <div class="list-group list-group-flush mt-3">
+                <a href="dashboard.html" class="list-group-item list-group-item-action  rounded-end p-3 fw-bold"><i id="step1DivIcon" class="bi bi-tv-fill mx-3"></i>Dashboard</a>
+                <a href="employees.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step2DivIcon" class="bi bi-people-fill  mx-3"></i> Employees</a>
+                <a href="commission.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step7DivIcon" class="bi bi-coin  mx-3"></i> Commission income</a>
+                <a href="salaries.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step3DivIcon" class="bi bi-paypal  mx-3"></i> Salaries</a>
+                <a href="taxes.html" class="list-group-item list-group-item-action float-start rounded-3 p-3 fw-bold"><i id="step3DivIcon" class="bi bi-triangle-fill mx-3"></i> Taxes</a>
+                <a href="pension.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step4DivIcon" class="bi bi-circle-fill  mx-3"></i> Pension</a>
+                <a href="hmo.html" class="list-group-item list-group-item-action   float-start rounded-3 p-3 fw-bold"><i id="step5DivIcon" class="bi bi-heart-pulse-fill  mx-3"></i> Health Insurance</a>
+                <a href="idCards.html" class="list-group-item list-group-item-action   float-start rounded-3 p-3 fw-bold"><i id="step6DivIcon" class="bi bi-postcard-fill  mx-3"></i> Employees ID cards</a>
+                <a href="profile.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step7DivIcon" class="bi bi-wallet-fill  mx-3"></i> Profile</a>
+                <a href="signout.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step7DivIcon" class="bi bi-power mx-3"></i> Signout</a>
+            </div>
+        </div>
+        <div class="col-3 mobileMenuClose"></div>
+    </section>
+
+    <section class="row ">
+        <div class="col-lg-2 py-5 mt-5 d-none d-lg-block">
+            <div class="list-group list-group-flush">
+                <a href="dashboard.html" class="list-group-item list-group-item-action rounded-end p-3 fw-bold"><i id="step1DivIcon" class="bi bi-tv-fill mx-3"></i>Dashboard</a>
+                <a href="employees.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step2DivIcon" class="bi bi-people-fill  mx-3"></i> Employees</a>
+                <a href="commission.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step7DivIcon" class="bi bi-coin  mx-3"></i> Commission income</a>
+                <a href="salaries.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step3DivIcon" class="bi bi-paypal  mx-3"></i> Salaries</a>
+                <a href="taxes.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step3DivIcon" class="bi bi-triangle-fill mx-3"></i> Taxes</a>
+                <a href="pension.html" class="list-group-item list-group-item-action   float-start rounded-3 p-3 fw-bold"><i id="step4DivIcon" class="bi bi-circle-fill  mx-3"></i> Pension</a>
+                <a href="hmo.html" class="list-group-item list-group-item-action   float-start rounded-3 p-3 fw-bold"><i id="step5DivIcon" class="bi bi-heart-pulse-fill  mx-3"></i> Health Insurance</a>
+                <a href="idCards.html" class="list-group-item list-group-item-action   float-start rounded-3 p-3 fw-bold"><i id="step6DivIcon" class="bi bi-postcard-fill  mx-3"></i> Employees ID cards</a>
+                <a href="profile.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step7DivIcon" class="bi bi-wallet-fill  mx-3"></i> Profile</a>
+                <a href="signout.html" class="list-group-item list-group-item-action  float-start rounded-3 p-3 fw-bold"><i id="step7DivIcon" class="bi bi-power mx-3"></i> Signout</a>
+            </div>
+            
+        </div>
+        <div class="col-lg-10 py-5 mt-5 border-1 content" id="content">
+            
+        </div>
+    </section>
+
+    <!--Scripts brought from top menu-->
+    <script>
+
+      var businessName = localStorage.getItem("businessName");
+      $('.username').html(businessName);
+  
+      function loadingStart(){
+        $('.loadingDiv').removeClass('d-none');
+      }
+  
+      function loadingStop(){
+        $('.loadingDiv').addClass('d-none');
+      }
+  
+      function successMessage(e){
+        $('.output').html('');
+        $('.output').addClass('alert-success');
+        $('.output').html('<center><i class="bi bi-check2-circle"></i> '+e+'</center>');
+        $('.output').removeClass("d-none");
+        setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-success"); }, 2000);
+      }
+  
+      function errorMessage(e){
+        $('.output').html('');
+        $('.output').addClass('alert-danger');
+        $('.output').html('<center><i class="bi bi-x-circle"></i> '+e+'</center>');
+        $('.output').removeClass("d-none");
+        setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-danger"); }, 2000);
+      }
+  
+      function infoMessage(e){
+        $('.output').html('');
+        $('.output').addClass('alert-primary');
+        $('.output').html('<center><i class="bi bi-info-circle"></i> '+e+'</center>');
+        $('.output').removeClass("d-none");
+        setTimeout(function(){ $(".output").addClass("d-none"); $('.output').removeClass("alert-primary"); }, 5000);
+      }
+  
+      function notificationAndHelp(){
+        var businessToken = "";
+        var businessId = "";
+        var obj = {
+          "businessToken":businessToken,
+          "businessId":businessId
+        }
+  
+        $.ajax({
+          type: "GET",
+          url: "api/notificationAndHelp.json",
+          data: obj,
+          dataType: "json",
+          success: function (response) {
+  
+            var helpList = response.Help;
+            var notificationList = response.Notification;
+  
+            if(helpList !=""){
+              var helpResult = '<div class="accordion accordion-flush overflow-auto" style="height: 500px;" id="accordionFlushExample">';
+              for(i in  helpList){
+                
+  
+                
+                helpResult += '<div class="accordion-item">';
+                  helpResult += '<h2 class="accordion-header" id="flush-heading_'+i+'">';
+                    helpResult += '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse_'+i+'" aria-expanded="true" aria-controls="flush-collapse_'+helpList[i]+'">';
+                      helpResult += helpList[i].title;
+                    helpResult += '</button>';
+                  helpResult += '</h2>';
+                  helpResult += '<div id="flush-collapse_'+i+'" class="accordion-collapse collapse" aria-labelledby="flush-heading_'+i+'" data-bs-parent="#accordionFlushExample">';
+                    helpResult += '<div class="accordion-body">';
+                      helpResult += helpList[i].description;
+                    helpResult += '</div>';
+                  helpResult += '</div>';
+                helpResult += '</div>';
+              }
+              helpResult += '</div>';
+              $('#helpList').append(helpResult);
+  
+              
+              
+              const accordionHeaders = document.querySelectorAll('.accordion-header');
+             
+              // Implement search functionality
+              $('#searchAccordion').keyup(function(){
+  
+                var searchBox = $('#searchAccordion').val()
+                const query = searchBox.toLowerCase();
+  
+                accordionHeaders.forEach(header => {
+                  const content = header.nextElementSibling;
+                  const headerHtml = header.textContent.toLowerCase();
+                  const text = content.textContent.toLowerCase();
+                  console.log(headerHtml);
+                  if (text.includes(query) || (headerHtml.includes(query))) {
+                    header.style.display = '';
+                  } else {
+                    header.style.display = 'none';
+                  }
+                });
+              });
+  
+            }
+            
+            if(notificationList !=""){
+              var notificationResult = '<ul class="list-group list-group-flush">';
+              for(var i in notificationList){
+                <!-- Some borders are removed -->
+                
+                notificationResult += '<li class="list-group-item">';
+                  notificationResult += '<div class="row">';
+                    notificationResult += '<div class="col-12">'+notificationList[i].text+'</div>';
+                    notificationResult += '<div class="col-12 text-end text-dark fw-bold">'+notificationList[i].time+'</div>';
+                    notificationResult += '</div>';
+                notificationResult += '</li>';
+                  
+                  
+              }
+              notificationResult += '</ul>';
+              $('#notificationList').prepend(notificationResult);
+            }
+           
+  
+          },
+          error: function(response){
+            var result = response.responseText;
+            console.log(result);
+            errorMessage("Error loadingnotification");
+          }
+        });
+          
+      }
+  
+  
+      function businessListing(){
+  
+        var token = localStorage.getItem("userToken");
+        var email = localStorage.getItem("email");
+
+        $('.username').html(email);
+
+        var obj = {
+            "userToken":token,
+            "emailAddress":email
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "https://staging.apws.spacepen.tech/fetchUserBusinesses.php",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            success: function (response) {
+  
+            var result = response.Result;
+            if(response.error == ""){
+
+              var result = response.success;
+
+              for(i in result){
+                var bStatus = "";
+                if(result[i].status == "verified"){
+                    bStatus = "bg-success";
+                }
+                
+                if(result[i].status == "under review"){
+                    bStatus = "bg-warning";
+                }
+
+                if(result[i].status == "notverified"){
+                    bStatus = "bg-dark"
+                }
+
+                if(result[i].companyLogo != ""){
+                    var businessLogo = result[i].companyLogo;
+                }else{
+                    var businessLogo = "images/business.svg"
+                }
+            
+                var output = '<a href="#" businessName="'+result[i].tradingName+'" businessEmail="'+result[i].emailAddress+'" businessToken="'+result[i].business_token+'" class="list-group-item list-group-item-action float-start p-3 fw-bold pickBusiness">'+result[i].tradingName+'</a>';
+    
+                $('.listBusinesses').append(output);
+                
+              }
+  
+              $('.pickBusiness').click(function(){
+                var businessName = $(this).attr("businessName");
+                var businessEmail = $(this).attr("businessEmail");
+                var businessToken = $(this).attr("businessToken");
+    
+                localStorage.setItem("businessName",businessName);
+                localStorage.setItem("businessEmail",businessEmail);
+                localStorage.setItem("businessToken",businessToken);
+                
+                window.location = 'home.html';
+
+              });
+
+            }
+  
+              
+          },
+          error: function(data){
+            var result = data.responseText;
+            console.log(result);
+            errorMessage("Connection failed, please try again");
+          }
+        });
+      }
+  
+      notificationAndHelp();
+      businessListing();
+  
+  
+      $(function(){
+  
+          /*Mobile menu*/
+          $('.mobileMenuOpen').click(function(){
+              $('.mobileMenu').removeClass("d-none");
+          });
+  
+          $('.mobileMenuClose').click(function(){
+              $('.mobileMenu').addClass("d-none");
+          });
+  
+          /*Business profiles*/
+          $('.profileMenuHanger').click(function(){
+              $('.profileMenu').removeClass("d-none");
+          });
+  
+          $('.outsideProfileMenu').click(function(){
+              $('.profileMenu').addClass("d-none");
+          });
+  
+          /*Help menu*/
+          $('.helpMenuHanger').click(function(){
+              $('.helpMenu').removeClass("d-none");
+          });
+  
+          $('.outsideHelpMenu').click(function(){
+              $('.helpMenu').addClass("d-none");
+          });
+          
+  
+          /*Notification hanger*/
+          $('.notificationMenuHanger').click(function(){
+              $('.notificationMenu').removeClass("d-none");
+          });
+  
+          $('.outsideNotificationMenu').click(function(){
+              $('.notificationMenu').addClass("d-none");
+          });
+  
+         
+  
+  
+          // function onboardingDiv(){
+          //   var onboardingStatus = localStorage.getItem("onboardingstatus");
+          //   if(onboardingStatus == "" || onboardingStatus == "undefined" || onboardingStatus == null){
+          //     $('#onboardingDiv').load('inappOnboarding.html');
+          //   }
+          // }
+          
+          // onboardingDiv();
+         
+      });
+
+      $(document).ready(function() {
+        // Handle navigation clicks
+        $('a').on('click', function(event) {
+          event.preventDefault();
+          $('.mobileMenuClose').click();
+          // Get the target URL from the href attribute
+          var targetUrl = $(this).attr('href');
+          
+          $('a').removeClass("active");
+          $(this).addClass("active");
+          
+          let urL = "pages/"+targetUrl;
+          // return false;
+          loadingStart();
+          // Load the content from the target URL
+          $.ajax({
+            type: "GET",
+            url: urL,
+            success: function(response) {
+                window.location.hash = targetUrl;
+              // Update the content area with the l oaded HTML
+              $('#content').html(response);
+              loadingStop();
+            },
+            error: function() {
+               window.location.hash = targetUrl
+              // Handle error cases
+              loadingStop();
+              $('#content').html('<p>Error loading content.</p>');
+            }
+          });
+        });
+
+        // // Load the initial content based on the hash in the URL
+        var initialUrl = window.location.hash.substr(1);
+        if (initialUrl) {
+          // Trigger a click event on the corresponding navigation link
+          $('a[href="#' + initialUrl + '"]').trigger('click');
+        } else {
+          // Load the default content (e.g., home page)
+          $('a:first').trigger('click');
+        }
+      });
+
+      
+    </script>
+    <!--Scripts for top menu ends here-->
+
+    <script src="js/jquery.smoothState.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

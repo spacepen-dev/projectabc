@@ -1,0 +1,203 @@
+
+        <div class="scene_element scene_element--fadeinright">
+            <div class="container border-1">
+                <div class="heading">
+                    <h1 class="fw-bolder text-center">Employees</h1>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="btn-group btn-lg w-100 mb-2 float-end">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle me-1" type="button"  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-plus-circle-fill"></i> New employee
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <span class="dropdown-item link" url="addEmployee.html">Create new employee data</span>
+                                    <span class="dropdown-item link" url="importEmployees.html">Import employees data</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card py-2 col-12 overflow-auto">
+                        <div class="card-header bg-transparent">
+                            <b>Employees</b>
+                        </div>
+                        <div class="card-body border-0 bg-transparent">
+                            <table id="datatable" class="table table-hover">
+                                <thead>
+                                    <tr class="rounded-top">
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Date of Birth</th>
+                                        <th>State</th>
+                                        <th>Local Govt. Area</th>
+                                        <th>Marital statis</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Department</th>
+                                        <th>Role</th>
+                                        <th>Work email</th>
+                                        <th>Work phone</th>
+                                        <th>Gross salary (Monthly)</th>
+                                        <th>Gross Salary (Annual)</th>
+                                        <th>Tax Authority</th>
+                                        <th>Pension company</th>
+                                        <th>HMO</th>
+                                        <th>View</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer border-0 bg-transparent"></div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    
+    
+    <script>
+
+        function fetchEmployees(){
+
+            var businessToken = localStorage.getItem("businessToken");
+            var userToken = localStorage.getItem("userToken");
+
+            var obj = {
+                "businessToken":businessToken,
+                "userToken":userToken
+            }
+
+            loadingStart();
+           
+            $.ajax({
+                type: "POST",
+                url: "https://staging.apws.spacepen.tech/fetchBusinessEmployee.php",
+                data: JSON.stringify(obj),
+                dataType: "json",
+                success: function (data2) {
+                 
+                    var dataError = data2.error;
+                    var data = data2.success;
+
+                    if(dataError === ""){
+                        $('#datatable tbody').html('');
+                        for(i in data){
+                            var obj = JSON.stringify(data[i]);
+                            var num = Number(i)+(1)
+                            var result = '<tr>';
+                                        result += '<td class="bg-white">'+num+'</td>';
+                                        result += '<td>'+data[i].employeeFirstname+' '+data[i].employeeMiddleName+' '+data[i].employeeLastname+'</td>';
+                                        result += '<td>'+data[i].employeeGender+'</td>';
+                                        result += '<td>'+data[i].employeeDOB+'</td>';
+                                        result += '<td>'+data[i].employeeState+'</td>';
+                                        result += '<td>'+data[i].employeeLGA+'</td>';
+                                        result += '<td>'+data[i].employeeMartialStatus+'</td>';
+                                        result += '<td>'+data[i].employeeEmail+'</td>';
+                                        result += '<td>'+data[i].employeePhoneNumber+'</td>';
+                                        result += '<td>'+data[i].employeeDepartment+'</td>';
+                                        result += '<td>'+data[i].employeeRole+'</td>';
+                                        result += '<td>'+data[i].employeeWorkMail+'</td>';
+                                        result += '<td>'+data[i].employeeWorkPhone+'</td>';
+                                        result += '<td>'+Number(data[i].employeeMGS).toLocaleString()+'</td>';
+                                        result += '<td>'+Number(data[i].employeeAGS).toLocaleString()+'</td>';
+                                        result += '<td>'+data[i].state_of_assignment+' IRS</td>';
+                                        result += '<td>'+data[i].employeePensionCompany+'</td>';
+                                        result += '<td>'+data[i].employeeHMO+'</td>';    
+                                        result += '<td class="bg-white"><span class="cursor-pointer badge alert-dark editEmployee" url="editEmployees.html" obj = "'+btoa(obj)+'" >View more</span></td>';
+                                    result += '</tr>';
+
+                            $('#datatable tbody').append(result);
+                            
+                        }
+
+                        $('.editEmployee').click(function(){
+                            var obj = atob($(this).attr("obj"));
+                            localStorage.setItem("editEmployee", obj);
+                            var url = $(this).attr("url");
+                            $('#content').load("pages/"+url);
+                            // window.location = 'editEmployees.html';
+                        });
+                                   
+                    }
+
+                    $('#datatable').DataTable({
+                        scrollX:true,
+                        fixedColumns: {
+                            rightColumns: 1 
+                        }
+                    });
+
+                    loadingStop();
+                    
+                    
+                },
+                error: function(data){
+                    
+                    var result = data.responseText;
+                    console.log(result);
+                    errorMessage("Connection failed, please try again");
+                    loadingStop();
+                }
+            });
+
+        }
+
+        
+        
+
+
+        fetchEmployees();
+
+        $(function(){
+            $('.dynamic').load("menu.html");
+           
+
+            /*New employees section*/
+            $('.createNewEmployeeRecord').click(function(){
+                $('.addEmployeesSection').removeClass('d-none');
+            });
+
+            $('.createNewEmployeeRecordOutside').click(function(){
+                $('.addEmployeesSection').addClass('d-none');
+            });
+
+            /*Edit employees section*/
+            $('.editEmployeeRecord').click(function(){
+                $('.editEmployeesSection').removeClass('d-none');
+            });
+
+            $('.editEmployeeRecordOutside').click(function(){
+                $('.editEmployeesSection').addClass('d-none');
+            });
+
+            /**pictures*/
+            
+            $('.removePhoto').click(function(){
+                $('.updatePhoto').removeClass("d-none");
+                $('.existingPhoto').addClass("d-none");
+            });
+
+            $('.restorePhoto').click(function(){
+                $('.updatePhoto').addClass("d-none");
+                $('.existingPhoto').removeClass("d-none");
+            });
+            
+            
+            $('.link').click(function(){
+                var url = $(this).attr("url");
+                $('#content').load("pages/"+url);
+            }) ;
+        
+        });
+    </script>
